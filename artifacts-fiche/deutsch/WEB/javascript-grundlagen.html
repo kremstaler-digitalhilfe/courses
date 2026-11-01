@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JavaScript Grundlagen</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Patrick+Hand&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* === THEME : seul bloc à modifier === */
+  --paper:#fffdfa; --grid:#ebe6ee; --ink:#2b2b3a; --page:#f3eef2;
+  --accent:#e8639a; --accent-soft:#fbd3e4; --highlight:#fff176;
+  --c1:#7bc47f; --c2:#6fa8e8; --c3:#f2a65a;
+  --c4:#b58be0; --c5:#4cc0b5; --c6:#f28aa5;
+  --font-title:'Fredoka',sans-serif;
+  --font-body:'Patrick Hand',sans-serif;
+  --font-hand:'Caveat',cursive;
+  --radius:14px;
+}
+*{box-sizing:border-box}
+body{margin:0;padding:16px;background:var(--page);color:var(--ink);
+  font-family:var(--font-body);font-size:18px;line-height:1.4}
+.sheet{position:relative;max-width:794px;min-height:1050px;margin:0 auto 24px;padding:32px 28px 52px;border-radius:6px;
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),
+                   linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px;box-shadow:0 6px 24px #0002}
+h1{font-family:var(--font-title);font-size:2.2rem;text-align:center;margin:0 0 6px}
+h1::after{content:"";display:block;height:6px;width:60%;margin:8px auto 0;
+  background:var(--accent);border-radius:6px;opacity:.7}
+h3{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px;display:inline-block;
+  background:var(--accent-soft);padding:3px 14px;border-radius:8px}
+.tag{display:inline-block;background:var(--accent-soft);padding:4px 14px;
+  border-radius:8px;font-family:var(--font-title);font-size:.95rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:18px;margin-top:20px}
+.grid.one{grid-template-columns:1fr}
+.grid.three{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.card{--c:var(--c1);position:relative;border:2px solid var(--c);
+  border-radius:var(--radius);padding:14px 16px;
+  background:color-mix(in srgb,var(--c) 8%,white)}
+.card::before{content:"";position:absolute;top:-9px;right:18px;width:54px;height:16px;
+  background:color-mix(in srgb,var(--c) 45%,white);opacity:.8;transform:rotate(4deg);border-radius:2px}
+.card h2{margin:0 0 4px;font-family:var(--font-title);font-size:1.05rem}
+.card .sub{font-family:var(--font-hand);font-size:1.15rem;color:color-mix(in srgb,var(--c) 70%,black);margin:0 0 8px}
+.num{display:inline-grid;place-items:center;width:26px;height:26px;
+  border-radius:50%;background:var(--c);color:#fff;margin-right:6px}
+.card ul{list-style:none;padding:0;margin:0}
+.card li{margin:6px 0;padding-left:2px}
+.card li::before{content:"✓ ";color:var(--c);font-weight:700}
+.card li b{font-family:var(--font-title);font-size:.78rem;text-transform:uppercase;
+  background:var(--c);color:#fff;padding:1px 8px;border-radius:6px;margin-right:6px}
+.hl{background:linear-gradient(transparent 55%,var(--highlight) 55%)}
+.code{display:inline-block;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem;
+  background:#fff;border:1.5px dashed var(--c,var(--accent));border-radius:8px;padding:1px 8px;
+  margin:1px 0;word-break:break-word}
+pre.codeblock{--c:var(--c2);position:relative;margin:12px 0 0;padding:12px 16px;background:#fff;
+  border:2px dashed var(--c);border-radius:var(--radius);
+  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem;line-height:1.6;overflow-x:auto}
+pre.codeblock[data-lang]::after{content:attr(data-lang);position:absolute;top:-11px;left:14px;
+  background:var(--c);color:#fff;font-family:var(--font-title);font-size:.72rem;letter-spacing:.05em;
+  padding:1px 10px;border-radius:6px}
+pre.codeblock.out{--c:var(--c5);background:color-mix(in srgb,var(--c5) 8%,white)}
+.k{color:color-mix(in srgb,var(--c4) 75%,black);font-weight:700}
+.st{color:color-mix(in srgb,var(--c1) 55%,black)}
+.nu{color:color-mix(in srgb,var(--c3) 65%,black)}
+.fn{color:color-mix(in srgb,var(--c2) 65%,black)}
+.cm{color:#8a8a99;font-style:italic}
+.cloud{display:inline-block;padding:8px 16px;border:2px dashed var(--accent);
+  border-radius:40px;background:#fff;font-family:var(--font-hand);font-size:1.2rem;margin:4px 4px 0 0}
+.note{border:2px solid var(--accent);border-radius:var(--radius);
+  background:#fff;padding:12px 16px;margin-top:18px}
+.note ul{list-style:none;padding:0;margin:6px 0 0}
+.note li::before{content:"♥ ";color:var(--accent)}
+.tip{--c:var(--c3);border:2px dashed var(--c);border-radius:var(--radius);
+  background:color-mix(in srgb,var(--c) 10%,white);padding:10px 16px;margin-top:18px}
+.tip strong{font-family:var(--font-title);color:color-mix(in srgb,var(--c) 70%,black)}
+.rule{--c:var(--c4);border:2px solid var(--c);border-radius:var(--radius);
+  background:color-mix(in srgb,var(--c) 10%,white);padding:10px 16px;margin-top:18px}
+.rule strong{font-family:var(--font-title);color:color-mix(in srgb,var(--c) 70%,black)}
+hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
+.banner{margin-top:20px;padding:10px;text-align:center;background:var(--accent-soft);
+  border:2px solid var(--accent);font-family:var(--font-title);
+  text-transform:uppercase;letter-spacing:.04em}
+.pageno{position:absolute;bottom:16px;left:0;right:0;text-align:center;
+  font-family:var(--font-hand);font-size:1.1rem;opacity:.6}
+a.link{color:var(--ink);font-weight:700;text-decoration:underline wavy var(--accent);
+  text-underline-offset:3px;word-break:break-all}
+.lead{margin:16px 0 0}
+.cap{font-family:var(--font-hand);font-size:1.15rem;margin:4px 0 0}
+/* Array-Zellen */
+.cells{display:flex;gap:0;justify-content:center;margin-top:14px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9rem}
+.cells div{text-align:center}
+.cells b{display:block;padding:8px 18px;border:2px solid var(--ink);background:#fff;margin-left:-2px}
+.cells div:nth-child(1) b{background:color-mix(in srgb,var(--c1) 30%,white)}
+.cells div:nth-child(2) b{background:color-mix(in srgb,var(--c2) 30%,white)}
+.cells div:nth-child(3) b{background:color-mix(in srgb,var(--c3) 35%,white)}
+.cells i{display:block;margin-top:4px;font-style:normal;font-family:var(--font-hand);font-size:1.2rem}
+/* Schleifen-Ablauf */
+.flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;margin-top:14px}
+.flow span.step{font-family:var(--font-hand);font-size:1.2rem;padding:6px 14px;border:2px dashed var(--accent);
+  border-radius:30px;background:#fff}
+.flow span.arr{font-size:1.3rem;color:var(--accent);font-weight:700}
+/* === Ornements SVG (carnet, crayons, étoiles...) === */
+.sheet{position:relative}
+.orn{position:absolute;top:16px;display:flex;gap:2px;align-items:flex-start;pointer-events:none}
+.orn.tl{left:18px}
+.orn.tr{right:18px}
+.orn svg{display:block;overflow:visible}
+.orn .big{width:78px;height:88px}
+.orn .bulb{width:38px;height:46px;margin-top:6px}
+.orn .star{width:26px;height:26px}
+.orn .heart{width:28px;height:28px;margin-top:10px}
+.sheet h1{padding:0 84px}
+@media (max-width:640px){.orn{display:none}.sheet h1{padding:0}}
+@media print{
+  @page{size:A4;margin:10mm}
+  body{background:#fff;padding:0}
+  .sheet{box-shadow:none;margin:0;min-height:auto;break-after:page;border-radius:0}
+  .sheet:last-of-type{break-after:auto}
+  .card,.note,.tip,.rule,pre,.cells,.flow{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ SEITE 1 ============ -->
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="big" viewBox="0 0 80 90" aria-hidden="true">
+  <g transform="rotate(-8 40 48)">
+    <rect x="16" y="10" width="52" height="68" rx="7" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.5"/>
+    <rect x="28" y="24" width="30" height="16" rx="3" style="fill:#fff;stroke:var(--ink);stroke-width:2"/>
+    <path d="M43 36c-4-3-6-5-6-7a3 3 0 0 1 6-.8 3 3 0 0 1 6 .8c0 2-2 4-6 7z" style="fill:var(--accent)"/>
+    <g style="fill:#fff;stroke:var(--ink);stroke-width:2.2">
+      <circle cx="16" cy="22" r="3.6"/><circle cx="16" cy="34" r="3.6"/><circle cx="16" cy="46" r="3.6"/>
+      <circle cx="16" cy="58" r="3.6"/><circle cx="16" cy="70" r="3.6"/>
+    </g>
+  </g>
+  <path d="M70 4l2.2 4.8 5.2.6-3.9 3.5 1.1 5.1L70 15.4l-4.6 2.6 1.1-5.1-3.9-3.5 5.2-.6z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round"/>
+</svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="big" viewBox="0 0 80 90" aria-hidden="true">
+  <g style="stroke:var(--ink);stroke-width:2;stroke-linejoin:round">
+    <g transform="rotate(-16 28 52)"><rect x="23" y="8" width="9" height="44" style="fill:var(--c3)"/><path d="M23 8L27.5-2 32 8z" style="fill:#f6dcc0"/></g>
+    <g transform="rotate(4 42 52)"><rect x="38" y="4" width="9" height="48" style="fill:var(--accent)"/><path d="M38 4L42.5-6 47 4z" style="fill:#f6dcc0"/></g>
+    <g transform="rotate(20 54 52)"><rect x="50" y="10" width="9" height="42" style="fill:var(--c4)"/><path d="M50 10L54.5 0 59 10z" style="fill:#f6dcc0"/></g>
+    <path d="M14 46h52l-5 36a5 5 0 0 1-5 4H24a5 5 0 0 1-5-4z" style="fill:var(--c5)"/>
+  </g>
+  <path d="M40 70c-3-2.4-4.6-4-4.6-5.6a2.3 2.3 0 0 1 4.6-.6 2.3 2.3 0 0 1 4.6.6c0 1.6-1.6 3.2-4.6 5.6z" style="fill:#fff"/>
+</svg></div>
+  <h1>JavaScript</h1>
+  <p style="text-align:center"><span class="tag">Webentwicklung · Grundlagen</span></p>
+
+  <h3>Was ist JavaScript?</h3>
+  <section class="grid three">
+    <article class="card" style="--c:var(--c1)">
+      <h2><span class="num">1</span>Programmiersprache</h2>
+      <p class="sub">Eine vollwertige</p>
+      <ul><li>Anders als HTML und CSS kann JavaScript <span class="hl">rechnen und entscheiden</span>.</li></ul>
+    </article>
+    <article class="card" style="--c:var(--c2)">
+      <h2><span class="num">2</span>Dynamisch</h2>
+      <p class="sub">Webseiten werden lebendig</p>
+      <ul>
+        <li>Reagiert auf <span class="hl">Eingaben</span></li>
+        <li>Rechnet</li>
+        <li>Verändert <span class="hl">Inhalte</span></li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c3)">
+      <h2><span class="num">3</span>Ohne Neuladen</h2>
+      <p class="sub">Alles live</p>
+      <ul><li>Die Seite muss dafür <span class="hl">nicht neu geladen</span> werden.</li></ul>
+    </article>
+  </section>
+
+  <hr>
+  <h3>1. Variablen</h3>
+  <p class="cap">Der Speicher des Computers</p>
+  <p style="margin:6px 0 0">Programme müssen sich Werte merken können (z. B. den <span class="hl">Punktestand</span> in einem Spiel oder den <span class="hl">Namen</span> eines eingeloggten Nutzers). Dafür nutzen wir <span class="hl">Variablen</span>.</p>
+
+  <p style="margin:14px 0 0"><strong>Wie man eine Variable erstellt:</strong> mit <span class="code">let</span> oder <span class="code">const</span></p>
+  <section class="grid">
+    <article class="card" style="--c:var(--c4)">
+      <h2><span class="num">1</span>const</h2>
+      <p class="sub">Constant = Konstante</p>
+      <ul><li>Der Wert darf sich <span class="hl">nicht mehr ändern</span>, nachdem er einmal festgelegt wurde.</li></ul>
+    </article>
+    <article class="card" style="--c:var(--c5)">
+      <h2><span class="num">2</span>let</h2>
+      <p class="sub">Lass uns das ändern können</p>
+      <ul><li>Der Wert darf sich im Laufe des Programms <span class="hl">ändern</span> (z. B. ein Punktestand, der steigt).</li></ul>
+    </article>
+  </section>
+
+  <pre class="codeblock" data-lang="JavaScript"><span class="k">const</span> name = <span class="st">"Anna"</span>;     <span class="cm">// bleibt immer "Anna"</span>
+<span class="k">let</span> punkte = <span class="nu">0</span>;          <span class="cm">// Startwert</span>
+punkte = punkte + <span class="nu">10</span>;      <span class="cm">// jetzt: 10</span></pre>
+  <p class="cap">↑ <span class="code">name</span> bleibt fest, <span class="code">punkte</span> darf wachsen.</p>
+  <div class="pageno">Seite 1 / 8</div>
+</main>
+
+<!-- ============ SEITE 2 ============ -->
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <h1>Datentypen</h1>
+  <p style="text-align:center"><span class="tag">Jeder Wert hat einen Typ</span></p>
+
+  <p class="lead">Jeder Wert in JavaScript hat einen <span class="hl">bestimmten Typ</span>. Die wichtigsten drei:</p>
+
+  <section class="grid three">
+    <article class="card" style="--c:var(--c1)">
+      <h2><span class="num">1</span>String</h2>
+      <p class="sub">Text</p>
+      <ul>
+        <li>Steht immer in <span class="hl">Anführungszeichen</span>.</li>
+        <li><span class="code">"Hallo Welt"</span></li>
+        <li><span class="code">'JavaScript'</span></li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c2)">
+      <h2><span class="num">2</span>Number</h2>
+      <p class="sub">Zahl</p>
+      <ul>
+        <li>Ganze Zahlen oder Kommazahlen.</li>
+        <li><span class="code">42</span></li>
+        <li><span class="code">3.14</span></li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c3)">
+      <h2><span class="num">3</span>Boolean</h2>
+      <p class="sub">Wahrheitswert</p>
+      <ul>
+        <li>Nur <span class="hl">zwei Zustände</span>:</li>
+        <li><span class="code">true</span> (wahr)</li>
+        <li><span class="code">false</span> (falsch)</li>
+      </ul>
+    </article>
+  </section>
+
+  <pre class="codeblock" data-lang="JavaScript"><span class="k">const</span> text = <span class="st">"Hallo Welt"</span>;     <span class="cm">// String</span>
+<span class="k">const</span> alter = <span class="nu">42</span>;              <span class="cm">// Number</span>
+<span class="k">const</span> pi = <span class="nu">3.14</span>;               <span class="cm">// Number (Kommazahl)</span>
+<span class="k">const</span> istAngemeldet = <span class="k">true</span>;   <span class="cm">// Boolean</span></pre>
+
+  <div class="rule">
+    <strong>Wichtig:</strong> Zahlen schreibt man <span class="hl">ohne Anführungszeichen</span> – sonst hält JavaScript sie für Text!
+  </div>
+
+  <section class="grid">
+    <article class="card" style="--c:var(--c5)">
+      <h2>✓ Richtig</h2>
+      <ul><li><span class="code">const alter = 42;</span> → Number</li></ul>
+    </article>
+    <article class="card" style="--c:var(--c6)">
+      <h2>✗ Falsch</h2>
+      <ul><li><span class="code">const alter = "42";</span> → String (Text!)</li></ul>
+    </article>
+  </section>
+
+  <div class="tip">
+    <strong>Boolean im Einsatz:</strong> Wird oft für <span class="hl">Schalter</span> oder <span class="hl">Prüfungen</span> genutzt – z. B. „ist der Nutzer angemeldet?“
+  </div>
+  <div class="pageno">Seite 2 / 8</div>
+</main>
+
+<!-- ============ SEITE 3 ============ -->
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <h1>Bedingungen</h1>
+  <p style="text-align:center"><span class="tag">2. if / else – Entscheidungen im Code</span></p>
+
+  <p class="lead">Programme müssen oft <span class="hl">Entscheidungen treffen</span>: Ist der Nutzer volljährig? Wenn ja, zeige den Inhalt. Wenn nein, zeige eine Fehlermeldung. Dafür nutzt man <span class="hl">Bedingungen</span>.</p>
+
+  <pre class="codeblock" data-lang="JavaScript"><span class="k">const</span> punkte = <span class="nu">75</span>;
+
+<span class="k">if</span> (punkte &gt;= <span class="nu">90</span>) {
+  <span class="fn">console.log</span>(<span class="st">"Sehr gut!"</span>);
+} <span class="k">else if</span> (punkte &gt;= <span class="nu">50</span>) {
+  <span class="fn">console.log</span>(<span class="st">"Bestanden"</span>);
+} <span class="k">else</span> {
+  <span class="fn">console.log</span>(<span class="st">"Leider nicht bestanden"</span>);
+}</pre>
+  <p class="cap">↑ Bei 75 Punkten erscheint „Bestanden“.</p>
+
+  <h3>Erklärung</h3>
+  <section class="grid one">
+    <article class="card" style="--c:var(--c1)">
+      <h2><span class="num">1</span>if (…)</h2>
+      <ul><li>Prüft, ob die Bedingung in den Klammern <span class="code">true</span> ist. Wenn ja, wird der Code im <span class="hl">ersten Block</span> ausgeführt.</li></ul>
+    </article>
+    <article class="card" style="--c:var(--c2)">
+      <h2><span class="num">2</span>else if</h2>
+      <ul><li>Fängt <span class="hl">weitere Bedingungen</span> ab.</li></ul>
+    </article>
+    <article class="card" style="--c:var(--c3)">
+      <h2><span class="num">3</span>else</h2>
+      <ul><li>Greift, wenn <span class="hl">keine der vorherigen Bedingungen</span> gestimmt hat.</li></ul>
+    </article>
+  </section>
+
+  <div class="tip">
+    <strong>Vergleiche:</strong> <span class="code">&gt;=</span> größer oder gleich ·
+    <span class="code">&lt;=</span> kleiner oder gleich ·
+    <span class="code">===</span> genau gleich (Wert <em>und</em> Typ)
+  </div>
+  <div class="pageno">Seite 3 / 8</div>
+</main>
+
+<!-- ============ SEITE 4 ============ -->
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <h1>Funktionen</h1>
+  <p style="text-align:center"><span class="tag">3. Wiederverwendbare Code-Blöcke</span></p>
+
+  <p class="lead">Eine Funktion ist wie ein <span class="hl">kleines Werkzeug</span> oder ein <span class="hl">Rezept</span>. Du schreibst den Code einmal auf und kannst ihn beliebig oft aufrufen – ohne ihn neu zu schreiben.</p>
+
+  <h3>A) Die Funktion definieren</h3>
+  <p class="cap">Das Rezept schreiben</p>
+  <pre class="codeblock" data-lang="JavaScript"><span class="k">function</span> <span class="fn">begruesseNutzer</span>(name) {
+  <span class="fn">console.log</span>(<span class="st">"Hallo "</span> + name + <span class="st">"!"</span>);
+}</pre>
+  <section class="grid three">
+    <article class="card" style="--c:var(--c1)">
+      <h2>function</h2>
+      <ul><li>Das <span class="hl">Schlüsselwort</span>: „Hier kommt eine Funktion.“</li></ul>
+    </article>
+    <article class="card" style="--c:var(--c2)">
+      <h2>begruesseNutzer</h2>
+      <ul><li>Der <span class="hl">selbst gewählte Name</span> der Funktion.</li></ul>
+    </article>
+    <article class="card" style="--c:var(--c3)">
+      <h2>(name)</h2>
+      <ul><li>Ein <span class="hl">Parameter</span>: Platzhalter für Daten, die wir von außen übergeben.</li></ul>
+    </article>
+  </section>
+
+  <h3>B) Die Funktion aufrufen</h3>
+  <p class="cap">Das Rezept ausführen</p>
+  <p style="margin:4px 0 0">Eine Funktion tut von alleine <span class="hl">gar nichts</span>. Du musst sie mit ihrem Namen aktivieren:</p>
+  <pre class="codeblock" data-lang="JavaScript"><span class="fn">begruesseNutzer</span>(<span class="st">"Anna"</span>);   <span class="cm">// Hallo Anna!</span>
+<span class="fn">begruesseNutzer</span>(<span class="st">"Ben"</span>);    <span class="cm">// Hallo Ben!</span></pre>
+
+  <h3>C) Der Rückgabewert (return)</h3>
+  <p style="margin:4px 0 0">Funktionen können nicht nur etwas auf der Konsole ausgeben, sondern auch ein <span class="hl">Ergebnis zurückgeben</span>, mit dem man weiterrechnen kann.</p>
+  <pre class="codeblock" data-lang="JavaScript"><span class="k">function</span> <span class="fn">addiere</span>(a, b) {
+  <span class="k">return</span> a + b;
+}
+
+<span class="k">const</span> summe = <span class="fn">addiere</span>(<span class="nu">2</span>, <span class="nu">3</span>);   <span class="cm">// summe ist 5</span>
+<span class="fn">console.log</span>(summe * <span class="nu">10</span>);        <span class="cm">// 50</span></pre>
+  <div class="pageno">Seite 4 / 8</div>
+</main>
+
+<!-- ============ SEITE 5 ============ -->
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <h1>Schleifen</h1>
+  <p style="text-align:center"><span class="tag">4. for-Schleife – Wiederholungen automatisieren</span></p>
+
+  <p class="lead">Wenn du denselben Befehl 100-mal ausführen möchtest (z. B. alle Elemente einer langen Liste durchgehen), schreibst du das nicht 100-mal von Hand. Dafür gibt es <span class="hl">Schleifen</span>. Die <span class="hl">for-Schleife</span> ist der Klassiker, wenn man <span class="hl">genau weiß, wie oft</span> etwas wiederholt werden soll.</p>
+
+  <pre class="codeblock" data-lang="JavaScript"><span class="k">for</span> (<span class="k">let</span> i = <span class="nu">1</span>; i &lt;= <span class="nu">3</span>; i++) {
+  <span class="fn">console.log</span>(<span class="st">"Durchlauf Nummer: "</span> + i);
+}</pre>
+
+  <h3>Was passiert in den Klammern?</h3>
+  <p class="cap"><span class="code">(let i = 1; i &lt;= 3; i++)</span></p>
+  <section class="grid three">
+    <article class="card" style="--c:var(--c1)">
+      <h2><span class="num">1</span>Start</h2>
+      <p class="sub"><span class="code">let i = 1;</span></p>
+      <ul><li>Eine Zählvariable <span class="code">i</span> (Index) – wir fangen bei <span class="hl">1</span> an.</li></ul>
+    </article>
+    <article class="card" style="--c:var(--c2)">
+      <h2><span class="num">2</span>Bedingung</h2>
+      <p class="sub"><span class="code">i &lt;= 3;</span></p>
+      <ul><li>Vor jedem Durchlauf: Ist <span class="code">i</span> kleiner oder gleich 3? Solange <span class="code">true</span>, läuft die Schleife. Bei <span class="code">4</span> <span class="hl">stoppt</span> sie.</li></ul>
+    </article>
+    <article class="card" style="--c:var(--c3)">
+      <h2><span class="num">3</span>Schrittweite</h2>
+      <p class="sub"><span class="code">i++</span></p>
+      <ul><li>Nach jedem Durchlauf wird <span class="code">i</span> um <span class="hl">1 erhöht</span> (<span class="code">++</span> = plus 1).</li></ul>
+    </article>
+  </section>
+
+  <div class="flow" aria-label="Ablauf der Schleife">
+    <span class="step">i = 1</span><span class="arr">→</span>
+    <span class="step">i &lt;= 3 ?</span><span class="arr">→ ja →</span>
+    <span class="step">Code ausführen</span><span class="arr">→</span>
+    <span class="step">i++</span><span class="arr">↺</span>
+  </div>
+  <p class="cap" style="text-align:center">Bei „nein“ (i ist 4) endet die Schleife.</p>
+
+  <p style="margin:14px 0 0"><strong>Ausgabe in der Konsole:</strong></p>
+  <pre class="codeblock out" data-lang="Konsole">Durchlauf Nummer: 1
+Durchlauf Nummer: 2
+Durchlauf Nummer: 3</pre>
+  <div class="pageno">Seite 5 / 8</div>
+</main>
+
+<!-- ============ SEITE 6 ============ -->
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <h1>Arrays &amp; Objekte</h1>
+  <p style="text-align:center"><span class="tag">5. Daten speichern und sortieren</span></p>
+
+  <p class="lead">In echten Programmen hat man selten nur eine einzelne Variable, sondern <span class="hl">Sammlungen von Daten</span>.</p>
+
+  <section class="grid one">
+    <article class="card" style="--c:var(--c1)">
+      <h2><span class="num">1</span>Arrays (Listen)</h2>
+      <p class="sub">Eckige Klammern <span class="code">[ ]</span></p>
+      <ul>
+        <li>Speichern <span class="hl">mehrere Werte</span> in einer geordneten Liste.</li>
+        <li>Jedes Element hat einen Platz (<span class="hl">Index</span>), der bei <span class="hl">0</span> beginnt.</li>
+      </ul>
+    </article>
+  </section>
+
+  <pre class="codeblock" data-lang="JavaScript"><span class="k">const</span> fruechte = [<span class="st">"Apfel"</span>, <span class="st">"Birne"</span>, <span class="st">"Kirsche"</span>];
+
+<span class="fn">console.log</span>(fruechte[<span class="nu">0</span>]);   <span class="cm">// "Apfel"</span>
+<span class="fn">console.log</span>(fruechte[<span class="nu">2</span>]);   <span class="cm">// "Kirsche"</span></pre>
+  <div class="cells" aria-label="Array mit Index 0, 1, 2">
+    <div><b>"Apfel"</b><i>Index 0</i></div>
+    <div><b>"Birne"</b><i>Index 1</i></div>
+    <div><b>"Kirsche"</b><i>Index 2</i></div>
+  </div>
+
+  <hr>
+
+  <section class="grid one">
+    <article class="card" style="--c:var(--c4)">
+      <h2><span class="num">2</span>Objekte (Strukturen)</h2>
+      <p class="sub">Geschweifte Klammern <span class="code">{ }</span></p>
+      <ul>
+        <li>Speichern <span class="hl">zusammengehörige Eigenschaften</span>.</li>
+        <li>Als <span class="hl">Schlüssel-Wert-Paare</span>.</li>
+      </ul>
+    </article>
+  </section>
+
+  <pre class="codeblock" data-lang="JavaScript"><span class="k">const</span> nutzer = {
+  name: <span class="st">"Anna"</span>,
+  alter: <span class="nu">25</span>,
+  istAngemeldet: <span class="k">true</span>
+};
+
+<span class="fn">console.log</span>(nutzer.name);   <span class="cm">// "Anna"</span></pre>
+
+  <div class="note">
+    <strong>Merke dir:</strong>
+    <ul>
+      <li>Array = Liste in <span class="code">[ ]</span>, Zugriff über die Nummer (Index ab 0)</li>
+      <li>Objekt = Eigenschaften in <span class="code">{ }</span>, Zugriff über den Namen</li>
+    </ul>
+  </div>
+  <div class="pageno">Seite 6 / 8</div>
+</main>
+
+<!-- ============ SEITE 7 ============ -->
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <h1>DOM &amp; Events</h1>
+  <p style="text-align:center"><span class="tag">6. Interaktion mit der Website</span></p>
+
+  <p class="lead">Das <span class="hl">DOM</span> (Document Object Model) ist die <span class="hl">Brücke</span> zwischen JavaScript und dem HTML. JavaScript kann das HTML <span class="hl">lesen, verändern</span> oder <span class="hl">neue Elemente hinzufügen</span>.</p>
+
+  <h3>Elemente greifen und verändern</h3>
+  <pre class="codeblock" data-lang="JavaScript"><span class="k">const</span> titel = document.<span class="fn">querySelector</span>(<span class="st">"h1"</span>);   <span class="cm">// Element greifen</span>
+
+titel.textContent = <span class="st">"Neuer Titel"</span>;          <span class="cm">// Text ändern</span>
+titel.style.color = <span class="st">"blue"</span>;                <span class="cm">// Farbe ändern</span></pre>
+  <section class="grid">
+    <article class="card" style="--c:var(--c1)">
+      <h2><span class="num">1</span>Greifen</h2>
+      <ul><li><span class="code">querySelector("h1")</span> findet ein Element über seinen <span class="hl">CSS-Selektor</span>.</li></ul>
+    </article>
+    <article class="card" style="--c:var(--c2)">
+      <h2><span class="num">2</span>Verändern</h2>
+      <ul><li><span class="code">textContent</span> und <span class="code">style</span> ändern <span class="hl">Text und Aussehen</span>.</li></ul>
+    </article>
+  </section>
+
+  <hr>
+  <h3>Events: auf den Nutzer reagieren</h3>
+  <p style="margin:6px 0 0">JavaScript wartet <span class="hl">passiv</span> darauf, dass der Nutzer eine Aktion ausführt (Klick, Tastendruck, Scrollen). Dafür nutzt man <span class="code">addEventListener</span>:</p>
+  <pre class="codeblock" data-lang="JavaScript"><span class="k">const</span> knopf = document.<span class="fn">querySelector</span>(<span class="st">"button"</span>);
+
+knopf.<span class="fn">addEventListener</span>(<span class="st">"click"</span>, <span class="k">function</span> () {
+  titel.textContent = <span class="st">"Du hast geklickt!"</span>;
+});</pre>
+
+  <section class="grid three">
+    <article class="card" style="--c:var(--c3)">
+      <h2>Wer?</h2>
+      <ul><li><span class="code">knopf</span> – das Element, das lauscht</li></ul>
+    </article>
+    <article class="card" style="--c:var(--c4)">
+      <h2>Was?</h2>
+      <ul><li><span class="code">"click"</span> – das Ereignis</li></ul>
+    </article>
+    <article class="card" style="--c:var(--c5)">
+      <h2>Dann?</h2>
+      <ul><li>Die <span class="hl">Funktion</span>, die dann läuft</li></ul>
+    </article>
+  </section>
+  <div class="pageno">Seite 7 / 8</div>
+</main>
+
+<!-- ============ SEITE 8 ============ -->
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <h1>JS &amp; Barrierefreiheit</h1>
+  <p style="text-align:center"><span class="tag">7. A11y – keine unabsichtlichen Barrieren</span></p>
+
+  <p class="lead">Weil JavaScript Inhalte <span class="hl">dynamisch verändern</span> kann, entstehen hier oft unabsichtlich Barrieren für Screenreader-Nutzer:</p>
+
+  <section class="grid one">
+    <article class="card" style="--c:var(--c1)">
+      <h2><span class="num">1</span>Fokus-Management bei Popups</h2>
+      <ul>
+        <li>Öffnet sich per JavaScript ein Menü oder Dialogfenster, muss der Fokus <span class="hl">sofort in dieses Fenster wandern</span>.</li>
+        <li>Schließt es sich wieder, muss der Fokus <span class="hl">zum auslösenden Element zurückkehren</span>.</li>
+      </ul>
+    </article>
+
+    <article class="card" style="--c:var(--c2)">
+      <h2><span class="num">2</span>Änderungen ankündigen</h2>
+      <p class="sub">aria-live</p>
+      <ul>
+        <li>Ändert JavaScript Text (z. B. eine Fehlermeldung im Formular), bekommen blinde Menschen das <span class="hl">nicht mit</span>.</li>
+        <li>Mit <span class="code">aria-live="polite"</span> sagt man dem Browser: <span class="hl">Lies diese Änderung vor.</span></li>
+      </ul>
+    </article>
+
+    <article class="card" style="--c:var(--c3)">
+      <h2><span class="num">3</span>Keine reine Maus-Abhängigkeit</h2>
+      <ul>
+        <li>Event-Listener <span class="hl">niemals nur an einen Klick</span> (<span class="code">click</span>) knüpfen.</li>
+        <li>Jede Aktion muss auch per <span class="hl">Tastatur</span> auslösbar sein (Enter-Taste oder Leertaste).</li>
+      </ul>
+    </article>
+  </section>
+
+  <pre class="codeblock" data-lang="HTML + JavaScript">&lt;p id="meldung" aria-live="polite"&gt;&lt;/p&gt;
+
+<span class="k">const</span> meldung = document.<span class="fn">querySelector</span>(<span class="st">"#meldung"</span>);
+meldung.textContent = <span class="st">"Bitte gib eine E-Mail-Adresse ein."</span>;  <span class="cm">// wird vorgelesen</span></pre>
+
+  <div class="tip">
+    <strong>Tipp:</strong> Echte <span class="code">&lt;button&gt;</span>-Elemente reagieren automatisch auf Klick, Enter und Leertaste – ein <span class="code">&lt;div&gt;</span> nicht.
+  </div>
+
+  <hr>
+  <h3>Weiter lernen</h3>
+  <section class="grid">
+    <article class="card" style="--c:var(--c5)">
+      <h2>Edabit</h2>
+      <ul><li><a class="link" href="https://edabit.com/tutorial/javascript" target="_blank" rel="noopener">edabit.com/tutorial/javascript</a></li></ul>
+    </article>
+    <article class="card" style="--c:var(--c6)">
+      <h2>CheckiO</h2>
+      <ul><li><a class="link" href="https://js.checkio.org/" target="_blank" rel="noopener">js.checkio.org</a></li></ul>
+    </article>
+  </section>
+
+  <p style="margin:18px 0 4px"><span class="tag">Zusammenfassung</span></p>
+  <span class="cloud">let / const = Werte merken</span>
+  <span class="cloud">if / else = entscheiden</span>
+  <span class="cloud">function = wiederverwenden</span>
+  <span class="cloud">for = wiederholen</span>
+  <span class="cloud">[ ] Liste · { } Objekt</span>
+  <span class="cloud">DOM + Events = reagieren</span>
+
+  <div class="banner">Merken · Entscheiden · Wiederholen · Reagieren</div>
+  <div class="pageno">Seite 8 / 8</div>
+</main>
+
+</body>
+</html>

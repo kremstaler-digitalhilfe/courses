@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSS Grundlagen</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Patrick+Hand&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* === THEME : seul bloc à modifier === */
+  --paper:#fffdfa; --grid:#ebe6ee; --ink:#2b2b3a; --page:#f3eef2;
+  --accent:#e8639a; --accent-soft:#fbd3e4; --highlight:#fff176;
+  --c1:#7bc47f; --c2:#6fa8e8; --c3:#f2a65a;
+  --c4:#b58be0; --c5:#4cc0b5; --c6:#f28aa5;
+  --font-title:'Fredoka',sans-serif;
+  --font-body:'Patrick Hand',sans-serif;
+  --font-hand:'Caveat',cursive;
+  --radius:14px;
+}
+*{box-sizing:border-box}
+body{margin:0;padding:16px;background:var(--page);color:var(--ink);
+  font-family:var(--font-body);font-size:18px;line-height:1.4}
+.sheet{position:relative;max-width:794px;min-height:1050px;margin:0 auto 24px;padding:32px 28px 52px;border-radius:6px;
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),
+                   linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px;box-shadow:0 6px 24px #0002}
+h1{font-family:var(--font-title);font-size:2.2rem;text-align:center;margin:0 0 6px}
+h1::after{content:"";display:block;height:6px;width:60%;margin:8px auto 0;
+  background:var(--accent);border-radius:6px;opacity:.7}
+h3{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px;display:inline-block;
+  background:var(--accent-soft);padding:3px 14px;border-radius:8px}
+.tag{display:inline-block;background:var(--accent-soft);padding:4px 14px;
+  border-radius:8px;font-family:var(--font-title);font-size:.95rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:18px;margin-top:20px}
+.grid.one{grid-template-columns:1fr}
+.card{--c:var(--c1);position:relative;border:2px solid var(--c);
+  border-radius:var(--radius);padding:14px 16px;
+  background:color-mix(in srgb,var(--c) 8%,white)}
+.card::before{content:"";position:absolute;top:-9px;right:18px;width:54px;height:16px;
+  background:color-mix(in srgb,var(--c) 45%,white);opacity:.8;transform:rotate(4deg);border-radius:2px}
+.card h2{margin:0 0 4px;font-family:var(--font-title);font-size:1.05rem}
+.card .sub{font-family:var(--font-hand);font-size:1.15rem;color:color-mix(in srgb,var(--c) 70%,black);margin:0 0 8px}
+.num{display:inline-grid;place-items:center;width:26px;height:26px;
+  border-radius:50%;background:var(--c);color:#fff;margin-right:6px}
+.card ul{list-style:none;padding:0;margin:0}
+.card li{margin:6px 0;padding-left:2px}
+.card li::before{content:"✓ ";color:var(--c);font-weight:700}
+.card li b{font-family:var(--font-title);font-size:.78rem;text-transform:uppercase;
+  background:var(--c);color:#fff;padding:1px 8px;border-radius:6px;margin-right:6px}
+.hl{background:linear-gradient(transparent 55%,var(--highlight) 55%)}
+.code{display:inline-block;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem;
+  background:#fff;border:1.5px dashed var(--c,var(--accent));border-radius:8px;padding:1px 8px;
+  margin:1px 0;word-break:break-word}
+pre.codeblock{--c:var(--c2);margin:10px 0 0;padding:12px 16px;background:#fff;
+  border:2px dashed var(--c);border-radius:var(--radius);
+  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem;line-height:1.6;overflow-x:auto}
+.s,.p,.v{padding:1px 4px;border-radius:5px}
+.s{background:color-mix(in srgb,var(--c1) 35%,white)}
+.p{background:color-mix(in srgb,var(--c2) 35%,white)}
+.v{background:color-mix(in srgb,var(--c3) 40%,white)}
+.cloud{display:inline-block;padding:8px 16px;border:2px dashed var(--accent);
+  border-radius:40px;background:#fff;font-family:var(--font-hand);font-size:1.2rem;margin:4px 4px 0 0}
+.note{border:2px solid var(--accent);border-radius:var(--radius);
+  background:#fff;padding:12px 16px;margin-top:18px}
+.note ul{list-style:none;padding:0;margin:6px 0 0}
+.note li::before{content:"♥ ";color:var(--accent)}
+.tip{--c:var(--c3);border:2px dashed var(--c);border-radius:var(--radius);
+  background:color-mix(in srgb,var(--c) 10%,white);padding:10px 16px;margin-top:18px}
+.tip strong{font-family:var(--font-title);color:color-mix(in srgb,var(--c) 70%,black)}
+.rule{--c:var(--c4);border:2px solid var(--c);border-radius:var(--radius);
+  background:color-mix(in srgb,var(--c) 10%,white);padding:10px 16px;margin-top:18px}
+.rule strong{font-family:var(--font-title);color:color-mix(in srgb,var(--c) 70%,black)}
+hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
+.banner{margin-top:20px;padding:10px;text-align:center;background:var(--accent-soft);
+  border:2px solid var(--accent);font-family:var(--font-title);
+  text-transform:uppercase;letter-spacing:.04em}
+.pageno{position:absolute;bottom:16px;left:0;right:0;text-align:center;
+  font-family:var(--font-hand);font-size:1.1rem;opacity:.6}
+a.link{color:var(--ink);font-weight:700;text-decoration:underline wavy var(--accent);
+  text-underline-offset:3px;word-break:break-all}
+/* Legende */
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.legend span{font-family:var(--font-hand);font-size:1.15rem;padding:2px 12px;border-radius:20px}
+/* Box-Model */
+.bm{max-width:400px;margin:14px auto 0;font-family:var(--font-title);font-size:.8rem}
+.bm .lbl{display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em}
+.bm-margin{padding:10px 18px 18px;border:2px dashed var(--c3);background:color-mix(in srgb,var(--c3) 16%,white);border-radius:6px}
+.bm-border{padding:10px 18px 18px;border:5px solid var(--c2);background:#fff;border-radius:4px}
+.bm-padding{padding:10px 18px 18px;background:color-mix(in srgb,var(--c1) 22%,white)}
+.bm-content{padding:16px;text-align:center;background:var(--accent-soft);border-radius:4px;
+  font-family:var(--font-hand);font-size:1.3rem}
+/* Flex-Demo */
+.demo{margin-top:12px;font-family:var(--font-hand);font-size:1.15rem}
+.demo .cap{font-family:var(--font-title);font-size:.78rem;text-transform:uppercase;margin-bottom:4px}
+.flexdemo{display:flex;gap:8px;padding:10px;border:2px dashed var(--c5);border-radius:10px;background:#fff}
+.flexdemo i{font-style:normal;flex:1;text-align:center;padding:8px 0;border-radius:8px;color:#fff}
+.flexdemo i:nth-child(1){background:var(--c5)}
+.flexdemo i:nth-child(2){background:var(--c2)}
+.flexdemo i:nth-child(3){background:var(--c4)}
+.griddemo{display:grid;grid-template-columns:1fr 2fr;grid-template-rows:auto auto auto;gap:6px;
+  padding:10px;border:2px dashed var(--c6);border-radius:10px;background:#fff;text-align:center}
+.griddemo i{font-style:normal;padding:8px 0;border-radius:8px;color:#fff}
+.griddemo .h{grid-column:1 / 3;background:var(--c6)}
+.griddemo .sb{background:var(--c3)}
+.griddemo .m{background:var(--c2)}
+.griddemo .f{grid-column:1 / 3;background:var(--c4)}
+
+/* === Ornements SVG (carnet, crayons, étoiles...) === */
+.sheet{position:relative}
+.orn{position:absolute;top:16px;display:flex;gap:2px;align-items:flex-start;pointer-events:none}
+.orn.tl{left:18px}
+.orn.tr{right:18px}
+.orn svg{display:block;overflow:visible}
+.orn .big{width:78px;height:88px}
+.orn .bulb{width:38px;height:46px;margin-top:6px}
+.orn .star{width:26px;height:26px}
+.orn .heart{width:28px;height:28px;margin-top:10px}
+.sheet h1{padding:0 84px}
+@media (max-width:640px){.orn{display:none}.sheet h1{padding:0}}
+@media print{
+  @page{size:A4;margin:10mm}
+  body{background:#fff;padding:0}
+  .sheet{box-shadow:none;margin:0;min-height:auto;break-after:page;border-radius:0}
+  .sheet:last-of-type{break-after:auto}
+  .card,.note,.tip,.rule,pre,.demo,.bm{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ SEITE 1 ============ -->
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="big" viewBox="0 0 80 90" aria-hidden="true">
+  <g transform="rotate(-8 40 48)">
+    <rect x="16" y="10" width="52" height="68" rx="7" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.5"/>
+    <rect x="28" y="24" width="30" height="16" rx="3" style="fill:#fff;stroke:var(--ink);stroke-width:2"/>
+    <path d="M43 36c-4-3-6-5-6-7a3 3 0 0 1 6-.8 3 3 0 0 1 6 .8c0 2-2 4-6 7z" style="fill:var(--accent)"/>
+    <g style="fill:#fff;stroke:var(--ink);stroke-width:2.2">
+      <circle cx="16" cy="22" r="3.6"/><circle cx="16" cy="34" r="3.6"/><circle cx="16" cy="46" r="3.6"/>
+      <circle cx="16" cy="58" r="3.6"/><circle cx="16" cy="70" r="3.6"/>
+    </g>
+  </g>
+  <path d="M70 4l2.2 4.8 5.2.6-3.9 3.5 1.1 5.1L70 15.4l-4.6 2.6 1.1-5.1-3.9-3.5 5.2-.6z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round"/>
+</svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="big" viewBox="0 0 80 90" aria-hidden="true">
+  <g style="stroke:var(--ink);stroke-width:2;stroke-linejoin:round">
+    <g transform="rotate(-16 28 52)"><rect x="23" y="8" width="9" height="44" style="fill:var(--c3)"/><path d="M23 8L27.5-2 32 8z" style="fill:#f6dcc0"/></g>
+    <g transform="rotate(4 42 52)"><rect x="38" y="4" width="9" height="48" style="fill:var(--accent)"/><path d="M38 4L42.5-6 47 4z" style="fill:#f6dcc0"/></g>
+    <g transform="rotate(20 54 52)"><rect x="50" y="10" width="9" height="42" style="fill:var(--c4)"/><path d="M50 10L54.5 0 59 10z" style="fill:#f6dcc0"/></g>
+    <path d="M14 46h52l-5 36a5 5 0 0 1-5 4H24a5 5 0 0 1-5-4z" style="fill:var(--c5)"/>
+  </g>
+  <path d="M40 70c-3-2.4-4.6-4-4.6-5.6a2.3 2.3 0 0 1 4.6-.6 2.3 2.3 0 0 1 4.6.6c0 1.6-1.6 3.2-4.6 5.6z" style="fill:#fff"/>
+</svg></div>
+
+  <h1>CSS</h1>
+  <p style="text-align:center"><span class="tag">Webentwicklung · Grundlagen</span></p>
+
+  <h3>Was ist CSS?</h3>
+  <section class="grid">
+    <article class="card" style="--c:var(--c1)">
+      <h2><span class="num">1</span>Die Abkürzung</h2>
+      <p class="sub">Cascading Style Sheets</p>
+      <ul><li>Auf Deutsch: <span class="hl">stufenförmige Stilvorlagen</span></li></ul>
+    </article>
+    <article class="card" style="--c:var(--c2)">
+      <h2><span class="num">2</span>Keine Programmiersprache!</h2>
+      <p class="sub">Sondern eine Design-Sprache</p>
+      <ul><li>CSS <span class="hl">gestaltet</span>, es rechnet nicht.</li></ul>
+    </article>
+    <article class="card" style="--c:var(--c3)">
+      <h2><span class="num">3</span>Seine Aufgabe</h2>
+      <p class="sub">Aussehen und Layout</p>
+      <ul><li>Farben, Schriftarten, Abstände, Anordnung</li></ul>
+    </article>
+    <article class="card" style="--c:var(--c4)">
+      <h2><span class="num">4</span>HTML + CSS</h2>
+      <p class="sub">Ein starkes Team</p>
+      <ul>
+        <li>HTML = das <span class="hl">Skelett</span></li>
+        <li>CSS = die <span class="hl">Farbe, Kleidung und das Design</span></li>
+      </ul>
+    </article>
+  </section>
+
+  <hr>
+  <h3>1. CSS-Vokabular (Syntax)</h3>
+  <p style="margin:6px 0 0">Eine CSS-Regel folgt immer demselben <span class="hl">festen Schema</span>:</p>
+  <pre class="codeblock"><span class="s">selektor</span> {
+  <span class="p">eigenschaft</span>: <span class="v">wert</span>;
+}</pre>
+
+  <section class="grid">
+    <article class="card" style="--c:var(--c1)">
+      <h2><span class="num">1</span>Selektor</h2>
+      <p class="sub">Was soll gestaltet werden?</p>
+      <ul>
+        <li>Sagt, <span class="hl">welches HTML-Element</span> gestaltet wird.</li>
+        <li><span class="code">p</span> = alle Absätze, <span class="code">h1</span> = Überschriften</li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c2)">
+      <h2><span class="num">2</span>Eigenschaft</h2>
+      <p class="sub">Property – Was soll sich ändern?</p>
+      <ul>
+        <li><span class="code">color</span> = Textfarbe</li>
+        <li><span class="code">font-size</span> = Schriftgröße</li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c3)">
+      <h2><span class="num">3</span>Wert</h2>
+      <p class="sub">Value – Wie soll es sich ändern?</p>
+      <ul>
+        <li><span class="code">blue</span> = Blau</li>
+        <li><span class="code">16px</span> = Größe</li>
+      </ul>
+    </article>
+  </section>
+
+  <p style="margin:18px 0 0"><strong>Beispiel:</strong></p>
+  <pre class="codeblock"><span class="s">h1</span> {
+  <span class="p">color</span>: <span class="v">blue</span>;
+  <span class="p">font-size</span>: <span class="v">24px</span>;
+}</pre>
+  <p style="margin:4px 0 0;font-family:var(--font-hand);font-size:1.15rem">↑ Das macht alle Hauptüberschriften blau und 24 Pixel groß.</p>
+  <div class="legend">
+    <span style="background:color-mix(in srgb,var(--c1) 35%,white)">Selektor</span>
+    <span style="background:color-mix(in srgb,var(--c2) 35%,white)">Eigenschaft</span>
+    <span style="background:color-mix(in srgb,var(--c3) 40%,white)">Wert</span>
+  </div>
+  <div class="pageno">Seite 1 / 6</div>
+</main>
+
+<!-- ============ SEITE 2 ============ -->
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+
+  <h1>CSS einbinden</h1>
+  <p style="text-align:center"><span class="tag">2. Wie kommt CSS in die Website?</span></p>
+
+  <p style="margin:16px 0 0">Es gibt <span class="hl">drei Wege</span>, CSS einzubinden. Der beste und wichtigste Weg ist die <span class="hl">externe Datei</span>.</p>
+
+  <section class="grid one">
+    <article class="card" style="--c:var(--c1)">
+      <h2><span class="num">1</span>Externe Datei</h2>
+      <p class="sub">Der Standard ★</p>
+      <ul>
+        <li>Eine separate <span class="code">.css</span>-Datei, z. B. <span class="code">style.css</span></li>
+        <li>Wird im <span class="code">&lt;head&gt;</span> der HTML-Datei verknüpft:</li>
+        <li><span class="code">&lt;link rel="stylesheet" href="style.css"&gt;</span></li>
+        <li>Hält den Code <span class="hl">sauber und übersichtlich</span>.</li>
+      </ul>
+    </article>
+
+    <article class="card" style="--c:var(--c2)">
+      <h2><span class="num">2</span>Interner Bereich</h2>
+      <p class="sub">Direkt in der HTML-Datei</p>
+      <ul>
+        <li>Innerhalb eines <span class="code">&lt;style&gt;</span>-Tags</li>
+        <li>Das Tag steht im <span class="code">&lt;head&gt;</span>.</li>
+      </ul>
+    </article>
+
+    <article class="card" style="--c:var(--c6)">
+      <h2><span class="num">3</span>Inline-CSS</h2>
+      <p class="sub">Vermeiden! ✗</p>
+      <ul>
+        <li>Direkt am jeweiligen HTML-Element:</li>
+        <li><span class="code">&lt;p style="color: red;"&gt;</span></li>
+        <li>Macht den Code <span class="hl">unübersichtlich</span> und <span class="hl">schwer zu pflegen</span>.</li>
+      </ul>
+    </article>
+  </section>
+
+  <div class="rule">
+    <strong>Goldene Regel:</strong> Externe Datei benutzen – Inline-CSS vermeiden!
+  </div>
+
+  <h3>Zum Vergleich</h3>
+  <section class="grid">
+    <article class="card" style="--c:var(--c1)">
+      <h2>Extern</h2>
+      <ul>
+        <li>Sauber ✓</li>
+        <li>Übersichtlich ✓</li>
+        <li>Standard ✓</li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c2)">
+      <h2>Intern</h2>
+      <ul>
+        <li>Im &lt;style&gt;-Tag</li>
+        <li>Im &lt;head&gt;</li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c6)">
+      <h2>Inline</h2>
+      <ul>
+        <li>Am Element</li>
+        <li>Schwer zu pflegen</li>
+      </ul>
+    </article>
+  </section>
+  <div class="pageno">Seite 2 / 6</div>
+</main>
+
+<!-- ============ SEITE 3 ============ -->
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+
+  <h1>CSS-Grundlagen</h1>
+  <p style="text-align:center"><span class="tag">3. Die wichtigsten Eigenschaften</span></p>
+
+  <section class="grid">
+    <article class="card" style="--c:var(--c1)">
+      <h2><span class="num">1</span>Farben</h2>
+      <p class="sub">color &amp; background-color</p>
+      <ul>
+        <li><span class="code">color</span> ändert die <span class="hl">Textfarbe</span>.</li>
+        <li><span class="code">background-color</span> ändert die <span class="hl">Hintergrundfarbe</span>.</li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c2)">
+      <h2><span class="num">2</span>Schrift</h2>
+      <p class="sub">font-family &amp; font-size</p>
+      <ul>
+        <li><span class="code">font-family</span> bestimmt die <span class="hl">Schriftart</span> (z. B. Arial, sans-serif).</li>
+        <li><span class="code">font-size</span> bestimmt die <span class="hl">Schriftgröße</span>.</li>
+      </ul>
+    </article>
+  </section>
+
+  <hr>
+  <h3>Das Box-Model</h3>
+  <p style="margin:6px 0 0">Jedes HTML-Element ist im Browser ein <span class="hl">unsichtbarer Kasten</span>. Diesen steuerst du mit:</p>
+
+  <div class="bm">
+    <div class="bm-margin">
+      <span class="lbl" style="color:color-mix(in srgb,var(--c3) 60%,black)">margin · Außenabstand</span>
+      <div class="bm-border">
+        <span class="lbl" style="color:var(--c2)">border · Rahmen</span>
+        <div class="bm-padding">
+          <span class="lbl" style="color:color-mix(in srgb,var(--c1) 60%,black)">padding · Innenabstand</span>
+          <div class="bm-content">Text / Inhalt</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="grid">
+    <article class="card" style="--c:var(--c1)">
+      <h2><span class="num">1</span>padding</h2>
+      <ul><li>Der <span class="hl">Innenabstand</span> – zwischen Text und Rahmen.</li></ul>
+    </article>
+    <article class="card" style="--c:var(--c3)">
+      <h2><span class="num">2</span>margin</h2>
+      <ul><li>Der <span class="hl">Außenabstand</span> – Abstand zu anderen Elementen.</li></ul>
+    </article>
+    <article class="card" style="--c:var(--c2)">
+      <h2><span class="num">3</span>border</h2>
+      <ul><li>Ein <span class="hl">sichtbarer Rahmen</span> um das Element.</li></ul>
+    </article>
+  </section>
+  <div class="pageno">Seite 3 / 6</div>
+</main>
+
+<!-- ============ SEITE 4 ============ -->
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+
+  <h1>Flexbox</h1>
+  <p style="text-align:center"><span class="tag">Positionierung · 1-dimensional</span></p>
+
+  <section class="grid one">
+    <article class="card" style="--c:var(--c5)">
+      <h2><span class="num">1</span>Was ist Flexbox?</h2>
+      <p class="sub">Flexible Box Layout</p>
+      <ul>
+        <li>Ein modernes Werkzeug, um Elemente <span class="hl">flexibel anzuordnen und auszurichten</span>.</li>
+        <li>Früher war es kompliziert, Boxen nebeneinander zu positionieren oder perfekt zu zentrieren.</li>
+        <li>Flexbox löst das: Ein Container bestimmt, wie sich seine Elemente <span class="hl">automatisch an den verfügbaren Platz anpassen</span>.</li>
+      </ul>
+    </article>
+  </section>
+
+  <h3>Die zwei Teile</h3>
+  <section class="grid">
+    <article class="card" style="--c:var(--c2)">
+      <h2><span class="num">1</span>Flex-Container</h2>
+      <ul><li>Das äußere <span class="hl">Eltern-Element</span>, das Flexbox aktiviert.</li></ul>
+    </article>
+    <article class="card" style="--c:var(--c4)">
+      <h2><span class="num">2</span>Flex-Items</h2>
+      <ul><li>Die inneren Elemente, die nun <span class="hl">flexibel verschoben</span> werden können.</li></ul>
+    </article>
+  </section>
+
+  <div class="demo">
+    <div class="cap">So sieht es aus – eine Zeile</div>
+    <div class="flexdemo"><i>Item 1</i><i>Item 2</i><i>Item 3</i></div>
+    <div style="margin-top:4px">↑ Flex-Container (gestrichelt) mit drei Flex-Items</div>
+  </div>
+
+  <div class="note">
+    <strong>Merke dir:</strong> Flexbox ist für <span class="hl">entweder eine Zeile ODER eine Spalte</span> gemacht.
+  </div>
+
+  <section class="grid">
+    <article class="card" style="--c:var(--c1)">
+      <h2>Arbeitsweise</h2>
+      <ul><li>Elemente werden in <span class="hl">eine Richtung</span> angeordnet (z. B. nebeneinander) und passen sich flexibel an den Platz an.</li></ul>
+    </article>
+    <article class="card" style="--c:var(--c3)">
+      <h2>Typische Anwendungen</h2>
+      <ul>
+        <li>Navigationsleisten (Links nebeneinander)</li>
+        <li>Kleine Gruppen von Buttons oder Icons</li>
+        <li>Elemente zentrieren</li>
+      </ul>
+    </article>
+  </section>
+
+  <div class="tip">
+    <strong>Üben:</strong> Lerne Flexbox mit
+    <a class="link" href="https://flexboxfroggy.com/#de" target="_blank" rel="noopener">flexboxfroggy.com</a><br>
+    <strong>Nachschlagen:</strong> CSS-Tricks-Guide:
+    <a class="link" href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank" rel="noopener">css-tricks.com/…/a-guide-to-flexbox</a>
+  </div>
+  <div class="pageno">Seite 4 / 6</div>
+</main>
+
+<!-- ============ SEITE 5 ============ -->
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+
+  <h1>CSS Grid</h1>
+  <p style="text-align:center"><span class="tag">Positionierung · 2-dimensional</span></p>
+
+  <section class="grid one">
+    <article class="card" style="--c:var(--c6)">
+      <h2><span class="num">2</span>Was ist CSS Grid?</h2>
+      <p class="sub">Wie ein Schachbrett oder ein kariertes Blatt Papier</p>
+      <ul>
+        <li>Gemacht für <span class="hl">Zeilen UND Spalten gleichzeitig</span>.</li>
+        <li><b>Arbeitsweise</b>Du definierst ein festes <span class="hl">Raster</span> aus Spalten und Zeilen und platzierst die Inhalte genau dort, wo du sie haben willst.</li>
+      </ul>
+    </article>
+  </section>
+
+  <div class="demo">
+    <div class="cap">So sieht es aus – ein Raster</div>
+    <div class="griddemo"><i class="h">Header</i><i class="sb">Sidebar</i><i class="m">Hauptinhalt</i><i class="f">Footer</i></div>
+  </div>
+
+  <section class="grid">
+    <article class="card" style="--c:var(--c6)">
+      <h2>Typische Anwendungen</h2>
+      <ul>
+        <li>Das <span class="hl">komplette Layout</span> einer Website (Header, Sidebar, Hauptinhalt, Footer)</li>
+        <li>Bildergalerien mit vielen Kacheln</li>
+        <li>Komplexe Formulare oder Dashboards</li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c2)">
+      <h2>Üben &amp; Nachschlagen</h2>
+      <ul>
+        <li><a class="link" href="https://cssgridgarden.com/#de" target="_blank" rel="noopener">cssgridgarden.com</a></li>
+        <li><a class="link" href="https://css-tricks.com/complete-guide-css-grid-layout/" target="_blank" rel="noopener">CSS-Tricks: Complete Guide to Grid</a></li>
+      </ul>
+    </article>
+  </section>
+
+  <h3>4. Die Faustregel</h3>
+  <section class="grid">
+    <article class="card" style="--c:var(--c5)">
+      <h2>Flexbox nutzen, wenn …</h2>
+      <ul><li>Elemente in <span class="hl">eine Richtung</span> fließen sollen (waagerecht oder senkrecht).</li></ul>
+    </article>
+    <article class="card" style="--c:var(--c6)">
+      <h2>Grid nutzen, wenn …</h2>
+      <ul><li>du eine <span class="hl">ganze Fläche</span> in Zeilen und Spalten aufteilen musst.</li></ul>
+    </article>
+  </section>
+
+  <div class="tip">
+    <strong>Tipp:</strong> In der Praxis schließen sich die beiden nicht aus. Meistens nutzt man
+    <span class="hl">Grid für das große Layout</span> der gesamten Website und
+    <span class="hl">Flexbox für die kleinen Details</span> im Inneren (z. B. Logo und Menüpunkte nebeneinander in der Kopfzeile).
+  </div>
+  <div class="pageno">Seite 5 / 6</div>
+</main>
+
+<!-- ============ SEITE 6 ============ -->
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+
+  <h1>CSS &amp; Barrierefreiheit</h1>
+  <p style="text-align:center"><span class="tag">4. Barrieren abbauen statt schaffen</span></p>
+
+  <p style="margin:16px 0 0">Auch mit CSS kannst du <span class="hl">Barrieren für Nutzer schaffen oder abbauen</span>:</p>
+
+  <section class="grid one">
+    <article class="card" style="--c:var(--c1)">
+      <h2><span class="num">1</span>Fokus-Rahmen erhalten</h2>
+      <p class="sub">Nie ohne Ersatz entfernen!</p>
+      <ul>
+        <li>Nutze niemals <span class="code">outline: none;</span> ohne einen eigenen, <span class="hl">gut sichtbaren Fokus-Rahmen</span>.</li>
+        <li>Tastaturnutzer müssen jederzeit sehen, <span class="hl">auf welchem Element sie sich befinden</span>.</li>
+      </ul>
+    </article>
+
+    <article class="card" style="--c:var(--c2)">
+      <h2><span class="num">2</span>Gute Kontraste</h2>
+      <p class="sub">Text und Hintergrund klar trennen</p>
+      <ul>
+        <li>Text und Hintergrund müssen sich <span class="hl">deutlich voneinander abheben</span>.</li>
+        <li>So können auch Menschen mit Sehbehinderungen alles problemlos lesen.</li>
+      </ul>
+    </article>
+
+    <article class="card" style="--c:var(--c3)">
+      <h2><span class="num">3</span>Schriftgröße skalierbar</h2>
+      <p class="sub">rem statt px</p>
+      <ul>
+        <li>Am besten <span class="hl">relative Einheiten</span> (wie <span class="code">rem</span>) statt fester Pixel (<span class="code">px</span>).</li>
+        <li>So können Nutzer die Schrift im Browser <span class="hl">problemlos vergrößern</span>.</li>
+      </ul>
+    </article>
+  </section>
+
+  <hr>
+  <p style="margin:12px 0 4px"><span class="tag">Zusammenfassung</span></p>
+  <span class="cloud">CSS = Design, keine Programmierung</span>
+  <span class="cloud">Selektor { Eigenschaft: Wert; }</span>
+  <span class="cloud">Externe Datei = Standard</span>
+  <span class="cloud">Flexbox 1D · Grid 2D</span>
+
+  <div class="note">
+    <strong>Merke dir:</strong> Gutes CSS …
+    <ul>
+      <li>liegt in einer externen Datei</li>
+      <li>nutzt Flexbox für eine Richtung und Grid für Flächen</li>
+      <li>erhält den Fokus-Rahmen und sorgt für gute Kontraste</li>
+      <li>nutzt rem statt px für Schriftgrößen</li>
+    </ul>
+  </div>
+
+  <div class="banner">Gestalten · Anordnen · Zugänglich bleiben</div>
+  <div class="pageno">Seite 6 / 6</div>
+</main>
+
+</body>
+</html>

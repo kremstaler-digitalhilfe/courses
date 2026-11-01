@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HTML Grundlagen</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Patrick+Hand&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* === THEME : seul bloc à modifier === */
+  --paper:#fffdfa; --grid:#ebe6ee; --ink:#2b2b3a; --page:#f3eef2;
+  --accent:#e8639a; --accent-soft:#fbd3e4; --highlight:#fff176;
+  --c1:#7bc47f; --c2:#6fa8e8; --c3:#f2a65a;
+  --c4:#b58be0; --c5:#4cc0b5; --c6:#f28aa5;
+  --font-title:'Fredoka',sans-serif;
+  --font-body:'Patrick Hand',sans-serif;
+  --font-hand:'Caveat',cursive;
+  --radius:14px;
+}
+*{box-sizing:border-box}
+body{margin:0;padding:16px;background:var(--page);color:var(--ink);
+  font-family:var(--font-body);font-size:18px;line-height:1.4}
+.sheet{position:relative;max-width:794px;min-height:1050px;margin:0 auto 24px;padding:32px 28px 52px;border-radius:6px;
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),
+                   linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px;box-shadow:0 6px 24px #0002}
+h1{font-family:var(--font-title);font-size:2.2rem;text-align:center;margin:0 0 6px}
+h1::after{content:"";display:block;height:6px;width:60%;margin:8px auto 0;
+  background:var(--accent);border-radius:6px;opacity:.7}
+h3{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px;display:inline-block;
+  background:var(--accent-soft);padding:3px 14px;border-radius:8px}
+.tag{display:inline-block;background:var(--accent-soft);padding:4px 14px;
+  border-radius:8px;font-family:var(--font-title);font-size:.95rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:18px;margin-top:20px}
+.grid.one{grid-template-columns:1fr}
+.card{--c:var(--c1);position:relative;border:2px solid var(--c);
+  border-radius:var(--radius);padding:14px 16px;
+  background:color-mix(in srgb,var(--c) 8%,white)}
+.card::before{content:"";position:absolute;top:-9px;right:18px;width:54px;height:16px;
+  background:color-mix(in srgb,var(--c) 45%,white);opacity:.8;transform:rotate(4deg);border-radius:2px}
+.card h2{margin:0 0 4px;font-family:var(--font-title);font-size:1.05rem}
+.card .sub{font-family:var(--font-hand);font-size:1.15rem;color:color-mix(in srgb,var(--c) 70%,black);margin:0 0 8px}
+.num{display:inline-grid;place-items:center;width:26px;height:26px;
+  border-radius:50%;background:var(--c);color:#fff;margin-right:6px}
+.card ul{list-style:none;padding:0;margin:0}
+.card li{margin:6px 0;padding-left:2px}
+.card li::before{content:"✓ ";color:var(--c);font-weight:700}
+.card li.lab::before{content:""}
+.card li b{font-family:var(--font-title);font-size:.78rem;text-transform:uppercase;
+  background:var(--c);color:#fff;padding:1px 8px;border-radius:6px;margin-right:6px}
+.hl{background:linear-gradient(transparent 55%,var(--highlight) 55%)}
+.code{display:inline-block;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem;
+  background:#fff;border:1.5px dashed var(--c,var(--accent));border-radius:8px;padding:1px 8px;
+  margin:1px 0;word-break:break-word}
+pre.codeblock{--c:var(--c2);margin:10px 0 0;padding:12px 16px;background:#fff;
+  border:2px dashed var(--c);border-radius:var(--radius);
+  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem;line-height:1.5;overflow-x:auto}
+.cloud{display:inline-block;padding:8px 16px;border:2px dashed var(--accent);
+  border-radius:40px;background:#fff;font-family:var(--font-hand);font-size:1.2rem;margin:4px 4px 0 0}
+.note{border:2px solid var(--accent);border-radius:var(--radius);
+  background:#fff;padding:12px 16px;margin-top:18px}
+.note ul{list-style:none;padding:0;margin:6px 0 0}
+.note li::before{content:"♥ ";color:var(--accent)}
+.tip{--c:var(--c3);border:2px dashed var(--c);border-radius:var(--radius);
+  background:color-mix(in srgb,var(--c) 10%,white);padding:10px 16px;margin-top:18px}
+.tip strong{font-family:var(--font-title);color:color-mix(in srgb,var(--c) 70%,black)}
+hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
+.banner{margin-top:20px;padding:10px;text-align:center;background:var(--accent-soft);
+  border:2px solid var(--accent);font-family:var(--font-title);
+  text-transform:uppercase;letter-spacing:.04em}
+.pageno{position:absolute;bottom:16px;left:0;right:0;text-align:center;
+  font-family:var(--font-hand);font-size:1.1rem;opacity:.6}
+/* Anatomie eines Elements */
+.anat{display:flex;justify-content:center;flex-wrap:wrap;gap:6px;margin-top:12px}
+.anat div{text-align:center}
+.anat code{display:block;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9rem;
+  background:#fff;padding:6px 10px;border-radius:8px;border:2px solid var(--k)}
+.anat span{display:block;margin-top:4px;padding-top:2px;border-top:4px solid var(--k);
+  font-family:var(--font-hand);font-size:1.15rem}
+
+/* === Ornements SVG (carnet, crayons, étoiles...) === */
+.sheet{position:relative}
+.orn{position:absolute;top:16px;display:flex;gap:2px;align-items:flex-start;pointer-events:none}
+.orn.tl{left:18px}
+.orn.tr{right:18px}
+.orn svg{display:block;overflow:visible}
+.orn .big{width:78px;height:88px}
+.orn .bulb{width:38px;height:46px;margin-top:6px}
+.orn .star{width:26px;height:26px}
+.orn .heart{width:28px;height:28px;margin-top:10px}
+.sheet h1{padding:0 84px}
+@media (max-width:640px){.orn{display:none}.sheet h1{padding:0}}
+@media print{
+  @page{size:A4;margin:10mm}
+  body{background:#fff;padding:0}
+  .sheet{box-shadow:none;margin:0;min-height:auto;break-after:page;border-radius:0}
+  .sheet:last-of-type{break-after:auto}
+  .card,.note,.tip,pre{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ SEITE 1 ============ -->
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="big" viewBox="0 0 80 90" aria-hidden="true">
+  <g transform="rotate(-8 40 48)">
+    <rect x="16" y="10" width="52" height="68" rx="7" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.5"/>
+    <rect x="28" y="24" width="30" height="16" rx="3" style="fill:#fff;stroke:var(--ink);stroke-width:2"/>
+    <path d="M43 36c-4-3-6-5-6-7a3 3 0 0 1 6-.8 3 3 0 0 1 6 .8c0 2-2 4-6 7z" style="fill:var(--accent)"/>
+    <g style="fill:#fff;stroke:var(--ink);stroke-width:2.2">
+      <circle cx="16" cy="22" r="3.6"/><circle cx="16" cy="34" r="3.6"/><circle cx="16" cy="46" r="3.6"/>
+      <circle cx="16" cy="58" r="3.6"/><circle cx="16" cy="70" r="3.6"/>
+    </g>
+  </g>
+  <path d="M70 4l2.2 4.8 5.2.6-3.9 3.5 1.1 5.1L70 15.4l-4.6 2.6 1.1-5.1-3.9-3.5 5.2-.6z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round"/>
+</svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="big" viewBox="0 0 80 90" aria-hidden="true">
+  <g style="stroke:var(--ink);stroke-width:2;stroke-linejoin:round">
+    <g transform="rotate(-16 28 52)"><rect x="23" y="8" width="9" height="44" style="fill:var(--c3)"/><path d="M23 8L27.5-2 32 8z" style="fill:#f6dcc0"/></g>
+    <g transform="rotate(4 42 52)"><rect x="38" y="4" width="9" height="48" style="fill:var(--accent)"/><path d="M38 4L42.5-6 47 4z" style="fill:#f6dcc0"/></g>
+    <g transform="rotate(20 54 52)"><rect x="50" y="10" width="9" height="42" style="fill:var(--c4)"/><path d="M50 10L54.5 0 59 10z" style="fill:#f6dcc0"/></g>
+    <path d="M14 46h52l-5 36a5 5 0 0 1-5 4H24a5 5 0 0 1-5-4z" style="fill:var(--c5)"/>
+  </g>
+  <path d="M40 70c-3-2.4-4.6-4-4.6-5.6a2.3 2.3 0 0 1 4.6-.6 2.3 2.3 0 0 1 4.6.6c0 1.6-1.6 3.2-4.6 5.6z" style="fill:#fff"/>
+</svg></div>
+
+  <h1>HTML</h1>
+  <p style="text-align:center"><span class="tag">Webentwicklung · Grundlagen</span></p>
+
+  <h3>Was ist HTML?</h3>
+  <section class="grid">
+    <article class="card" style="--c:var(--c1)">
+      <h2><span class="num">1</span>Die Abkürzung</h2>
+      <p class="sub">HyperText Markup Language</p>
+      <ul>
+        <li>Auf Deutsch: <span class="hl">Hypertext-Auszeichnungssprache</span></li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c2)">
+      <h2><span class="num">2</span>Keine Programmiersprache!</h2>
+      <p class="sub">Sondern eine Auszeichnungssprache</p>
+      <ul>
+        <li>HTML <span class="hl">beschreibt Inhalte</span>, es rechnet nicht.</li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c3)">
+      <h2><span class="num">3</span>Das Fundament</h2>
+      <p class="sub">Das Grundgerüst jeder Website</p>
+      <ul>
+        <li>Jede Website <span class="hl">baut auf HTML auf</span>.</li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c4)">
+      <h2><span class="num">4</span>Seine Aufgabe</h2>
+      <p class="sub">Dem Browser etwas mitteilen</p>
+      <ul>
+        <li>Welche <span class="hl">Inhalte</span> sind auf der Seite?</li>
+        <li>Welche <span class="hl">Bedeutung</span> haben sie? (Überschrift, Text, Bild, Link)</li>
+      </ul>
+    </article>
+  </section>
+
+  <hr>
+  <h3>1. HTML-Vokabular</h3>
+  <section class="grid">
+    <article class="card" style="--c:var(--c5)">
+      <h2><span class="num">1</span>Tag</h2>
+      <p class="sub">Ein Befehl in spitzen Klammern</p>
+      <ul>
+        <li>Sagt dem Browser, <span class="hl">was dargestellt</span> werden soll.</li>
+        <li>Meist Start-Tag <span class="code">&lt;p&gt;</span> und End-Tag mit Schrägstrich <span class="code">&lt;/p&gt;</span></li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c6)">
+      <h2><span class="num">2</span>Element</h2>
+      <p class="sub">Ein kompletter Baustein</p>
+      <ul>
+        <li>Start-Tag + <span class="hl">Inhalt</span> + End-Tag</li>
+        <li><span class="code">&lt;p&gt;Das ist ein Text.&lt;/p&gt;</span></li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c1)">
+      <h2><span class="num">3</span>Attribut</h2>
+      <p class="sub">Eine Zusatzangabe im Start-Tag</p>
+      <ul>
+        <li>Liefert <span class="hl">Details</span>, z. B. die Webadresse eines Links oder den Namen eines Bildes.</li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c2)">
+      <h2><span class="num">4</span>Semantik</h2>
+      <p class="sub">Die Bedeutung eines Tags</p>
+      <ul>
+        <li><span class="code">&lt;button&gt;</span> = „Hier ist ein <span class="hl">klickbarer Knopf</span>“</li>
+        <li><span class="code">&lt;div&gt;</span> = neutraler Container, <span class="hl">keine feste Bedeutung</span></li>
+      </ul>
+    </article>
+  </section>
+  <div class="pageno">Seite 1 / 5</div>
+</main>
+
+<!-- ============ SEITE 2 ============ -->
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+
+  <h1>Die Standard-Tags</h1>
+  <p style="text-align:center"><span class="tag">Inhalte darstellen</span></p>
+
+  <p style="text-align:center;margin:14px 0 0">So sieht ein Element aus:</p>
+  <div class="anat">
+    <div style="--k:var(--c1)"><code>&lt;a href="https://example.com"&gt;</code><span>Start-Tag + Attribut</span></div>
+    <div style="--k:var(--c3)"><code>Hier klicken</code><span>Inhalt</span></div>
+    <div style="--k:var(--c4)"><code>&lt;/a&gt;</code><span>End-Tag</span></div>
+  </div>
+
+  <section class="grid">
+    <article class="card" style="--c:var(--c1)">
+      <h2><span class="num">1</span>Überschriften</h2>
+      <p class="sub"><span class="code">&lt;h1&gt;</span> bis <span class="code">&lt;h6&gt;</span></p>
+      <ul>
+        <li>Gliedern den Text <span class="hl">hierarchisch</span>.</li>
+        <li><span class="code">&lt;h1&gt;</span> = Hauptüberschrift (höchste Ebene)</li>
+        <li><span class="code">&lt;h6&gt;</span> = kleinste Unterüberschrift</li>
+        <li><span class="code">&lt;h1&gt;Willkommen auf meiner Seite&lt;/h1&gt;</span></li>
+      </ul>
+    </article>
+
+    <article class="card" style="--c:var(--c2)">
+      <h2><span class="num">2</span>Absätze</h2>
+      <p class="sub"><span class="code">&lt;p&gt;</span></p>
+      <ul>
+        <li>Definieren <span class="hl">normale Textblöcke</span>.</li>
+        <li>Der Browser fügt vor und nach einem Absatz automatisch <span class="hl">Abstand</span> ein.</li>
+        <li><span class="code">&lt;p&gt;Das ist ein einfacher Textabschnitt.&lt;/p&gt;</span></li>
+      </ul>
+    </article>
+
+    <article class="card" style="--c:var(--c3)">
+      <h2><span class="num">3</span>Links</h2>
+      <p class="sub"><span class="code">&lt;a&gt;</span></p>
+      <ul>
+        <li>Verknüpfen mit anderen Webseiten.</li>
+        <li>Das Attribut <span class="code">href</span> bestimmt das <span class="hl">Ziel</span>.</li>
+        <li><span class="code">&lt;a href="https://example.com"&gt;Hier klicken&lt;/a&gt;</span></li>
+      </ul>
+    </article>
+
+    <article class="card" style="--c:var(--c4)">
+      <h2><span class="num">4</span>Bilder</h2>
+      <p class="sub"><span class="code">&lt;img&gt;</span></p>
+      <ul>
+        <li>Bindet Bilder ein – <span class="hl">ohne End-Tag</span>!</li>
+        <li><span class="code">src</span> = Dateiname / Pfad</li>
+        <li><span class="code">alt</span> = Beschreibung des Bildes</li>
+        <li><span class="code">&lt;img src="logo.png" alt="Firmenlogo"&gt;</span></li>
+      </ul>
+    </article>
+
+    <article class="card" style="--c:var(--c5)">
+      <h2><span class="num">5</span>Listen</h2>
+      <p class="sub"><span class="code">&lt;ul&gt;</span> <span class="code">&lt;ol&gt;</span> <span class="code">&lt;li&gt;</span></p>
+      <ul>
+        <li><span class="code">&lt;ul&gt;</span> = ungeordnete Liste (mit Punkten)</li>
+        <li><span class="code">&lt;ol&gt;</span> = Nummernliste (mit Zahlen)</li>
+        <li><span class="code">&lt;li&gt;</span> = ein Listeneintrag, immer <span class="hl">innerhalb von ul oder ol</span></li>
+      </ul>
+    </article>
+
+    <article class="card" style="--c:var(--c6)">
+      <h2><span class="num">6</span>Hervorhebung</h2>
+      <p class="sub"><span class="code">&lt;strong&gt;</span> <span class="code">&lt;em&gt;</span></p>
+      <ul>
+        <li><span class="code">&lt;strong&gt;</span> = <b style="all:unset;font-weight:700">fett</b> + als <span class="hl">wichtig</span> markiert (wichtig für Screenreader)</li>
+        <li><span class="code">&lt;em&gt;</span> = <i>kursiv</i> + sprachlich <span class="hl">betont</span></li>
+      </ul>
+    </article>
+  </section>
+
+  <pre class="codeblock">&lt;ul&gt;
+  &lt;li&gt;Äpfel&lt;/li&gt;
+  &lt;li&gt;Birnen&lt;/li&gt;
+&lt;/ul&gt;</pre>
+  <p style="margin:4px 0 0;font-family:var(--font-hand);font-size:1.15rem">↑ Beispiel für eine ungeordnete Liste</p>
+  <div class="pageno">Seite 2 / 5</div>
+</main>
+
+<!-- ============ SEITE 3 ============ -->
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+
+  <h1>Die Grundstruktur</h1>
+  <p style="text-align:center"><span class="tag">2. HTML-Grundstruktur</span></p>
+
+  <p style="margin:16px 0 0">Jede HTML-Seite braucht ein <span class="hl">festes Grundgerüst</span>, damit der Browser die Inhalte korrekt einliest:</p>
+
+  <pre class="codeblock">&lt;!DOCTYPE html&gt;
+&lt;html lang="de"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Mein Seitentitel&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;header&gt;…&lt;/header&gt;
+    &lt;main&gt;
+      &lt;h1&gt;Hauptüberschrift&lt;/h1&gt;
+      &lt;p&gt;Inhalt der Seite&lt;/p&gt;
+    &lt;/main&gt;
+    &lt;footer&gt;…&lt;/footer&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+
+  <h3>Wichtige Bausteine</h3>
+  <section class="grid">
+    <article class="card" style="--c:var(--c1)">
+      <h2><span class="num">1</span>&lt;!DOCTYPE html&gt;</h2>
+      <ul><li>Kündigt ein <span class="hl">modernes HTML-Dokument</span> an.</li></ul>
+    </article>
+    <article class="card" style="--c:var(--c2)">
+      <h2><span class="num">2</span>&lt;head&gt;</h2>
+      <ul><li>Enthält <span class="hl">unsichtbare Metadaten</span> und den Browsertitel.</li></ul>
+    </article>
+    <article class="card" style="--c:var(--c3)">
+      <h2><span class="num">3</span>&lt;body&gt;</h2>
+      <ul><li>Umschließt <span class="hl">alle sichtbaren Inhalte</span>.</li></ul>
+    </article>
+    <article class="card" style="--c:var(--c4)">
+      <h2><span class="num">4</span>Bereiche</h2>
+      <p class="sub"><span class="code">&lt;header&gt;</span> <span class="code">&lt;main&gt;</span> <span class="code">&lt;footer&gt;</span></p>
+      <ul><li>Teilen die Seite <span class="hl">logisch auf</span>.</li></ul>
+    </article>
+  </section>
+
+  <div class="tip">
+    <strong>Tipp:</strong> Die Bereiche <span class="code">&lt;header&gt;</span>, <span class="code">&lt;main&gt;</span> und
+    <span class="code">&lt;footer&gt;</span> sind wichtig für die Barrierefreiheit – mehr dazu auf der nächsten Seite.
+  </div>
+  <div class="pageno">Seite 3 / 5</div>
+</main>
+
+<!-- ============ SEITE 4 ============ -->
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+
+  <h1>Barrierefreiheit</h1>
+  <p style="text-align:center"><span class="tag">3. Schlechte Struktur &amp; Screenreader</span></p>
+
+  <p style="margin:16px 0 0">Blinde oder sehbehinderte Menschen nutzen <span class="hl">Screenreader</span>, die Webseiteninhalte vorlesen.
+  Eine unsaubere HTML-Struktur führt zu diesen Problemen:</p>
+
+  <section class="grid one">
+    <article class="card" style="--c:var(--c1)">
+      <h2><span class="num">1</span>Überschriften-Chaos</h2>
+      <p class="sub">Ebenen werden durcheinandergebracht oder übersprungen</p>
+      <ul>
+        <li>Beispiel: Sprung von <span class="code">&lt;h1&gt;</span> direkt zu <span class="code">&lt;h4&gt;</span></li>
+        <li>Nutzer <span class="hl">verlieren die Orientierung</span>.</li>
+        <li>Screenreader-Nutzer springen gezielt <span class="hl">von Überschrift zu Überschrift</span>.</li>
+      </ul>
+    </article>
+
+    <article class="card" style="--c:var(--c2)">
+      <h2><span class="num">2</span>Fehlende Bereiche</h2>
+      <p class="sub">Die „&lt;div&gt;-Wüste“</p>
+      <ul>
+        <li>Seite besteht nur aus neutralen <span class="code">&lt;div&gt;</span> statt aus <span class="code">&lt;header&gt;</span>, <span class="code">&lt;main&gt;</span> …</li>
+        <li>Der Screenreader weiß nicht, <span class="hl">wo die Navigation aufhört</span> und der Text beginnt.</li>
+      </ul>
+    </article>
+
+    <article class="card" style="--c:var(--c3)">
+      <h2><span class="num">3</span>Fehlende Bildbeschreibungen</h2>
+      <p class="sub">Das <span class="code">alt</span>-Attribut fehlt</p>
+      <ul>
+        <li>Der Screenreader liest oft nur den <span class="hl">kryptischen Dateinamen</span> vor.</li>
+        <li>Statt zu sagen, <span class="hl">was auf dem Bild zu sehen ist</span>.</li>
+      </ul>
+    </article>
+
+    <article class="card" style="--c:var(--c4)">
+      <h2><span class="num">4</span>Falsche Reihenfolge</h2>
+      <p class="sub">CSS verschiebt Inhalte</p>
+      <ul>
+        <li>Inhalte stehen im Code an einer anderen Stelle als auf dem Bildschirm.</li>
+        <li>Der Vorlesefokus springt <span class="hl">völlig unlogisch hin und her</span>.</li>
+      </ul>
+    </article>
+  </section>
+
+  <div class="note">
+    <strong>Merke dir:</strong> Gute Struktur = gute Barrierefreiheit
+    <ul>
+      <li>Überschriften der Reihe nach verwenden</li>
+      <li>Echte Bereiche statt nur &lt;div&gt;</li>
+      <li>Jedes Bild bekommt ein alt-Attribut</li>
+      <li>Die Reihenfolge im Code entspricht der Reihenfolge auf der Seite</li>
+    </ul>
+  </div>
+  <div class="pageno">Seite 4 / 5</div>
+</main>
+
+<!-- ============ SEITE 5 ============ -->
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+
+  <h1>Manuelles Testen</h1>
+  <p style="text-align:center"><span class="tag">4. Barrierefreiheit prüfen</span></p>
+
+  <p style="margin:16px 0 0">Automatische Prüfprogramme finden <span class="hl">längst nicht jeden Fehler</span>. Deshalb wird manuell getestet:</p>
+
+  <section class="grid one">
+    <article class="card" style="--c:var(--c1)">
+      <h2><span class="num">1</span>Tastatur-Test</h2>
+      <p class="sub">Maus weglegen!</p>
+      <ul>
+        <li>Nur mit <span class="code">Tab</span> (vorwärts) und <span class="code">Shift + Tab</span> (rückwärts) bedienen.</li>
+        <li><b>Ziel</b>Alle Links und Knöpfe sind <span class="hl">erreichbar</span>.</li>
+        <li><b>Ziel</b>Immer ist ein klarer <span class="hl">Fokus-Rahmen</span> sichtbar.</li>
+      </ul>
+    </article>
+
+    <article class="card" style="--c:var(--c2)">
+      <h2><span class="num">2</span>Screenreader einschalten</h2>
+      <p class="sub">Kostenlose Programme</p>
+      <ul>
+        <li><span class="hl">NVDA</span> (Windows) oder <span class="hl">VoiceOver</span> (Mac) starten.</li>
+        <li>Mit geschlossenen Augen prüfen: Finde ich mich <span class="hl">allein über die Sprachausgabe</span> auf der Seite zurecht?</li>
+      </ul>
+    </article>
+
+    <article class="card" style="--c:var(--c3)">
+      <h2><span class="num">3</span>Erweiterungen nutzen</h2>
+      <p class="sub">Browser-Tools</p>
+      <ul>
+        <li>Zum Beispiel <span class="hl">WAVE</span>, <span class="hl">Axe</span> oder eine <span class="hl">IBM-Erweiterung</span>.</li>
+        <li>Zeigen direkt auf der Website an, ob <span class="hl">Kontraste stimmen</span> oder <span class="hl">Beschriftungen fehlen</span>.</li>
+      </ul>
+    </article>
+  </section>
+
+  <hr>
+  <p style="margin:12px 0 4px"><span class="tag">Zusammenfassung</span></p>
+  <span class="cloud">HTML = Auszeichnung, keine Programmierung</span>
+  <span class="cloud">Tag → Element → Attribut</span>
+  <span class="cloud">Struktur = Bedeutung</span>
+  <span class="cloud">Immer manuell testen</span>
+
+  <div class="note">
+    <strong>Merke dir:</strong> Gutes HTML …
+    <ul>
+      <li>gibt jedem Inhalt die richtige Bedeutung (Semantik)</li>
+      <li>hat ein sauberes Grundgerüst (DOCTYPE, head, body)</li>
+      <li>ist mit Tastatur und Screenreader nutzbar</li>
+    </ul>
+  </div>
+
+  <div class="banner">Struktur · Bedeutung · Barrierefreiheit</div>
+  <div class="pageno">Seite 5 / 5</div>
+</main>
+
+</body>
+</html>
