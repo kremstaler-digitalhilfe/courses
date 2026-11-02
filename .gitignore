@@ -13,9 +13,9 @@
 **/__pycache__/
 *.pyc
 
-# PowerPoint & assets de build
+# PowerPoint (non déployé)
 *.pptx
-**/powerpoint/grid-bg.png
+**/powerpoint/
 
 # Fiche de référence locale (pas publiée)
 **/technisches-objekt.html
