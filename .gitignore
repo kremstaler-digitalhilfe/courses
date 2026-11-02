@@ -6,11 +6,14 @@
 # Node / Playwright / axe (audit local)
 node_modules/
 package-lock.json
+package.json
+*.mjs
 a11y-report.json
 test-results/
 playwright-report/
 blob-report/
 .playwright/
+scripts/
 
 # Outils locaux (génération PPT / polices)
 .fonts/

@@ -1,8 +1,9 @@
 :root{
+  /* === THEME : seul bloc à modifier === */
   --paper:#fffdfa; --grid:#ebe6ee; --ink:#2b2b3a; --page:#f3eef2;
-  --accent:#e8639a; --link:#7a3068; --accent-soft:#fbd3e4; --highlight:#fff176;
-  --c1:#7bc47f; --c2:#6fa8e8; --c3:#f2a65a;
-  --c4:#b58be0; --c5:#4cc0b5; --c6:#f28aa5;
+  --accent:#d44d86; --link:#7a3068; --accent-soft:#fce4ef; --highlight:#ffe566;
+  --c1:#5faf64; --c2:#5a96d4; --c3:#e0923f;
+  --c4:#9b6fd0; --c5:#3aa89e; --c6:#e06f90;
   --font-title:'Fredoka',sans-serif;
   --font-body:'Patrick Hand',sans-serif;
   --font-hand:'Caveat',cursive;
@@ -37,15 +38,15 @@ nav.crumb a:hover{text-decoration-thickness:2px}
 .grid.one{grid-template-columns:1fr}
 .card{--c:var(--c1);position:relative;border:2px solid var(--c);
   border-radius:var(--radius);padding:14px 16px;
-  background:color-mix(in srgb,var(--c) 8%,white);text-decoration:none;color:inherit;
-  display:block;transition:transform .12s ease}
+  background:color-mix(in srgb,var(--c) 5%,white);text-decoration:none;color:inherit;
+  display:block;transition:transform .12s ease;overflow-wrap:anywhere}
 .card:hover{transform:translateY(-2px)}
 .card:focus-visible{outline:3px solid var(--link);outline-offset:3px}
 .card::before{content:"";position:absolute;top:-9px;right:18px;width:54px;height:16px;
   background:color-mix(in srgb,var(--c) 45%,white);opacity:.8;transform:rotate(4deg);border-radius:2px}
 .card h2{margin:0 0 6px;font-family:var(--font-title);font-size:1.05rem}
 .card p{margin:0;font-size:1rem}
-.card .arrow{color:color-mix(in srgb,var(--c) 45%,black);font-weight:700;margin-left:4px}
+.card .arrow{color:color-mix(in srgb,var(--c) 35%,#14141f);font-weight:700;margin-left:4px}
 .list{list-style:none;padding:0;margin:14px 0 0}
 .list li{margin:8px 0}
 .list a{color:var(--ink);text-decoration:underline;text-underline-offset:3px;

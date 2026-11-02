@@ -9,9 +9,9 @@
 :root{
   /* === THEME : seul bloc à modifier === */
   --paper:#fffdfa; --grid:#ebe6ee; --ink:#2b2b3a; --page:#f3eef2;
-  --accent:#e8639a; --accent-soft:#fbd3e4; --highlight:#fff176;
-  --c1:#7bc47f; --c2:#6fa8e8; --c3:#f2a65a;
-  --c4:#b58be0; --c5:#4cc0b5; --c6:#f28aa5;
+  --accent:#d44d86; --link:#7a3068; --accent-soft:#fce4ef; --highlight:#ffe566;
+  --c1:#5faf64; --c2:#5a96d4; --c3:#e0923f;
+  --c4:#9b6fd0; --c5:#3aa89e; --c6:#e06f90;
   --font-title:'Fredoka',sans-serif;
   --font-body:'Patrick Hand',sans-serif;
   --font-hand:'Caveat',cursive;
@@ -38,16 +38,15 @@ h3{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px;display:inl
 .grid.three{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
 .card{--c:var(--c1);position:relative;border:2px solid var(--c);
   border-radius:var(--radius);padding:14px 16px;
-  background:color-mix(in srgb,var(--c) 8%,white)}
+  background:color-mix(in srgb,var(--c) 5%,white);overflow-wrap:anywhere}
 .card::before{content:"";position:absolute;top:-9px;right:18px;width:54px;height:16px;
   background:color-mix(in srgb,var(--c) 45%,white);opacity:.8;transform:rotate(4deg);border-radius:2px}
 .card h2{margin:0 0 4px;font-family:var(--font-title);font-size:1.05rem}
-.card .sub{font-family:var(--font-hand);font-size:1.15rem;color:color-mix(in srgb,var(--c) 70%,black);margin:0 0 8px}
-.num{display:inline-grid;place-items:center;width:26px;height:26px;
-  border-radius:50%;background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:2px solid var(--c);margin-right:6px}
+.card .sub{font-family:var(--font-hand);font-size:1.15rem;color:color-mix(in srgb,var(--c) 38%,#14141f);margin:0 0 8px;overflow-wrap:anywhere;hyphens:auto;-webkit-hyphens:auto}
+.num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;padding:0;border-radius:50%;box-sizing:border-box;font-family:var(--font-title);font-size:.82rem;font-weight:700;line-height:1;letter-spacing:0;text-align:center;background:color-mix(in srgb,var(--c) 18%,white);color:var(--ink);border:2px solid var(--c);margin-right:6px}
 .card ul{list-style:none;padding:0;margin:0}
 .card li{margin:6px 0;padding-left:2px}
-.card li::before{content:"✓ ";color:var(--c);font-weight:700}
+.card li::before{content:"✓ ";color:color-mix(in srgb,var(--c) 38%,#14141f);font-weight:700}
 .card li b{font-family:var(--font-title);font-size:.78rem;text-transform:uppercase;
   background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:1px solid var(--c);padding:1px 8px;border-radius:6px;margin-right:6px}
 .card ul.plain li::before{content:""}
@@ -71,19 +70,19 @@ pre.codeblock.bad{--c:var(--c6)}
 .note{border:2px solid var(--accent);border-radius:var(--radius);
   background:#fff;padding:12px 16px;margin-top:18px}
 .note ul{list-style:none;padding:0;margin:6px 0 0}
-.note li::before{content:"♥ ";color:var(--accent)}
+.note li::before{content:"♥ ";color:color-mix(in srgb,var(--accent) 45%,#14141f)}
 .tip{--c:var(--c3);border:2px dashed var(--c);border-radius:var(--radius);
-  background:color-mix(in srgb,var(--c) 10%,white);padding:10px 16px;margin-top:18px}
-.tip strong{font-family:var(--font-title);color:color-mix(in srgb,var(--c) 70%,black)}
+  background:color-mix(in srgb,var(--c) 6%,white);padding:10px 16px;margin-top:18px}
+.tip strong{font-family:var(--font-title);color:color-mix(in srgb,var(--c) 38%,#14141f)}
 .rule{--c:var(--c4);border:2px solid var(--c);border-radius:var(--radius);
-  background:color-mix(in srgb,var(--c) 10%,white);padding:10px 16px;margin-top:18px}
-.rule strong{font-family:var(--font-title);color:color-mix(in srgb,var(--c) 70%,black)}
+  background:color-mix(in srgb,var(--c) 6%,white);padding:10px 16px;margin-top:18px}
+.rule strong{font-family:var(--font-title);color:color-mix(in srgb,var(--c) 38%,#14141f)}
 hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
 .banner{margin-top:20px;padding:10px;text-align:center;background:var(--accent-soft);
   border:2px solid var(--accent);font-family:var(--font-title);
   text-transform:uppercase;letter-spacing:.04em}
 .pageno{position:absolute;bottom:16px;left:0;right:0;text-align:center;
-  font-family:var(--font-hand);font-size:1.1rem;opacity:.6}
+  font-family:var(--font-hand);font-size:1.1rem;color:color-mix(in srgb,var(--ink) 72%,white)}
 a.link{color:var(--ink);font-weight:700;text-decoration:underline wavy var(--accent);
   text-underline-offset:3px;word-break:break-all}
 .lead{margin:16px 0 0}
@@ -102,14 +101,15 @@ a.link{color:var(--ink);font-weight:700;text-decoration:underline wavy var(--acc
 .brace::before{content:"⏟";display:block;font-size:2rem;line-height:.6;color:var(--accent)}
 
 /* ---- Rechts-Matrix ---- */
-.matrix{display:grid;grid-template-columns:130px 1fr 1fr;gap:6px;margin-top:18px;text-align:center}
-.matrix > div{padding:10px 8px;border-radius:12px;border:2px solid var(--ink);background:#fff}
-.matrix .h{background:var(--accent-soft);border-color:var(--accent);font-family:var(--font-title);font-size:.9rem}
-.matrix .r{font-family:var(--font-title);font-size:1rem;background:color-mix(in srgb,var(--c2) 15%,white);border-color:var(--c2)}
+.matrix{display:grid;grid-template-columns:minmax(0,110px) minmax(0,1fr) minmax(0,1fr);gap:6px;margin-top:18px;text-align:center}
+.matrix > div{min-width:0;padding:10px 8px;border-radius:12px;border:2px solid var(--ink);background:#fff;
+  overflow-wrap:anywhere;hyphens:auto;-webkit-hyphens:auto}
+.matrix .h{background:var(--accent-soft);border-color:var(--accent);font-family:var(--font-title);font-size:.85rem;line-height:1.2}
+.matrix .r{font-family:var(--font-title);font-size:.9rem;background:color-mix(in srgb,var(--c2) 15%,white);border-color:var(--c2)}
 .matrix .pub{background:color-mix(in srgb,var(--c1) 18%,white);border-color:var(--c1)}
 .matrix .priv{background:color-mix(in srgb,var(--c3) 18%,white);border-color:var(--c3)}
-.matrix strong{display:block;font-family:var(--font-title);font-size:1.15rem}
-.matrix small{display:block;font-family:var(--font-hand);font-size:1.05rem;opacity:.85}
+.matrix strong{display:block;font-family:var(--font-title);font-size:1.05rem}
+.matrix small{display:block;font-family:var(--font-hand);font-size:1rem;line-height:1.2;color:color-mix(in srgb,var(--ink) 88%,white)}
 
 /* ---- Diagramm ---- */
 .diagram{width:100%;height:auto;margin-top:10px}
@@ -136,7 +136,7 @@ a.link{color:var(--ink);font-weight:700;text-decoration:underline wavy var(--acc
 .btn.ring{outline:3px solid var(--accent);outline-offset:3px}
 .keys{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem;border:2px solid var(--ink);
   border-bottom-width:4px;border-radius:6px;padding:1px 8px;background:#fff}
-.arrow{font-size:1.3rem;color:var(--accent);font-weight:700}
+.arrow{font-size:1.3rem;color:color-mix(in srgb,var(--accent) 45%,#14141f);font-weight:700}
 .swatch{padding:8px 14px;border-radius:10px;border:1.5px solid #00000022;font-family:var(--font-body);font-size:1rem;text-align:center}
 .swatch small{display:block;font-family:var(--font-hand);font-size:1.05rem;color:var(--ink)}
 .swatch.ok1{background:#fff;color:#2b2b3a}
@@ -187,7 +187,6 @@ a.link{color:var(--ink);font-weight:700;text-decoration:underline wavy var(--acc
 }
 
 /* === a11y === */
-:root{--link:#7a3068}
 a{color:var(--link)}
 a:hover{color:var(--link);text-decoration-thickness:2px}
 :focus-visible{outline:3px solid var(--link);outline-offset:3px}
@@ -198,6 +197,8 @@ a:focus:not(:focus-visible){outline:none}
 .skip-link:focus,.skip-link:focus-visible{transform:translateY(0);outline:3px solid var(--link);outline-offset:2px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+
 
 </style>
 </head>
@@ -315,13 +316,13 @@ a:focus:not(:focus-visible){outline:none}
   <div class="matrix" role="table" aria-label="Gesetze im Überblick">
     <div></div>
     <div class="h">Öffentliche Stellen</div>
-    <div class="h">Privatwirtschaft</div>
-    <div class="r">Deutschland</div>
-    <div class="pub"><strong>BITV 2.0</strong><small>Barrierefreie-Informationstechnik-Verordnung</small></div>
-    <div class="priv"><strong><span lang="en">BFSG</span></strong><small>Barrierefreiheitsstärkungsgesetz</small></div>
-    <div class="r">Österreich</div>
+    <div class="h">Privat&shy;wirtschaft</div>
+    <div class="r">Deutsch&shy;land</div>
+    <div class="pub"><strong>BITV 2.0</strong><small>Barrierefreie-Informations&shy;technik-Verordnung</small></div>
+    <div class="priv"><strong><span lang="en">BFSG</span></strong><small>Barrierefreiheits&shy;stärkungs&shy;gesetz</small></div>
+    <div class="r">Öster&shy;reich</div>
     <div class="pub"><strong>WZG</strong><small>Web-Zugänglichkeits-Gesetz</small></div>
-    <div class="priv"><strong>BaFG</strong><small>Barrierefreiheitsgesetz</small></div>
+    <div class="priv"><strong>BaFG</strong><small>Barrierefreiheits&shy;gesetz</small></div>
   </div>
   <p class="cap" style="text-align:center">Zusätzlich in Österreich: das <span class="code">BGStG</span> schützt generell vor Diskriminierung.</p>
 
@@ -409,7 +410,7 @@ a:focus:not(:focus-visible){outline:none}
   <section class="grid">
     <article class="card" style="--c:var(--c1)">
       <h2>Was ist das <span lang="en">BFSG</span>?</h2>
-      <p class="sub">Barrierefreiheitsstärkungsgesetz</p>
+      <p class="sub">Barrierefreiheits&shy;stärkungs&shy;gesetz</p>
       <ul><li>Setzt den europäischen Standard (<span class="hl">European Accessibility Act</span>) in nationales Recht um.</li></ul>
     </article>
     <article class="card" style="--c:var(--c3)">
