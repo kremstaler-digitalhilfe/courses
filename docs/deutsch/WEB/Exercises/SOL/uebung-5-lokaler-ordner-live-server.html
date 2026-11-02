@@ -8,7 +8,7 @@
 <style>
 :root{
   --paper:#fffdfa; --grid:#ebe6ee; --ink:#2b2b3a; --page:#f3eef2;
-  --accent:#e8639a; --accent-soft:#fbd3e4; --highlight:#fff176;
+  --accent:#e8639a; --link:#7a3068; --accent-soft:#fbd3e4; --highlight:#fff176;
   --c1:#7bc47f; --c2:#6fa8e8; --c3:#f2a65a;
   --c4:#b58be0; --c5:#4cc0b5; --c6:#f28aa5;
   --font-title:'Fredoka',sans-serif;
@@ -27,7 +27,7 @@ body{margin:0;padding:16px;background:var(--page);color:var(--ink);
 h1{font-family:var(--font-title);font-size:2rem;text-align:center;margin:0 0 6px;padding:0 84px}
 h1::after{content:"";display:block;height:6px;width:60%;margin:8px auto 0;
   background:var(--accent);border-radius:6px;opacity:.7}
-h3{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px;display:inline-block;
+.sheet > h2{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px;display:inline-block;
   background:var(--accent-soft);padding:3px 14px;border-radius:8px}
 .tag{display:inline-block;background:var(--accent-soft);padding:4px 14px;
   border-radius:8px;font-family:var(--font-title);font-size:.95rem}
@@ -38,10 +38,10 @@ h3{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px;display:inl
   padding:14px 16px;background:color-mix(in srgb,var(--c) 8%,white)}
 .card::before{content:"";position:absolute;top:-9px;right:18px;width:54px;height:16px;
   background:color-mix(in srgb,var(--c) 45%,white);opacity:.8;transform:rotate(4deg);border-radius:2px}
-.card h2{margin:0 0 4px;font-family:var(--font-title);font-size:1.05rem}
+.card h2,.card h3{margin:0 0 4px;font-family:var(--font-title);font-size:1.05rem}
 .card .sub{font-family:var(--font-hand);font-size:1.15rem;color:color-mix(in srgb,var(--c) 70%,black);margin:0 0 8px}
 .num{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;
-  background:var(--c);color:#fff;margin-right:6px}
+  background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:2px solid var(--c);margin-right:6px}
 .card ul{list-style:none;padding:0;margin:0}
 .card li{margin:6px 0}
 .card li::before{content:"✓ ";color:var(--c);font-weight:700}
@@ -81,9 +81,7 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
 .banner{margin-top:20px;padding:10px;text-align:center;background:var(--accent-soft);
   border:2px solid var(--accent);font-family:var(--font-title);text-transform:uppercase;letter-spacing:.04em}
 .pageno{position:absolute;bottom:16px;left:0;right:0;text-align:center;
-  font-family:var(--font-hand);font-size:1.1rem;opacity:.6}
-.lead{margin:16px 0 0}
-.demo{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;margin-top:12px;
+  font-family:var(--font-hand);font-size:1.1rem;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;margin-top:12px;
   font-family:var(--font-hand);font-size:1.15rem}
 .arrow{font-size:1.3rem;color:var(--accent);font-weight:700}
 .flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;margin-top:14px}
@@ -115,39 +113,60 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
   @page{size:A4;margin:10mm}
   body{background:#fff;padding:0}
   .sheet{box-shadow:none;margin:0;min-height:auto;break-after:page;border-radius:0}
-  .sheet:last-of-type{break-after:auto}
+  .sheet:last-child{break-after:auto}
   .card,.note,.tip,.rule,.gloss div,.flow,.diagram{break-inside:avoid}
 }
+
+/* === a11y: contraste liens + focus (AA/AAA) === */
+:root{--link:#7a3068}
+a{color:var(--link)}
+a:hover{color:var(--link);text-decoration-thickness:2px}
+:focus-visible{outline:3px solid var(--link);outline-offset:3px}
+a:focus:not(:focus-visible){outline:none}
+.num{background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:2px solid var(--c)}
+.card li b{background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:1px solid var(--c)}
+.card li::before{color:color-mix(in srgb,var(--c) 55%,black)}
+.card .sub{color:color-mix(in srgb,var(--c) 45%,black)}
+.tip strong,.rule strong{color:color-mix(in srgb,var(--c) 45%,black)}
+
+.skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;
+  background:var(--paper);color:var(--link);padding:10px 16px;border:2px solid var(--link);
+  border-radius:8px;font-family:var(--font-title);text-decoration:none;z-index:100}
+.skip-link:focus{left:16px;top:16px;width:auto;height:auto;overflow:visible}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
 </style>
 </head>
 <body>
+<a class="skip-link" href="#inhalt">Zum Inhalt</a>
 
-<main class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="big" viewBox="0 0 80 90" aria-hidden="true">
+<main id="inhalt" class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="big" viewbox="0 0 80 90" aria-hidden="true">
   <g transform="rotate(-8 40 48)">
-    <rect x="16" y="10" width="52" height="68" rx="7" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.5"/>
-    <rect x="28" y="24" width="30" height="16" rx="3" style="fill:#fff;stroke:var(--ink);stroke-width:2"/>
-    <path d="M43 36c-4-3-6-5-6-7a3 3 0 0 1 6-.8 3 3 0 0 1 6 .8c0 2-2 4-6 7z" style="fill:var(--accent)"/>
+    <rect x="16" y="10" width="52" height="68" rx="7" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.5"></rect>
+    <rect x="28" y="24" width="30" height="16" rx="3" style="fill:#fff;stroke:var(--ink);stroke-width:2"></rect>
+    <path d="M43 36c-4-3-6-5-6-7a3 3 0 0 1 6-.8 3 3 0 0 1 6 .8c0 2-2 4-6 7z" style="fill:var(--accent)"></path>
     <g style="fill:#fff;stroke:var(--ink);stroke-width:2.2">
-      <circle cx="16" cy="22" r="3.6"/><circle cx="16" cy="34" r="3.6"/><circle cx="16" cy="46" r="3.6"/>
-      <circle cx="16" cy="58" r="3.6"/><circle cx="16" cy="70" r="3.6"/>
+      <circle cx="16" cy="22" r="3.6"></circle><circle cx="16" cy="34" r="3.6"></circle><circle cx="16" cy="46" r="3.6"></circle>
+      <circle cx="16" cy="58" r="3.6"></circle><circle cx="16" cy="70" r="3.6"></circle>
     </g>
   </g>
-  <path d="M70 4l2.2 4.8 5.2.6-3.9 3.5 1.1 5.1L70 15.4l-4.6 2.6 1.1-5.1-3.9-3.5 5.2-.6z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round"/>
+  <path d="M70 4l2.2 4.8 5.2.6-3.9 3.5 1.1 5.1L70 15.4l-4.6 2.6 1.1-5.1-3.9-3.5 5.2-.6z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round"></path>
 </svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="big" viewBox="0 0 80 90" aria-hidden="true">
+  <div class="orn tr" aria-hidden="true"><svg class="big" viewbox="0 0 80 90" aria-hidden="true">
   <g style="stroke:var(--ink);stroke-width:2;stroke-linejoin:round">
-    <g transform="rotate(-16 28 52)"><rect x="23" y="8" width="9" height="44" style="fill:var(--c3)"/><path d="M23 8L27.5-2 32 8z" style="fill:#f6dcc0"/></g>
-    <g transform="rotate(4 42 52)"><rect x="38" y="4" width="9" height="48" style="fill:var(--accent)"/><path d="M38 4L42.5-6 47 4z" style="fill:#f6dcc0"/></g>
-    <g transform="rotate(20 54 52)"><rect x="50" y="10" width="9" height="42" style="fill:var(--c4)"/><path d="M50 10L54.5 0 59 10z" style="fill:#f6dcc0"/></g>
-    <path d="M14 46h52l-5 36a5 5 0 0 1-5 4H24a5 5 0 0 1-5-4z" style="fill:var(--c5)"/>
+    <g transform="rotate(-16 28 52)"><rect x="23" y="8" width="9" height="44" style="fill:var(--c3)"></rect><path d="M23 8L27.5-2 32 8z" style="fill:#f6dcc0"></path></g>
+    <g transform="rotate(4 42 52)"><rect x="38" y="4" width="9" height="48" style="fill:var(--accent)"></rect><path d="M38 4L42.5-6 47 4z" style="fill:#f6dcc0"></path></g>
+    <g transform="rotate(20 54 52)"><rect x="50" y="10" width="9" height="42" style="fill:var(--c4)"></rect><path d="M50 10L54.5 0 59 10z" style="fill:#f6dcc0"></path></g>
+    <path d="M14 46h52l-5 36a5 5 0 0 1-5 4H24a5 5 0 0 1-5-4z" style="fill:var(--c5)"></path>
   </g>
-  <path d="M40 70c-3-2.4-4.6-4-4.6-5.6a2.3 2.3 0 0 1 4.6-.6 2.3 2.3 0 0 1 4.6.6c0 1.6-1.6 3.2-4.6 5.6z" style="fill:#fff"/>
+  <path d="M40 70c-3-2.4-4.6-4-4.6-5.6a2.3 2.3 0 0 1 4.6-.6 2.3 2.3 0 0 1 4.6.6c0 1.6-1.6 3.2-4.6 5.6z" style="fill:#fff"></path>
 </svg></div>
 
-  <h1>Übung 5: Ordner &amp; Live Server</h1>
+  <h1>Übung 5: Ordner &amp; <span lang="en">Live Server</span></h1>
   <p style="text-align:center">
-    <span class="tag">WEB · SOL · VS Code · ca. 25 Min.</span>
+    <span class="tag">WEB · SOL · <span lang="en">VS Code</span> · ca. 25 Min.</span>
   </p>
 
   <section class="grid one">
@@ -157,10 +176,10 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
       <ul>
         <li>Einen <span class="hl">lokalen Projektordner</span> anlegen</li>
         <li>Drei Dateien nebeneinander: <span class="code">index.html</span>, <span class="code">style.css</span>, <span class="code">script.js</span></li>
-        <li>Die Seite mit <span class="hl">Live Server</span> im Browser öffnen</li>
+        <li>Die Seite mit <span class="hl"><span lang="en">Live Server</span></span> im Browser öffnen</li>
       </ul>
     </article>
-  </section>
+  </main>
 
   <div class="flow">
     <span class="st" style="--c:var(--c2)">Ordner</span><span class="arrow">→</span>
@@ -170,73 +189,73 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
   </div>
 
   <hr>
-  <h3>Die 5 Schritte</h3>
+  <h2>Die 5 Schritte</h2>
   <section class="grid">
     <article class="card" style="--c:var(--c2)">
-      <h2><span class="num">1</span>VS Code</h2>
-      <ul><li>Visual Studio Code herunterladen und starten.</li></ul>
+      <h3><span class="num">1</span><span lang="en">VS Code</span></h3>
+      <ul><li><span lang="en">Visual Studio Code</span> herunterladen und starten.</li></ul>
     </article>
     <article class="card" style="--c:var(--c3)">
-      <h2><span class="num">2</span>Ordner anlegen</h2>
+      <h3><span class="num">2</span>Ordner anlegen</h3>
       <ul><li>Auf dem Desktop: <span class="hl">meine-erste-website</span>.</li></ul>
     </article>
     <article class="card" style="--c:var(--c4)">
-      <h2><span class="num">3</span>In VS Code öffnen</h2>
+      <h3><span class="num">3</span>In <span lang="en">VS Code</span> öffnen</h3>
       <ul><li>Ordner per <span class="hl">Drag &amp; Drop</span> ins Fenster ziehen.</li></ul>
     </article>
     <article class="card" style="--c:var(--c1)">
-      <h2><span class="num">4</span>Drei Dateien</h2>
+      <h3><span class="num">4</span>Drei Dateien</h3>
       <ul>
         <li>Oben links: Neue Datei</li>
         <li>Exakt so nennen: <span class="code">index.html</span>, <span class="code">style.css</span>, <span class="code">script.js</span></li>
       </ul>
     </article>
     <article class="card" style="--c:var(--c5)">
-      <h2><span class="num">5</span>Einfügen &amp; speichern</h2>
+      <h3><span class="num">5</span>Einfügen &amp; speichern</h3>
       <ul>
         <li>Code von den nächsten Seiten kopieren</li>
         <li><span class="hl">Cmd + S</span> (Mac) oder <span class="hl">Strg + S</span> (Windows)</li>
       </ul>
     </article>
     <article class="card" style="--c:var(--c6)">
-      <h2>Go Live</h2>
+      <h3>Go Live</h3>
       <ul>
         <li><span class="code">index.html</span> öffnen</li>
-        <li>Unten rechts: <span class="hl">Go Live</span> — oder Rechtsklick → Open with Live Server</li>
+        <li>Unten rechts: <span class="hl">Go Live</span> — oder Rechtsklick → Open with <span lang="en">Live Server</span></li>
       </ul>
     </article>
   </section>
 
   <div class="tip">
-    <strong>Tipp:</strong> Die Erweiterung <span class="hl">Live Server</span> muss in VS Code installiert sein.
+    <strong>Tipp:</strong> Die Erweiterung <span class="hl"><span lang="en">Live Server</span></span> muss in <span lang="en">VS Code</span> installiert sein.
     Danach öffnet sich der Browser von selbst.
   </div>
   <div class="pageno">Seite 1 / 4</div>
 </main>
 
-<main class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
-  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
-  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
-  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
-</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+<section aria-label="Seite 2" class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewbox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"></path>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
+</svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
 
-  <h1>Ordner-Struktur</h1>
+  <h2>Ordner-Struktur</h2>
   <p style="text-align:center"><span class="tag">Alle drei Dateien nebeneinander</span></p>
 
   <p class="lead">Im Projektordner liegen die Dateien <span class="hl">direkt nebeneinander</span> – keine Extra-Unterordner.</p>
 
-  <svg class="diagram" viewBox="0 0 700 250" role="img" aria-label="Ordner meine-erste-website enthält index.html, style.css und script.js nebeneinander">
-    <rect x="80" y="20" width="540" height="210" rx="18" fill="#e6d8f5" stroke="#b58be0" stroke-width="3"/>
+  <svg class="diagram" viewbox="0 0 700 250" role="img" aria-label="Ordner meine-erste-website enthält index.html, style.css und script.js nebeneinander">
+    <rect x="80" y="20" width="540" height="210" rx="18" fill="#e6d8f5" stroke="#b58be0" stroke-width="3"></rect>
     <text class="t" x="350" y="52" text-anchor="middle">📂 meine-erste-website</text>
-    <rect x="110" y="80" width="150" height="120" rx="14" fill="#cfe2fb" stroke="#6fa8e8" stroke-width="2.5"/>
+    <rect x="110" y="80" width="150" height="120" rx="14" fill="#cfe2fb" stroke="#6fa8e8" stroke-width="2.5"></rect>
     <text class="t" x="185" y="132" text-anchor="middle">index.html</text>
     <text class="s" x="185" y="158" text-anchor="middle">Struktur</text>
-    <rect x="275" y="80" width="150" height="120" rx="14" fill="#fde7cf" stroke="#f2a65a" stroke-width="2.5"/>
+    <rect x="275" y="80" width="150" height="120" rx="14" fill="#fde7cf" stroke="#f2a65a" stroke-width="2.5"></rect>
     <text class="t" x="350" y="132" text-anchor="middle">style.css</text>
     <text class="s" x="350" y="158" text-anchor="middle">Design</text>
-    <rect x="440" y="80" width="150" height="120" rx="14" fill="#d7efd9" stroke="#7bc47f" stroke-width="2.5"/>
+    <rect x="440" y="80" width="150" height="120" rx="14" fill="#d7efd9" stroke="#7bc47f" stroke-width="2.5"></rect>
     <text class="t" x="515" y="132" text-anchor="middle">script.js</text>
     <text class="s" x="515" y="158" text-anchor="middle">Klick / Logik</text>
   </svg>
@@ -252,7 +271,7 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
   <div class="rule">
     <strong>Goldene Regel:</strong> CSS kommt im <span class="hl">&lt;head&gt;</span>
     (<span class="code">link rel="stylesheet"</span>).
-    JavaScript kommt <span class="hl">ganz unten im body</span>
+    <span lang="en">JavaScript</span> kommt <span class="hl">ganz unten im body</span>
     (<span class="code">&lt;script src="script.js"&gt;</span>).
   </div>
 
@@ -277,17 +296,17 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
 <span class="s">&lt;/html&gt;</span>
 </pre>
   <div class="pageno">Seite 2 / 4</div>
-</main>
+</section>
 
-<main class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
-  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
-  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
-  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
-</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+<section aria-label="Seite 3" class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewbox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"></path>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
+</svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
 
-  <h1>style.css – kopieren</h1>
+  <h2>style.css – kopieren</h2>
   <p style="text-align:center"><span class="tag">Die Haut · Design</span></p>
 
   <pre class="codeblock" data-lang="style.css" style="--c:var(--c3)"><span class="cm">/* Alles zentrieren */</span>
@@ -340,32 +359,32 @@ button.<span class="fn">addEventListener</span>(<span class="st">"click"</span>,
 });
 </pre>
   <div class="pageno">Seite 3 / 4</div>
-</main>
+</section>
 
-<main class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
-  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
-  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
-  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
-</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+<section aria-label="Seite 4" class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewbox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"></path>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
+</svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
 
-  <h1>Live Server &amp; Check</h1>
+  <h2><span lang="en">Live Server</span> &amp; Check</h2>
   <p style="text-align:center"><span class="tag">Übung 5 · Fertig?</span></p>
 
   <h3>So startest du</h3>
   <section class="grid">
     <article class="card" style="--c:var(--c2)">
-      <h2><span class="num">1</span>index.html öffnen</h2>
-      <ul class="plain"><li>Die Datei in VS Code anklicken.</li></ul>
+      <h4><span class="num">1</span>index.html öffnen</h4>
+      <ul class="plain"><li>Die Datei in <span lang="en">VS Code</span> anklicken.</li></ul>
     </article>
     <article class="card" style="--c:var(--c1)">
-      <h2><span class="num">2</span>Go Live</h2>
-      <ul class="plain"><li>Unten in der blauen Leiste <span class="hl">Go Live</span> – oder Rechtsklick → Open with Live Server.</li></ul>
+      <h4><span class="num">2</span>Go Live</h4>
+      <ul class="plain"><li>Unten in der blauen Leiste <span class="hl">Go Live</span> – oder Rechtsklick → Open with <span lang="en">Live Server</span>.</li></ul>
     </article>
   </section>
 
-  <p class="lead">Der Browser öffnet sich. Du siehst die Karte. Ein Klick auf den Button startet JavaScript (Alert + grüner Button).</p>
+  <p class="lead">Der Browser öffnet sich. Du siehst die Karte. Ein Klick auf den Button startet <span lang="en">JavaScript</span> (Alert + grüner Button).</p>
 
   <div class="trail">
     <span class="p">index.html</span><span class="arrow">→</span>
@@ -373,12 +392,12 @@ button.<span class="fn">addEventListener</span>(<span class="st">"click"</span>,
     <span class="p" style="background:var(--highlight)">Browser zeigt die Karte</span>
   </div>
 
-  <h3>Fertig-Check</h3>
+  <h2>Fertig-Check</h2>
   <section class="grid one">
     <article class="card" style="--c:var(--c1)">
-      <h2>Kannst du …</h2>
+      <h3>Kannst du …</h3>
       <ul class="check">
-        <li>den Ordner <span class="hl">meine-erste-website</span> in VS Code öffnen?</li>
+        <li>den Ordner <span class="hl">meine-erste-website</span> in <span lang="en">VS Code</span> öffnen?</li>
         <li>die drei Dateien <span class="hl">nebeneinander</span> anlegen und speichern?</li>
         <li>CSS im head und JS <span class="hl">unten im body</span> verknüpfen?</li>
         <li>mit <span class="hl">Go Live</span> die Karte im Browser sehen und klicken?</li>
@@ -386,20 +405,20 @@ button.<span class="fn">addEventListener</span>(<span class="st">"click"</span>,
     </article>
   </section>
 
-  <h3>Zusammenfassung</h3>
+  <h2>Zusammenfassung</h2>
   <div class="note">
     <strong>Merke dir:</strong>
     <ul>
       <li>Ein Projekt = ein Ordner mit html, css und js nebeneinander</li>
       <li>Immer speichern, bevor du im Browser prüfst</li>
-      <li>Live Server zeigt die echte lokale Website – wie Profis arbeiten</li>
+      <li><span lang="en">Live Server</span> zeigt die echte lokale Website – wie Profis arbeiten</li>
     </ul>
   </div>
 
-  <h3>Glossar</h3>
+  <h2>Glossar</h2>
   <div class="gloss">
-    <div style="--c:var(--c1)"><b>VS Code:</b> Editor, in dem du Dateien schreibst und speicherst.</div>
-    <div style="--c:var(--c2)"><b>Live Server:</b> Erweiterung, die die Seite im Browser live zeigt.</div>
+    <div style="--c:var(--c1)"><b><span lang="en">VS Code</span>:</b> Editor, in dem du Dateien schreibst und speicherst.</div>
+    <div style="--c:var(--c2)"><b><span lang="en">Live Server</span>:</b> Erweiterung, die die Seite im Browser live zeigt.</div>
     <div style="--c:var(--c3)"><b>index.html:</b> Startseite eines Projekts – der Browser öffnet sie zuerst.</div>
     <div style="--c:var(--c4)"><b>href / src:</b> Pfad zur CSS-Datei (link) bzw. zur JS-Datei (script).</div>
     <div style="--c:var(--c5)"><b>getElementById:</b> Findet ein HTML-Element über seine id.</div>

@@ -8,7 +8,7 @@
 <style>
 :root{
   --paper:#fffdfa; --grid:#ebe6ee; --ink:#2b2b3a; --page:#f3eef2;
-  --accent:#e8639a; --accent-soft:#fbd3e4; --highlight:#fff176;
+  --accent:#e8639a; --link:#7a3068; --accent-soft:#fbd3e4; --highlight:#fff176;
   --c1:#7bc47f; --c2:#6fa8e8; --c3:#f2a65a;
   --c4:#b58be0; --c5:#4cc0b5; --c6:#f28aa5;
   --font-title:'Fredoka',sans-serif;
@@ -27,7 +27,7 @@ body{margin:0;padding:16px;background:var(--page);color:var(--ink);
 h1{font-family:var(--font-title);font-size:2rem;text-align:center;margin:0 0 6px;padding:0 84px}
 h1::after{content:"";display:block;height:6px;width:60%;margin:8px auto 0;
   background:var(--accent);border-radius:6px;opacity:.7}
-h3{font-family:var(--font-title);font-size:1.2rem;margin:20px 0 4px;display:inline-block;
+.sheet > h2{font-family:var(--font-title);font-size:1.2rem;margin:20px 0 4px;display:inline-block;
   background:var(--accent-soft);padding:3px 14px;border-radius:8px}
 .tag{display:inline-block;background:var(--accent-soft);padding:4px 14px;
   border-radius:8px;font-family:var(--font-title);font-size:.95rem}
@@ -38,10 +38,10 @@ h3{font-family:var(--font-title);font-size:1.2rem;margin:20px 0 4px;display:inli
   padding:14px 16px;background:color-mix(in srgb,var(--c) 8%,white)}
 .card::before{content:"";position:absolute;top:-9px;right:18px;width:54px;height:16px;
   background:color-mix(in srgb,var(--c) 45%,white);opacity:.8;transform:rotate(4deg);border-radius:2px}
-.card h2{margin:0 0 4px;font-family:var(--font-title);font-size:1.05rem}
+.card h2,.card h3{margin:0 0 4px;font-family:var(--font-title);font-size:1.05rem}
 .card .sub{font-family:var(--font-hand);font-size:1.15rem;color:color-mix(in srgb,var(--c) 70%,black);margin:0 0 8px}
 .num{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;
-  background:var(--c);color:#fff;margin-right:6px}
+  background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:2px solid var(--c);margin-right:6px}
 .card ul{list-style:none;padding:0;margin:0}
 .card li{margin:6px 0}
 .card li::before{content:"✓ ";color:var(--c);font-weight:700}
@@ -61,9 +61,7 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:18px 0 4px}
 .banner{margin-top:18px;padding:10px;text-align:center;background:var(--accent-soft);
   border:2px solid var(--accent);font-family:var(--font-title);text-transform:uppercase;letter-spacing:.04em}
 .pageno{position:absolute;bottom:16px;left:0;right:0;text-align:center;
-  font-family:var(--font-hand);font-size:1.1rem;opacity:.6}
-.lead{margin:14px 0 0}
-.cap{font-family:var(--font-hand);font-size:1.15rem;margin:4px 0 0}
+  font-family:var(--font-hand);font-size:1.1rem;font-size:1.15rem;margin:4px 0 0}
 .blank{display:inline-block;min-width:7rem;border-bottom:2px dashed var(--accent);margin:0 4px;vertical-align:bottom}
 .blank.l{display:block;min-width:100%;min-height:1.5em;margin:8px 0 4px}
 .blank.xl{display:block;min-width:100%;min-height:2.4em;margin:8px 0 4px}
@@ -91,34 +89,55 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:18px 0 4px}
   @page{size:A4;margin:10mm}
   body{background:#fff;padding:0}
   .sheet{box-shadow:none;margin:0;min-height:auto;break-after:page;border-radius:0}
-  .sheet:last-of-type{break-after:auto}
+  .sheet:last-child{break-after:auto}
   .card,.note,.tip,.rule,.gloss div{break-inside:avoid}
 }
+
+/* === a11y: contraste liens + focus (AA/AAA) === */
+:root{--link:#7a3068}
+a{color:var(--link)}
+a:hover{color:var(--link);text-decoration-thickness:2px}
+:focus-visible{outline:3px solid var(--link);outline-offset:3px}
+a:focus:not(:focus-visible){outline:none}
+.num{background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:2px solid var(--c)}
+.card li b{background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:1px solid var(--c)}
+.card li::before{color:color-mix(in srgb,var(--c) 55%,black)}
+.card .sub{color:color-mix(in srgb,var(--c) 45%,black)}
+.tip strong,.rule strong{color:color-mix(in srgb,var(--c) 45%,black)}
+
+.skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;
+  background:var(--paper);color:var(--link);padding:10px 16px;border:2px solid var(--link);
+  border-radius:8px;font-family:var(--font-title);text-decoration:none;z-index:100}
+.skip-link:focus{left:16px;top:16px;width:auto;height:auto;overflow:visible}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
 </style>
 </head>
 <body>
+<a class="skip-link" href="#inhalt">Zum Inhalt</a>
 
-<main class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="big" viewBox="0 0 80 90" aria-hidden="true">
+<main id="inhalt" class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="big" viewbox="0 0 80 90" aria-hidden="true">
   <g transform="rotate(-8 40 48)">
-    <rect x="16" y="10" width="52" height="68" rx="7" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.5"/>
-    <rect x="28" y="24" width="30" height="16" rx="3" style="fill:#fff;stroke:var(--ink);stroke-width:2"/>
-    <path d="M43 36c-4-3-6-5-6-7a3 3 0 0 1 6-.8 3 3 0 0 1 6 .8c0 2-2 4-6 7z" style="fill:var(--accent)"/>
+    <rect x="16" y="10" width="52" height="68" rx="7" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.5"></rect>
+    <rect x="28" y="24" width="30" height="16" rx="3" style="fill:#fff;stroke:var(--ink);stroke-width:2"></rect>
+    <path d="M43 36c-4-3-6-5-6-7a3 3 0 0 1 6-.8 3 3 0 0 1 6 .8c0 2-2 4-6 7z" style="fill:var(--accent)"></path>
     <g style="fill:#fff;stroke:var(--ink);stroke-width:2.2">
-      <circle cx="16" cy="22" r="3.6"/><circle cx="16" cy="34" r="3.6"/><circle cx="16" cy="46" r="3.6"/>
-      <circle cx="16" cy="58" r="3.6"/><circle cx="16" cy="70" r="3.6"/>
+      <circle cx="16" cy="22" r="3.6"></circle><circle cx="16" cy="34" r="3.6"></circle><circle cx="16" cy="46" r="3.6"></circle>
+      <circle cx="16" cy="58" r="3.6"></circle><circle cx="16" cy="70" r="3.6"></circle>
     </g>
   </g>
-  <path d="M70 4l2.2 4.8 5.2.6-3.9 3.5 1.1 5.1L70 15.4l-4.6 2.6 1.1-5.1-3.9-3.5 5.2-.6z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round"/>
+  <path d="M70 4l2.2 4.8 5.2.6-3.9 3.5 1.1 5.1L70 15.4l-4.6 2.6 1.1-5.1-3.9-3.5 5.2-.6z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round"></path>
 </svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="big" viewBox="0 0 80 90" aria-hidden="true">
+  <div class="orn tr" aria-hidden="true"><svg class="big" viewbox="0 0 80 90" aria-hidden="true">
   <g style="stroke:var(--ink);stroke-width:2;stroke-linejoin:round">
-    <g transform="rotate(-16 28 52)"><rect x="23" y="8" width="9" height="44" style="fill:var(--c3)"/><path d="M23 8L27.5-2 32 8z" style="fill:#f6dcc0"/></g>
-    <g transform="rotate(4 42 52)"><rect x="38" y="4" width="9" height="48" style="fill:var(--accent)"/><path d="M38 4L42.5-6 47 4z" style="fill:#f6dcc0"/></g>
-    <g transform="rotate(20 54 52)"><rect x="50" y="10" width="9" height="42" style="fill:var(--c4)"/><path d="M50 10L54.5 0 59 10z" style="fill:#f6dcc0"/></g>
-    <path d="M14 46h52l-5 36a5 5 0 0 1-5 4H24a5 5 0 0 1-5-4z" style="fill:var(--c5)"/>
+    <g transform="rotate(-16 28 52)"><rect x="23" y="8" width="9" height="44" style="fill:var(--c3)"></rect><path d="M23 8L27.5-2 32 8z" style="fill:#f6dcc0"></path></g>
+    <g transform="rotate(4 42 52)"><rect x="38" y="4" width="9" height="48" style="fill:var(--accent)"></rect><path d="M38 4L42.5-6 47 4z" style="fill:#f6dcc0"></path></g>
+    <g transform="rotate(20 54 52)"><rect x="50" y="10" width="9" height="42" style="fill:var(--c4)"></rect><path d="M50 10L54.5 0 59 10z" style="fill:#f6dcc0"></path></g>
+    <path d="M14 46h52l-5 36a5 5 0 0 1-5 4H24a5 5 0 0 1-5-4z" style="fill:var(--c5)"></path>
   </g>
-  <path d="M40 70c-3-2.4-4.6-4-4.6-5.6a2.3 2.3 0 0 1 4.6-.6 2.3 2.3 0 0 1 4.6.6c0 1.6-1.6 3.2-4.6 5.6z" style="fill:#fff"/>
+  <path d="M40 70c-3-2.4-4.6-4-4.6-5.6a2.3 2.3 0 0 1 4.6-.6 2.3 2.3 0 0 1 4.6.6c0 1.6-1.6 3.2-4.6 5.6z" style="fill:#fff"></path>
 </svg></div>
 
   <h1>Übungen Modul 1</h1>
@@ -126,11 +145,11 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:18px 0 4px}
     <span class="tag">PM · Präsenz · Agiles Setup</span>
   </p>
 
-  <h3>1 · Wasserfall oder agil?</h3>
+  <h2>1 · Wasserfall oder agil?</h2>
   <p class="cap">Ordne zu: <span class="hl">Agil</span> oder <span class="hl">Wasserfall</span>?</p>
   <section class="grid one">
     <article class="card" style="--c:var(--c2)">
-      <h2>Aussagen</h2>
+      <h3>Aussagen</h3>
       <ul class="plain">
         <li>(a) Nach jedem Zyklus gibt es Kundenfeedback. → <span class="blank" aria-hidden="true"></span></li>
         <li>(b) Alle Anforderungen werden komplett vor dem Start geplant. → <span class="blank" aria-hidden="true"></span></li>
@@ -142,13 +161,13 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:18px 0 4px}
         <span class="who" style="--c:var(--c1)">Agil</span>
       </div>
     </article>
-  </section>
+  </main>
 
-  <h3>2 · Project Manager oder Product Owner?</h3>
+  <h2>2 · <span lang="en">Project Manager</span> oder <span lang="en">Product Owner</span>?</h2>
   <p class="cap">Wer sagt das: <span class="hl">PM</span> oder <span class="hl">PO</span>?</p>
   <section class="grid one">
     <article class="card" style="--c:var(--c4)">
-      <h2>Zitate</h2>
+      <h3>Zitate</h3>
       <ul class="plain">
         <li>(a) „Wir liegen 10.000 € über dem Budget.“ → <span class="blank" aria-hidden="true"></span></li>
         <li>(b) „Die Suchfunktion ist für Kunden wichtiger als das Design.“ → <span class="blank" aria-hidden="true"></span></li>
@@ -157,12 +176,12 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:18px 0 4px}
     </article>
   </section>
 
-  <h3>3 · Welcher Scrum-Termin?</h3>
+  <h2>3 · Welcher Scrum-Termin?</h2>
   <section class="grid one">
     <article class="card" style="--c:var(--c5)">
-      <h2>Szene</h2>
+      <h3>Szene</h3>
       <ul class="plain">
-        <li>Das Team setzt sich am <span class="hl">Ende des Sprints</span> zusammen und bespricht: Was lief gut in der Zusammenarbeit? Was können wir im nächsten Sprint besser machen?</li>
+        <li>Das Team setzt sich am <span class="hl">Ende des Sprints</span> zusammen und bespricht: Was lief gut in der Zusammenarbeit? Was können wir im nächsten <span lang="en">Sprint</span> besser machen?</li>
       </ul>
       <p class="cap">Termin Name: <span class="blank" style="min-width:14rem" aria-hidden="true"></span></p>
     </article>
@@ -170,23 +189,23 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:18px 0 4px}
   <div class="pageno">Seite 1 / 2</div>
 </main>
 
-<main class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
-  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
-  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
-  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
-</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+<section aria-label="Seite 2" class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewbox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"></path>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
+</svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
 
-  <h1>Übungen 4 &amp; 5</h1>
-  <p style="text-align:center"><span class="tag">Modul 1 · Rollen · SMART</span></p>
+  <h2>Übungen 4 &amp; 5</h2>
+  <p style="text-align:center"><span class="tag">Modul 1 · Rollen · <span lang="en">SMART</span></span></p>
 
   <h3>4 · Welche Scrum-Rolle fehlt?</h3>
   <section class="grid one">
     <article class="card" style="--c:var(--c3)">
-      <h2>Im Scrum-Team gibt es …</h2>
+      <h4>Im Scrum-Team gibt es …</h4>
       <ul>
-        <li><span class="hl">Product Owner</span> – steuert das Produkt</li>
+        <li><span class="hl"><span lang="en">Product Owner</span></span> – steuert das Produkt</li>
         <li><span class="hl">Developers</span> – bauen das Produkt</li>
       </ul>
       <ul class="plain" style="margin-top:8px">
@@ -196,20 +215,20 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:18px 0 4px}
     </article>
   </section>
 
-  <h3>5 · Ziel SMART machen</h3>
+  <h2>5 · Ziel <span lang="en">SMART</span> machen</h2>
   <section class="grid one">
     <article class="card" style="--c:var(--c6)">
-      <h2>Zu ungenau</h2>
+      <h3>Zu ungenau</h3>
       <ul class="plain">
         <li>„Die App soll besser werden.“</li>
       </ul>
-      <p class="sub">Formuliere ein SMART-Ziel für die Online-Banking-App.</p>
+      <p class="sub">Formuliere ein <span lang="en">SMART</span>-Ziel für die Online-Banking-App.</p>
       <p class="cap">Hinweis: spezifische Zahlen, Personen oder ein festes Datum.</p>
       <div class="chips">
         <span style="--c:var(--c1)">S</span><span style="--c:var(--c2)">M</span><span style="--c:var(--c3)">A</span>
         <span style="--c:var(--c4)">R</span><span style="--c:var(--c5)">T</span>
       </div>
-      <p class="cap" style="margin-top:12px">Dein SMART-Ziel:</p>
+      <p class="cap" style="margin-top:12px">Dein <span lang="en">SMART</span>-Ziel:</p>
       <span class="blank xl" aria-hidden="true"></span>
       <span class="blank xl" aria-hidden="true"></span>
     </article>
@@ -220,22 +239,22 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:18px 0 4px}
     <ul>
       <li>Agil = Feedback in Zyklen · Wasserfall = alles vorab, Lieferung am Ende</li>
       <li>PO = Produktwert · PM = Zeit, Budget, Meilensteine</li>
-      <li>Retro = Zusammenarbeit verbessern · Scrum Master = Coach &amp; Hindernisse</li>
-      <li>SMART = Spezifisch, Messbar, Attraktiv, Realistisch, Terminiert</li>
+      <li>Retro = Zusammenarbeit verbessern · <span lang="en">Scrum Master</span> = Coach &amp; Hindernisse</li>
+      <li><span lang="en">SMART</span> = Spezifisch, Messbar, Attraktiv, Realistisch, Terminiert</li>
     </ul>
   </div>
 
-  <h3>Glossar</h3>
+  <h2>Glossar</h2>
   <div class="gloss">
     <div style="--c:var(--c1)"><b>Agil:</b> Arbeiten in kurzen Zyklen mit regelmäßigem Feedback.</div>
     <div style="--c:var(--c2)"><b>Wasserfall:</b> Phasen nacheinander; Anforderungen oft komplett vorab.</div>
-    <div style="--c:var(--c3)"><b>Product Owner:</b> Priorisiert Nutzen und Produktentscheidungen.</div>
-    <div style="--c:var(--c4)"><b>Project Manager:</b> Achtet auf Zeit, Budget und Meilensteine.</div>
-    <div style="--c:var(--c5)"><b>Sprint Retro:</b> Termin am Sprint-Ende zur Verbesserung der Zusammenarbeit.</div>
-    <div style="--c:var(--c6)"><b>Scrum Master:</b> Coach des Teams; beseitigt Hindernisse.</div>
+    <div style="--c:var(--c3)"><b><span lang="en">Product Owner</span>:</b> Priorisiert Nutzen und Produktentscheidungen.</div>
+    <div style="--c:var(--c4)"><b><span lang="en">Project Manager</span>:</b> Achtet auf Zeit, Budget und Meilensteine.</div>
+    <div style="--c:var(--c5)"><b><span lang="en">Sprint</span> Retro:</b> Termin am <span lang="en">Sprint</span>-Ende zur Verbesserung der Zusammenarbeit.</div>
+    <div style="--c:var(--c6)"><b><span lang="en">Scrum Master</span>:</b> Coach des Teams; beseitigt Hindernisse.</div>
   </div>
 
-  <div class="banner">Zuordnen · Rollen · Termine · SMART</div>
+  <div class="banner">Zuordnen · Rollen · Termine · <span lang="en">SMART</span></div>
   <div class="pageno">Seite 2 / 2</div>
 </main>
 

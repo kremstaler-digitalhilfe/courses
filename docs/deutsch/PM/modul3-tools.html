@@ -9,7 +9,7 @@
 :root{
   /* === THEME : seul bloc à modifier === */
   --paper:#fffdfa; --grid:#ebe6ee; --ink:#2b2b3a; --page:#f3eef2;
-  --accent:#e8639a; --accent-soft:#fbd3e4; --highlight:#fff176;
+  --accent:#e8639a; --link:#7a3068; --accent-soft:#fbd3e4; --highlight:#fff176;
   --c1:#7bc47f; --c2:#6fa8e8; --c3:#f2a65a;
   --c4:#b58be0; --c5:#4cc0b5; --c6:#f28aa5;
   --font-title:'Fredoka',sans-serif;
@@ -28,7 +28,7 @@ body{margin:0;padding:16px;background:var(--page);color:var(--ink);
 h1{font-family:var(--font-title);font-size:2.2rem;text-align:center;margin:0 0 6px}
 h1::after{content:"";display:block;height:6px;width:60%;margin:8px auto 0;
   background:var(--accent);border-radius:6px;opacity:.7}
-h3{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px;display:inline-block;
+.sheet > h2{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px;display:inline-block;
   background:var(--accent-soft);padding:3px 14px;border-radius:8px}
 .tag{display:inline-block;background:var(--accent-soft);padding:4px 14px;
   border-radius:8px;font-family:var(--font-title);font-size:.95rem}
@@ -41,15 +41,14 @@ h3{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px;display:inl
   background:color-mix(in srgb,var(--c) 8%,white)}
 .card::before{content:"";position:absolute;top:-9px;right:18px;width:54px;height:16px;
   background:color-mix(in srgb,var(--c) 45%,white);opacity:.8;transform:rotate(4deg);border-radius:2px}
-.card h2{margin:0 0 4px;font-family:var(--font-title);font-size:1.05rem}
+.card h2,.card h3{margin:0 0 4px;font-family:var(--font-title);font-size:1.05rem}
 .card .sub{font-family:var(--font-hand);font-size:1.15rem;color:color-mix(in srgb,var(--c) 70%,black);margin:0 0 8px}
-.num{display:inline-grid;place-items:center;width:26px;height:26px;
-  border-radius:50%;background:var(--c);color:#fff;margin-right:6px}
+.num{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:2px solid var(--c);margin-right:6px}
 .card ul{list-style:none;padding:0;margin:0}
 .card li{margin:6px 0;padding-left:2px}
 .card li::before{content:"✓ ";color:var(--c);font-weight:700}
 .card li b{font-family:var(--font-title);font-size:.78rem;text-transform:uppercase;
-  background:var(--c);color:#fff;padding:1px 8px;border-radius:6px;margin-right:6px}
+  background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:1px solid var(--c);padding:1px 8px;border-radius:6px;margin-right:6px}
 .card ul.plain li::before{content:""}
 .hl{background:linear-gradient(transparent 55%,var(--highlight) 55%)}
 .code{display:inline-block;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem;
@@ -72,9 +71,7 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
   border:2px solid var(--accent);font-family:var(--font-title);
   text-transform:uppercase;letter-spacing:.04em}
 .pageno{position:absolute;bottom:16px;left:0;right:0;text-align:center;
-  font-family:var(--font-hand);font-size:1.1rem;opacity:.6}
-.lead{margin:16px 0 0}
-.cap{font-family:var(--font-hand);font-size:1.15rem;margin:4px 0 0}
+  font-family:var(--font-hand);font-size:1.1rem;font-size:1.15rem;margin:4px 0 0}
 .arrow{font-size:1.3rem;color:var(--accent);font-weight:700}
 .demo{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;margin-top:12px;
   font-family:var(--font-hand);font-size:1.15rem}
@@ -138,7 +135,7 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
 .wpage .crumbs{padding:6px 14px;background:color-mix(in srgb,var(--c2) 15%,white);border-bottom:2px solid var(--ink);
   font-family:var(--font-hand);font-size:1.1rem}
 .wpage .body{padding:12px 16px}
-.wpage h4{margin:0 0 4px;font-family:var(--font-title);font-size:1.15rem}
+.wpage .mock-title{margin:0 0 4px;font-family:var(--font-title);font-size:1.15rem}
 .wpage .meta{display:flex;gap:14px;flex-wrap:wrap;font-family:var(--font-hand);font-size:1.1rem;margin-bottom:8px}
 .wpage .meta span{padding:0 10px;border-radius:12px;background:color-mix(in srgb,var(--c3) 22%,white)}
 .wpage .line{height:9px;border-radius:5px;background:#e3dfe8;margin:7px 0}
@@ -167,15 +164,36 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
   @page{size:A4;margin:10mm}
   body{background:#fff;padding:0}
   .sheet{box-shadow:none;margin:0;min-height:auto;break-after:page;border-radius:0}
-  .sheet:last-of-type{break-after:auto}
+  .sheet:last-child{break-after:auto}
   .card,.note,.tip,.rule,.diagram,.gloss div,.ticket,.wpage,.table{break-inside:avoid}
 }
+
+/* === a11y: contraste liens + focus (AA/AAA) === */
+:root{--link:#7a3068}
+a{color:var(--link)}
+a:hover{color:var(--link);text-decoration-thickness:2px}
+:focus-visible{outline:3px solid var(--link);outline-offset:3px}
+a:focus:not(:focus-visible){outline:none}
+.num{background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:2px solid var(--c)}
+.card li b{background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:1px solid var(--c)}
+.card li::before{color:color-mix(in srgb,var(--c) 55%,black)}
+.card .sub{color:color-mix(in srgb,var(--c) 45%,black)}
+.tip strong,.rule strong{color:color-mix(in srgb,var(--c) 45%,black)}
+
+.skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;
+  background:var(--paper);color:var(--link);padding:10px 16px;border:2px solid var(--link);
+  border-radius:8px;font-family:var(--font-title);text-decoration:none;z-index:100}
+.skip-link:focus{left:16px;top:16px;width:auto;height:auto;overflow:visible}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
 </style>
 </head>
 <body>
+<a class="skip-link" href="#inhalt">Zum Inhalt</a>
 
 <!-- ============ SEITE 1 ============ -->
-<main class="sheet">
+<main id="inhalt" class="sheet">
   <h1>Modul 3: Tools</h1>
   <p style="text-align:center"><span class="tag">Dokumentation und Zusammenarbeit</span></p>
 
@@ -183,23 +201,23 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
     <article class="card" style="--c:var(--c5)">
       <h2>Nach diesem Modul kannst du …</h2>
       <ul class="check">
-        <li>erklären, wofür Teams <span class="hl">digitale Tools</span> (wie Jira, Confluence oder Trello) nutzen</li>
+        <li>erklären, wofür Teams <span class="hl">digitale Tools</span> (wie <span lang="en">Jira</span>, <span lang="en">Confluence</span> oder Trello) nutzen</li>
         <li><span class="hl">Aufgaben, Wissen und Kommunikation</span> dem richtigen Tool zuordnen</li>
-        <li>den <span class="hl">Aufbau von Confluence</span> beschreiben</li>
-        <li>ein <span class="hl">Jira-Ticket</span> und eine <span class="hl">Confluence-Seite</span> sinnvoll strukturieren</li>
+        <li>den <span class="hl">Aufbau von <span lang="en">Confluence</span></span> beschreiben</li>
+        <li>ein <span class="hl"><span lang="en">Jira</span>-Ticket</span> und eine <span class="hl"><span lang="en">Confluence</span>-Seite</span> sinnvoll strukturieren</li>
         <li>ein passendes Tool nach <span class="hl">einfachen Kriterien</span> auswählen</li>
       </ul>
     </article>
-  </section>
+  </main>
 
   <hr>
-  <h3>3.1 Warum Teams Tools brauchen</h3>
+  <h2>3.1 Warum Teams Tools brauchen</h2>
   <p class="lead">Ein <span class="hl">Whiteboard im Raum</span> reicht nicht mehr aus, wenn ein Team <span class="hl">wächst</span> oder im <span class="hl">Homeoffice</span> arbeitet. Digitale Tools machen Informationen für alle <span class="hl">sichtbar und auffindbar</span>.</p>
 
   <p style="margin:14px 0 0"><strong>Beispiel Banking-App:</strong></p>
   <section class="grid">
     <article class="card" style="--c:var(--c6)">
-      <h2>✗ Ohne Tools</h2>
+      <h3>✗ Ohne Tools</h3>
       <p class="sub">Infos stecken verstreut …</p>
       <div class="scatter" style="--c:var(--c6)">
         <span>📧 E-Mails</span><span>🧠 Köpfe einzelner Personen</span><span>📧 E-Mails</span><span>🧠 „Frag Sarah!“</span>
@@ -210,10 +228,10 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
       </ul>
     </article>
     <article class="card" style="--c:var(--c1)">
-      <h2>✓ Mit Tools</h2>
+      <h3>✓ Mit Tools</h3>
       <p class="sub">… alles an einem Ort</p>
       <div class="scatter" style="--c:var(--c1);min-height:96px">
-        <span style="transform:none">📋 Backlog</span><span style="transform:none">📚 Wissen</span><span style="transform:none">💬 Fragen</span>
+        <span style="transform:none">📋 <span lang="en">Backlog</span></span><span style="transform:none">📚 Wissen</span><span style="transform:none">💬 Fragen</span>
       </div>
       <ul class="plain">
         <li>Alle im Team können Informationen <span class="hl">sehen und finden</span>.</li>
@@ -222,79 +240,79 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
   </section>
 
   <div class="rule">
-    <strong>Wichtig:</strong> Ein Tool ersetzt <span class="hl">keine Methode</span>! Ein schlechtes Backlog wird auch durch ein teures Software-Tool nicht besser.
+    <strong>Wichtig:</strong> Ein Tool ersetzt <span class="hl">keine Methode</span>! Ein schlechtes <span lang="en">Backlog</span> wird auch durch ein teures Software-Tool nicht besser.
   </div>
   <div class="pageno">Seite 1 / 8</div>
 </main>
 
 <!-- ============ SEITE 2 ============ -->
-<main class="sheet">
-  <h1>Arten von Tools</h1>
+<section aria-label="Seite 2" class="sheet">
+  <h2>Arten von Tools</h2>
   <p style="text-align:center"><span class="tag">3.2 Jedes Tool hat einen Schwerpunkt</span></p>
 
   <section class="grid">
     <article class="card" style="--c:var(--c2)">
-      <h2><span class="ico">📋</span>Aufgaben &amp; Backlog</h2>
+      <h3><span class="ico">📋</span>Aufgaben &amp; <span lang="en">Backlog</span></h3>
       <ul>
-        <li><b>Tools</b>Jira, Trello, Azure DevOps</li>
+        <li><b>Tools</b><span lang="en">Jira</span>, Trello, Azure DevOps</li>
         <li><b>Beispiel</b>Die Story „Passwort zurücksetzen“ verwalten</li>
       </ul>
     </article>
     <article class="card" style="--c:var(--c1)">
-      <h2><span class="ico">📚</span>Wissen &amp; Dokumentation</h2>
+      <h3><span class="ico">📚</span>Wissen &amp; Dokumentation</h3>
       <ul>
-        <li><b>Tools</b>Confluence, Notion</li>
-        <li><b>Beispiel</b>Regeln, Beschreibungen und Definition of Done</li>
+        <li><b>Tools</b><span lang="en">Confluence</span>, Notion</li>
+        <li><b>Beispiel</b>Regeln, Beschreibungen und <span lang="en">Definition of Done</span></li>
       </ul>
     </article>
     <article class="card" style="--c:var(--c3)">
-      <h2><span class="ico">💬</span>Schnelle Kommunikation</h2>
+      <h3><span class="ico">💬</span>Schnelle Kommunikation</h3>
       <ul>
         <li><b>Tools</b>MS Teams, Slack</li>
         <li><b>Beispiel</b>Kurze Fragen im Team klären</li>
       </ul>
     </article>
     <article class="card" style="--c:var(--c4)">
-      <h2><span class="ico">🎨</span>Digitales Whiteboard</h2>
+      <h3><span class="ico">🎨</span>Digitales Whiteboard</h3>
       <ul>
         <li><b>Tools</b>Miro, Mural</li>
         <li><b>Beispiel</b>Retrospektive mit digitalen Zetteln durchführen</li>
       </ul>
     </article>
     <article class="card" style="--c:var(--c5)">
-      <h2><span class="ico">💻</span>Programmcode verwalten</h2>
+      <h3><span class="ico">💻</span>Programmcode verwalten</h3>
       <ul>
-        <li><b>Tools</b>Git (GitHub, GitLab)</li>
+        <li><b>Tools</b>Git (<span lang="en">GitHub</span>, GitLab)</li>
         <li><b>Beispiel</b>Den Quellcode der App speichern und sichern</li>
       </ul>
     </article>
   </section>
 
-  <h3>Alles auf einen Blick</h3>
-  <svg class="diagram" viewBox="0 0 700 270" role="img" aria-label="Das Team in der Mitte, umgeben von fünf Tool-Arten">
+  <h2>Alles auf einen Blick</h2>
+  <svg class="diagram" viewbox="0 0 700 270" role="img" aria-label="Das Team in der Mitte, umgeben von fünf Tool-Arten">
     <defs>
-      <marker id="am1" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
-        <path d="M0,0 L10,5 L0,10 z" fill="#e8639a"/>
+      <marker id="am1" markerwidth="10" markerheight="10" refx="8" refy="5" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="#e8639a"></path>
       </marker>
     </defs>
     <g stroke="#e8639a" stroke-width="2.2" fill="none" marker-end="url(#am1)" opacity=".85">
-      <line x1="290" y1="118" x2="200" y2="70"/>
-      <line x1="410" y1="118" x2="500" y2="70"/>
-      <line x1="270" y1="150" x2="170" y2="170"/>
-      <line x1="430" y1="150" x2="530" y2="170"/>
-      <line x1="350" y1="172" x2="350" y2="212"/>
+      <line x1="290" y1="118" x2="200" y2="70"></line>
+      <line x1="410" y1="118" x2="500" y2="70"></line>
+      <line x1="270" y1="150" x2="170" y2="170"></line>
+      <line x1="430" y1="150" x2="530" y2="170"></line>
+      <line x1="350" y1="172" x2="350" y2="212"></line>
     </g>
-    <ellipse cx="350" cy="140" rx="82" ry="34" fill="#fbd3e4" stroke="#e8639a" stroke-width="2.5"/>
+    <ellipse cx="350" cy="140" rx="82" ry="34" fill="#fbd3e4" stroke="#e8639a" stroke-width="2.5"></ellipse>
     <text class="t" x="350" y="146" text-anchor="middle">Das Team</text>
-    <rect x="30"  y="30"  width="190" height="50" rx="14" fill="#cfe2fb" stroke="#6fa8e8" stroke-width="2.5"/>
+    <rect x="30" y="30" width="190" height="50" rx="14" fill="#cfe2fb" stroke="#6fa8e8" stroke-width="2.5"></rect>
     <text class="b" x="125" y="52" text-anchor="middle">Jira · Trello</text><text class="xs" x="125" y="70" text-anchor="middle">Aufgaben &amp; Backlog</text>
-    <rect x="480" y="30"  width="190" height="50" rx="14" fill="#d7efd9" stroke="#7bc47f" stroke-width="2.5"/>
+    <rect x="480" y="30" width="190" height="50" rx="14" fill="#d7efd9" stroke="#7bc47f" stroke-width="2.5"></rect>
     <text class="b" x="575" y="52" text-anchor="middle">Confluence · Notion</text><text class="xs" x="575" y="70" text-anchor="middle">Wissen &amp; Doku</text>
-    <rect x="10"  y="150" width="170" height="50" rx="14" fill="#fde7cf" stroke="#f2a65a" stroke-width="2.5"/>
+    <rect x="10" y="150" width="170" height="50" rx="14" fill="#fde7cf" stroke="#f2a65a" stroke-width="2.5"></rect>
     <text class="b" x="95" y="172" text-anchor="middle">Slack · Teams</text><text class="xs" x="95" y="190" text-anchor="middle">schnelle Fragen</text>
-    <rect x="520" y="150" width="170" height="50" rx="14" fill="#e6d8f5" stroke="#b58be0" stroke-width="2.5"/>
+    <rect x="520" y="150" width="170" height="50" rx="14" fill="#e6d8f5" stroke="#b58be0" stroke-width="2.5"></rect>
     <text class="b" x="605" y="172" text-anchor="middle">Miro · Mural</text><text class="xs" x="605" y="190" text-anchor="middle">Whiteboard</text>
-    <rect x="240" y="214" width="220" height="50" rx="14" fill="#d3f1ee" stroke="#4cc0b5" stroke-width="2.5"/>
+    <rect x="240" y="214" width="220" height="50" rx="14" fill="#d3f1ee" stroke="#4cc0b5" stroke-width="2.5"></rect>
     <text class="b" x="350" y="236" text-anchor="middle">Git (GitHub, GitLab)</text><text class="xs" x="350" y="254" text-anchor="middle">Programmcode</text>
   </svg>
 
@@ -305,13 +323,13 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
 </main>
 
 <!-- ============ SEITE 3 ============ -->
-<main class="sheet">
-  <h1>Confluence</h1>
+<section aria-label="Seite 3" class="sheet">
+  <h2><span lang="en">Confluence</span></h2>
   <p style="text-align:center"><span class="tag">3.3 Das gemeinsame Wissensarchiv</span></p>
 
   <section class="grid">
     <article class="card" style="--c:var(--c2)">
-      <h2><span class="num">1</span>Ein Wiki</h2>
+      <h3><span class="num">1</span>Ein Wiki</h3>
       <p class="sub">von der Firma Atlassian</p>
       <ul>
         <li>Eine <span class="hl">Sammlung von Seiten</span>, die alle im Team lesen und bearbeiten können.</li>
@@ -319,7 +337,7 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
       </ul>
     </article>
     <article class="card" style="--c:var(--c1)">
-      <h2><span class="num">2</span>Spaces</h2>
+      <h3><span class="num">2</span>Spaces</h3>
       <p class="sub">Bereiche</p>
       <ul>
         <li>Die Seiten liegen in <span class="hl">Spaces</span>.</li>
@@ -328,24 +346,24 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
     </article>
   </section>
 
-  <h3>Was gehört hinein?</h3>
-  <svg class="diagram" viewBox="0 0 700 180" role="img" aria-label="Ein Space enthält sechs Arten von Seiten">
+  <h2>Was gehört hinein?</h2>
+  <svg class="diagram" viewbox="0 0 700 180" role="img" aria-label="Ein Space enthält sechs Arten von Seiten">
     <g stroke="#e8639a" stroke-width="2.2" fill="none">
-      <line x1="350" y1="56" x2="350" y2="80"/>
-      <line x1="63" y1="80" x2="633" y2="80"/>
-      <line x1="63" y1="80" x2="63" y2="98"/><line x1="177" y1="80" x2="177" y2="98"/><line x1="291" y1="80" x2="291" y2="98"/>
-      <line x1="405" y1="80" x2="405" y2="98"/><line x1="519" y1="80" x2="519" y2="98"/><line x1="633" y1="80" x2="633" y2="98"/>
+      <line x1="350" y1="56" x2="350" y2="80"></line>
+      <line x1="63" y1="80" x2="633" y2="80"></line>
+      <line x1="63" y1="80" x2="63" y2="98"></line><line x1="177" y1="80" x2="177" y2="98"></line><line x1="291" y1="80" x2="291" y2="98"></line>
+      <line x1="405" y1="80" x2="405" y2="98"></line><line x1="519" y1="80" x2="519" y2="98"></line><line x1="633" y1="80" x2="633" y2="98"></line>
     </g>
-    <rect x="130" y="8" width="440" height="48" rx="14" fill="#cfe2fb" stroke="#6fa8e8" stroke-width="2.5"/>
+    <rect x="130" y="8" width="440" height="48" rx="14" fill="#cfe2fb" stroke="#6fa8e8" stroke-width="2.5"></rect>
     <text class="t" x="350" y="29" text-anchor="middle">Space: Banking-App-Team</text>
     <text class="xs" x="350" y="47" text-anchor="middle">meist ein Space pro Team oder Projekt</text>
     <g stroke="#2b2b3a" stroke-width="2">
-      <rect x="10"  y="98" width="106" height="68" rx="10" fill="#d7efd9"/>
-      <rect x="124" y="98" width="106" height="68" rx="10" fill="#fde7cf"/>
-      <rect x="238" y="98" width="106" height="68" rx="10" fill="#e6d8f5"/>
-      <rect x="352" y="98" width="106" height="68" rx="10" fill="#cfe2fb"/>
-      <rect x="466" y="98" width="106" height="68" rx="10" fill="#d3f1ee"/>
-      <rect x="580" y="98" width="106" height="68" rx="10" fill="#fbd3e4"/>
+      <rect x="10" y="98" width="106" height="68" rx="10" fill="#d7efd9"></rect>
+      <rect x="124" y="98" width="106" height="68" rx="10" fill="#fde7cf"></rect>
+      <rect x="238" y="98" width="106" height="68" rx="10" fill="#e6d8f5"></rect>
+      <rect x="352" y="98" width="106" height="68" rx="10" fill="#cfe2fb"></rect>
+      <rect x="466" y="98" width="106" height="68" rx="10" fill="#d3f1ee"></rect>
+      <rect x="580" y="98" width="106" height="68" rx="10" fill="#fbd3e4"></rect>
     </g>
     <g text-anchor="middle" class="xs">
       <text class="b" x="63" y="128" style="font-size:13px">Projekt-</text><text class="b" x="63" y="146" style="font-size:13px">steckbrief</text>
@@ -359,27 +377,27 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
 
   <section class="grid">
     <article class="card" style="--c:var(--c1)">
-      <h2>Projektsteckbrief</h2>
-      <ul class="plain"><li><span class="hl">Ziel</span> (SMART formuliert), <span class="hl">Beteiligte</span>, <span class="hl">Zeitrahmen</span>.</li></ul>
+      <h3>Projektsteckbrief</h3>
+      <ul class="plain"><li><span class="hl">Ziel</span> (<span lang="en">SMART</span> formuliert), <span class="hl">Beteiligte</span>, <span class="hl">Zeitrahmen</span>.</li></ul>
     </article>
     <article class="card" style="--c:var(--c3)">
-      <h2>Anforderungen</h2>
-      <ul class="plain"><li>Ausführliche Beschreibung einer <span class="hl">User Story</span>, z. B. der genaue Ablauf beim Zurücksetzen eines Passworts.</li></ul>
+      <h3>Anforderungen</h3>
+      <ul class="plain"><li>Ausführliche Beschreibung einer <span class="hl"><span lang="en">User Story</span></span>, z. B. der genaue Ablauf beim Zurücksetzen eines Passworts.</li></ul>
     </article>
     <article class="card" style="--c:var(--c4)">
-      <h2>Definition of Done</h2>
+      <h3><span lang="en">Definition of Done</span></h3>
       <ul class="plain"><li>Die gemeinsame <span class="hl">Checkliste</span>, wann etwas als fertig gilt.</li></ul>
     </article>
     <article class="card" style="--c:var(--c2)">
-      <h2>Protokolle</h2>
-      <ul class="plain"><li>Ergebnisse von <span class="hl">Sprint Review</span> und <span class="hl">Retrospektive</span>.</li></ul>
+      <h3>Protokolle</h3>
+      <ul class="plain"><li>Ergebnisse von <span class="hl"><span lang="en">Sprint</span> Review</span> und <span class="hl">Retrospektive</span>.</li></ul>
     </article>
     <article class="card" style="--c:var(--c5)">
-      <h2>Entscheidungen</h2>
+      <h3>Entscheidungen</h3>
       <ul class="plain"><li>Was wurde <span class="hl">warum</span> entschieden, und <span class="hl">von wem</span>?</li></ul>
     </article>
     <article class="card" style="--c:var(--c6)">
-      <h2>Anleitungen</h2>
+      <h3>Anleitungen</h3>
       <ul class="plain"><li>Z. B. wie man die <span class="hl">Testumgebung</span> benutzt.</li></ul>
     </article>
   </section>
@@ -387,14 +405,14 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
 </main>
 
 <!-- ============ SEITE 4 ============ -->
-<main class="sheet">
-  <h1>Gute Seitenstruktur</h1>
-  <p style="text-align:center"><span class="tag">3.3 Tipps für Confluence</span></p>
+<section aria-label="Seite 4" class="sheet">
+  <h2>Gute Seitenstruktur</h2>
+  <p style="text-align:center"><span class="tag">3.3 Tipps für <span lang="en">Confluence</span></span></p>
 
   <section class="grid one">
     <article class="card" style="--c:var(--c1)">
-      <h2><span class="num">1</span>Einheitliche Quelle</h2>
-      <p class="sub">Single Source of Truth</p>
+      <h3><span class="num">1</span>Einheitliche Quelle</h3>
+      <p class="sub"><span lang="en">Single Source of Truth</span></p>
       <ul><li>Infos stehen <span class="hl">nur an einer Stelle</span> – keine Dopplungen.</li></ul>
       <div class="sot">
         <div style="--c:var(--c6)">✗ Dieselbe Info in 3 Seiten<br>→ widersprüchlich, veraltet</div>
@@ -403,7 +421,7 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
     </article>
 
     <article class="card" style="--c:var(--c3)">
-      <h2><span class="num">2</span>Klarer Kopf</h2>
+      <h3><span class="num">2</span>Klarer Kopf</h3>
       <p class="sub">Jede Seite braucht …</p>
       <ul>
         <li>einen <span class="hl">eindeutigen Titel</span></li>
@@ -413,7 +431,7 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
       <div class="wpage">
         <div class="crumbs">Banking-App-Team › Anforderungen</div>
         <div class="body">
-          <h4>Passwort zurücksetzen</h4>
+          <p class="mock-title">Passwort zurücksetzen</p>
           <div class="meta"><span>📅 Datum: TT.MM.JJJJ</span><span>👤 Verantwortlich: Name</span></div>
           <div class="line m"></div><div class="line"></div><div class="line s"></div>
         </div>
@@ -421,7 +439,7 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
     </article>
 
     <article class="card" style="--c:var(--c2)">
-      <h2><span class="num">3</span>Saubere Ordner</h2>
+      <h3><span class="num">3</span>Saubere Ordner</h3>
       <p class="sub">Zum Beispiel:</p>
       <div class="trail">
         <span class="p">Hauptseite</span><span class="arrow">→</span>
@@ -434,7 +452,7 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
   <div class="note">
     <strong>Merke dir:</strong>
     <ul>
-      <li>Confluence = Wiki für Wissen, Regeln und Entscheidungen</li>
+      <li><span lang="en">Confluence</span> = Wiki für Wissen, Regeln und Entscheidungen</li>
       <li>Space = Bereich für ein Team oder Projekt</li>
       <li>Eine Info = ein Ort, mit klarem Titel, Datum und Verantwortlichen</li>
     </ul>
@@ -443,36 +461,36 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
 </main>
 
 <!-- ============ SEITE 5 ============ -->
-<main class="sheet">
-  <h1>Jira &amp; Trello</h1>
+<section aria-label="Seite 5" class="sheet">
+  <h2><span lang="en">Jira</span> &amp; Trello</h2>
   <p style="text-align:center"><span class="tag">3.4 Aufgaben im Blick behalten</span></p>
 
   <h3>Die 4 wichtigsten Ticket-Typen</h3>
   <section class="grid">
     <article class="card" style="--c:var(--c4)">
-      <h2><span class="badge epic">Epic</span></h2>
+      <h4><span class="badge epic"><span lang="en">Epic</span></span></h4>
       <ul class="plain"><li>Das <span class="hl">riesige Themenfeld</span>.</li><li>Z. B. „Online-Banking“</li></ul>
     </article>
     <article class="card" style="--c:var(--c1)">
-      <h2><span class="badge story">Story</span></h2>
-      <ul class="plain"><li>Die konkrete <span class="hl">User Story</span>.</li><li>Z. B. „Passwort zurücksetzen“</li></ul>
+      <h4><span class="badge story">Story</span></h4>
+      <ul class="plain"><li>Die konkrete <span class="hl"><span lang="en">User Story</span></span>.</li><li>Z. B. „Passwort zurücksetzen“</li></ul>
     </article>
     <article class="card" style="--c:var(--c2)">
-      <h2><span class="badge task">Task</span></h2>
+      <h4><span class="badge task">Task</span></h4>
       <ul class="plain"><li>Eine <span class="hl">technische Aufgabe</span> ohne Kundennutzen.</li><li>Z. B. „Server einrichten“</li></ul>
     </article>
     <article class="card" style="--c:#d94b4b">
-      <h2><span class="badge bug">Bug</span></h2>
+      <h4><span class="badge bug">Bug</span></h4>
       <ul class="plain"><li>Ein <span class="hl">Software-Fehler</span>, der repariert werden muss.</li><li>Z. B. „Button reagiert nicht“</li></ul>
     </article>
   </section>
 
-  <h3>So sieht ein Ticket aus</h3>
+  <h2>So sieht ein Ticket aus</h2>
   <div class="ticket">
     <div class="th"><span class="badge story">Story</span> Passwort per E-Mail-Link zurücksetzen</div>
     <dl class="tb">
       <dt>Typ</dt><dd>Story</dd>
-      <dt>Story Points</dt><dd><span class="sp">3</span></dd>
+      <dt><span lang="en">Story Points</span></dt><dd><span class="sp">3</span></dd>
       <dt>Status</dt><dd><span class="pill">In Progress</span></dd>
       <dt>Zugewiesen an</dt><dd><span class="av">S</span>Sarah (Entwicklerin)</dd>
     </dl>
@@ -480,16 +498,16 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
 
   <section class="grid">
     <article class="card" style="--c:var(--c3)">
-      <h2><span class="num">1</span>Jira</h2>
+      <h3><span class="num">1</span><span lang="en">Jira</span></h3>
       <ul>
-        <li>Verwaltet Tickets in <span class="hl">Backlog, Board und Sprint</span>.</li>
+        <li>Verwaltet Tickets in <span class="hl"><span lang="en">Backlog</span>, Board und <span lang="en">Sprint</span></span>.</li>
       </ul>
     </article>
     <article class="card" style="--c:var(--c5)">
-      <h2><span class="num">2</span>Trello</h2>
+      <h3><span class="num">2</span>Trello</h3>
       <ul>
-        <li>Die <span class="hl">einfache Alternative</span> zu Jira.</li>
-        <li>Perfekt für <span class="hl">kleine Teams</span> mit einfachen Kanban-Boards.</li>
+        <li>Die <span class="hl">einfache Alternative</span> zu <span lang="en">Jira</span>.</li>
+        <li>Perfekt für <span class="hl">kleine Teams</span> mit einfachen <span lang="en">Kanban</span>-Boards.</li>
       </ul>
     </article>
   </section>
@@ -497,8 +515,8 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
 </main>
 
 <!-- ============ SEITE 6 ============ -->
-<main class="sheet">
-  <h1>Jira + Confluence</h1>
+<section aria-label="Seite 6" class="sheet">
+  <h2><span lang="en">Jira</span> + <span lang="en">Confluence</span></h2>
   <p style="text-align:center"><span class="tag">3.4 Das Zusammenspiel</span></p>
 
   <h3>Beispiel-Ticket zur Passwort-Story</h3>
@@ -508,36 +526,36 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
     <div class="r">Titel</div><div>Passwort per E-Mail-Link zurücksetzen</div>
     <div class="r">Beschreibung</div><div>„Als registrierter Kunde möchte ich mein Passwort über einen Link per E-Mail zurücksetzen können, damit …“</div>
     <div class="r">Akzeptanzkriterien</div><div>E-Mail innerhalb von 60 Sekunden, Link nach 30 Minuten ungültig, neutrale Meldung bei unbekannter Adresse</div>
-    <div class="r">Story Points</div><div><span class="sp">3</span> (Beispielwert)</div>
+    <div class="r"><span lang="en">Story Points</span></div><div><span class="sp">3</span> (Beispielwert)</div>
     <div class="r">Status</div><div><span class="pill">In Progress</span></div>
     <div class="r">Zugewiesen an</div><div>eine Entwicklerin aus dem Team</div>
   </div>
 
-  <h3>Jira und Confluence zusammen</h3>
-  <svg class="diagram" viewBox="0 0 700 220" role="img" aria-label="Jira beantwortet Was ist zu tun, Confluence beantwortet Warum und wie genau. Beide sind per Link verbunden.">
+  <h3><span lang="en">Jira</span> und <span lang="en">Confluence</span> zusammen</h3>
+  <svg class="diagram" viewbox="0 0 700 220" role="img" aria-label="Jira beantwortet Was ist zu tun, Confluence beantwortet Warum und wie genau. Beide sind per Link verbunden.">
     <defs>
-      <marker id="am2" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
-        <path d="M0,0 L10,5 L0,10 z" fill="#e8639a"/>
+      <marker id="am2" markerwidth="10" markerheight="10" refx="8" refy="5" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="#e8639a"></path>
       </marker>
     </defs>
-    <rect x="10" y="20" width="250" height="150" rx="18" fill="#cfe2fb" stroke="#6fa8e8" stroke-width="3"/>
+    <rect x="10" y="20" width="250" height="150" rx="18" fill="#cfe2fb" stroke="#6fa8e8" stroke-width="3"></rect>
     <text class="t" x="135" y="52" text-anchor="middle" style="font-size:20px">Jira</text>
     <text x="135" y="86" text-anchor="middle">Was ist zu tun,</text>
     <text x="135" y="110" text-anchor="middle">und wie weit sind wir?</text>
     <text class="s" x="135" y="148" text-anchor="middle">Tickets · Backlog · Board</text>
-    <rect x="440" y="20" width="250" height="150" rx="18" fill="#d7efd9" stroke="#7bc47f" stroke-width="3"/>
+    <rect x="440" y="20" width="250" height="150" rx="18" fill="#d7efd9" stroke="#7bc47f" stroke-width="3"></rect>
     <text class="t" x="565" y="52" text-anchor="middle" style="font-size:20px">Confluence</text>
     <text x="565" y="86" text-anchor="middle">Warum, und wie genau</text>
     <text x="565" y="110" text-anchor="middle">ist es beschrieben?</text>
     <text class="s" x="565" y="148" text-anchor="middle">Seiten · Wissen · Regeln</text>
-    <line x1="264" y1="76" x2="436" y2="76" stroke="#e8639a" stroke-width="3" marker-end="url(#am2)"/>
+    <line x1="264" y1="76" x2="436" y2="76" stroke="#e8639a" stroke-width="3" marker-end="url(#am2)"></line>
     <text class="s" x="350" y="64" text-anchor="middle">Ticket → Seite</text>
-    <line x1="436" y1="126" x2="264" y2="126" stroke="#e8639a" stroke-width="3" marker-end="url(#am2)"/>
+    <line x1="436" y1="126" x2="264" y2="126" stroke="#e8639a" stroke-width="3" marker-end="url(#am2)"></line>
     <text class="s" x="350" y="152" text-anchor="middle">Seite zeigt Tickets</text>
     <text x="350" y="200" text-anchor="middle">🔗 beide Tools lassen sich per Link verbinden</text>
   </svg>
   <div class="rule">
-    <strong>Das Zusammenspiel:</strong> Jira zeigt, <span class="hl">was zu tun ist</span>. Confluence erklärt, <span class="hl">wie es im Detail funktioniert</span>. Ein Ticket verweist per Link auf die ausführliche Seite, und eine Seite kann zugehörige Tickets anzeigen.
+    <strong>Das Zusammenspiel:</strong> <span lang="en">Jira</span> zeigt, <span class="hl">was zu tun ist</span>. <span lang="en">Confluence</span> erklärt, <span class="hl">wie es im Detail funktioniert</span>. Ein Ticket verweist per Link auf die ausführliche Seite, und eine Seite kann zugehörige Tickets anzeigen.
   </div>
 
   <p style="margin:14px 0 0"><strong>Workflow eines Tickets</strong> (Abfolge der Status, z. B.):</p>
@@ -548,30 +566,30 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
     <span class="st" style="--c:var(--c1)">Done</span>
   </div>
   <div class="pageno">Seite 6 / 8</div>
-</main>
+</section>
 
 <!-- ============ SEITE 7 ============ -->
-<main class="sheet">
-  <h1>Das passende Tool</h1>
+<section aria-label="Seite 7" class="sheet">
+  <h2>Das passende Tool</h2>
   <p style="text-align:center"><span class="tag">3.5 Wie wählt man ein Tool aus?</span></p>
 
   <h3>Die 3 goldenen Regeln</h3>
   <section class="grid three">
     <article class="card" style="--c:var(--c1)">
-      <h2><span class="big">🌱</span>Lieber klein anfangen</h2>
+      <h4><span class="big">🌱</span>Lieber klein anfangen</h4>
       <ul class="plain"><li>Ein <span class="hl">einfaches Board, das alle nutzen</span>, ist besser als ein überladenes Riesen-Tool.</li></ul>
     </article>
     <article class="card" style="--c:var(--c2)">
-      <h2><span class="big">🔗</span>Bestehende Tools nutzen</h2>
+      <h4><span class="big">🔗</span>Bestehende Tools nutzen</h4>
       <ul class="plain"><li>Nutzt die Firma schon <span class="hl">Microsoft oder Atlassian</span>? Dann bleib im selben System.</li></ul>
     </article>
     <article class="card" style="--c:var(--c4)">
-      <h2><span class="big">🔒</span>Daten schützen</h2>
+      <h4><span class="big">🔒</span>Daten schützen</h4>
       <ul class="plain"><li>Kläre vorab, <span class="hl">wo die Daten gespeichert</span> werden (Datenschutz).</li></ul>
     </article>
   </section>
 
-  <h3>Auswahl-Check</h3>
+  <h2>Auswahl-Check</h2>
   <p class="cap">Bei der Auswahl zählen:</p>
   <div class="chips">
     <span style="--c:var(--c1)">Teamgröße</span>
@@ -582,18 +600,18 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
     <span style="--c:var(--c6)">Datenschutz</span>
   </div>
 
-  <h3>Typische Fehler</h3>
+  <h2>Typische Fehler</h2>
   <section class="grid three">
     <article class="card" style="--c:var(--c6)">
-      <h2><span class="big">🕸️</span>Veraltet</h2>
+      <h3><span class="big">🕸️</span>Veraltet</h3>
       <ul class="plain"><li>Seiten und Tickets sind <span class="hl">veraltet</span>, und niemand traut ihnen mehr.</li></ul>
     </article>
     <article class="card" style="--c:var(--c3)">
-      <h2><span class="big">📝</span>Zu viel Pflicht</h2>
+      <h3><span class="big">📝</span>Zu viel Pflicht</h3>
       <ul class="plain"><li>Zu viele <span class="hl">Pflichtfelder und Status</span> – die Pflege nervt.</li></ul>
     </article>
     <article class="card" style="--c:var(--c4)">
-      <h2><span class="big">🧩</span>Wildwuchs</h2>
+      <h3><span class="big">🧩</span>Wildwuchs</h3>
       <ul class="plain"><li>Jede Person nutzt <span class="hl">ein anderes Tool</span>, Infos stehen nur im Chat.</li></ul>
     </article>
   </section>
@@ -605,36 +623,36 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
 </main>
 
 <!-- ============ SEITE 8 ============ -->
-<main class="sheet">
-  <h1>Zusammenfassung &amp; Glossar</h1>
+<section aria-label="Seite 8" class="sheet">
+  <h2>Zusammenfassung &amp; Glossar</h2>
   <p style="text-align:center"><span class="tag">Modul 3</span></p>
 
   <section class="grid one">
     <article class="card" style="--c:var(--c5)">
-      <h2>Zusammenfassung Modul 3</h2>
+      <h3>Zusammenfassung Modul 3</h3>
       <ul>
         <li>Tools machen Arbeit <span class="hl">sichtbar</span>, ersetzen aber <span class="hl">keine agilen Methoden</span>.</li>
         <li>Jedes Tool hat einen Zweck:
-          <br>• <b style="all:unset;font-family:var(--font-title)">Jira/Trello</b>: Tickets (Epic, Story, Task, Bug) in Backlog, Board und Sprint
-          <br>• <b style="all:unset;font-family:var(--font-title)">Confluence/Notion</b>: Wissen
+          <br>• <b style="all:unset;font-family:var(--font-title)"><span lang="en">Jira</span>/Trello</b>: Tickets (<span lang="en">Epic</span>, Story, Task, Bug) in <span lang="en">Backlog</span>, Board und <span lang="en">Sprint</span>
+          <br>• <b style="all:unset;font-family:var(--font-title)"><span lang="en">Confluence</span>/Notion</b>: Wissen
           <br>• <b style="all:unset;font-family:var(--font-title)">Slack oder Teams</b>: schnelle Fragen
           <br>• <b style="all:unset;font-family:var(--font-title)">Miro</b>: gemeinsames Skizzieren / digitale Workshops</li>
-        <li><span class="hl">Verlinke Jira und Confluence</span>, um Aufgaben direkt mit Wissen zu verknüpfen.</li>
+        <li><span class="hl">Verlinke <span lang="en">Jira</span> und <span lang="en">Confluence</span></span>, um Aufgaben direkt mit Wissen zu verknüpfen.</li>
         <li>Bei der Auswahl zählen <span class="hl">Teamgröße, Kosten, bestehende Tools, Einarbeitung, Integrationen und Datenschutz</span>. Lieber klein anfangen.</li>
       </ul>
     </article>
   </section>
 
-  <h3>Glossar Modul 3</h3>
+  <h2>Glossar Modul 3</h2>
   <div class="gloss">
     <div style="--c:var(--c1)"><b>Bug:</b> Fehler in einer Software.</div>
-    <div style="--c:var(--c2)"><b>Confluence / Notion:</b> Wiki-Tool zum gemeinsamen Dokumentieren.</div>
-    <div style="--c:var(--c3)"><b>Epic:</b> Große Anforderung, die in mehrere User Stories zerlegt wird.</div>
+    <div style="--c:var(--c2)"><b><span lang="en">Confluence</span> / Notion:</b> Wiki-Tool zum gemeinsamen Dokumentieren.</div>
+    <div style="--c:var(--c3)"><b><span lang="en">Epic</span>:</b> Große Anforderung, die in mehrere <span lang="en">User Stories</span> zerlegt wird.</div>
     <div style="--c:var(--c4)"><b>Git:</b> System zum Speichern und Verwalten von Programmcode.</div>
-    <div style="--c:var(--c5)"><b>Integration:</b> Die Verknüpfung von zwei Tools (z. B. Jira und Confluence).</div>
-    <div style="--c:var(--c6)"><b>Jira/Trello:</b> Tool zur Verwaltung von Tickets, Backlogs und Boards.</div>
+    <div style="--c:var(--c5)"><b>Integration:</b> Die Verknüpfung von zwei Tools (z. B. <span lang="en">Jira</span> und <span lang="en">Confluence</span>).</div>
+    <div style="--c:var(--c6)"><b><span lang="en">Jira</span>/Trello:</b> Tool zur Verwaltung von Tickets, Backlogs und Boards.</div>
     <div style="--c:var(--c1)"><b>Miro:</b> Digitales Whiteboard für Online-Workshops.</div>
-    <div style="--c:var(--c2)"><b>Space:</b> Ein Ordnerbereich in Confluence für ein bestimmtes Projekt.</div>
+    <div style="--c:var(--c2)"><b>Space:</b> Ein Ordnerbereich in <span lang="en">Confluence</span> für ein bestimmtes Projekt.</div>
     <div style="--c:var(--c3)"><b>Task:</b> Eine rein technische Aufgabe ohne direkten Kundennutzen.</div>
     <div style="--c:var(--c4)"><b>Ticket (Issue):</b> Ein digitaler Zettel für eine Aufgabe oder einen Fehler im Tool.</div>
     <div style="--c:var(--c5)"><b>Versionshistorie:</b> Liste früherer Fassungen einer Seite.</div>
