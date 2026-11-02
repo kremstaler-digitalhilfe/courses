@@ -19,8 +19,8 @@
 }
 *{box-sizing:border-box}
 body{margin:0;padding:16px;background:var(--page);color:var(--ink);
-  font-family:var(--font-body);font-size:18px;line-height:1.4}
-.sheet{position:relative;max-width:794px;min-height:1050px;margin:0 auto 24px;padding:32px 28px 52px;border-radius:6px;
+  font-family:var(--font-body);font-size:18px;line-height:1.4;max-width:100%;overflow-x:clip}
+.sheet{position:relative;width:100%;max-width:min(794px,100%);min-height:1050px;margin:0 auto 24px;padding:32px 28px 52px;border-radius:6px;box-sizing:border-box;
   background-color:var(--paper);
   background-image:linear-gradient(var(--grid) 1px,transparent 1px),
                    linear-gradient(90deg,var(--grid) 1px,transparent 1px);
@@ -32,12 +32,12 @@ h3{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px;display:inl
   background:var(--accent-soft);padding:3px 14px;border-radius:8px}
 .tag{display:inline-block;background:var(--accent-soft);padding:4px 14px;
   border-radius:8px;font-family:var(--font-title);font-size:.95rem}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));
   gap:18px;margin-top:20px}
 .grid.one{grid-template-columns:1fr}
 .card{--c:var(--c1);position:relative;border:2px solid var(--c);
   border-radius:var(--radius);padding:14px 16px;
-  background:color-mix(in srgb,var(--c) 5%,white);overflow-wrap:anywhere}
+  background:color-mix(in srgb,var(--c) 5%,white);overflow-wrap:anywhere;max-width:100%;min-width:0}
 .card::before{content:"";position:absolute;top:-9px;right:18px;width:54px;height:16px;
   background:color-mix(in srgb,var(--c) 45%,white);opacity:.8;transform:rotate(4deg);border-radius:2px}
 .card h2{margin:0 0 4px;font-family:var(--font-title);font-size:1.05rem}
@@ -53,9 +53,15 @@ h3{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px;display:inl
 .code{display:inline-block;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem;
   background:#fff;border:1.5px dashed var(--c,var(--accent));border-radius:8px;padding:1px 8px;
   margin:1px 0;word-break:break-word}
-pre.codeblock{--c:var(--c2);margin:10px 0 0;padding:12px 16px;background:#fff;
-  border:2px dashed var(--c);border-radius:var(--radius);
-  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem;line-height:1.5;overflow-x:auto}
+pre.codeblock{--c:var(--c2);display:block;width:100%;max-width:100%;box-sizing:border-box;position:relative;
+  margin:36px 0 8px;padding:32px 28px 24px;background:#fff;min-height:6.5rem;
+  border:2px dashed var(--c);border-radius:var(--radius);overflow:visible;
+  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem;line-height:1.6;
+  white-space:pre-wrap;word-break:normal;overflow-wrap:anywhere}
+pre.codeblock[data-lang]::after{content:attr(data-lang);position:absolute;top:-14px;left:18px;
+  background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:1.5px solid var(--c);
+  font-family:var(--font-title);font-size:.78rem;letter-spacing:.05em;
+  padding:3px 14px;border-radius:6px;line-height:1.2;white-space:nowrap}
 .cloud{display:inline-block;padding:8px 16px;border:2px dashed var(--accent);
   border-radius:40px;background:#fff;font-family:var(--font-hand);font-size:1.2rem;margin:4px 4px 0 0}
 .note{border:2px solid var(--accent);border-radius:var(--radius);
@@ -90,7 +96,7 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
 .orn .star{width:26px;height:26px}
 .orn .heart{width:28px;height:28px;margin-top:10px}
 .sheet h1{padding:0 84px}
-@media (max-width:640px){.orn{display:none}.sheet h1{padding:0}}
+@media (max-width:640px){body{padding:10px}.orn{display:none}.sheet{padding:22px 14px 40px}.sheet h1{padding:0}}
 @media print{
   @page{size:A4;margin:10mm}
   body{background:#fff;padding:0}
@@ -110,6 +116,10 @@ a:focus:not(:focus-visible){outline:none}
 .skip-link:focus,.skip-link:focus-visible{transform:translateY(0);outline:3px solid var(--link);outline-offset:2px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+
+
+
 
 
 
@@ -218,7 +228,7 @@ a:focus:not(:focus-visible){outline:none}
 </main>
 
 <!-- ============ SEITE 2 ============ -->
-<main class="sheet">
+<section class="sheet" aria-label="Seite 2">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
@@ -226,7 +236,7 @@ a:focus:not(:focus-visible){outline:none}
 </svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
 
-  <h1>Die Standard-Tags</h1>
+  <h2>Die Standard-Tags</h2>
   <p style="text-align:center"><span class="tag">Inhalte darstellen</span></p>
 
   <p style="text-align:center;margin:14px 0 0">So sieht ein Element aus:</p>
@@ -305,10 +315,10 @@ a:focus:not(:focus-visible){outline:none}
 &lt;/ul&gt;</pre>
   <p style="margin:4px 0 0;font-family:var(--font-hand);font-size:1.15rem">↑ Beispiel für eine ungeordnete Liste</p>
   <div class="pageno">Seite 2 / 5</div>
-</main>
+</section>
 
 <!-- ============ SEITE 3 ============ -->
-<main class="sheet">
+<section class="sheet" aria-label="Seite 3">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
@@ -316,7 +326,7 @@ a:focus:not(:focus-visible){outline:none}
 </svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
 
-  <h1>Die Grundstruktur</h1>
+  <h2>Die Grundstruktur</h2>
   <p style="text-align:center"><span class="tag">2. HTML-Grundstruktur</span></p>
 
   <p style="margin:16px 0 0">Jede HTML-Seite braucht ein <span class="hl">festes Grundgerüst</span>, damit der Browser die Inhalte korrekt einliest:</p>
@@ -363,10 +373,10 @@ a:focus:not(:focus-visible){outline:none}
     <span class="code">&lt;footer&gt;</span> sind wichtig für die Barrierefreiheit – mehr dazu auf der nächsten Seite.
   </div>
   <div class="pageno">Seite 3 / 5</div>
-</main>
+</section>
 
 <!-- ============ SEITE 4 ============ -->
-<main class="sheet">
+<section class="sheet" aria-label="Seite 4">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
@@ -374,7 +384,7 @@ a:focus:not(:focus-visible){outline:none}
 </svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
 
-  <h1>Barrierefreiheit</h1>
+  <h2>Barrierefreiheit</h2>
   <p style="text-align:center"><span class="tag">3. Schlechte Struktur &amp; Screenreader</span></p>
 
   <p style="margin:16px 0 0">Blinde oder sehbehinderte Menschen nutzen <span class="hl">Screenreader</span>, die Webseiteninhalte vorlesen.
@@ -429,10 +439,10 @@ a:focus:not(:focus-visible){outline:none}
     </ul>
   </div>
   <div class="pageno">Seite 4 / 5</div>
-</main>
+</section>
 
 <!-- ============ SEITE 5 ============ -->
-<main class="sheet">
+<section class="sheet" aria-label="Seite 5">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
@@ -440,7 +450,7 @@ a:focus:not(:focus-visible){outline:none}
 </svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
 
-  <h1>Manuelles Testen</h1>
+  <h2>Manuelles Testen</h2>
   <p style="text-align:center"><span class="tag">4. Barrierefreiheit prüfen</span></p>
 
   <p style="margin:16px 0 0">Automatische Prüfprogramme finden <span class="hl">längst nicht jeden Fehler</span>. Deshalb wird manuell getestet:</p>
@@ -493,7 +503,7 @@ a:focus:not(:focus-visible){outline:none}
 
   <div class="banner">Struktur · Bedeutung · Barrierefreiheit</div>
   <div class="pageno">Seite 5 / 5</div>
-</main>
+</section>
 
 </body>
 </html>

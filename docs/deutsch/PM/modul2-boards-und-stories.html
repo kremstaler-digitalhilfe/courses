@@ -19,8 +19,8 @@
 }
 *{box-sizing:border-box}
 body{margin:0;padding:16px;background:var(--page);color:var(--ink);
-  font-family:var(--font-body);font-size:18px;line-height:1.4}
-.sheet{position:relative;max-width:794px;min-height:1050px;margin:0 auto 24px;padding:32px 28px 52px;border-radius:6px;
+  font-family:var(--font-body);font-size:18px;line-height:1.4;max-width:100%;overflow-x:clip}
+.sheet{position:relative;width:100%;max-width:min(794px,100%);min-height:1050px;margin:0 auto 24px;padding:32px 28px 52px;border-radius:6px;box-sizing:border-box;
   background-color:var(--paper);
   background-image:linear-gradient(var(--grid) 1px,transparent 1px),
                    linear-gradient(90deg,var(--grid) 1px,transparent 1px);
@@ -32,13 +32,13 @@ h3{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px;display:inl
   background:var(--accent-soft);padding:3px 14px;border-radius:8px}
 .tag{display:inline-block;background:var(--accent-soft);padding:4px 14px;
   border-radius:8px;font-family:var(--font-title);font-size:.95rem}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));
   gap:18px;margin-top:20px}
 .grid.one{grid-template-columns:1fr}
-.grid.three{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.grid.three{grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr))}
 .card{--c:var(--c1);position:relative;border:2px solid var(--c);
   border-radius:var(--radius);padding:14px 16px;
-  background:color-mix(in srgb,var(--c) 5%,white);overflow-wrap:anywhere}
+  background:color-mix(in srgb,var(--c) 5%,white);overflow-wrap:anywhere;max-width:100%;min-width:0}
 .card::before{content:"";position:absolute;top:-9px;right:18px;width:54px;height:16px;
   background:color-mix(in srgb,var(--c) 45%,white);opacity:.8;transform:rotate(4deg);border-radius:2px}
 .card h2{margin:0 0 4px;font-family:var(--font-title);font-size:1.05rem}
@@ -163,13 +163,13 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
 /* ---- Vergleichstabelle ---- */
 .table{display:grid;gap:6px;margin-top:16px}
 .table.t3{grid-template-columns:130px 1fr 1fr}
-.table > div{padding:8px 10px;border-radius:10px;border:2px solid var(--ink);background:#fff;font-size:1rem}
+.table > div{min-width:0;overflow-wrap:anywhere;padding:8px 10px;border-radius:10px;border:2px solid var(--ink);background:#fff;font-size:1rem}
 .table .h{background:var(--accent-soft);border-color:var(--accent);font-family:var(--font-title);font-size:.9rem;text-align:center}
 .table .r{font-family:var(--font-title);font-size:.95rem;background:color-mix(in srgb,var(--c4) 15%,white);border-color:var(--c4)}
 .table .sc{background:color-mix(in srgb,var(--c3) 16%,white);border-color:var(--c3)}
 .table .kb{background:color-mix(in srgb,var(--c2) 16%,white);border-color:var(--c2)}
 /* ---- Glossar ---- */
-.gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px 18px;margin-top:14px}
+.gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:10px 18px;margin-top:14px}
 .gloss div{padding:8px 12px;border-left:5px solid var(--c);border-radius:6px;background:color-mix(in srgb,var(--c) 5%,white);font-size:1rem}
 .gloss b{font-family:var(--font-title);font-size:.95rem}
 /* === Ornements SVG (carnet, crayons, étoiles...) === */
@@ -183,7 +183,7 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
 .orn .star{width:26px;height:26px}
 .orn .heart{width:28px;height:28px;margin-top:10px}
 .sheet h1{padding:0 84px}
-@media (max-width:640px){.orn{display:none}.sheet h1{padding:0}}
+@media (max-width:640px){body{padding:10px}.orn{display:none}.sheet{padding:22px 14px 40px}.sheet h1{padding:0}}
 @media print{
   @page{size:A4;margin:10mm}
   body{background:#fff;padding:0}
@@ -203,6 +203,10 @@ a:focus:not(:focus-visible){outline:none}
 .skip-link:focus,.skip-link:focus-visible{transform:translateY(0);outline:3px solid var(--link);outline-offset:2px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+
+
+
 
 
 
@@ -299,14 +303,14 @@ a:focus:not(:focus-visible){outline:none}
 </main>
 
 <!-- ============ SEITE 2 ============ -->
-<main class="sheet">
+<section class="sheet" aria-label="Seite 2">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
   <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
 </svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
-  <h1>Scrum vs. <span lang="en">Kanban</span> Board</h1>
+  <h2>Scrum vs. <span lang="en">Kanban</span> Board</h2>
   <p style="text-align:center"><span class="tag">Zwei Ansätze, fast gleiches Aussehen</span></p>
 
   <section class="grid">
@@ -401,7 +405,7 @@ a:focus:not(:focus-visible){outline:none}
     <text x="530" y="236" text-anchor="middle" class="s">Engpässe sofort sehen</text>
   </svg>
 
-  <div class="table t3" role="table" aria-label="Scrum Board und Kanban Board im Vergleich">
+  <div class="table t3" role="group" aria-label="Scrum Board und Kanban Board im Vergleich">
     <div></div><div class="h">Scrum Board</div><div class="h"><span lang="en">Kanban</span> Board</div>
     <div class="r">Zeit</div><div class="sc">Zeitlich begrenzt: ein <span lang="en">Sprint</span> (z. B. 2 Wochen)</div><div class="kb">Kontinuierlicher Fluss, keine festen Zeitfenster</div>
     <div class="r">Planung</div><div class="sc">Zu Beginn fest: <span lang="en">Sprint</span> <span lang="en">Backlog</span></div><div class="kb">Neue Aufgaben rücken fortlaufend nach</div>
@@ -412,17 +416,17 @@ a:focus:not(:focus-visible){outline:none}
     <strong><span lang="en">Kanban</span> steckt auch in Scrum:</strong> Fast jedes Scrum-Team nutzt für die tägliche Arbeit ein <span class="hl"><span lang="en">Sprint</span> Board</span>, das genau nach dem <span class="hl"><span lang="en">Kanban</span>-Prinzip</span> funktioniert (Spalten von To-Do bis Done). Wer <span lang="en">Kanban</span> versteht, kann also <span class="hl">sofort auch ein Scrum Board lesen und bedienen</span>.
   </div>
   <div class="pageno">Seite 2 / 12</div>
-</main>
+</section>
 
 <!-- ============ SEITE 3 ============ -->
-<main class="sheet">
+<section class="sheet" aria-label="Seite 3">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
   <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
 </svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
-  <h1><span lang="en">Kanban</span> im Detail</h1>
+  <h2><span lang="en">Kanban</span> im Detail</h2>
   <p style="text-align:center"><span class="tag">2.1 Das Board und die WIP-Limits</span></p>
 
   <h3><span lang="en">Kanban</span></h3>
@@ -484,17 +488,17 @@ a:focus:not(:focus-visible){outline:none}
     </article>
   </section>
   <div class="pageno">Seite 3 / 12</div>
-</main>
+</section>
 
 <!-- ============ SEITE 4 ============ -->
-<main class="sheet">
+<section class="sheet" aria-label="Seite 4">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
   <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
 </svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
-  <h1>WIP-Limits</h1>
+  <h2>WIP-Limits</h2>
   <p style="text-align:center"><span class="tag">2.1 Arbeit begrenzen</span></p>
 
   <h3>Warum ein WIP-Limit?</h3>
@@ -564,17 +568,17 @@ a:focus:not(:focus-visible){outline:none}
     <strong>Beispiel:</strong> Das Limit für „In Bearbeitung“ ist <span class="hl">3</span>. Sind dort 3 Aufgaben, darf niemand eine <span class="hl">4. Aufgabe beginnen</span>. Erst muss eine fertige Aufgabe in die nächste Spalte wandern.
   </div>
   <div class="pageno">Seite 4 / 12</div>
-</main>
+</section>
 
 <!-- ============ SEITE 5 ============ -->
-<main class="sheet">
+<section class="sheet" aria-label="Seite 5">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
   <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
 </svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
-  <h1>Die Hierarchie</h1>
+  <h2>Die Hierarchie</h2>
   <p style="text-align:center"><span class="tag">2.2 Vom Großen zum Kleinen</span></p>
 
   <p class="lead">Große Vorhaben sind <span class="hl">zu riesig, um sie sofort umzusetzen</span>. Deshalb werden sie <span class="hl">schrittweise zerkleinert</span>:</p>
@@ -626,17 +630,17 @@ a:focus:not(:focus-visible){outline:none}
     </article>
   </section>
   <div class="pageno">Seite 5 / 12</div>
-</main>
+</section>
 
 <!-- ============ SEITE 6 ============ -->
-<main class="sheet">
+<section class="sheet" aria-label="Seite 6">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
   <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
 </svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
-  <h1><span lang="en">User Stories</span></h1>
+  <h2><span lang="en">User Stories</span></h2>
   <p style="text-align:center"><span class="tag">2.2 &amp; Akzeptanzkriterien</span></p>
 
   <p class="lead">Eine <span lang="en">User Story</span> beschreibt eine Anforderung <span class="hl">immer aus der Sicht der Nutzerinnen und Nutzer</span>. Sie folgt einem <span class="hl">festen Satzmuster</span>:</p>
@@ -674,17 +678,17 @@ a:focus:not(:focus-visible){outline:none}
     <strong>Merke:</strong> Ohne Akzeptanzkriterien lässt sich nicht prüfen, ob eine Story wirklich fertig ist – sie machen die Story <span class="hl">prüfbar</span>.
   </div>
   <div class="pageno">Seite 6 / 12</div>
-</main>
+</section>
 
 <!-- ============ SEITE 7 ============ -->
-<main class="sheet">
+<section class="sheet" aria-label="Seite 7">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
   <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
 </svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
-  <h1><span lang="en">INVEST</span></h1>
+  <h2><span lang="en">INVEST</span></h2>
   <p style="text-align:center"><span class="tag">2.2 Die Checkliste für gute <span lang="en">User Stories</span></span></p>
 
   <p class="lead">Ob eine <span lang="en">User Story</span> <span class="hl">gut aufgebaut und bereit für die Entwicklung</span> ist, prüft man mit der Eselsbrücke <span class="hl"><span lang="en">INVEST</span></span>:</p>
@@ -728,17 +732,17 @@ a:focus:not(:focus-visible){outline:none}
     </ul>
   </div>
   <div class="pageno">Seite 7 / 12</div>
-</main>
+</section>
 
 <!-- ============ SEITE 8 ============ -->
-<main class="sheet">
+<section class="sheet" aria-label="Seite 8">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
   <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
 </svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
-  <h1>Schätzen</h1>
+  <h2>Schätzen</h2>
   <p style="text-align:center"><span class="tag">2.3 Absolut vs. relativ · Methoden</span></p>
 
   <p class="lead">Teams können den Aufwand für Aufgaben auf <span class="hl">zwei Arten</span> schätzen:</p>
@@ -812,17 +816,17 @@ a:focus:not(:focus-visible){outline:none}
     </article>
   </section>
   <div class="pageno">Seite 8 / 12</div>
-</main>
+</section>
 
 <!-- ============ SEITE 9 ============ -->
-<main class="sheet">
+<section class="sheet" aria-label="Seite 9">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
   <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
 </svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
-  <h1><span lang="en">Story Points</span></h1>
+  <h2><span lang="en">Story Points</span></h2>
   <p style="text-align:center"><span class="tag">2.3 Das relative Maß</span></p>
 
   <div class="rule">
@@ -861,17 +865,17 @@ a:focus:not(:focus-visible){outline:none}
     <strong>Wichtig:</strong> Ein Story Point ist <span class="hl">einheitslos</span> – keine Stunden, sondern ein relatives Maß im Vergleich zu anderen Aufgaben.
   </div>
   <div class="pageno">Seite 9 / 12</div>
-</main>
+</section>
 
 <!-- ============ SEITE 10 ============ -->
-<main class="sheet">
+<section class="sheet" aria-label="Seite 10">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
   <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
 </svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
-  <h1>Fibonacci &amp; Referenz</h1>
+  <h2>Fibonacci &amp; Referenz</h2>
   <p style="text-align:center"><span class="tag">2.3 Womit wird geschätzt?</span></p>
 
   <p class="lead">Geschätzt wird meist mit der <span class="hl">Fibonacci-Folge</span>: <span class="code">1, 2, 3, 5, 8, 13, …</span> – jede Zahl ist die <span class="hl">Summe der beiden vorherigen</span>.</p>
@@ -912,17 +916,17 @@ a:focus:not(:focus-visible){outline:none}
     <span class="cloud">Rechtschreibfehler = 1</span><span class="arrow">≪</span><span class="cloud">Kreditkarten-Schnittstelle = 8</span>
   </div>
   <div class="pageno">Seite 10 / 12</div>
-</main>
+</section>
 
 <!-- ============ SEITE 11 ============ -->
-<main class="sheet">
+<section class="sheet" aria-label="Seite 11">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
   <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
 </svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
-  <h1><span lang="en">Planning Poker</span></h1>
+  <h2><span lang="en">Planning Poker</span></h2>
   <p style="text-align:center"><span class="tag">2.3 Schätzen im Team</span></p>
 
   <p class="lead">Beim <span lang="en">Planning Poker</span> schätzt das Team <span class="hl">gemeinsam mit Spielkarten</span>:</p>
@@ -955,17 +959,17 @@ a:focus:not(:focus-visible){outline:none}
     <strong>Wichtig:</strong> Der größte Nutzen von <span lang="en">Planning Poker</span> liegt im <span class="hl">Gespräch</span>! Unterschiedliche Schätzungen decken <span class="hl">Missverständnisse, fehlendes Wissen oder versteckte Risiken</span> auf.
   </div>
   <div class="pageno">Seite 11 / 12</div>
-</main>
+</section>
 
 <!-- ============ SEITE 12 ============ -->
-<main class="sheet">
+<section class="sheet" aria-label="Seite 12">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
   <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
 </svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
-  <h1>Zusammenfassung &amp; Glossar</h1>
+  <h2>Zusammenfassung &amp; Glossar</h2>
   <p style="text-align:center"><span class="tag">Modul 2</span></p>
 
   <section class="grid one">
@@ -1000,7 +1004,7 @@ a:focus:not(:focus-visible){outline:none}
 
   <div class="banner">Sichtbar machen · Zerkleinern · Gemeinsam schätzen</div>
   <div class="pageno">Seite 12 / 12</div>
-</main>
+</section>
 
 </body>
 </html>

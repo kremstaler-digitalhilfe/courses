@@ -19,8 +19,8 @@
 }
 *{box-sizing:border-box}
 body{margin:0;padding:16px;background:var(--page);color:var(--ink);
-  font-family:var(--font-body);font-size:18px;line-height:1.4}
-.sheet{position:relative;max-width:794px;min-height:1050px;margin:0 auto 24px;padding:32px 28px 52px;border-radius:6px;
+  font-family:var(--font-body);font-size:18px;line-height:1.4;max-width:100%;overflow-x:clip}
+.sheet{position:relative;width:100%;max-width:min(794px,100%);min-height:1050px;margin:0 auto 24px;padding:32px 28px 52px;border-radius:6px;box-sizing:border-box;
   background-color:var(--paper);
   background-image:linear-gradient(var(--grid) 1px,transparent 1px),
                    linear-gradient(90deg,var(--grid) 1px,transparent 1px);
@@ -32,12 +32,12 @@ h3{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px;display:inl
   background:var(--accent-soft);padding:3px 14px;border-radius:8px}
 .tag{display:inline-block;background:var(--accent-soft);padding:4px 14px;
   border-radius:8px;font-family:var(--font-title);font-size:.95rem}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));
   gap:18px;margin-top:20px}
 .grid.one{grid-template-columns:1fr}
 .card{--c:var(--c1);position:relative;border:2px solid var(--c);
   border-radius:var(--radius);padding:14px 16px;
-  background:color-mix(in srgb,var(--c) 5%,white);overflow-wrap:anywhere}
+  background:color-mix(in srgb,var(--c) 5%,white);overflow-wrap:anywhere;max-width:100%;min-width:0}
 .card::before{content:"";position:absolute;top:-9px;right:18px;width:54px;height:16px;
   background:color-mix(in srgb,var(--c) 45%,white);opacity:.8;transform:rotate(4deg);border-radius:2px}
 .card h2{margin:0 0 4px;font-family:var(--font-title);font-size:1.05rem}
@@ -52,9 +52,15 @@ h3{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px;display:inl
 .code{display:inline-block;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem;
   background:#fff;border:1.5px dashed var(--c,var(--accent));border-radius:8px;padding:1px 8px;
   margin:1px 0;word-break:break-word}
-pre.codeblock{--c:var(--c2);margin:10px 0 0;padding:12px 16px;background:#fff;
-  border:2px dashed var(--c);border-radius:var(--radius);
-  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem;line-height:1.6;overflow-x:auto}
+pre.codeblock{--c:var(--c2);display:block;width:100%;max-width:100%;box-sizing:border-box;position:relative;
+  margin:36px 0 8px;padding:32px 28px 24px;background:#fff;min-height:6.5rem;
+  border:2px dashed var(--c);border-radius:var(--radius);overflow:visible;
+  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem;line-height:1.6;
+  white-space:pre-wrap;word-break:normal;overflow-wrap:anywhere}
+pre.codeblock[data-lang]::after{content:attr(data-lang);position:absolute;top:-14px;left:18px;
+  background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:1.5px solid var(--c);
+  font-family:var(--font-title);font-size:.78rem;letter-spacing:.05em;
+  padding:3px 14px;border-radius:6px;line-height:1.2;white-space:nowrap}
 .s,.p,.v{padding:1px 4px;border-radius:5px}
 .s{background:color-mix(in srgb,var(--c1) 35%,white)}
 .p{background:color-mix(in srgb,var(--c2) 35%,white)}
@@ -94,17 +100,17 @@ a.link{color:var(--ink);font-weight:700;text-decoration:underline wavy var(--acc
 .demo{margin-top:12px;font-family:var(--font-hand);font-size:1.15rem}
 .demo .cap{font-family:var(--font-title);font-size:.78rem;text-transform:uppercase;margin-bottom:4px}
 .flexdemo{display:flex;gap:8px;padding:10px;border:2px dashed var(--c5);border-radius:10px;background:#fff}
-.flexdemo i{font-style:normal;flex:1;text-align:center;padding:8px 0;border-radius:8px;color:#fff}
-.flexdemo i:nth-child(1){background:var(--c5)}
-.flexdemo i:nth-child(2){background:var(--c2)}
-.flexdemo i:nth-child(3){background:var(--c4)}
+.flexdemo i{font-style:normal;flex:1;min-width:0;text-align:center;padding:8px 0;border-radius:8px;color:var(--ink);font-weight:700}
+.flexdemo i:nth-child(1){background:color-mix(in srgb,var(--c5) 28%,white)}
+.flexdemo i:nth-child(2){background:color-mix(in srgb,var(--c2) 28%,white)}
+.flexdemo i:nth-child(3){background:color-mix(in srgb,var(--c4) 28%,white)}
 .griddemo{display:grid;grid-template-columns:1fr 2fr;grid-template-rows:auto auto auto;gap:6px;
   padding:10px;border:2px dashed var(--c6);border-radius:10px;background:#fff;text-align:center}
-.griddemo i{font-style:normal;padding:8px 0;border-radius:8px;color:#fff}
-.griddemo .h{grid-column:1 / 3;background:var(--c6)}
-.griddemo .sb{background:var(--c3)}
-.griddemo .m{background:var(--c2)}
-.griddemo .f{grid-column:1 / 3;background:var(--c4)}
+.griddemo i{font-style:normal;padding:8px 0;border-radius:8px;color:var(--ink);font-weight:700}
+.griddemo .h{grid-column:1 / 3;background:color-mix(in srgb,var(--c6) 28%,white)}
+.griddemo .sb{background:color-mix(in srgb,var(--c3) 28%,white)}
+.griddemo .m{background:color-mix(in srgb,var(--c2) 28%,white)}
+.griddemo .f{grid-column:1 / 3;background:color-mix(in srgb,var(--c4) 28%,white)}
 
 /* === Ornements SVG (carnet, crayons, étoiles...) === */
 .sheet{position:relative}
@@ -117,7 +123,7 @@ a.link{color:var(--ink);font-weight:700;text-decoration:underline wavy var(--acc
 .orn .star{width:26px;height:26px}
 .orn .heart{width:28px;height:28px;margin-top:10px}
 .sheet h1{padding:0 84px}
-@media (max-width:640px){.orn{display:none}.sheet h1{padding:0}}
+@media (max-width:640px){body{padding:10px}.orn{display:none}.sheet{padding:22px 14px 40px}.sheet h1{padding:0}}
 @media print{
   @page{size:A4;margin:10mm}
   body{background:#fff;padding:0}
@@ -137,6 +143,10 @@ a:focus:not(:focus-visible){outline:none}
 .skip-link:focus,.skip-link:focus-visible{transform:translateY(0);outline:3px solid var(--link);outline-offset:2px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+
+
+
 
 
 
@@ -249,7 +259,7 @@ a:focus:not(:focus-visible){outline:none}
 </main>
 
 <!-- ============ SEITE 2 ============ -->
-<main class="sheet">
+<section class="sheet" aria-label="Seite 2">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
@@ -257,7 +267,7 @@ a:focus:not(:focus-visible){outline:none}
 </svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
 
-  <h1>CSS einbinden</h1>
+  <h2>CSS einbinden</h2>
   <p style="text-align:center"><span class="tag">2. Wie kommt CSS in die Website?</span></p>
 
   <p style="margin:16px 0 0">Es gibt <span class="hl">drei Wege</span>, CSS einzubinden. Der beste und wichtigste Weg ist die <span class="hl">externe Datei</span>.</p>
@@ -324,10 +334,10 @@ a:focus:not(:focus-visible){outline:none}
     </article>
   </section>
   <div class="pageno">Seite 2 / 6</div>
-</main>
+</section>
 
 <!-- ============ SEITE 3 ============ -->
-<main class="sheet">
+<section class="sheet" aria-label="Seite 3">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
@@ -335,7 +345,7 @@ a:focus:not(:focus-visible){outline:none}
 </svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
 
-  <h1>CSS-Grundlagen</h1>
+  <h2>CSS-Grundlagen</h2>
   <p style="text-align:center"><span class="tag">3. Die wichtigsten Eigenschaften</span></p>
 
   <section class="grid">
@@ -363,11 +373,11 @@ a:focus:not(:focus-visible){outline:none}
 
   <div class="bm">
     <div class="bm-margin">
-      <span class="lbl" style="color:color-mix(in srgb,var(--c3) 60%,black)">margin · Außenabstand</span>
+      <span class="lbl" style="color:color-mix(in srgb,var(--c3) 35%,#14141f)">margin · Außenabstand</span>
       <div class="bm-border">
-        <span class="lbl" style="color:var(--c2)">border · Rahmen</span>
+        <span class="lbl" style="color:color-mix(in srgb,var(--c2) 35%,#14141f)">border · Rahmen</span>
         <div class="bm-padding">
-          <span class="lbl" style="color:color-mix(in srgb,var(--c1) 60%,black)">padding · Innenabstand</span>
+          <span class="lbl" style="color:color-mix(in srgb,var(--c1) 35%,#14141f)">padding · Innenabstand</span>
           <div class="bm-content">Text / Inhalt</div>
         </div>
       </div>
@@ -389,10 +399,10 @@ a:focus:not(:focus-visible){outline:none}
     </article>
   </section>
   <div class="pageno">Seite 3 / 6</div>
-</main>
+</section>
 
 <!-- ============ SEITE 4 ============ -->
-<main class="sheet">
+<section class="sheet" aria-label="Seite 4">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
@@ -400,7 +410,7 @@ a:focus:not(:focus-visible){outline:none}
 </svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
 
-  <h1>Flexbox</h1>
+  <h2>Flexbox</h2>
   <p style="text-align:center"><span class="tag">Positionierung · 1-dimensional</span></p>
 
   <section class="grid one">
@@ -459,10 +469,10 @@ a:focus:not(:focus-visible){outline:none}
     <a class="link" href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank" rel="noopener noreferrer">css-tricks.com/…/a-guide-to-flexbox<span class="sr-only"> (öffnet in neuem Tab)</span></a>
   </div>
   <div class="pageno">Seite 4 / 6</div>
-</main>
+</section>
 
 <!-- ============ SEITE 5 ============ -->
-<main class="sheet">
+<section class="sheet" aria-label="Seite 5">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
@@ -470,7 +480,7 @@ a:focus:not(:focus-visible){outline:none}
 </svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
 
-  <h1>CSS Grid</h1>
+  <h2>CSS Grid</h2>
   <p style="text-align:center"><span class="tag">Positionierung · 2-dimensional</span></p>
 
   <section class="grid one">
@@ -525,10 +535,10 @@ a:focus:not(:focus-visible){outline:none}
     <span class="hl">Flexbox für die kleinen Details</span> im Inneren (z. B. Logo und Menüpunkte nebeneinander in der Kopfzeile).
   </div>
   <div class="pageno">Seite 5 / 6</div>
-</main>
+</section>
 
 <!-- ============ SEITE 6 ============ -->
-<main class="sheet">
+<section class="sheet" aria-label="Seite 6">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
@@ -536,7 +546,7 @@ a:focus:not(:focus-visible){outline:none}
 </svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
 
-  <h1>CSS &amp; Barrierefreiheit</h1>
+  <h2>CSS &amp; Barrierefreiheit</h2>
   <p style="text-align:center"><span class="tag">4. Barrieren abbauen statt schaffen</span></p>
 
   <p style="margin:16px 0 0">Auch mit CSS kannst du <span class="hl">Barrieren für Nutzer schaffen oder abbauen</span>:</p>
@@ -589,7 +599,7 @@ a:focus:not(:focus-visible){outline:none}
 
   <div class="banner">Gestalten · Anordnen · Zugänglich bleiben</div>
   <div class="pageno">Seite 6 / 6</div>
-</main>
+</section>
 
 </body>
 </html>

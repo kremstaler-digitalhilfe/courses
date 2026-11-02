@@ -19,8 +19,8 @@
 }
 *{box-sizing:border-box}
 body{margin:0;padding:16px;background:var(--page);color:var(--ink);
-  font-family:var(--font-body);font-size:18px;line-height:1.4}
-.sheet{position:relative;max-width:794px;min-height:1050px;margin:0 auto 24px;padding:32px 28px 52px;border-radius:6px;
+  font-family:var(--font-body);font-size:18px;line-height:1.4;max-width:100%;overflow-x:clip}
+.sheet{position:relative;width:100%;max-width:min(794px,100%);min-height:1050px;margin:0 auto 24px;padding:32px 28px 52px;border-radius:6px;box-sizing:border-box;
   background-color:var(--paper);
   background-image:linear-gradient(var(--grid) 1px,transparent 1px),
                    linear-gradient(90deg,var(--grid) 1px,transparent 1px);
@@ -32,13 +32,13 @@ h3{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px;display:inl
   background:var(--accent-soft);padding:3px 14px;border-radius:8px}
 .tag{display:inline-block;background:var(--accent-soft);padding:4px 14px;
   border-radius:8px;font-family:var(--font-title);font-size:.95rem}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));
   gap:18px;margin-top:20px}
 .grid.one{grid-template-columns:1fr}
-.grid.three{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.grid.three{grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr))}
 .card{--c:var(--c1);position:relative;border:2px solid var(--c);
   border-radius:var(--radius);padding:14px 16px;
-  background:color-mix(in srgb,var(--c) 5%,white);overflow-wrap:anywhere}
+  background:color-mix(in srgb,var(--c) 5%,white);overflow-wrap:anywhere;max-width:100%;min-width:0}
 .card::before{content:"";position:absolute;top:-9px;right:18px;width:54px;height:16px;
   background:color-mix(in srgb,var(--c) 45%,white);opacity:.8;transform:rotate(4deg);border-radius:2px}
 .card h2{margin:0 0 4px;font-family:var(--font-title);font-size:1.05rem}
@@ -108,8 +108,8 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
 
 /* ---- Tabellen ---- */
 .table{display:grid;gap:6px;margin-top:16px}
-.table.t2{grid-template-columns:170px 1fr}
-.table > div{padding:8px 10px;border-radius:10px;border:2px solid var(--ink);background:#fff;font-size:1rem}
+.table.t2{grid-template-columns:minmax(0,0.9fr) minmax(0,1.4fr)}
+.table > div{min-width:0;overflow-wrap:anywhere;padding:8px 10px;border-radius:10px;border:2px solid var(--ink);background:#fff;font-size:1rem}
 .table .h{background:var(--accent-soft);border-color:var(--accent);font-family:var(--font-title);font-size:.9rem;text-align:center}
 .table .r{font-family:var(--font-title);font-size:.95rem;background:color-mix(in srgb,var(--c2) 15%,white);border-color:var(--c2)}
 
@@ -121,11 +121,11 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
 .ticket .tb{display:grid;grid-template-columns:140px 1fr;gap:6px 10px;padding:12px 14px;font-size:1rem;align-items:center}
 .ticket .tb dt{font-family:var(--font-hand);font-size:1.15rem;opacity:.8}
 .ticket .tb dd{margin:0}
-.badge{display:inline-block;padding:1px 12px;border-radius:8px;color:#fff;font-family:var(--font-title);font-size:.8rem;letter-spacing:.03em}
-.badge.epic{background:var(--c4)}
-.badge.story{background:var(--c1)}
-.badge.task{background:var(--c2)}
-.badge.bug{background:#d94b4b}
+.badge{display:inline-block;padding:1px 12px;border-radius:8px;color:var(--ink);font-family:var(--font-title);font-size:.8rem;letter-spacing:.03em;border:1.5px solid transparent}
+.badge.epic{background:color-mix(in srgb,var(--c4) 28%,white);border-color:var(--c4)}
+.badge.story{background:color-mix(in srgb,var(--c1) 28%,white);border-color:var(--c1)}
+.badge.task{background:color-mix(in srgb,var(--c2) 28%,white);border-color:var(--c2)}
+.badge.bug{background:color-mix(in srgb,#d94b4b 28%,white);border-color:#d94b4b}
 .pill{display:inline-block;padding:1px 12px;border-radius:20px;background:color-mix(in srgb,var(--c3) 40%,white);
   border:2px solid var(--c3);font-family:var(--font-title);font-size:.85rem}
 .sp{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--c4);color:#fff;font-family:var(--font-title)}
@@ -151,7 +151,7 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
 
 /* ---- Workflow ---- */
 .flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;margin-top:12px}
-.flow .st{padding:5px 16px;border-radius:20px;border:2px solid var(--c);background:color-mix(in srgb,var(--c) 25%,white);font-family:var(--font-title);font-size:.9rem}
+.flow .st{padding:5px 16px;border-radius:20px;border:2px solid var(--c);background:color-mix(in srgb,var(--c) 16%,white);font-family:var(--font-title);font-size:.9rem;color:color-mix(in srgb,var(--c) 38%,#14141f)}
 
 /* ---- Auswahl ---- */
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
@@ -159,7 +159,7 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
   font-family:var(--font-title);font-size:.85rem}
 
 /* ---- Glossar ---- */
-.gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px 18px;margin-top:14px}
+.gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:10px 18px;margin-top:14px}
 .gloss div{padding:8px 12px;border-left:5px solid var(--c);border-radius:6px;background:color-mix(in srgb,var(--c) 5%,white);font-size:1rem}
 .gloss b{font-family:var(--font-title);font-size:.95rem}
 @media print{
@@ -181,6 +181,10 @@ a:focus:not(:focus-visible){outline:none}
 .skip-link:focus,.skip-link:focus-visible{transform:translateY(0);outline:3px solid var(--link);outline-offset:2px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+
+
+
 
 
 
@@ -244,8 +248,8 @@ a:focus:not(:focus-visible){outline:none}
 </main>
 
 <!-- ============ SEITE 2 ============ -->
-<main class="sheet">
-  <h1>Arten von Tools</h1>
+<section class="sheet" aria-label="Seite 2">
+  <h2>Arten von Tools</h2>
   <p style="text-align:center"><span class="tag">3.2 Jedes Tool hat einen Schwerpunkt</span></p>
 
   <section class="grid">
@@ -318,11 +322,11 @@ a:focus:not(:focus-visible){outline:none}
     <strong>Gut zu wissen:</strong> Funktionen und Bezeichnungen der Tools <span class="hl">ändern sich mit der Zeit</span>. Die Aufgaben dahinter bleiben gleich – und genau die lernst du hier.
   </div>
   <div class="pageno">Seite 2 / 8</div>
-</main>
+</section>
 
 <!-- ============ SEITE 3 ============ -->
-<main class="sheet">
-  <h1><span lang="en">Confluence</span></h1>
+<section class="sheet" aria-label="Seite 3">
+  <h2><span lang="en">Confluence</span></h2>
   <p style="text-align:center"><span class="tag">3.3 Das gemeinsame Wissensarchiv</span></p>
 
   <section class="grid">
@@ -400,11 +404,11 @@ a:focus:not(:focus-visible){outline:none}
     </article>
   </section>
   <div class="pageno">Seite 3 / 8</div>
-</main>
+</section>
 
 <!-- ============ SEITE 4 ============ -->
-<main class="sheet">
-  <h1>Gute Seitenstruktur</h1>
+<section class="sheet" aria-label="Seite 4">
+  <h2>Gute Seitenstruktur</h2>
   <p style="text-align:center"><span class="tag">3.3 Tipps für <span lang="en">Confluence</span></span></p>
 
   <section class="grid one">
@@ -456,11 +460,11 @@ a:focus:not(:focus-visible){outline:none}
     </ul>
   </div>
   <div class="pageno">Seite 4 / 8</div>
-</main>
+</section>
 
 <!-- ============ SEITE 5 ============ -->
-<main class="sheet">
-  <h1><span lang="en">Jira</span> &amp; Trello</h1>
+<section class="sheet" aria-label="Seite 5">
+  <h2><span lang="en">Jira</span> &amp; Trello</h2>
   <p style="text-align:center"><span class="tag">3.4 Aufgaben im Blick behalten</span></p>
 
   <h3>Die 4 wichtigsten Ticket-Typen</h3>
@@ -510,15 +514,15 @@ a:focus:not(:focus-visible){outline:none}
     </article>
   </section>
   <div class="pageno">Seite 5 / 8</div>
-</main>
+</section>
 
 <!-- ============ SEITE 6 ============ -->
-<main class="sheet">
-  <h1><span lang="en">Jira</span> + <span lang="en">Confluence</span></h1>
+<section class="sheet" aria-label="Seite 6">
+  <h2><span lang="en">Jira</span> + <span lang="en">Confluence</span></h2>
   <p style="text-align:center"><span class="tag">3.4 Das Zusammenspiel</span></p>
 
   <h3>Beispiel-Ticket zur Passwort-Story</h3>
-  <div class="table t2" role="table" aria-label="Feld und Inhalt des Tickets">
+  <div class="table t2" role="group" aria-label="Feld und Inhalt des Tickets">
     <div class="h">Feld</div><div class="h">Inhalt</div>
     <div class="r">Typ</div><div><span class="badge story">Story</span></div>
     <div class="r">Titel</div><div>Passwort per E-Mail-Link zurücksetzen</div>
@@ -564,11 +568,11 @@ a:focus:not(:focus-visible){outline:none}
     <span class="st" style="--c:var(--c1)">Done</span>
   </div>
   <div class="pageno">Seite 6 / 8</div>
-</main>
+</section>
 
 <!-- ============ SEITE 7 ============ -->
-<main class="sheet">
-  <h1>Das passende Tool</h1>
+<section class="sheet" aria-label="Seite 7">
+  <h2>Das passende Tool</h2>
   <p style="text-align:center"><span class="tag">3.5 Wie wählt man ein Tool aus?</span></p>
 
   <h3>Die 3 goldenen Regeln</h3>
@@ -618,11 +622,11 @@ a:focus:not(:focus-visible){outline:none}
     <strong>Faustregel:</strong> Ein einfaches Tool, das <span class="hl">alle wirklich pflegen</span>, schlägt ein perfektes Tool, das niemand nutzt.
   </div>
   <div class="pageno">Seite 7 / 8</div>
-</main>
+</section>
 
 <!-- ============ SEITE 8 ============ -->
-<main class="sheet">
-  <h1>Zusammenfassung &amp; Glossar</h1>
+<section class="sheet" aria-label="Seite 8">
+  <h2>Zusammenfassung &amp; Glossar</h2>
   <p style="text-align:center"><span class="tag">Modul 3</span></p>
 
   <section class="grid one">
@@ -660,7 +664,7 @@ a:focus:not(:focus-visible){outline:none}
 
   <div class="banner">Sichtbar · Verlinkt · Einfach · Geschützt</div>
   <div class="pageno">Seite 8 / 8</div>
-</main>
+</section>
 
 </body>
 </html>

@@ -19,8 +19,8 @@
 }
 *{box-sizing:border-box}
 body{margin:0;padding:16px;background:var(--page);color:var(--ink);
-  font-family:var(--font-body);font-size:18px;line-height:1.4}
-.sheet{position:relative;max-width:794px;min-height:1050px;margin:0 auto 24px;padding:32px 28px 52px;border-radius:6px;
+  font-family:var(--font-body);font-size:18px;line-height:1.4;max-width:100%;overflow-x:clip}
+.sheet{position:relative;width:100%;max-width:min(794px,100%);min-height:1050px;margin:0 auto 24px;padding:32px 28px 52px;border-radius:6px;box-sizing:border-box;
   background-color:var(--paper);
   background-image:linear-gradient(var(--grid) 1px,transparent 1px),
                    linear-gradient(90deg,var(--grid) 1px,transparent 1px);
@@ -32,13 +32,13 @@ h3{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px;display:inl
   background:var(--accent-soft);padding:3px 14px;border-radius:8px}
 .tag{display:inline-block;background:var(--accent-soft);padding:4px 14px;
   border-radius:8px;font-family:var(--font-title);font-size:.95rem}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));
   gap:18px;margin-top:20px}
 .grid.one{grid-template-columns:1fr}
-.grid.three{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.grid.three{grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr))}
 .card{--c:var(--c1);position:relative;border:2px solid var(--c);
   border-radius:var(--radius);padding:14px 16px;
-  background:color-mix(in srgb,var(--c) 5%,white);overflow-wrap:anywhere}
+  background:color-mix(in srgb,var(--c) 5%,white);overflow-wrap:anywhere;max-width:100%;min-width:0}
 .card::before{content:"";position:absolute;top:-9px;right:18px;width:54px;height:16px;
   background:color-mix(in srgb,var(--c) 45%,white);opacity:.8;transform:rotate(4deg);border-radius:2px}
 .card h2{margin:0 0 4px;font-family:var(--font-title);font-size:1.05rem}
@@ -53,18 +53,21 @@ h3{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px;display:inl
 .code{display:inline-block;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem;
   background:#fff;border:1.5px dashed var(--c,var(--accent));border-radius:8px;padding:1px 8px;
   margin:1px 0;word-break:break-word}
-pre.codeblock{--c:var(--c2);position:relative;margin:12px 0 0;padding:12px 16px;background:#fff;
-  border:2px dashed var(--c);border-radius:var(--radius);
-  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem;line-height:1.6;overflow-x:auto}
-pre.codeblock[data-lang]::after{content:attr(data-lang);position:absolute;top:-11px;left:14px;
-  background:var(--c);color:#fff;font-family:var(--font-title);font-size:.72rem;letter-spacing:.05em;
-  padding:1px 10px;border-radius:6px}
+pre.codeblock{--c:var(--c2);display:block;width:100%;max-width:100%;box-sizing:border-box;position:relative;
+  margin:36px 0 8px;padding:32px 28px 24px;background:#fff;min-height:6.5rem;
+  border:2px dashed var(--c);border-radius:var(--radius);overflow:visible;
+  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem;line-height:1.6;
+  white-space:pre-wrap;word-break:normal;overflow-wrap:anywhere}
+pre.codeblock[data-lang]::after{content:attr(data-lang);position:absolute;top:-14px;left:18px;
+  background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:1.5px solid var(--c);
+  font-family:var(--font-title);font-size:.78rem;letter-spacing:.05em;
+  padding:3px 14px;border-radius:6px;line-height:1.2;white-space:nowrap}
 pre.codeblock.out{--c:var(--c5);background:color-mix(in srgb,var(--c5) 8%,white)}
-.k{color:color-mix(in srgb,var(--c4) 75%,black);font-weight:700}
-.st{color:color-mix(in srgb,var(--c1) 55%,black)}
+.k{color:color-mix(in srgb,var(--c4) 42%,#14141f);font-weight:700}
+.st{color:color-mix(in srgb,var(--c) 42%,#14141f)}
 .nu{color:color-mix(in srgb,var(--c3) 65%,black)}
-.fn{color:color-mix(in srgb,var(--c2) 65%,black)}
-.cm{color:#8a8a99;font-style:italic}
+.fn{color:color-mix(in srgb,var(--c2) 38%,#14141f)}
+.cm{color:#4a4a58;font-style:italic}
 .cloud{display:inline-block;padding:8px 16px;border:2px dashed var(--accent);
   border-radius:40px;background:#fff;font-family:var(--font-hand);font-size:1.2rem;margin:4px 4px 0 0}
 .note{border:2px solid var(--accent);border-radius:var(--radius);
@@ -111,7 +114,7 @@ a.link{color:var(--ink);font-weight:700;text-decoration:underline wavy var(--acc
 .orn .star{width:26px;height:26px}
 .orn .heart{width:28px;height:28px;margin-top:10px}
 .sheet h1{padding:0 84px}
-@media (max-width:640px){.orn{display:none}.sheet h1{padding:0}}
+@media (max-width:640px){body{padding:10px}.orn{display:none}.sheet{padding:22px 14px 40px}.sheet h1{padding:0}}
 @media print{
   @page{size:A4;margin:10mm}
   body{background:#fff;padding:0}
@@ -131,6 +134,10 @@ a:focus:not(:focus-visible){outline:none}
 .skip-link:focus,.skip-link:focus-visible{transform:translateY(0);outline:3px solid var(--link);outline-offset:2px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+
+
+
 
 
 
@@ -216,14 +223,14 @@ punkte = punkte + <span class="nu">10</span>;      <span class="cm">// jetzt: 10
 </main>
 
 <!-- ============ SEITE 2 ============ -->
-<main class="sheet">
+<section class="sheet" aria-label="Seite 2">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
   <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
 </svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
-  <h1>Datentypen</h1>
+  <h2>Datentypen</h2>
   <p style="text-align:center"><span class="tag">Jeder Wert hat einen Typ</span></p>
 
   <p class="lead">Jeder Wert in <span lang="en">JavaScript</span> hat einen <span class="hl">bestimmten Typ</span>. Die wichtigsten drei:</p>
@@ -282,17 +289,17 @@ punkte = punkte + <span class="nu">10</span>;      <span class="cm">// jetzt: 10
     <strong>Boolean im Einsatz:</strong> Wird oft für <span class="hl">Schalter</span> oder <span class="hl">Prüfungen</span> genutzt – z. B. „ist der Nutzer angemeldet?“
   </div>
   <div class="pageno">Seite 2 / 8</div>
-</main>
+</section>
 
 <!-- ============ SEITE 3 ============ -->
-<main class="sheet">
+<section class="sheet" aria-label="Seite 3">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
   <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
 </svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
-  <h1>Bedingungen</h1>
+  <h2>Bedingungen</h2>
   <p style="text-align:center"><span class="tag">2. if / else – Entscheidungen im Code</span></p>
 
   <p class="lead">Programme müssen oft <span class="hl">Entscheidungen treffen</span>: Ist der Nutzer volljährig? Wenn ja, zeige den Inhalt. Wenn nein, zeige eine Fehlermeldung. Dafür nutzt man <span class="hl">Bedingungen</span>.</p>
@@ -330,17 +337,17 @@ punkte = punkte + <span class="nu">10</span>;      <span class="cm">// jetzt: 10
     <span class="code">===</span> genau gleich (Wert <em>und</em> Typ)
   </div>
   <div class="pageno">Seite 3 / 8</div>
-</main>
+</section>
 
 <!-- ============ SEITE 4 ============ -->
-<main class="sheet">
+<section class="sheet" aria-label="Seite 4">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
   <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
 </svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
-  <h1>Funktionen</h1>
+  <h2>Funktionen</h2>
   <p style="text-align:center"><span class="tag">3. Wiederverwendbare Code-Blöcke</span></p>
 
   <p class="lead">Eine Funktion ist wie ein <span class="hl">kleines Werkzeug</span> oder ein <span class="hl">Rezept</span>. Du schreibst den Code einmal auf und kannst ihn beliebig oft aufrufen – ohne ihn neu zu schreiben.</p>
@@ -380,17 +387,17 @@ punkte = punkte + <span class="nu">10</span>;      <span class="cm">// jetzt: 10
 <span class="k">const</span> summe = <span class="fn">addiere</span>(<span class="nu">2</span>, <span class="nu">3</span>);   <span class="cm">// summe ist 5</span>
 <span class="fn">console.log</span>(summe * <span class="nu">10</span>);        <span class="cm">// 50</span></pre>
   <div class="pageno">Seite 4 / 8</div>
-</main>
+</section>
 
 <!-- ============ SEITE 5 ============ -->
-<main class="sheet">
+<section class="sheet" aria-label="Seite 5">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
   <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
 </svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
-  <h1>Schleifen</h1>
+  <h2>Schleifen</h2>
   <p style="text-align:center"><span class="tag">4. for-Schleife – Wiederholungen automatisieren</span></p>
 
   <p class="lead">Wenn du denselben Befehl 100-mal ausführen möchtest (z. B. alle Elemente einer langen Liste durchgehen), schreibst du das nicht 100-mal von Hand. Dafür gibt es <span class="hl">Schleifen</span>. Die <span class="hl">for-Schleife</span> ist der Klassiker, wenn man <span class="hl">genau weiß, wie oft</span> etwas wiederholt werden soll.</p>
@@ -432,17 +439,17 @@ punkte = punkte + <span class="nu">10</span>;      <span class="cm">// jetzt: 10
 Durchlauf Nummer: 2
 Durchlauf Nummer: 3</pre>
   <div class="pageno">Seite 5 / 8</div>
-</main>
+</section>
 
 <!-- ============ SEITE 6 ============ -->
-<main class="sheet">
+<section class="sheet" aria-label="Seite 6">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
   <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
 </svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
-  <h1>Arrays &amp; Objekte</h1>
+  <h2>Arrays &amp; Objekte</h2>
   <p style="text-align:center"><span class="tag">5. Daten speichern und sortieren</span></p>
 
   <p class="lead">In echten Programmen hat man selten nur eine einzelne Variable, sondern <span class="hl">Sammlungen von Daten</span>.</p>
@@ -497,17 +504,17 @@ Durchlauf Nummer: 3</pre>
     </ul>
   </div>
   <div class="pageno">Seite 6 / 8</div>
-</main>
+</section>
 
 <!-- ============ SEITE 7 ============ -->
-<main class="sheet">
+<section class="sheet" aria-label="Seite 7">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
   <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
 </svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
-  <h1><span lang="en">DOM</span> &amp; Events</h1>
+  <h2><span lang="en">DOM</span> &amp; Events</h2>
   <p style="text-align:center"><span class="tag">6. Interaktion mit der Website</span></p>
 
   <p class="lead">Das <span class="hl"><span lang="en">DOM</span></span> (Document Object Model) ist die <span class="hl">Brücke</span> zwischen <span lang="en">JavaScript</span> und dem HTML. <span lang="en">JavaScript</span> kann das HTML <span class="hl">lesen, verändern</span> oder <span class="hl">neue Elemente hinzufügen</span>.</p>
@@ -552,17 +559,17 @@ knopf.<span class="fn">addEventListener</span>(<span class="st">"click"</span>, 
     </article>
   </section>
   <div class="pageno">Seite 7 / 8</div>
-</main>
+</section>
 
 <!-- ============ SEITE 8 ============ -->
-<main class="sheet">
+<section class="sheet" aria-label="Seite 8">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
   <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
 </svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
-  <h1>JS &amp; Barrierefreiheit</h1>
+  <h2>JS &amp; Barrierefreiheit</h2>
   <p style="text-align:center"><span class="tag">7. A11y – keine unabsichtlichen Barrieren</span></p>
 
   <p class="lead">Weil <span lang="en">JavaScript</span> Inhalte <span class="hl">dynamisch verändern</span> kann, entstehen hier oft unabsichtlich Barrieren für Screenreader-Nutzer:</p>
@@ -626,7 +633,7 @@ meldung.textContent = <span class="st">"Bitte gib eine E-Mail-Adresse ein."</spa
 
   <div class="banner">Merken · Entscheiden · Wiederholen · Reagieren</div>
   <div class="pageno">Seite 8 / 8</div>
-</main>
+</section>
 
 </body>
 </html>
