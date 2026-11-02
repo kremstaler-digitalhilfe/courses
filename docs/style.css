@@ -50,4 +50,10 @@ h1::after{content:"";display:block;height:6px;width:60%;margin:8px auto 0;
   background:#fff;padding:12px 16px;margin-top:18px}
 hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:18px 0}
 .footer{margin-top:22px;text-align:center;font-family:var(--font-hand);
-  font-size:1.05rem;opacity:.7}
+  font-size:1.1rem;line-height:1.35}
+.footer .name{margin:0;opacity:.85}
+.footer .site{margin:4px 0 0}
+.footer .site a{color:var(--accent);text-decoration:none}
+.footer .site a:hover{text-decoration:underline}
+.footer .logo{display:block;margin:10px auto 0;width:36px;height:36px;
+  object-fit:contain}

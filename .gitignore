@@ -6,7 +6,7 @@
 # Outils locaux (génération PPT / polices)
 .fonts/
 .python-pkgs/
-logo.png
+/logo.png
 
 # Scripts Python (génération indexes / PPTX)
 *.py
