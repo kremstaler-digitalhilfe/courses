@@ -9,7 +9,7 @@
 :root{
   /* === THEME : seul bloc à modifier === */
   --paper:#fffdfa; --grid:#ebe6ee; --ink:#2b2b3a; --page:#f3eef2;
-  --accent:#e8639a; --link:#7a3068; --accent-soft:#fbd3e4; --highlight:#fff176;
+  --accent:#e8639a; --accent-soft:#fbd3e4; --highlight:#fff176;
   --c1:#7bc47f; --c2:#6fa8e8; --c3:#f2a65a;
   --c4:#b58be0; --c5:#4cc0b5; --c6:#f28aa5;
   --font-title:'Fredoka',sans-serif;
@@ -28,7 +28,7 @@ body{margin:0;padding:16px;background:var(--page);color:var(--ink);
 h1{font-family:var(--font-title);font-size:2.2rem;text-align:center;margin:0 0 6px}
 h1::after{content:"";display:block;height:6px;width:60%;margin:8px auto 0;
   background:var(--accent);border-radius:6px;opacity:.7}
-.sheet > h2{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px;display:inline-block;
+h3{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px;display:inline-block;
   background:var(--accent-soft);padding:3px 14px;border-radius:8px}
 .tag{display:inline-block;background:var(--accent-soft);padding:4px 14px;
   border-radius:8px;font-family:var(--font-title);font-size:.95rem}
@@ -41,9 +41,10 @@ h1::after{content:"";display:block;height:6px;width:60%;margin:8px auto 0;
   background:color-mix(in srgb,var(--c) 8%,white)}
 .card::before{content:"";position:absolute;top:-9px;right:18px;width:54px;height:16px;
   background:color-mix(in srgb,var(--c) 45%,white);opacity:.8;transform:rotate(4deg);border-radius:2px}
-.card h2,.card h3{margin:0 0 4px;font-family:var(--font-title);font-size:1.05rem}
+.card h2{margin:0 0 4px;font-family:var(--font-title);font-size:1.05rem}
 .card .sub{font-family:var(--font-hand);font-size:1.15rem;color:color-mix(in srgb,var(--c) 70%,black);margin:0 0 8px}
-.num{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:2px solid var(--c);margin-right:6px}
+.num{display:inline-grid;place-items:center;width:26px;height:26px;
+  border-radius:50%;background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:2px solid var(--c);margin-right:6px}
 .card ul{list-style:none;padding:0;margin:0}
 .card li{margin:6px 0;padding-left:2px}
 .card li::before{content:"✓ ";color:var(--c);font-weight:700}
@@ -71,7 +72,9 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
   border:2px solid var(--accent);font-family:var(--font-title);
   text-transform:uppercase;letter-spacing:.04em}
 .pageno{position:absolute;bottom:16px;left:0;right:0;text-align:center;
-  font-family:var(--font-hand);font-size:1.1rem;font-size:1.15rem;margin:4px 0 0}
+  font-family:var(--font-hand);font-size:1.1rem;opacity:.6}
+.lead{margin:16px 0 0}
+.cap{font-family:var(--font-hand);font-size:1.15rem;margin:4px 0 0}
 .arrow{font-size:1.3rem;color:var(--accent);font-weight:700}
 .demo{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;margin-top:12px;
   font-family:var(--font-hand);font-size:1.15rem}
@@ -180,62 +183,57 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
 .orn .bulb{width:38px;height:46px;margin-top:6px}
 .orn .star{width:26px;height:26px}
 .orn .heart{width:28px;height:28px;margin-top:10px}
-.sheet > h1,.sheet > h2{padding:0 84px}
-@media (max-width:640px){.orn{display:none}.sheet > h1,.sheet > h2{padding:0}}
+.sheet h1{padding:0 84px}
+@media (max-width:640px){.orn{display:none}.sheet h1{padding:0}}
 @media print{
   @page{size:A4;margin:10mm}
   body{background:#fff;padding:0}
   .sheet{box-shadow:none;margin:0;min-height:auto;break-after:page;border-radius:0}
-  .sheet:last-child{break-after:auto}
+  .sheet:last-of-type{break-after:auto}
   .card,.note,.tip,.rule,.diagram,.gloss div,.invest div,.cards,.fib,.table{break-inside:avoid}
 }
 
-/* === a11y: contraste liens + focus (AA/AAA) === */
+/* === a11y === */
 :root{--link:#7a3068}
 a{color:var(--link)}
 a:hover{color:var(--link);text-decoration-thickness:2px}
 :focus-visible{outline:3px solid var(--link);outline-offset:3px}
 a:focus:not(:focus-visible){outline:none}
-.num{background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:2px solid var(--c)}
-.card li b{background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:1px solid var(--c)}
-.card li::before{color:color-mix(in srgb,var(--c) 55%,black)}
-.card .sub{color:color-mix(in srgb,var(--c) 45%,black)}
-.tip strong,.rule strong{color:color-mix(in srgb,var(--c) 45%,black)}
-
-.skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;
+.skip-link{position:absolute;top:0;left:0;transform:translateY(-120%);
   background:var(--paper);color:var(--link);padding:10px 16px;border:2px solid var(--link);
-  border-radius:8px;font-family:var(--font-title);text-decoration:none;z-index:100}
-.skip-link:focus{left:16px;top:16px;width:auto;height:auto;overflow:visible}
+  border-radius:8px;font-family:var(--font-title);font-weight:700;text-decoration:underline;z-index:100}
+.skip-link:focus,.skip-link:focus-visible{transform:translateY(0);outline:3px solid var(--link);outline-offset:2px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
 </style>
 </head>
 <body>
-<a class="skip-link" href="#inhalt">Zum Inhalt</a>
+<a class="skip-link" href="#main">Zum Hauptinhalt springen</a>
+
 
 <!-- ============ SEITE 1 ============ -->
-<main id="inhalt" class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="big" viewbox="0 0 80 90" aria-hidden="true">
+<main id="main" class="sheet" tabindex="-1">
+  <div class="orn tl" aria-hidden="true"><svg class="big" viewBox="0 0 80 90" aria-hidden="true">
   <g transform="rotate(-8 40 48)">
-    <rect x="16" y="10" width="52" height="68" rx="7" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.5"></rect>
-    <rect x="28" y="24" width="30" height="16" rx="3" style="fill:#fff;stroke:var(--ink);stroke-width:2"></rect>
-    <path d="M43 36c-4-3-6-5-6-7a3 3 0 0 1 6-.8 3 3 0 0 1 6 .8c0 2-2 4-6 7z" style="fill:var(--accent)"></path>
+    <rect x="16" y="10" width="52" height="68" rx="7" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.5"/>
+    <rect x="28" y="24" width="30" height="16" rx="3" style="fill:#fff;stroke:var(--ink);stroke-width:2"/>
+    <path d="M43 36c-4-3-6-5-6-7a3 3 0 0 1 6-.8 3 3 0 0 1 6 .8c0 2-2 4-6 7z" style="fill:var(--accent)"/>
     <g style="fill:#fff;stroke:var(--ink);stroke-width:2.2">
-      <circle cx="16" cy="22" r="3.6"></circle><circle cx="16" cy="34" r="3.6"></circle><circle cx="16" cy="46" r="3.6"></circle>
-      <circle cx="16" cy="58" r="3.6"></circle><circle cx="16" cy="70" r="3.6"></circle>
+      <circle cx="16" cy="22" r="3.6"/><circle cx="16" cy="34" r="3.6"/><circle cx="16" cy="46" r="3.6"/>
+      <circle cx="16" cy="58" r="3.6"/><circle cx="16" cy="70" r="3.6"/>
     </g>
   </g>
-  <path d="M70 4l2.2 4.8 5.2.6-3.9 3.5 1.1 5.1L70 15.4l-4.6 2.6 1.1-5.1-3.9-3.5 5.2-.6z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round"></path>
+  <path d="M70 4l2.2 4.8 5.2.6-3.9 3.5 1.1 5.1L70 15.4l-4.6 2.6 1.1-5.1-3.9-3.5 5.2-.6z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round"/>
 </svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="big" viewbox="0 0 80 90" aria-hidden="true">
+  <div class="orn tr" aria-hidden="true"><svg class="big" viewBox="0 0 80 90" aria-hidden="true">
   <g style="stroke:var(--ink);stroke-width:2;stroke-linejoin:round">
-    <g transform="rotate(-16 28 52)"><rect x="23" y="8" width="9" height="44" style="fill:var(--c3)"></rect><path d="M23 8L27.5-2 32 8z" style="fill:#f6dcc0"></path></g>
-    <g transform="rotate(4 42 52)"><rect x="38" y="4" width="9" height="48" style="fill:var(--accent)"></rect><path d="M38 4L42.5-6 47 4z" style="fill:#f6dcc0"></path></g>
-    <g transform="rotate(20 54 52)"><rect x="50" y="10" width="9" height="42" style="fill:var(--c4)"></rect><path d="M50 10L54.5 0 59 10z" style="fill:#f6dcc0"></path></g>
-    <path d="M14 46h52l-5 36a5 5 0 0 1-5 4H24a5 5 0 0 1-5-4z" style="fill:var(--c5)"></path>
+    <g transform="rotate(-16 28 52)"><rect x="23" y="8" width="9" height="44" style="fill:var(--c3)"/><path d="M23 8L27.5-2 32 8z" style="fill:#f6dcc0"/></g>
+    <g transform="rotate(4 42 52)"><rect x="38" y="4" width="9" height="48" style="fill:var(--accent)"/><path d="M38 4L42.5-6 47 4z" style="fill:#f6dcc0"/></g>
+    <g transform="rotate(20 54 52)"><rect x="50" y="10" width="9" height="42" style="fill:var(--c4)"/><path d="M50 10L54.5 0 59 10z" style="fill:#f6dcc0"/></g>
+    <path d="M14 46h52l-5 36a5 5 0 0 1-5 4H24a5 5 0 0 1-5-4z" style="fill:var(--c5)"/>
   </g>
-  <path d="M40 70c-3-2.4-4.6-4-4.6-5.6a2.3 2.3 0 0 1 4.6-.6 2.3 2.3 0 0 1 4.6.6c0 1.6-1.6 3.2-4.6 5.6z" style="fill:#fff"></path>
+  <path d="M40 70c-3-2.4-4.6-4-4.6-5.6a2.3 2.3 0 0 1 4.6-.6 2.3 2.3 0 0 1 4.6.6c0 1.6-1.6 3.2-4.6 5.6z" style="fill:#fff"/>
 </svg></div>
   <h1>Modul 2: Boards &amp; Schätzen</h1>
   <p style="text-align:center"><span class="tag">Boards · <span lang="en">User Stories</span> · Schätzmethoden</span></p>
@@ -250,25 +248,25 @@ a:focus:not(:focus-visible){outline:none}
         <li>Aufgaben mit <span class="hl"><span lang="en">Story Points</span> und <span lang="en">Planning Poker</span></span> schätzen</li>
       </ul>
     </article>
-  </main>
+  </section>
 
   <hr>
-  <h2>Scrum Board vs. <span lang="en">Kanban</span> Board</h2>
+  <h3>Scrum Board vs. <span lang="en">Kanban</span> Board</h3>
   <p class="lead">Beide Boards sehen <span class="hl">optisch fast identisch</span> aus (Spalten wie <span class="hl">To-Do, In Progress, Done</span>), verfolgen aber <span class="hl">zwei unterschiedliche Ansätze</span>:</p>
 
-  <svg class="diagram" viewbox="0 0 700 330" role="img" aria-label="Ein Board mit To-Do, In Progress und Done, darunter zwei Ansätze: Scrum Board und Kanban Board">
+  <svg class="diagram" viewBox="0 0 700 330" role="img" aria-label="Ein Board mit To-Do, In Progress und Done, darunter zwei Ansätze: Scrum Board und Kanban Board">
     <defs>
-      <marker id="ak5" markerwidth="10" markerheight="10" refx="8" refy="5" orient="auto">
-        <path d="M0,0 L10,5 L0,10 z" fill="#e8639a"></path>
+      <marker id="ak5" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="#e8639a"/>
       </marker>
     </defs>
     <g stroke="#2b2b3a" stroke-width="2">
-      <rect x="20" y="10" width="205" height="170" rx="14" fill="#fff"></rect>
-      <rect x="247" y="10" width="205" height="170" rx="14" fill="#fff"></rect>
-      <rect x="474" y="10" width="205" height="170" rx="14" fill="#fff"></rect>
-      <rect x="20" y="10" width="205" height="34" rx="14" fill="#cfe2fb"></rect>
-      <rect x="247" y="10" width="205" height="34" rx="14" fill="#fde7cf"></rect>
-      <rect x="474" y="10" width="205" height="34" rx="14" fill="#d7efd9"></rect>
+      <rect x="20"  y="10" width="205" height="170" rx="14" fill="#fff"/>
+      <rect x="247" y="10" width="205" height="170" rx="14" fill="#fff"/>
+      <rect x="474" y="10" width="205" height="170" rx="14" fill="#fff"/>
+      <rect x="20"  y="10" width="205" height="34" rx="14" fill="#cfe2fb"/>
+      <rect x="247" y="10" width="205" height="34" rx="14" fill="#fde7cf"/>
+      <rect x="474" y="10" width="205" height="34" rx="14" fill="#d7efd9"/>
     </g>
     <g text-anchor="middle">
       <text class="t" x="122" y="33">To-Do</text>
@@ -276,10 +274,10 @@ a:focus:not(:focus-visible){outline:none}
       <text class="t" x="576" y="33">Done</text>
     </g>
     <g stroke="#2b2b3a" stroke-width="1.5">
-      <rect x="36" y="62" width="173" height="34" rx="6" fill="#fff3a8" transform="rotate(-1.2 120 79)"></rect>
-      <rect x="36" y="108" width="173" height="34" rx="6" fill="#ffd9e8" transform="rotate(1.2 120 125)"></rect>
-      <rect x="263" y="62" width="173" height="34" rx="6" fill="#d4ecff" transform="rotate(1.2 350 79)"></rect>
-      <rect x="490" y="62" width="173" height="34" rx="6" fill="#d7efd9" transform="rotate(-1.2 576 79)"></rect>
+      <rect x="36"  y="62"  width="173" height="34" rx="6" fill="#fff3a8" transform="rotate(-1.2 120 79)"/>
+      <rect x="36"  y="108" width="173" height="34" rx="6" fill="#ffd9e8" transform="rotate(1.2 120 125)"/>
+      <rect x="263" y="62"  width="173" height="34" rx="6" fill="#d4ecff" transform="rotate(1.2 350 79)"/>
+      <rect x="490" y="62"  width="173" height="34" rx="6" fill="#d7efd9" transform="rotate(-1.2 576 79)"/>
     </g>
     <g text-anchor="middle">
       <text x="122" y="85">Ticket</text><text x="122" y="131">Ticket</text>
@@ -287,13 +285,13 @@ a:focus:not(:focus-visible){outline:none}
     </g>
     <text x="350" y="204" text-anchor="middle">sieht bei beiden fast gleich aus – aber:</text>
     <g stroke="#e8639a" stroke-width="2.5" fill="none" marker-end="url(#ak5)">
-      <line x1="320" y1="214" x2="190" y2="248"></line>
-      <line x1="380" y1="214" x2="510" y2="248"></line>
+      <line x1="320" y1="214" x2="190" y2="248"/>
+      <line x1="380" y1="214" x2="510" y2="248"/>
     </g>
-    <rect x="20" y="252" width="320" height="66" rx="16" fill="#fde7cf" stroke="#f2a65a" stroke-width="2.5"></rect>
+    <rect x="20" y="252" width="320" height="66" rx="16" fill="#fde7cf" stroke="#f2a65a" stroke-width="2.5"/>
     <text class="t" x="180" y="278" text-anchor="middle">Scrum Board (Sprint Board)</text>
     <text x="180" y="302" text-anchor="middle">zeitlich begrenzt – ein Sprint</text>
-    <rect x="360" y="252" width="320" height="66" rx="16" fill="#cfe2fb" stroke="#6fa8e8" stroke-width="2.5"></rect>
+    <rect x="360" y="252" width="320" height="66" rx="16" fill="#cfe2fb" stroke="#6fa8e8" stroke-width="2.5"/>
     <text class="t" x="520" y="278" text-anchor="middle">Kanban Board</text>
     <text x="520" y="302" text-anchor="middle">kontinuierlicher Fluss</text>
   </svg>
@@ -301,19 +299,19 @@ a:focus:not(:focus-visible){outline:none}
 </main>
 
 <!-- ============ SEITE 2 ============ -->
-<section aria-label="Seite 2" class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewbox="0 0 40 48" aria-hidden="true">
-  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"></path>
-  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-</svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="heart" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <h2>Scrum vs. <span lang="en">Kanban</span> Board</h2>
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <h1>Scrum vs. <span lang="en">Kanban</span> Board</h1>
   <p style="text-align:center"><span class="tag">Zwei Ansätze, fast gleiches Aussehen</span></p>
 
   <section class="grid">
     <article class="card" style="--c:var(--c3)">
-      <h3><span class="num">1</span>Das Scrum Board</h3>
+      <h2><span class="num">1</span>Das Scrum Board</h2>
       <p class="sub"><span lang="en">Sprint</span> Board</p>
       <ul>
         <li>Gehört zu Scrum und ist <span class="hl">zeitlich begrenzt</span> – für die Dauer eines Sprints (z. B. 2 Wochen).</li>
@@ -322,7 +320,7 @@ a:focus:not(:focus-visible){outline:none}
       </ul>
     </article>
     <article class="card" style="--c:var(--c2)">
-      <h3><span class="num">2</span>Das <span lang="en">Kanban</span> Board</h3>
+      <h2><span class="num">2</span>Das <span lang="en">Kanban</span> Board</h2>
       <p class="sub">Kontinuierlicher Fluss</p>
       <ul>
         <li>Funktioniert <span class="hl">ohne Sprints oder feste Zeitfenster</span>.</li>
@@ -332,51 +330,51 @@ a:focus:not(:focus-visible){outline:none}
     </article>
   </section>
 
-  <svg class="diagram" viewbox="0 0 700 250" role="img" aria-label="Links: Scrum Board mit Sprint von 2 Wochen und festen Karten. Rechts: Kanban Board mit kontinuierlichem Fluss und WIP-Limit.">
+  <svg class="diagram" viewBox="0 0 700 250" role="img" aria-label="Links: Scrum Board mit Sprint von 2 Wochen und festen Karten. Rechts: Kanban Board mit kontinuierlichem Fluss und WIP-Limit.">
     <defs>
-      <marker id="ak6" markerwidth="10" markerheight="10" refx="8" refy="5" orient="auto">
-        <path d="M0,0 L10,5 L0,10 z" fill="#e8639a"></path>
+      <marker id="ak6" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="#e8639a"/>
       </marker>
     </defs>
-    <rect x="10" y="6" width="320" height="28" rx="14" fill="#fde7cf" stroke="#2b2b3a" stroke-width="2"></rect>
+    <rect x="10" y="6" width="320" height="28" rx="14" fill="#fde7cf" stroke="#2b2b3a" stroke-width="2"/>
     <text class="b" x="170" y="26" text-anchor="middle">Sprint · z. B. 2 Wochen</text>
     <g stroke="#2b2b3a" stroke-width="2">
-      <rect x="10" y="46" width="100" height="140" rx="10" fill="#fff"></rect>
-      <rect x="120" y="46" width="100" height="140" rx="10" fill="#fff"></rect>
-      <rect x="230" y="46" width="100" height="140" rx="10" fill="#fff"></rect>
-      <rect x="10" y="46" width="100" height="26" rx="10" fill="#cfe2fb"></rect>
-      <rect x="120" y="46" width="100" height="26" rx="10" fill="#fde7cf"></rect>
-      <rect x="230" y="46" width="100" height="26" rx="10" fill="#d7efd9"></rect>
+      <rect x="10"  y="46" width="100" height="140" rx="10" fill="#fff"/>
+      <rect x="120" y="46" width="100" height="140" rx="10" fill="#fff"/>
+      <rect x="230" y="46" width="100" height="140" rx="10" fill="#fff"/>
+      <rect x="10"  y="46" width="100" height="26" rx="10" fill="#cfe2fb"/>
+      <rect x="120" y="46" width="100" height="26" rx="10" fill="#fde7cf"/>
+      <rect x="230" y="46" width="100" height="26" rx="10" fill="#d7efd9"/>
     </g>
     <g class="b" text-anchor="middle">
-      <text class="b" x="60" y="64">To-Do</text>
+      <text class="b" x="60"  y="64">To-Do</text>
       <text class="b" x="170" y="64">In Progress</text>
       <text class="b" x="280" y="64">Done</text>
     </g>
     <g stroke="#2b2b3a" stroke-width="1.5">
-      <rect x="18" y="84" width="84" height="28" rx="5" fill="#fff3a8"></rect>
-      <rect x="18" y="120" width="84" height="28" rx="5" fill="#ffd9e8"></rect>
-      <rect x="128" y="84" width="84" height="28" rx="5" fill="#d4ecff"></rect>
-      <rect x="128" y="120" width="84" height="28" rx="5" fill="#fff3a8"></rect>
-      <rect x="238" y="84" width="84" height="28" rx="5" fill="#d7efd9"></rect>
+      <rect x="18"  y="84"  width="84" height="28" rx="5" fill="#fff3a8"/>
+      <rect x="18"  y="120" width="84" height="28" rx="5" fill="#ffd9e8"/>
+      <rect x="128" y="84"  width="84" height="28" rx="5" fill="#d4ecff"/>
+      <rect x="128" y="120" width="84" height="28" rx="5" fill="#fff3a8"/>
+      <rect x="238" y="84"  width="84" height="28" rx="5" fill="#d7efd9"/>
     </g>
     <g class="s" text-anchor="middle">
-      <text class="s" x="60" y="104">Karte 1</text><text class="s" x="60" y="140">Karte 2</text>
+      <text class="s" x="60"  y="104">Karte 1</text><text class="s" x="60"  y="140">Karte 2</text>
       <text class="s" x="170" y="104">Karte 3</text><text class="s" x="170" y="140">Karte 4</text>
       <text class="s" x="280" y="104">Karte 5 ✓</text>
     </g>
     <text x="170" y="214" text-anchor="middle">Ziel: am Ende alles auf Done ✓</text>
     <text x="170" y="236" text-anchor="middle" class="s">feste Karten (Sprint Backlog)</text>
 
-    <line x1="370" y1="30" x2="690" y2="30" stroke="#e8639a" stroke-width="3" marker-end="url(#ak6)"></line>
+    <line x1="370" y1="30" x2="690" y2="30" stroke="#e8639a" stroke-width="3" marker-end="url(#ak6)"/>
     <text x="530" y="20" text-anchor="middle" class="s">kontinuierlicher Fluss – kein Sprint</text>
     <g stroke="#2b2b3a" stroke-width="2">
-      <rect x="370" y="46" width="100" height="140" rx="10" fill="#fff"></rect>
-      <rect x="480" y="46" width="100" height="140" rx="10" fill="#fff8e1" stroke-width="3"></rect>
-      <rect x="590" y="46" width="100" height="140" rx="10" fill="#fff"></rect>
-      <rect x="370" y="46" width="100" height="26" rx="10" fill="#cfe2fb"></rect>
-      <rect x="480" y="46" width="100" height="26" rx="10" fill="#fde7cf"></rect>
-      <rect x="590" y="46" width="100" height="26" rx="10" fill="#d7efd9"></rect>
+      <rect x="370" y="46" width="100" height="140" rx="10" fill="#fff"/>
+      <rect x="480" y="46" width="100" height="140" rx="10" fill="#fff8e1" stroke-width="3"/>
+      <rect x="590" y="46" width="100" height="140" rx="10" fill="#fff"/>
+      <rect x="370" y="46" width="100" height="26" rx="10" fill="#cfe2fb"/>
+      <rect x="480" y="46" width="100" height="26" rx="10" fill="#fde7cf"/>
+      <rect x="590" y="46" width="100" height="26" rx="10" fill="#d7efd9"/>
     </g>
     <g text-anchor="middle">
       <text class="b" x="420" y="64">To-Do</text>
@@ -384,20 +382,20 @@ a:focus:not(:focus-visible){outline:none}
       <text class="b" x="640" y="64">Done</text>
     </g>
     <g stroke="#2b2b3a" stroke-width="1.5">
-      <rect x="378" y="84" width="84" height="28" rx="5" fill="#fff3a8"></rect>
-      <rect x="378" y="120" width="84" height="28" rx="5" fill="#ffd9e8"></rect>
-      <rect x="488" y="84" width="84" height="28" rx="5" fill="#d4ecff"></rect>
-      <rect x="488" y="120" width="84" height="28" rx="5" fill="#fff3a8"></rect>
-      <rect x="598" y="84" width="84" height="28" rx="5" fill="#d7efd9"></rect>
+      <rect x="378" y="84"  width="84" height="28" rx="5" fill="#fff3a8"/>
+      <rect x="378" y="120" width="84" height="28" rx="5" fill="#ffd9e8"/>
+      <rect x="488" y="84"  width="84" height="28" rx="5" fill="#d4ecff"/>
+      <rect x="488" y="120" width="84" height="28" rx="5" fill="#fff3a8"/>
+      <rect x="598" y="84"  width="84" height="28" rx="5" fill="#d7efd9"/>
     </g>
-    <rect x="378" y="154" width="84" height="26" rx="5" fill="#fff" stroke="#e8639a" stroke-width="2" stroke-dasharray="5 4"></rect>
+    <rect x="378" y="154" width="84" height="26" rx="5" fill="#fff" stroke="#e8639a" stroke-width="2" stroke-dasharray="5 4"/>
     <g text-anchor="middle">
       <text class="s" x="420" y="104">Karte 1</text><text class="s" x="420" y="140">Karte 2</text>
       <text class="s" x="530" y="104">Karte 3</text><text class="s" x="530" y="140">Karte 4</text>
       <text class="s" x="640" y="104">Karte 5 ✓</text>
       <text class="s" x="420" y="172">+ neue Karte</text>
     </g>
-    <rect x="490" y="156" width="80" height="22" rx="11" fill="#fff" stroke="#d94b4b" stroke-width="2"></rect>
+    <rect x="490" y="156" width="80" height="22" rx="11" fill="#fff" stroke="#d94b4b" stroke-width="2"/>
     <text class="s" x="530" y="172" text-anchor="middle" style="fill:#d94b4b">WIP-Limit 3</text>
     <text x="530" y="214" text-anchor="middle">Fokus: WIP-Limits</text>
     <text x="530" y="236" text-anchor="middle" class="s">Engpässe sofort sehen</text>
@@ -417,14 +415,14 @@ a:focus:not(:focus-visible){outline:none}
 </main>
 
 <!-- ============ SEITE 3 ============ -->
-<section aria-label="Seite 3" class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewbox="0 0 40 48" aria-hidden="true">
-  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"></path>
-  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-</svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="heart" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <h2><span lang="en">Kanban</span> im Detail</h2>
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <h1><span lang="en">Kanban</span> im Detail</h1>
   <p style="text-align:center"><span class="tag">2.1 Das Board und die WIP-Limits</span></p>
 
   <h3><span lang="en">Kanban</span></h3>
@@ -433,19 +431,19 @@ a:focus:not(:focus-visible){outline:none}
 
   <p class="lead"><strong>Analogie:</strong> Ein Whiteboard in der Küche mit den Spalten „Einkaufen“, „Kochen“ und „Fertig“. Jede Aufgabe ist ein Zettel.</p>
 
-  <svg class="diagram" viewbox="0 0 700 280" role="img" aria-label="Küchen-Whiteboard mit drei Spalten: Einkaufen, Kochen, Fertig. Zettel wandern von links nach rechts.">
+  <svg class="diagram" viewBox="0 0 700 280" role="img" aria-label="Küchen-Whiteboard mit drei Spalten: Einkaufen, Kochen, Fertig. Zettel wandern von links nach rechts.">
     <defs>
-      <marker id="ak1" markerwidth="10" markerheight="10" refx="8" refy="5" orient="auto">
-        <path d="M0,0 L10,5 L0,10 z" fill="#e8639a"></path>
+      <marker id="ak1" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="#e8639a"/>
       </marker>
     </defs>
     <g stroke="#2b2b3a" stroke-width="2">
-      <rect x="20" y="20" width="205" height="192" rx="14" fill="#fff"></rect>
-      <rect x="247" y="20" width="205" height="192" rx="14" fill="#fff"></rect>
-      <rect x="474" y="20" width="205" height="192" rx="14" fill="#fff"></rect>
-      <rect x="20" y="20" width="205" height="36" rx="14" fill="#cfe2fb"></rect>
-      <rect x="247" y="20" width="205" height="36" rx="14" fill="#fde7cf"></rect>
-      <rect x="474" y="20" width="205" height="36" rx="14" fill="#d7efd9"></rect>
+      <rect x="20"  y="20" width="205" height="192" rx="14" fill="#fff"/>
+      <rect x="247" y="20" width="205" height="192" rx="14" fill="#fff"/>
+      <rect x="474" y="20" width="205" height="192" rx="14" fill="#fff"/>
+      <rect x="20"  y="20" width="205" height="36" rx="14" fill="#cfe2fb"/>
+      <rect x="247" y="20" width="205" height="36" rx="14" fill="#fde7cf"/>
+      <rect x="474" y="20" width="205" height="36" rx="14" fill="#d7efd9"/>
     </g>
     <g class="b" text-anchor="middle">
       <text class="t" x="122" y="44">Einkaufen</text>
@@ -453,10 +451,10 @@ a:focus:not(:focus-visible){outline:none}
       <text class="t" x="576" y="44">Fertig</text>
     </g>
     <g stroke="#2b2b3a" stroke-width="1.5" fill="#fff3a8">
-      <rect x="36" y="74" width="173" height="40" rx="6" transform="rotate(-1.5 120 94)"></rect>
-      <rect x="36" y="128" width="173" height="40" rx="6" transform="rotate(1.2 120 148)" fill="#ffd9e8"></rect>
-      <rect x="263" y="74" width="173" height="40" rx="6" transform="rotate(1.5 350 94)" fill="#d4ecff"></rect>
-      <rect x="490" y="74" width="173" height="40" rx="6" transform="rotate(-1.2 576 94)" fill="#d7efd9"></rect>
+      <rect x="36"  y="74"  width="173" height="40" rx="6" transform="rotate(-1.5 120 94)"/>
+      <rect x="36"  y="128" width="173" height="40" rx="6" transform="rotate(1.2 120 148)" fill="#ffd9e8"/>
+      <rect x="263" y="74"  width="173" height="40" rx="6" transform="rotate(1.5 350 94)" fill="#d4ecff"/>
+      <rect x="490" y="74"  width="173" height="40" rx="6" transform="rotate(-1.2 576 94)" fill="#d7efd9"/>
     </g>
     <g text-anchor="middle">
       <text x="122" y="100">Tomaten kaufen</text>
@@ -464,13 +462,13 @@ a:focus:not(:focus-visible){outline:none}
       <text x="349" y="100">Sauce kochen</text>
       <text x="576" y="100">Brot backen ✓</text>
     </g>
-    <line x1="60" y1="240" x2="640" y2="240" stroke="#e8639a" stroke-width="3" marker-end="url(#ak1)"></line>
+    <line x1="60" y1="240" x2="640" y2="240" stroke="#e8639a" stroke-width="3" marker-end="url(#ak1)"/>
     <text x="350" y="268" text-anchor="middle">Aufgaben wandern von links nach rechts – vom Start bis zur Fertigstellung</text>
   </svg>
 
   <section class="grid">
     <article class="card" style="--c:var(--c2)">
-      <h4><span class="num">1</span>Keine Sprints</h4>
+      <h2><span class="num">1</span>Keine Sprints</h2>
       <p class="sub">Anders als Scrum</p>
       <ul>
         <li><span lang="en">Kanban</span> kennt <span class="hl">keine festen Sprints</span>.</li>
@@ -478,7 +476,7 @@ a:focus:not(:focus-visible){outline:none}
       </ul>
     </article>
     <article class="card" style="--c:var(--c3)">
-      <h4><span class="num">2</span>WIP-Limit</h4>
+      <h2><span class="num">2</span>WIP-Limit</h2>
       <p class="sub">Work in Progress = Arbeit in Bearbeitung</p>
       <ul>
         <li>Legt fest, <span class="hl">wie viele Aufgaben gleichzeitig</span> in einer Spalte liegen dürfen.</li>
@@ -489,76 +487,76 @@ a:focus:not(:focus-visible){outline:none}
 </main>
 
 <!-- ============ SEITE 4 ============ -->
-<section aria-label="Seite 4" class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewbox="0 0 40 48" aria-hidden="true">
-  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"></path>
-  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-</svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="heart" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <h2>WIP-Limits</h2>
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <h1>WIP-Limits</h1>
   <p style="text-align:center"><span class="tag">2.1 Arbeit begrenzen</span></p>
 
   <h3>Warum ein WIP-Limit?</h3>
   <section class="grid three">
     <article class="card" style="--c:var(--c1)">
-      <h4>Schutz</h4>
+      <h2>Schutz</h2>
       <ul class="plain"><li>Schützt das Team vor <span class="hl">Überlastung</span>.</li></ul>
     </article>
     <article class="card" style="--c:var(--c4)">
-      <h4>Fokus</h4>
+      <h2>Fokus</h2>
       <ul class="plain"><li>Verhindert, dass Aufgaben <span class="hl">halbfertig liegen bleiben</span>.</li></ul>
     </article>
     <article class="card" style="--c:var(--c6)">
-      <h4>Transparenz</h4>
+      <h2>Transparenz</h2>
       <ul class="plain"><li>Macht <span class="hl">Engpässe sofort sichtbar</span>.</li></ul>
     </article>
   </section>
 
-  <h2>Beispiel: Limit 3</h2>
-  <svg class="diagram" viewbox="0 0 700 300" role="img" aria-label="Board mit WIP-Limit 3 in der Spalte In Bearbeitung. Die vierte Aufgabe darf nicht starten.">
+  <h3>Beispiel: Limit 3</h3>
+  <svg class="diagram" viewBox="0 0 700 300" role="img" aria-label="Board mit WIP-Limit 3 in der Spalte In Bearbeitung. Die vierte Aufgabe darf nicht starten.">
     <defs>
-      <marker id="ak2" markerwidth="10" markerheight="10" refx="8" refy="5" orient="auto">
-        <path d="M0,0 L10,5 L0,10 z" fill="#e8639a"></path>
+      <marker id="ak2" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="#e8639a"/>
       </marker>
-      <marker id="ak2r" markerwidth="10" markerheight="10" refx="8" refy="5" orient="auto">
-        <path d="M0,0 L10,5 L0,10 z" fill="#d94b4b"></path>
+      <marker id="ak2r" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="#d94b4b"/>
       </marker>
     </defs>
     <g stroke="#2b2b3a" stroke-width="2">
-      <rect x="20" y="14" width="170" height="222" rx="14" fill="#fff"></rect>
-      <rect x="215" y="14" width="270" height="222" rx="14" fill="#fff8e1" stroke-width="3"></rect>
-      <rect x="510" y="14" width="170" height="222" rx="14" fill="#fff"></rect>
-      <rect x="20" y="14" width="170" height="36" rx="14" fill="#cfe2fb"></rect>
-      <rect x="215" y="14" width="270" height="36" rx="14" fill="#fde7cf"></rect>
-      <rect x="510" y="14" width="170" height="36" rx="14" fill="#d7efd9"></rect>
+      <rect x="20"  y="14" width="170" height="222" rx="14" fill="#fff"/>
+      <rect x="215" y="14" width="270" height="222" rx="14" fill="#fff8e1" stroke-width="3"/>
+      <rect x="510" y="14" width="170" height="222" rx="14" fill="#fff"/>
+      <rect x="20"  y="14" width="170" height="36" rx="14" fill="#cfe2fb"/>
+      <rect x="215" y="14" width="270" height="36" rx="14" fill="#fde7cf"/>
+      <rect x="510" y="14" width="170" height="36" rx="14" fill="#d7efd9"/>
     </g>
     <g text-anchor="middle">
       <text class="t" x="105" y="38">Offen</text>
       <text class="t" x="350" y="38">In Bearbeitung</text>
       <text class="t" x="595" y="38">Fertig</text>
     </g>
-    <rect x="420" y="20" width="58" height="24" rx="12" fill="#fff" stroke="#d94b4b" stroke-width="2.5"></rect>
+    <rect x="420" y="20" width="58" height="24" rx="12" fill="#fff" stroke="#d94b4b" stroke-width="2.5"/>
     <text class="b" x="449" y="37" text-anchor="middle" style="fill:#d94b4b">3 / 3</text>
 
     <g stroke="#2b2b3a" stroke-width="1.5">
-      <rect x="235" y="66" width="230" height="42" rx="6" fill="#fff3a8" transform="rotate(-1 350 87)"></rect>
-      <rect x="235" y="120" width="230" height="42" rx="6" fill="#ffd9e8" transform="rotate(1 350 141)"></rect>
-      <rect x="235" y="174" width="230" height="42" rx="6" fill="#d4ecff" transform="rotate(-1 350 195)"></rect>
+      <rect x="235" y="66"  width="230" height="42" rx="6" fill="#fff3a8" transform="rotate(-1 350 87)"/>
+      <rect x="235" y="120" width="230" height="42" rx="6" fill="#ffd9e8" transform="rotate(1 350 141)"/>
+      <rect x="235" y="174" width="230" height="42" rx="6" fill="#d4ecff" transform="rotate(-1 350 195)"/>
     </g>
     <g text-anchor="middle">
       <text x="350" y="93">Aufgabe A</text>
       <text x="350" y="147">Aufgabe B</text>
       <text x="350" y="201">Aufgabe C</text>
     </g>
-    <rect x="36" y="66" width="138" height="42" rx="6" fill="#fff" stroke="#d94b4b" stroke-width="2.5" stroke-dasharray="6 4"></rect>
+    <rect x="36" y="66" width="138" height="42" rx="6" fill="#fff" stroke="#d94b4b" stroke-width="2.5" stroke-dasharray="6 4"/>
     <text x="105" y="93" text-anchor="middle">Aufgabe D</text>
-    <line x1="176" y1="87" x2="208" y2="87" stroke="#d94b4b" stroke-width="3" marker-end="url(#ak2r)"></line>
+    <line x1="176" y1="87" x2="208" y2="87" stroke="#d94b4b" stroke-width="3" marker-end="url(#ak2r)"/>
     <text x="192" y="76" text-anchor="middle" style="fill:#d94b4b;font-size:26px">✗</text>
     <text x="105" y="130" text-anchor="middle" class="s">darf nicht starten</text>
-    <rect x="526" y="66" width="138" height="42" rx="6" fill="none" stroke="#7bc47f" stroke-width="2" stroke-dasharray="6 4"></rect>
+    <rect x="526" y="66" width="138" height="42" rx="6" fill="none" stroke="#7bc47f" stroke-width="2" stroke-dasharray="6 4"/>
     <text x="595" y="93" text-anchor="middle" class="s">fertige Aufgabe</text>
-    <line x1="470" y1="195" x2="520" y2="110" stroke="#e8639a" stroke-width="2.5" marker-end="url(#ak2)"></line>
+    <line x1="470" y1="195" x2="520" y2="110" stroke="#e8639a" stroke-width="2.5" marker-end="url(#ak2)"/>
     <text x="350" y="272" text-anchor="middle">Erst wenn eine Aufgabe fertig in die nächste Spalte wandert, darf Aufgabe D beginnen.</text>
   </svg>
 
@@ -569,60 +567,60 @@ a:focus:not(:focus-visible){outline:none}
 </main>
 
 <!-- ============ SEITE 5 ============ -->
-<section aria-label="Seite 5" class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewbox="0 0 40 48" aria-hidden="true">
-  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"></path>
-  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-</svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="heart" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <h2>Die Hierarchie</h2>
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <h1>Die Hierarchie</h1>
   <p style="text-align:center"><span class="tag">2.2 Vom Großen zum Kleinen</span></p>
 
   <p class="lead">Große Vorhaben sind <span class="hl">zu riesig, um sie sofort umzusetzen</span>. Deshalb werden sie <span class="hl">schrittweise zerkleinert</span>:</p>
 
   <div class="demo" style="margin-top:16px">
-    <span class="cloud"><span lang="en">Epic</span> <small>(riesig)</small></span><span class="arrow">→</span>
+    <span class="cloud">Epic <small>(riesig)</small></span><span class="arrow">→</span>
     <span class="cloud">Feature <small>(mittelgroß)</small></span><span class="arrow">→</span>
     <span class="cloud"><span lang="en">User Story</span> <small>(klein &amp; konkret)</small></span>
   </div>
 
-  <svg class="diagram" viewbox="0 0 700 330" role="img" aria-label="Epic Online-Banking für Privatkunden enthält das Feature Passwort vergessen und Zurücksetzen, das mehrere User Stories enthält">
+  <svg class="diagram" viewBox="0 0 700 330" role="img" aria-label="Epic Online-Banking für Privatkunden enthält das Feature Passwort vergessen und Zurücksetzen, das mehrere User Stories enthält">
     <defs>
-      <marker id="ak3" markerwidth="10" markerheight="10" refx="8" refy="5" orient="auto">
-        <path d="M0,0 L10,5 L0,10 z" fill="#e8639a"></path>
+      <marker id="ak3" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="#e8639a"/>
       </marker>
     </defs>
-    <rect x="10" y="10" width="680" height="310" rx="20" fill="#e6d8f5" stroke="#b58be0" stroke-width="3"></rect>
+    <rect x="10" y="10" width="680" height="310" rx="20" fill="#e6d8f5" stroke="#b58be0" stroke-width="3"/>
     <text class="t" x="30" y="40">EPIC – das Riesengroße</text>
     <text x="30" y="64">„Online-Banking für Privatkunden“</text>
-    <rect x="40" y="86" width="620" height="220" rx="16" fill="#cfe2fb" stroke="#6fa8e8" stroke-width="3"></rect>
+    <rect x="40" y="86" width="620" height="220" rx="16" fill="#cfe2fb" stroke="#6fa8e8" stroke-width="3"/>
     <text class="t" x="60" y="116">FEATURE – die Klammer / Funktion</text>
     <text x="60" y="140">„Passwort vergessen &amp; Zurücksetzen“</text>
-    <rect x="62" y="162" width="176" height="124" rx="12" fill="#d7efd9" stroke="#7bc47f" stroke-width="3"></rect>
+    <rect x="62" y="162" width="176" height="124" rx="12" fill="#d7efd9" stroke="#7bc47f" stroke-width="3"/>
     <text class="b" x="150" y="186" text-anchor="middle">USER STORY</text>
     <text class="s" x="150" y="210" text-anchor="middle">Reset-Link per E-Mail</text>
     <text class="s" x="150" y="230" text-anchor="middle">erhalten, um das</text>
     <text class="s" x="150" y="250" text-anchor="middle">Passwort zurückzusetzen</text>
-    <rect x="262" y="162" width="176" height="124" rx="12" fill="#fff" stroke="#7bc47f" stroke-width="2.5" stroke-dasharray="7 5"></rect>
+    <rect x="262" y="162" width="176" height="124" rx="12" fill="#fff" stroke="#7bc47f" stroke-width="2.5" stroke-dasharray="7 5"/>
     <text class="s" x="350" y="230" text-anchor="middle">weitere User Story</text>
-    <rect x="462" y="162" width="176" height="124" rx="12" fill="#fff" stroke="#7bc47f" stroke-width="2.5" stroke-dasharray="7 5"></rect>
+    <rect x="462" y="162" width="176" height="124" rx="12" fill="#fff" stroke="#7bc47f" stroke-width="2.5" stroke-dasharray="7 5"/>
     <text class="s" x="550" y="230" text-anchor="middle">weitere User Story</text>
   </svg>
 
   <section class="grid three">
     <article class="card" style="--c:var(--c4)">
-      <h3><span lang="en">Epic</span></h3>
+      <h2>Epic</h2>
       <p class="sub">Das Riesengroße</p>
       <ul class="plain"><li>Sehr großes Ziel oder Themenfeld, das <span class="hl">mehrere Monate</span> dauern kann.</li></ul>
     </article>
     <article class="card" style="--c:var(--c2)">
-      <h3>Feature</h3>
+      <h2>Feature</h2>
       <p class="sub">Die Klammer</p>
       <ul class="plain"><li>Zusammenhängende Produktfunktion aus <span class="hl">mehreren <span lang="en">User Stories</span></span> mit spürbarem Nutzen.</li></ul>
     </article>
     <article class="card" style="--c:var(--c1)">
-      <h3><span lang="en">User Story</span></h3>
+      <h2><span lang="en">User Story</span></h2>
       <p class="sub">Die konkrete Aufgabe</p>
       <ul class="plain"><li>Kleine, konkrete Anforderung aus Nutzersicht, in <span class="hl">einem <span lang="en">Sprint</span></span> umsetzbar.</li></ul>
     </article>
@@ -631,14 +629,14 @@ a:focus:not(:focus-visible){outline:none}
 </main>
 
 <!-- ============ SEITE 6 ============ -->
-<section aria-label="Seite 6" class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewbox="0 0 40 48" aria-hidden="true">
-  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"></path>
-  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-</svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="heart" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <h2><span lang="en">User Stories</span></h2>
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <h1><span lang="en">User Stories</span></h1>
   <p style="text-align:center"><span class="tag">2.2 &amp; Akzeptanzkriterien</span></p>
 
   <p class="lead">Eine <span lang="en">User Story</span> beschreibt eine Anforderung <span class="hl">immer aus der Sicht der Nutzerinnen und Nutzer</span>. Sie folgt einem <span class="hl">festen Satzmuster</span>:</p>
@@ -652,18 +650,18 @@ a:focus:not(:focus-visible){outline:none}
   <h3>Beispiel: Passwort zurücksetzen</h3>
   <section class="grid one">
     <article class="card" style="--c:var(--c1)">
-      <h4><span lang="en">User Story</span></h4>
+      <h2><span lang="en">User Story</span></h2>
       <ul class="plain">
         <li class="quote">„Als <span class="mk r1">registrierter Kunde</span> möchte ich <span class="mk r2">mein Passwort über einen Link per E-Mail zurücksetzen können</span>, damit <span class="mk r3">ich mich bei Verlust des Passworts wieder einloggen kann</span>.“</li>
       </ul>
     </article>
   </section>
 
-  <h2>Akzeptanzkriterien</h2>
+  <h3>Akzeptanzkriterien</h3>
   <p style="margin:6px 0 0">Zu jeder <span lang="en">User Story</span> gehören <span class="hl">klare Bedingungen</span>. Erst wenn sie erfüllt sind, gilt die Story als <span class="hl">„fertig“</span>.</p>
   <section class="grid one">
     <article class="card" style="--c:var(--c5)">
-      <h3>Die Story ist fertig, wenn …</h3>
+      <h2>Die Story ist fertig, wenn …</h2>
       <ul class="check done">
         <li>bei Eingabe einer <span class="hl">gültigen E-Mail-Adresse</span> innerhalb von <span class="hl">60 Sekunden</span> eine E-Mail verschickt wird. Sie enthält einen <span class="hl">Token</span> (einen einmaligen, geheimen Code).</li>
         <li>der Link nach <span class="hl">30 Minuten</span> nicht mehr gültig ist.</li>
@@ -679,14 +677,14 @@ a:focus:not(:focus-visible){outline:none}
 </main>
 
 <!-- ============ SEITE 7 ============ -->
-<section aria-label="Seite 7" class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewbox="0 0 40 48" aria-hidden="true">
-  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"></path>
-  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-</svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="heart" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <h2><span lang="en">INVEST</span></h2>
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <h1><span lang="en">INVEST</span></h1>
   <p style="text-align:center"><span class="tag">2.2 Die Checkliste für gute <span lang="en">User Stories</span></span></p>
 
   <p class="lead">Ob eine <span lang="en">User Story</span> <span class="hl">gut aufgebaut und bereit für die Entwicklung</span> ist, prüft man mit der Eselsbrücke <span class="hl"><span lang="en">INVEST</span></span>:</p>
@@ -703,15 +701,15 @@ a:focus:not(:focus-visible){outline:none}
   <h3>Probe aufs Beispiel</h3>
   <section class="grid">
     <article class="card" style="--c:var(--c6)">
-      <h4>✗ „Online-Banking für Privatkunden“</h4>
+      <h2>✗ „Online-Banking für Privatkunden“</h2>
       <ul class="plain">
-        <li>Das ist ein <span class="hl"><span lang="en">Epic</span></span> – dauert mehrere Monate.</li>
+        <li>Das ist ein <span class="hl">Epic</span> – dauert mehrere Monate.</li>
         <li><b>S</b> nicht klein genug für einen <span lang="en">Sprint</span></li>
         <li><b>E</b> kaum schätzbar</li>
       </ul>
     </article>
     <article class="card" style="--c:var(--c1)">
-      <h4>✓ „Reset-Link per E-Mail erhalten“</h4>
+      <h2>✓ „Reset-Link per E-Mail erhalten“</h2>
       <ul class="plain">
         <li>Klein und konkret, aus Nutzersicht formuliert.</li>
         <li><b>T</b> durch Akzeptanzkriterien prüfbar (60 s, 30 min, neutrale Meldung)</li>
@@ -723,7 +721,7 @@ a:focus:not(:focus-visible){outline:none}
   <div class="note">
     <strong>Merke dir:</strong>
     <ul>
-      <li>Hierarchie: <span lang="en">Epic</span> → Feature → <span lang="en">User Story</span></li>
+      <li>Hierarchie: Epic → Feature → <span lang="en">User Story</span></li>
       <li>Satzmuster: Als [Rolle] möchte ich [Funktion], damit [Nutzen]</li>
       <li>Akzeptanzkriterien = wann ist die Story fertig?</li>
       <li><span lang="en">INVEST</span> = Qualitäts-Check vor der Entwicklung</li>
@@ -733,20 +731,20 @@ a:focus:not(:focus-visible){outline:none}
 </main>
 
 <!-- ============ SEITE 8 ============ -->
-<section aria-label="Seite 8" class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewbox="0 0 40 48" aria-hidden="true">
-  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"></path>
-  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-</svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="heart" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <h2>Schätzen</h2>
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <h1>Schätzen</h1>
   <p style="text-align:center"><span class="tag">2.3 Absolut vs. relativ · Methoden</span></p>
 
   <p class="lead">Teams können den Aufwand für Aufgaben auf <span class="hl">zwei Arten</span> schätzen:</p>
   <section class="grid">
     <article class="card" style="--c:var(--c3)">
-      <h3><span class="num">1</span>Absolute Schätzung</h3>
+      <h2><span class="num">1</span>Absolute Schätzung</h2>
       <p class="sub">Direkt in Stunden oder Tagen</p>
       <ul>
         <li>Funktioniert nur bei <span class="hl">kleinen, sehr bekannten</span> Aufgaben gut.</li>
@@ -755,7 +753,7 @@ a:focus:not(:focus-visible){outline:none}
       </ul>
     </article>
     <article class="card" style="--c:var(--c1)">
-      <h3><span class="num">2</span>Relative Schätzung</h3>
+      <h2><span class="num">2</span>Relative Schätzung</h2>
       <p class="sub">Aufgaben miteinander vergleichen</p>
       <ul>
         <li>Schwerer oder leichter als eine bereits bekannte <span class="hl">Referenzaufgabe</span>?</li>
@@ -768,11 +766,11 @@ a:focus:not(:focus-visible){outline:none}
     </article>
   </section>
 
-  <h2>Schätzmethoden im Vergleich</h2>
+  <h3>Schätzmethoden im Vergleich</h3>
   <p class="cap">Je nach Phase des Projekts nutzt man verschiedene Methoden:</p>
   <section class="grid three">
     <article class="card" style="--c:var(--c4)">
-      <h3>T-Shirt-Größen</h3>
+      <h2>T-Shirt-Größen</h2>
       <p class="sub">XS bis XL</p>
       <ul>
         <li>Sortiert sehr grob, <span class="hl">ganz ohne Zahlen</span>.</li>
@@ -788,7 +786,7 @@ a:focus:not(:focus-visible){outline:none}
       </div>
     </article>
     <article class="card" style="--c:var(--c5)">
-      <h3>Bucket-System</h3>
+      <h2>Bucket-System</h2>
       <p class="sub">Eimer-Methode</p>
       <ul>
         <li>Aufgaben werden schnell in <span class="hl">„Eimer“ mit festen Zahlenwerten</span> sortiert.</li>
@@ -802,7 +800,7 @@ a:focus:not(:focus-visible){outline:none}
       <p class="cap" style="text-align:center">(Beispielwerte)</p>
     </article>
     <article class="card" style="--c:var(--c1)">
-      <h3><span lang="en">Story Points</span> &amp; <span lang="en">Planning Poker</span></h3>
+      <h2><span lang="en">Story Points</span> &amp; <span lang="en">Planning Poker</span></h2>
       <p class="sub">Die Standardmethode</p>
       <ul>
         <li>Für die <span class="hl">detaillierte <span lang="en">Sprint</span>-Planung</span>.</li>
@@ -817,14 +815,14 @@ a:focus:not(:focus-visible){outline:none}
 </main>
 
 <!-- ============ SEITE 9 ============ -->
-<section aria-label="Seite 9" class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewbox="0 0 40 48" aria-hidden="true">
-  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"></path>
-  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-</svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="heart" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <h2><span lang="en">Story Points</span></h2>
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <h1><span lang="en">Story Points</span></h1>
   <p style="text-align:center"><span class="tag">2.3 Das relative Maß</span></p>
 
   <div class="rule">
@@ -842,11 +840,11 @@ a:focus:not(:focus-visible){outline:none}
   <h3>Was ist ein Story Point?</h3>
   <p style="margin:6px 0 0">Ein relatives Maß für den <span class="hl">Gesamtaufwand</span> einer Aufgabe. Er kombiniert <span class="hl">drei Faktoren</span>:</p>
 
-  <svg class="diagram" viewbox="0 0 700 300" role="img" aria-label="Drei sich überlappende Kreise: Aufwand, Komplexität, Risiko und Unsicherheit. In der Mitte der Story Point.">
+  <svg class="diagram" viewBox="0 0 700 300" role="img" aria-label="Drei sich überlappende Kreise: Aufwand, Komplexität, Risiko und Unsicherheit. In der Mitte der Story Point.">
     <g fill-opacity=".45" stroke="#2b2b3a" stroke-width="2">
-      <circle cx="285" cy="115" r="88" fill="#7bc47f"></circle>
-      <circle cx="415" cy="115" r="88" fill="#6fa8e8"></circle>
-      <circle cx="350" cy="205" r="88" fill="#f2a65a"></circle>
+      <circle cx="285" cy="115" r="88" fill="#7bc47f"/>
+      <circle cx="415" cy="115" r="88" fill="#6fa8e8"/>
+      <circle cx="350" cy="205" r="88" fill="#f2a65a"/>
     </g>
     <g text-anchor="middle">
       <text class="t" x="240" y="95">Aufwand</text>
@@ -863,17 +861,17 @@ a:focus:not(:focus-visible){outline:none}
     <strong>Wichtig:</strong> Ein Story Point ist <span class="hl">einheitslos</span> – keine Stunden, sondern ein relatives Maß im Vergleich zu anderen Aufgaben.
   </div>
   <div class="pageno">Seite 9 / 12</div>
-</section>
+</main>
 
 <!-- ============ SEITE 10 ============ -->
-<section aria-label="Seite 10" class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewbox="0 0 40 48" aria-hidden="true">
-  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"></path>
-  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-</svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="heart" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <h2>Fibonacci &amp; Referenz</h2>
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <h1>Fibonacci &amp; Referenz</h1>
   <p style="text-align:center"><span class="tag">2.3 Womit wird geschätzt?</span></p>
 
   <p class="lead">Geschätzt wird meist mit der <span class="hl">Fibonacci-Folge</span>: <span class="code">1, 2, 3, 5, 8, 13, …</span> – jede Zahl ist die <span class="hl">Summe der beiden vorherigen</span>.</p>
@@ -890,7 +888,7 @@ a:focus:not(:focus-visible){outline:none}
 
   <section class="grid one">
     <article class="card" style="--c:var(--c4)">
-      <h3>Warum werden die Lücken größer?</h3>
+      <h2>Warum werden die Lücken größer?</h2>
       <ul>
         <li>Die Lücken wachsen <span class="hl">nach hinten bewusst</span>.</li>
         <li>So diskutiert das Team nicht über <span class="hl">unnötige Kleinigkeiten</span> – z. B. ob eine riesige Aufgabe nun 12 oder 13 Points hat.</li>
@@ -898,15 +896,15 @@ a:focus:not(:focus-visible){outline:none}
     </article>
   </section>
 
-  <h2>Die Referenzaufgabe</h2>
+  <h3>Die Referenzaufgabe</h3>
   <p style="margin:6px 0 0">Das Team legt vorab gemeinsam eine <span class="hl">bekannte kleine Aufgabe als Maßstab</span> fest.</p>
   <section class="grid">
     <article class="card" style="--c:var(--c1)">
-      <h3><span class="big">1</span>Point</h3>
+      <h2><span class="big">1</span>Point</h2>
       <ul class="plain"><li>Einen <span class="hl">Rechtschreibfehler</span> im Hilfetext der App korrigieren.</li></ul>
     </article>
     <article class="card" style="--c:var(--c5)">
-      <h3><span class="big">8</span>Points</h3>
+      <h2><span class="big">8</span>Points</h2>
       <ul class="plain"><li>Die Einbindung einer neuen <span class="hl">Kreditkarten-Schnittstelle</span> (Verbindung zu einem externen Bezahlsystem).</li></ul>
     </article>
   </section>
@@ -917,14 +915,14 @@ a:focus:not(:focus-visible){outline:none}
 </main>
 
 <!-- ============ SEITE 11 ============ -->
-<section aria-label="Seite 11" class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewbox="0 0 40 48" aria-hidden="true">
-  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"></path>
-  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-</svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="heart" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <h2><span lang="en">Planning Poker</span></h2>
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <h1><span lang="en">Planning Poker</span></h1>
   <p style="text-align:center"><span class="tag">2.3 Schätzen im Team</span></p>
 
   <p class="lead">Beim <span lang="en">Planning Poker</span> schätzt das Team <span class="hl">gemeinsam mit Spielkarten</span>:</p>
@@ -935,7 +933,7 @@ a:focus:not(:focus-visible){outline:none}
 
   <section class="grid one">
     <article class="card" style="--c:var(--c2)">
-      <h3>Der Ablauf</h3>
+      <h2>Der Ablauf</h2>
       <ul class="plain">
         <li><b>1</b>Das Team liest eine <span lang="en">User Story</span> <span class="hl">gemeinsam</span> durch.</li>
         <li><b>2</b>Jede Person wählt <span class="hl">verdeckt</span> eine Karte (1, 2, 3, 5, 8, 13).</li>
@@ -960,19 +958,19 @@ a:focus:not(:focus-visible){outline:none}
 </main>
 
 <!-- ============ SEITE 12 ============ -->
-<section aria-label="Seite 12" class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewbox="0 0 40 48" aria-hidden="true">
-  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"></path>
-  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-</svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="heart" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <h2>Zusammenfassung &amp; Glossar</h2>
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <h1>Zusammenfassung &amp; Glossar</h1>
   <p style="text-align:center"><span class="tag">Modul 2</span></p>
 
   <section class="grid one">
     <article class="card" style="--c:var(--c5)">
-      <h3>Zusammenfassung Modul 2</h3>
+      <h2>Zusammenfassung Modul 2</h2>
       <ul>
         <li><b>Boards</b>Das <span class="hl">Scrum Board</span> ist zeitlich begrenzt (ein <span lang="en">Sprint</span>), das <span class="hl"><span lang="en">Kanban</span> Board</span> läuft kontinuierlich – beide sehen fast gleich aus.</li>
         <li><b><span lang="en">Kanban</span></b>Macht Arbeit auf einem <span class="hl">Board sichtbar</span>, nutzt einen kontinuierlichen Fluss ohne feste Sprints und schützt das Team durch <span class="hl">WIP-Limits</span> vor Überlastung.</li>
@@ -984,16 +982,16 @@ a:focus:not(:focus-visible){outline:none}
     </article>
   </section>
 
-  <h2>Glossar Modul 2</h2>
+  <h3>Glossar Modul 2</h3>
   <div class="gloss">
     <div style="--c:var(--c1)"><b>Akzeptanzkriterium:</b> Klare Bedingung, die erfüllt sein muss, damit eine <span lang="en">User Story</span> als fertig gilt.</div>
-    <div style="--c:var(--c2)"><b><span lang="en">Epic</span>:</b> Ein sehr großes Projektziel oder Themenfeld, das in mehrere Features und <span lang="en">User Stories</span> zerlegt wird.</div>
+    <div style="--c:var(--c2)"><b>Epic:</b> Ein sehr großes Projektziel oder Themenfeld, das in mehrere Features und <span lang="en">User Stories</span> zerlegt wird.</div>
     <div style="--c:var(--c3)"><b>Feature:</b> Zusammenhängende Produktfunktion (Klammer über mehreren <span lang="en">User Stories</span>) mit spürbarem Nutzen für Kunden.</div>
     <div style="--c:var(--c4)"><b>Fibonacci-Folge:</b> Zahlenreihe (1, 2, 3, 5, 8, 13 …), bei der die Lücken nach hinten größer werden. Wird beim Schätzen mit <span lang="en">Story Points</span> genutzt.</div>
     <div style="--c:var(--c5)"><b><span lang="en">INVEST</span>:</b> Eselsbrücke und Checkliste für gute <span lang="en">User Stories</span> (Independent, Negotiable, Valuable, Estimable, Small, Testable).</div>
     <div style="--c:var(--c6)"><b><span lang="en">Kanban</span>:</b> Methode zur visuellen Steuerung von Arbeit. Aufgaben wandern als Zettel kontinuierlich von links nach rechts – ohne feste Sprints.</div>
     <div style="--c:var(--c1)"><b><span lang="en">Planning Poker</span>:</b> Schätzspiel im Team mit Spielkarten, um verdeckt und ohne gegenseitige Beeinflussung den relativen Aufwand zu bestimmen.</div>
-    <div style="--c:var(--c2)"><b>Schnittstelle (<span lang="en">API</span>):</b> Verbindung zwischen zwei Systemen oder Programmen, damit diese Daten austauschen können.</div>
+    <div style="--c:var(--c2)"><b>Schnittstelle (API):</b> Verbindung zwischen zwei Systemen oder Programmen, damit diese Daten austauschen können.</div>
     <div style="--c:var(--c3)"><b>Story Point:</b> Einheitsloses Maß für den relativen Aufwand, die Komplexität und das Risiko einer Aufgabe.</div>
     <div style="--c:var(--c4)"><b>Token:</b> Einmaliger, geschützter Code (z. B. in einem Link zum Passwort-Zurücksetzen).</div>
     <div style="--c:var(--c5)"><b><span lang="en">User Story</span>:</b> Anforderung aus Sicht der Nutzerinnen und Nutzer: Als [Rolle] möchte ich [Funktion], damit [Nutzen].</div>

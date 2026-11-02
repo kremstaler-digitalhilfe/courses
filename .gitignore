@@ -3,6 +3,15 @@
 **/.DS_Store
 .cursor/
 
+# Node / Playwright / axe (audit local)
+node_modules/
+package-lock.json
+a11y-report.json
+test-results/
+playwright-report/
+blob-report/
+.playwright/
+
 # Outils locaux (génération PPT / polices)
 .fonts/
 .python-pkgs/

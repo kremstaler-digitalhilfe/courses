@@ -9,7 +9,7 @@
 :root{
   /* === THEME : seul bloc à modifier === */
   --paper:#fffdfa; --grid:#ebe6ee; --ink:#2b2b3a; --page:#f3eef2;
-  --accent:#e8639a; --link:#7a3068; --accent-soft:#fbd3e4; --highlight:#fff176;
+  --accent:#e8639a; --accent-soft:#fbd3e4; --highlight:#fff176;
   --c1:#7bc47f; --c2:#6fa8e8; --c3:#f2a65a;
   --c4:#b58be0; --c5:#4cc0b5; --c6:#f28aa5;
   --font-title:'Fredoka',sans-serif;
@@ -28,7 +28,7 @@ body{margin:0;padding:16px;background:var(--page);color:var(--ink);
 h1{font-family:var(--font-title);font-size:2.2rem;text-align:center;margin:0 0 6px}
 h1::after{content:"";display:block;height:6px;width:60%;margin:8px auto 0;
   background:var(--accent);border-radius:6px;opacity:.7}
-.sheet > h2{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px;display:inline-block;
+h3{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px;display:inline-block;
   background:var(--accent-soft);padding:3px 14px;border-radius:8px}
 .tag{display:inline-block;background:var(--accent-soft);padding:4px 14px;
   border-radius:8px;font-family:var(--font-title);font-size:.95rem}
@@ -41,9 +41,10 @@ h1::after{content:"";display:block;height:6px;width:60%;margin:8px auto 0;
   background:color-mix(in srgb,var(--c) 8%,white)}
 .card::before{content:"";position:absolute;top:-9px;right:18px;width:54px;height:16px;
   background:color-mix(in srgb,var(--c) 45%,white);opacity:.8;transform:rotate(4deg);border-radius:2px}
-.card h2,.card h3{margin:0 0 4px;font-family:var(--font-title);font-size:1.05rem}
+.card h2{margin:0 0 4px;font-family:var(--font-title);font-size:1.05rem}
 .card .sub{font-family:var(--font-hand);font-size:1.15rem;color:color-mix(in srgb,var(--c) 70%,black);margin:0 0 8px}
-.num{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:2px solid var(--c);margin-right:6px}
+.num{display:inline-grid;place-items:center;width:26px;height:26px;
+  border-radius:50%;background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:2px solid var(--c);margin-right:6px}
 .card ul{list-style:none;padding:0;margin:0}
 .card li{margin:6px 0;padding-left:2px}
 .card li::before{content:"✓ ";color:var(--c);font-weight:700}
@@ -82,7 +83,8 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
   border:2px solid var(--accent);font-family:var(--font-title);
   text-transform:uppercase;letter-spacing:.04em}
 .pageno{position:absolute;bottom:16px;left:0;right:0;text-align:center;
-  font-family:var(--font-hand);font-size:1.1rem;font-weight:700;text-decoration:underline wavy var(--accent);
+  font-family:var(--font-hand);font-size:1.1rem;opacity:.6}
+a.link{color:var(--ink);font-weight:700;text-decoration:underline wavy var(--accent);
   text-underline-offset:3px;word-break:break-all}
 .lead{margin:16px 0 0}
 .cap{font-family:var(--font-hand);font-size:1.15rem;margin:4px 0 0}
@@ -109,75 +111,70 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
 .orn .bulb{width:38px;height:46px;margin-top:6px}
 .orn .star{width:26px;height:26px}
 .orn .heart{width:28px;height:28px;margin-top:10px}
-.sheet > h1,.sheet > h2{padding:0 84px}
-@media (max-width:640px){.orn{display:none}.sheet > h1,.sheet > h2{padding:0}}
+.sheet h1{padding:0 84px}
+@media (max-width:640px){.orn{display:none}.sheet h1{padding:0}}
 @media print{
   @page{size:A4;margin:10mm}
   body{background:#fff;padding:0}
   .sheet{box-shadow:none;margin:0;min-height:auto;break-after:page;border-radius:0}
-  .sheet:last-child{break-after:auto}
+  .sheet:last-of-type{break-after:auto}
   .card,.note,.tip,.rule,pre,.cells,.flow{break-inside:avoid}
 }
 
-/* === a11y: contraste liens + focus (AA/AAA) === */
+/* === a11y === */
 :root{--link:#7a3068}
 a{color:var(--link)}
 a:hover{color:var(--link);text-decoration-thickness:2px}
 :focus-visible{outline:3px solid var(--link);outline-offset:3px}
 a:focus:not(:focus-visible){outline:none}
-.num{background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:2px solid var(--c)}
-.card li b{background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:1px solid var(--c)}
-.card li::before{color:color-mix(in srgb,var(--c) 55%,black)}
-.card .sub{color:color-mix(in srgb,var(--c) 45%,black)}
-.tip strong,.rule strong{color:color-mix(in srgb,var(--c) 45%,black)}
-
-.skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;
+.skip-link{position:absolute;top:0;left:0;transform:translateY(-120%);
   background:var(--paper);color:var(--link);padding:10px 16px;border:2px solid var(--link);
-  border-radius:8px;font-family:var(--font-title);text-decoration:none;z-index:100}
-.skip-link:focus{left:16px;top:16px;width:auto;height:auto;overflow:visible}
+  border-radius:8px;font-family:var(--font-title);font-weight:700;text-decoration:underline;z-index:100}
+.skip-link:focus,.skip-link:focus-visible{transform:translateY(0);outline:3px solid var(--link);outline-offset:2px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
 </style>
 </head>
 <body>
-<a class="skip-link" href="#inhalt">Zum Inhalt</a>
+<a class="skip-link" href="#main">Zum Hauptinhalt springen</a>
+
 
 <!-- ============ SEITE 1 ============ -->
-<main id="inhalt" class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="big" viewbox="0 0 80 90" aria-hidden="true">
+<main id="main" class="sheet" tabindex="-1">
+  <div class="orn tl" aria-hidden="true"><svg class="big" viewBox="0 0 80 90" aria-hidden="true">
   <g transform="rotate(-8 40 48)">
-    <rect x="16" y="10" width="52" height="68" rx="7" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.5"></rect>
-    <rect x="28" y="24" width="30" height="16" rx="3" style="fill:#fff;stroke:var(--ink);stroke-width:2"></rect>
-    <path d="M43 36c-4-3-6-5-6-7a3 3 0 0 1 6-.8 3 3 0 0 1 6 .8c0 2-2 4-6 7z" style="fill:var(--accent)"></path>
+    <rect x="16" y="10" width="52" height="68" rx="7" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.5"/>
+    <rect x="28" y="24" width="30" height="16" rx="3" style="fill:#fff;stroke:var(--ink);stroke-width:2"/>
+    <path d="M43 36c-4-3-6-5-6-7a3 3 0 0 1 6-.8 3 3 0 0 1 6 .8c0 2-2 4-6 7z" style="fill:var(--accent)"/>
     <g style="fill:#fff;stroke:var(--ink);stroke-width:2.2">
-      <circle cx="16" cy="22" r="3.6"></circle><circle cx="16" cy="34" r="3.6"></circle><circle cx="16" cy="46" r="3.6"></circle>
-      <circle cx="16" cy="58" r="3.6"></circle><circle cx="16" cy="70" r="3.6"></circle>
+      <circle cx="16" cy="22" r="3.6"/><circle cx="16" cy="34" r="3.6"/><circle cx="16" cy="46" r="3.6"/>
+      <circle cx="16" cy="58" r="3.6"/><circle cx="16" cy="70" r="3.6"/>
     </g>
   </g>
-  <path d="M70 4l2.2 4.8 5.2.6-3.9 3.5 1.1 5.1L70 15.4l-4.6 2.6 1.1-5.1-3.9-3.5 5.2-.6z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round"></path>
+  <path d="M70 4l2.2 4.8 5.2.6-3.9 3.5 1.1 5.1L70 15.4l-4.6 2.6 1.1-5.1-3.9-3.5 5.2-.6z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round"/>
 </svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="big" viewbox="0 0 80 90" aria-hidden="true">
+  <div class="orn tr" aria-hidden="true"><svg class="big" viewBox="0 0 80 90" aria-hidden="true">
   <g style="stroke:var(--ink);stroke-width:2;stroke-linejoin:round">
-    <g transform="rotate(-16 28 52)"><rect x="23" y="8" width="9" height="44" style="fill:var(--c3)"></rect><path d="M23 8L27.5-2 32 8z" style="fill:#f6dcc0"></path></g>
-    <g transform="rotate(4 42 52)"><rect x="38" y="4" width="9" height="48" style="fill:var(--accent)"></rect><path d="M38 4L42.5-6 47 4z" style="fill:#f6dcc0"></path></g>
-    <g transform="rotate(20 54 52)"><rect x="50" y="10" width="9" height="42" style="fill:var(--c4)"></rect><path d="M50 10L54.5 0 59 10z" style="fill:#f6dcc0"></path></g>
-    <path d="M14 46h52l-5 36a5 5 0 0 1-5 4H24a5 5 0 0 1-5-4z" style="fill:var(--c5)"></path>
+    <g transform="rotate(-16 28 52)"><rect x="23" y="8" width="9" height="44" style="fill:var(--c3)"/><path d="M23 8L27.5-2 32 8z" style="fill:#f6dcc0"/></g>
+    <g transform="rotate(4 42 52)"><rect x="38" y="4" width="9" height="48" style="fill:var(--accent)"/><path d="M38 4L42.5-6 47 4z" style="fill:#f6dcc0"/></g>
+    <g transform="rotate(20 54 52)"><rect x="50" y="10" width="9" height="42" style="fill:var(--c4)"/><path d="M50 10L54.5 0 59 10z" style="fill:#f6dcc0"/></g>
+    <path d="M14 46h52l-5 36a5 5 0 0 1-5 4H24a5 5 0 0 1-5-4z" style="fill:var(--c5)"/>
   </g>
-  <path d="M40 70c-3-2.4-4.6-4-4.6-5.6a2.3 2.3 0 0 1 4.6-.6 2.3 2.3 0 0 1 4.6.6c0 1.6-1.6 3.2-4.6 5.6z" style="fill:#fff"></path>
+  <path d="M40 70c-3-2.4-4.6-4-4.6-5.6a2.3 2.3 0 0 1 4.6-.6 2.3 2.3 0 0 1 4.6.6c0 1.6-1.6 3.2-4.6 5.6z" style="fill:#fff"/>
 </svg></div>
   <h1><span lang="en">JavaScript</span></h1>
   <p style="text-align:center"><span class="tag">Webentwicklung · Grundlagen</span></p>
 
-  <h2>Was ist <span lang="en">JavaScript</span>?</h2>
+  <h3>Was ist <span lang="en">JavaScript</span>?</h3>
   <section class="grid three">
     <article class="card" style="--c:var(--c1)">
-      <h3><span class="num">1</span>Programmiersprache</h3>
+      <h2><span class="num">1</span>Programmiersprache</h2>
       <p class="sub">Eine vollwertige</p>
       <ul><li>Anders als HTML und CSS kann <span lang="en">JavaScript</span> <span class="hl">rechnen und entscheiden</span>.</li></ul>
     </article>
     <article class="card" style="--c:var(--c2)">
-      <h3><span class="num">2</span>Dynamisch</h3>
+      <h2><span class="num">2</span>Dynamisch</h2>
       <p class="sub">Webseiten werden lebendig</p>
       <ul>
         <li>Reagiert auf <span class="hl">Eingaben</span></li>
@@ -186,26 +183,26 @@ a:focus:not(:focus-visible){outline:none}
       </ul>
     </article>
     <article class="card" style="--c:var(--c3)">
-      <h3><span class="num">3</span>Ohne Neuladen</h3>
+      <h2><span class="num">3</span>Ohne Neuladen</h2>
       <p class="sub">Alles live</p>
       <ul><li>Die Seite muss dafür <span class="hl">nicht neu geladen</span> werden.</li></ul>
     </article>
-  </main>
+  </section>
 
   <hr>
-  <h2>1. Variablen</h2>
+  <h3>1. Variablen</h3>
   <p class="cap">Der Speicher des Computers</p>
   <p style="margin:6px 0 0">Programme müssen sich Werte merken können (z. B. den <span class="hl">Punktestand</span> in einem Spiel oder den <span class="hl">Namen</span> eines eingeloggten Nutzers). Dafür nutzen wir <span class="hl">Variablen</span>.</p>
 
   <p style="margin:14px 0 0"><strong>Wie man eine Variable erstellt:</strong> mit <span class="code">let</span> oder <span class="code">const</span></p>
   <section class="grid">
     <article class="card" style="--c:var(--c4)">
-      <h3><span class="num">1</span>const</h3>
+      <h2><span class="num">1</span>const</h2>
       <p class="sub">Constant = Konstante</p>
       <ul><li>Der Wert darf sich <span class="hl">nicht mehr ändern</span>, nachdem er einmal festgelegt wurde.</li></ul>
     </article>
     <article class="card" style="--c:var(--c5)">
-      <h3><span class="num">2</span>let</h3>
+      <h2><span class="num">2</span>let</h2>
       <p class="sub">Lass uns das ändern können</p>
       <ul><li>Der Wert darf sich im Laufe des Programms <span class="hl">ändern</span> (z. B. ein Punktestand, der steigt).</li></ul>
     </article>
@@ -219,21 +216,21 @@ punkte = punkte + <span class="nu">10</span>;      <span class="cm">// jetzt: 10
 </main>
 
 <!-- ============ SEITE 2 ============ -->
-<section aria-label="Seite 2" class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewbox="0 0 40 48" aria-hidden="true">
-  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"></path>
-  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-</svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="heart" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <h2>Datentypen</h2>
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <h1>Datentypen</h1>
   <p style="text-align:center"><span class="tag">Jeder Wert hat einen Typ</span></p>
 
   <p class="lead">Jeder Wert in <span lang="en">JavaScript</span> hat einen <span class="hl">bestimmten Typ</span>. Die wichtigsten drei:</p>
 
   <section class="grid three">
     <article class="card" style="--c:var(--c1)">
-      <h3><span class="num">1</span>String</h3>
+      <h2><span class="num">1</span>String</h2>
       <p class="sub">Text</p>
       <ul>
         <li>Steht immer in <span class="hl">Anführungszeichen</span>.</li>
@@ -242,7 +239,7 @@ punkte = punkte + <span class="nu">10</span>;      <span class="cm">// jetzt: 10
       </ul>
     </article>
     <article class="card" style="--c:var(--c2)">
-      <h3><span class="num">2</span>Number</h3>
+      <h2><span class="num">2</span>Number</h2>
       <p class="sub">Zahl</p>
       <ul>
         <li>Ganze Zahlen oder Kommazahlen.</li>
@@ -251,7 +248,7 @@ punkte = punkte + <span class="nu">10</span>;      <span class="cm">// jetzt: 10
       </ul>
     </article>
     <article class="card" style="--c:var(--c3)">
-      <h3><span class="num">3</span>Boolean</h3>
+      <h2><span class="num">3</span>Boolean</h2>
       <p class="sub">Wahrheitswert</p>
       <ul>
         <li>Nur <span class="hl">zwei Zustände</span>:</li>
@@ -288,14 +285,14 @@ punkte = punkte + <span class="nu">10</span>;      <span class="cm">// jetzt: 10
 </main>
 
 <!-- ============ SEITE 3 ============ -->
-<section aria-label="Seite 3" class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewbox="0 0 40 48" aria-hidden="true">
-  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"></path>
-  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-</svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="heart" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <h2>Bedingungen</h2>
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <h1>Bedingungen</h1>
   <p style="text-align:center"><span class="tag">2. if / else – Entscheidungen im Code</span></p>
 
   <p class="lead">Programme müssen oft <span class="hl">Entscheidungen treffen</span>: Ist der Nutzer volljährig? Wenn ja, zeige den Inhalt. Wenn nein, zeige eine Fehlermeldung. Dafür nutzt man <span class="hl">Bedingungen</span>.</p>
@@ -314,15 +311,15 @@ punkte = punkte + <span class="nu">10</span>;      <span class="cm">// jetzt: 10
   <h3>Erklärung</h3>
   <section class="grid one">
     <article class="card" style="--c:var(--c1)">
-      <h4><span class="num">1</span>if (…)</h4>
+      <h2><span class="num">1</span>if (…)</h2>
       <ul><li>Prüft, ob die Bedingung in den Klammern <span class="code">true</span> ist. Wenn ja, wird der Code im <span class="hl">ersten Block</span> ausgeführt.</li></ul>
     </article>
     <article class="card" style="--c:var(--c2)">
-      <h4><span class="num">2</span>else if</h4>
+      <h2><span class="num">2</span>else if</h2>
       <ul><li>Fängt <span class="hl">weitere Bedingungen</span> ab.</li></ul>
     </article>
     <article class="card" style="--c:var(--c3)">
-      <h4><span class="num">3</span>else</h4>
+      <h2><span class="num">3</span>else</h2>
       <ul><li>Greift, wenn <span class="hl">keine der vorherigen Bedingungen</span> gestimmt hat.</li></ul>
     </article>
   </section>
@@ -336,14 +333,14 @@ punkte = punkte + <span class="nu">10</span>;      <span class="cm">// jetzt: 10
 </main>
 
 <!-- ============ SEITE 4 ============ -->
-<section aria-label="Seite 4" class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewbox="0 0 40 48" aria-hidden="true">
-  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"></path>
-  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-</svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="heart" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <h2>Funktionen</h2>
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <h1>Funktionen</h1>
   <p style="text-align:center"><span class="tag">3. Wiederverwendbare Code-Blöcke</span></p>
 
   <p class="lead">Eine Funktion ist wie ein <span class="hl">kleines Werkzeug</span> oder ein <span class="hl">Rezept</span>. Du schreibst den Code einmal auf und kannst ihn beliebig oft aufrufen – ohne ihn neu zu schreiben.</p>
@@ -355,26 +352,26 @@ punkte = punkte + <span class="nu">10</span>;      <span class="cm">// jetzt: 10
 }</pre>
   <section class="grid three">
     <article class="card" style="--c:var(--c1)">
-      <h4>function</h4>
+      <h2>function</h2>
       <ul><li>Das <span class="hl">Schlüsselwort</span>: „Hier kommt eine Funktion.“</li></ul>
     </article>
     <article class="card" style="--c:var(--c2)">
-      <h4>begruesseNutzer</h4>
+      <h2>begruesseNutzer</h2>
       <ul><li>Der <span class="hl">selbst gewählte Name</span> der Funktion.</li></ul>
     </article>
     <article class="card" style="--c:var(--c3)">
-      <h4>(name)</h4>
+      <h2>(name)</h2>
       <ul><li>Ein <span class="hl">Parameter</span>: Platzhalter für Daten, die wir von außen übergeben.</li></ul>
     </article>
   </section>
 
-  <h2>B) Die Funktion aufrufen</h2>
+  <h3>B) Die Funktion aufrufen</h3>
   <p class="cap">Das Rezept ausführen</p>
   <p style="margin:4px 0 0">Eine Funktion tut von alleine <span class="hl">gar nichts</span>. Du musst sie mit ihrem Namen aktivieren:</p>
   <pre class="codeblock" data-lang="JavaScript"><span class="fn">begruesseNutzer</span>(<span class="st">"Anna"</span>);   <span class="cm">// Hallo Anna!</span>
 <span class="fn">begruesseNutzer</span>(<span class="st">"Ben"</span>);    <span class="cm">// Hallo Ben!</span></pre>
 
-  <h2>C) Der Rückgabewert (return)</h2>
+  <h3>C) Der Rückgabewert (return)</h3>
   <p style="margin:4px 0 0">Funktionen können nicht nur etwas auf der Konsole ausgeben, sondern auch ein <span class="hl">Ergebnis zurückgeben</span>, mit dem man weiterrechnen kann.</p>
   <pre class="codeblock" data-lang="JavaScript"><span class="k">function</span> <span class="fn">addiere</span>(a, b) {
   <span class="k">return</span> a + b;
@@ -386,14 +383,14 @@ punkte = punkte + <span class="nu">10</span>;      <span class="cm">// jetzt: 10
 </main>
 
 <!-- ============ SEITE 5 ============ -->
-<section aria-label="Seite 5" class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewbox="0 0 40 48" aria-hidden="true">
-  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"></path>
-  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-</svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="heart" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <h2>Schleifen</h2>
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <h1>Schleifen</h1>
   <p style="text-align:center"><span class="tag">4. for-Schleife – Wiederholungen automatisieren</span></p>
 
   <p class="lead">Wenn du denselben Befehl 100-mal ausführen möchtest (z. B. alle Elemente einer langen Liste durchgehen), schreibst du das nicht 100-mal von Hand. Dafür gibt es <span class="hl">Schleifen</span>. Die <span class="hl">for-Schleife</span> ist der Klassiker, wenn man <span class="hl">genau weiß, wie oft</span> etwas wiederholt werden soll.</p>
@@ -406,17 +403,17 @@ punkte = punkte + <span class="nu">10</span>;      <span class="cm">// jetzt: 10
   <p class="cap"><span class="code">(let i = 1; i &lt;= 3; i++)</span></p>
   <section class="grid three">
     <article class="card" style="--c:var(--c1)">
-      <h4><span class="num">1</span>Start</h4>
+      <h2><span class="num">1</span>Start</h2>
       <p class="sub"><span class="code">let i = 1;</span></p>
       <ul><li>Eine Zählvariable <span class="code">i</span> (Index) – wir fangen bei <span class="hl">1</span> an.</li></ul>
     </article>
     <article class="card" style="--c:var(--c2)">
-      <h4><span class="num">2</span>Bedingung</h4>
+      <h2><span class="num">2</span>Bedingung</h2>
       <p class="sub"><span class="code">i &lt;= 3;</span></p>
       <ul><li>Vor jedem Durchlauf: Ist <span class="code">i</span> kleiner oder gleich 3? Solange <span class="code">true</span>, läuft die Schleife. Bei <span class="code">4</span> <span class="hl">stoppt</span> sie.</li></ul>
     </article>
     <article class="card" style="--c:var(--c3)">
-      <h4><span class="num">3</span>Schrittweite</h4>
+      <h2><span class="num">3</span>Schrittweite</h2>
       <p class="sub"><span class="code">i++</span></p>
       <ul><li>Nach jedem Durchlauf wird <span class="code">i</span> um <span class="hl">1 erhöht</span> (<span class="code">++</span> = plus 1).</li></ul>
     </article>
@@ -438,21 +435,21 @@ Durchlauf Nummer: 3</pre>
 </main>
 
 <!-- ============ SEITE 6 ============ -->
-<section aria-label="Seite 6" class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewbox="0 0 40 48" aria-hidden="true">
-  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"></path>
-  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-</svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="heart" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <h2>Arrays &amp; Objekte</h2>
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <h1>Arrays &amp; Objekte</h1>
   <p style="text-align:center"><span class="tag">5. Daten speichern und sortieren</span></p>
 
   <p class="lead">In echten Programmen hat man selten nur eine einzelne Variable, sondern <span class="hl">Sammlungen von Daten</span>.</p>
 
   <section class="grid one">
     <article class="card" style="--c:var(--c1)">
-      <h3><span class="num">1</span>Arrays (Listen)</h3>
+      <h2><span class="num">1</span>Arrays (Listen)</h2>
       <p class="sub">Eckige Klammern <span class="code">[ ]</span></p>
       <ul>
         <li>Speichern <span class="hl">mehrere Werte</span> in einer geordneten Liste.</li>
@@ -503,14 +500,14 @@ Durchlauf Nummer: 3</pre>
 </main>
 
 <!-- ============ SEITE 7 ============ -->
-<section aria-label="Seite 7" class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewbox="0 0 40 48" aria-hidden="true">
-  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"></path>
-  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-</svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="heart" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <h2><span lang="en">DOM</span> &amp; Events</h2>
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <h1><span lang="en">DOM</span> &amp; Events</h1>
   <p style="text-align:center"><span class="tag">6. Interaktion mit der Website</span></p>
 
   <p class="lead">Das <span class="hl"><span lang="en">DOM</span></span> (Document Object Model) ist die <span class="hl">Brücke</span> zwischen <span lang="en">JavaScript</span> und dem HTML. <span lang="en">JavaScript</span> kann das HTML <span class="hl">lesen, verändern</span> oder <span class="hl">neue Elemente hinzufügen</span>.</p>
@@ -522,17 +519,17 @@ titel.textContent = <span class="st">"Neuer Titel"</span>;          <span class=
 titel.style.color = <span class="st">"blue"</span>;                <span class="cm">// Farbe ändern</span></pre>
   <section class="grid">
     <article class="card" style="--c:var(--c1)">
-      <h4><span class="num">1</span>Greifen</h4>
+      <h2><span class="num">1</span>Greifen</h2>
       <ul><li><span class="code">querySelector("h1")</span> findet ein Element über seinen <span class="hl">CSS-Selektor</span>.</li></ul>
     </article>
     <article class="card" style="--c:var(--c2)">
-      <h4><span class="num">2</span>Verändern</h4>
+      <h2><span class="num">2</span>Verändern</h2>
       <ul><li><span class="code">textContent</span> und <span class="code">style</span> ändern <span class="hl">Text und Aussehen</span>.</li></ul>
     </article>
   </section>
 
   <hr>
-  <h2>Events: auf den Nutzer reagieren</h2>
+  <h3>Events: auf den Nutzer reagieren</h3>
   <p style="margin:6px 0 0"><span lang="en">JavaScript</span> wartet <span class="hl">passiv</span> darauf, dass der Nutzer eine Aktion ausführt (Klick, Tastendruck, Scrollen). Dafür nutzt man <span class="code">addEventListener</span>:</p>
   <pre class="codeblock" data-lang="JavaScript"><span class="k">const</span> knopf = document.<span class="fn">querySelector</span>(<span class="st">"button"</span>);
 
@@ -542,15 +539,15 @@ knopf.<span class="fn">addEventListener</span>(<span class="st">"click"</span>, 
 
   <section class="grid three">
     <article class="card" style="--c:var(--c3)">
-      <h3>Wer?</h3>
+      <h2>Wer?</h2>
       <ul><li><span class="code">knopf</span> – das Element, das lauscht</li></ul>
     </article>
     <article class="card" style="--c:var(--c4)">
-      <h3>Was?</h3>
+      <h2>Was?</h2>
       <ul><li><span class="code">"click"</span> – das Ereignis</li></ul>
     </article>
     <article class="card" style="--c:var(--c5)">
-      <h3>Dann?</h3>
+      <h2>Dann?</h2>
       <ul><li>Die <span class="hl">Funktion</span>, die dann läuft</li></ul>
     </article>
   </section>
@@ -558,21 +555,21 @@ knopf.<span class="fn">addEventListener</span>(<span class="st">"click"</span>, 
 </main>
 
 <!-- ============ SEITE 8 ============ -->
-<section aria-label="Seite 8" class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewbox="0 0 40 48" aria-hidden="true">
-  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"></path>
-  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-</svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="heart" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <h2>JS &amp; Barrierefreiheit</h2>
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <h1>JS &amp; Barrierefreiheit</h1>
   <p style="text-align:center"><span class="tag">7. A11y – keine unabsichtlichen Barrieren</span></p>
 
   <p class="lead">Weil <span lang="en">JavaScript</span> Inhalte <span class="hl">dynamisch verändern</span> kann, entstehen hier oft unabsichtlich Barrieren für Screenreader-Nutzer:</p>
 
   <section class="grid one">
     <article class="card" style="--c:var(--c1)">
-      <h3><span class="num">1</span>Fokus-Management bei Popups</h3>
+      <h2><span class="num">1</span>Fokus-Management bei Popups</h2>
       <ul>
         <li>Öffnet sich per <span lang="en">JavaScript</span> ein Menü oder Dialogfenster, muss der Fokus <span class="hl">sofort in dieses Fenster wandern</span>.</li>
         <li>Schließt es sich wieder, muss der Fokus <span class="hl">zum auslösenden Element zurückkehren</span>.</li>
@@ -580,7 +577,7 @@ knopf.<span class="fn">addEventListener</span>(<span class="st">"click"</span>, 
     </article>
 
     <article class="card" style="--c:var(--c2)">
-      <h3><span class="num">2</span>Änderungen ankündigen</h3>
+      <h2><span class="num">2</span>Änderungen ankündigen</h2>
       <p class="sub">aria-live</p>
       <ul>
         <li>Ändert <span lang="en">JavaScript</span> Text (z. B. eine Fehlermeldung im Formular), bekommen blinde Menschen das <span class="hl">nicht mit</span>.</li>
@@ -589,7 +586,7 @@ knopf.<span class="fn">addEventListener</span>(<span class="st">"click"</span>, 
     </article>
 
     <article class="card" style="--c:var(--c3)">
-      <h3><span class="num">3</span>Keine reine Maus-Abhängigkeit</h3>
+      <h2><span class="num">3</span>Keine reine Maus-Abhängigkeit</h2>
       <ul>
         <li>Event-Listener <span class="hl">niemals nur an einen Klick</span> (<span class="code">click</span>) knüpfen.</li>
         <li>Jede Aktion muss auch per <span class="hl">Tastatur</span> auslösbar sein (Enter-Taste oder Leertaste).</li>
@@ -607,14 +604,14 @@ meldung.textContent = <span class="st">"Bitte gib eine E-Mail-Adresse ein."</spa
   </div>
 
   <hr>
-  <h2>Weiter lernen</h2>
+  <h3>Weiter lernen</h3>
   <section class="grid">
     <article class="card" style="--c:var(--c5)">
-      <h3>Edabit</h3>
+      <h2>Edabit</h2>
       <ul><li><a class="link" href="https://edabit.com/tutorial/javascript" target="_blank" rel="noopener noreferrer">edabit.com/tutorial/javascript<span class="sr-only"> (öffnet in neuem Tab)</span></a></li></ul>
     </article>
     <article class="card" style="--c:var(--c6)">
-      <h3>CheckiO</h3>
+      <h2>CheckiO</h2>
       <ul><li><a class="link" href="https://js.checkio.org/" target="_blank" rel="noopener noreferrer">js.checkio.org<span class="sr-only"> (öffnet in neuem Tab)</span></a></li></ul>
     </article>
   </section>

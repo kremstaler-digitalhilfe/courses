@@ -9,7 +9,7 @@
 :root{
   /* === THEME : seul bloc à modifier === */
   --paper:#fffdfa; --grid:#ebe6ee; --ink:#2b2b3a; --page:#f3eef2;
-  --accent:#e8639a; --link:#7a3068; --accent-soft:#fbd3e4; --highlight:#fff176;
+  --accent:#e8639a; --accent-soft:#fbd3e4; --highlight:#fff176;
   --c1:#7bc47f; --c2:#6fa8e8; --c3:#f2a65a;
   --c4:#b58be0; --c5:#4cc0b5; --c6:#f28aa5;
   --font-title:'Fredoka',sans-serif;
@@ -28,7 +28,7 @@ body{margin:0;padding:16px;background:var(--page);color:var(--ink);
 h1{font-family:var(--font-title);font-size:2.2rem;text-align:center;margin:0 0 6px}
 h1::after{content:"";display:block;height:6px;width:60%;margin:8px auto 0;
   background:var(--accent);border-radius:6px;opacity:.7}
-.sheet > h2{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px;display:inline-block;
+h3{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px;display:inline-block;
   background:var(--accent-soft);padding:3px 14px;border-radius:8px}
 .tag{display:inline-block;background:var(--accent-soft);padding:4px 14px;
   border-radius:8px;font-family:var(--font-title);font-size:.95rem}
@@ -40,9 +40,10 @@ h1::after{content:"";display:block;height:6px;width:60%;margin:8px auto 0;
   background:color-mix(in srgb,var(--c) 8%,white)}
 .card::before{content:"";position:absolute;top:-9px;right:18px;width:54px;height:16px;
   background:color-mix(in srgb,var(--c) 45%,white);opacity:.8;transform:rotate(4deg);border-radius:2px}
-.card h2,.card h3{margin:0 0 4px;font-family:var(--font-title);font-size:1.05rem}
+.card h2{margin:0 0 4px;font-family:var(--font-title);font-size:1.05rem}
 .card .sub{font-family:var(--font-hand);font-size:1.15rem;color:color-mix(in srgb,var(--c) 70%,black);margin:0 0 8px}
-.num{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:2px solid var(--c);margin-right:6px}
+.num{display:inline-grid;place-items:center;width:26px;height:26px;
+  border-radius:50%;background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:2px solid var(--c);margin-right:6px}
 .card ul{list-style:none;padding:0;margin:0}
 .card li{margin:6px 0;padding-left:2px}
 .card li::before{content:"✓ ";color:var(--c);font-weight:700}
@@ -70,7 +71,9 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
   border:2px solid var(--accent);font-family:var(--font-title);
   text-transform:uppercase;letter-spacing:.04em}
 .pageno{position:absolute;bottom:16px;left:0;right:0;text-align:center;
-  font-family:var(--font-hand);font-size:1.1rem;justify-content:center;flex-wrap:wrap;gap:6px;margin-top:12px}
+  font-family:var(--font-hand);font-size:1.1rem;opacity:.6}
+/* Anatomie eines Elements */
+.anat{display:flex;justify-content:center;flex-wrap:wrap;gap:6px;margin-top:12px}
 .anat div{text-align:center}
 .anat code{display:block;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9rem;
   background:#fff;padding:6px 10px;border-radius:8px;border:2px solid var(--k)}
@@ -87,105 +90,100 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
 .orn .bulb{width:38px;height:46px;margin-top:6px}
 .orn .star{width:26px;height:26px}
 .orn .heart{width:28px;height:28px;margin-top:10px}
-.sheet > h1,.sheet > h2{padding:0 84px}
-@media (max-width:640px){.orn{display:none}.sheet > h1,.sheet > h2{padding:0}}
+.sheet h1{padding:0 84px}
+@media (max-width:640px){.orn{display:none}.sheet h1{padding:0}}
 @media print{
   @page{size:A4;margin:10mm}
   body{background:#fff;padding:0}
   .sheet{box-shadow:none;margin:0;min-height:auto;break-after:page;border-radius:0}
-  .sheet:last-child{break-after:auto}
+  .sheet:last-of-type{break-after:auto}
   .card,.note,.tip,pre{break-inside:avoid}
 }
 
-/* === a11y: contraste liens + focus (AA/AAA) === */
+/* === a11y === */
 :root{--link:#7a3068}
 a{color:var(--link)}
 a:hover{color:var(--link);text-decoration-thickness:2px}
 :focus-visible{outline:3px solid var(--link);outline-offset:3px}
 a:focus:not(:focus-visible){outline:none}
-.num{background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:2px solid var(--c)}
-.card li b{background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:1px solid var(--c)}
-.card li::before{color:color-mix(in srgb,var(--c) 55%,black)}
-.card .sub{color:color-mix(in srgb,var(--c) 45%,black)}
-.tip strong,.rule strong{color:color-mix(in srgb,var(--c) 45%,black)}
-
-.skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;
+.skip-link{position:absolute;top:0;left:0;transform:translateY(-120%);
   background:var(--paper);color:var(--link);padding:10px 16px;border:2px solid var(--link);
-  border-radius:8px;font-family:var(--font-title);text-decoration:none;z-index:100}
-.skip-link:focus{left:16px;top:16px;width:auto;height:auto;overflow:visible}
+  border-radius:8px;font-family:var(--font-title);font-weight:700;text-decoration:underline;z-index:100}
+.skip-link:focus,.skip-link:focus-visible{transform:translateY(0);outline:3px solid var(--link);outline-offset:2px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
 </style>
 </head>
 <body>
-<a class="skip-link" href="#inhalt">Zum Inhalt</a>
+<a class="skip-link" href="#main">Zum Hauptinhalt springen</a>
+
 
 <!-- ============ SEITE 1 ============ -->
-<main id="inhalt" class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="big" viewbox="0 0 80 90" aria-hidden="true">
+<main id="main" class="sheet" tabindex="-1">
+  <div class="orn tl" aria-hidden="true"><svg class="big" viewBox="0 0 80 90" aria-hidden="true">
   <g transform="rotate(-8 40 48)">
-    <rect x="16" y="10" width="52" height="68" rx="7" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.5"></rect>
-    <rect x="28" y="24" width="30" height="16" rx="3" style="fill:#fff;stroke:var(--ink);stroke-width:2"></rect>
-    <path d="M43 36c-4-3-6-5-6-7a3 3 0 0 1 6-.8 3 3 0 0 1 6 .8c0 2-2 4-6 7z" style="fill:var(--accent)"></path>
+    <rect x="16" y="10" width="52" height="68" rx="7" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.5"/>
+    <rect x="28" y="24" width="30" height="16" rx="3" style="fill:#fff;stroke:var(--ink);stroke-width:2"/>
+    <path d="M43 36c-4-3-6-5-6-7a3 3 0 0 1 6-.8 3 3 0 0 1 6 .8c0 2-2 4-6 7z" style="fill:var(--accent)"/>
     <g style="fill:#fff;stroke:var(--ink);stroke-width:2.2">
-      <circle cx="16" cy="22" r="3.6"></circle><circle cx="16" cy="34" r="3.6"></circle><circle cx="16" cy="46" r="3.6"></circle>
-      <circle cx="16" cy="58" r="3.6"></circle><circle cx="16" cy="70" r="3.6"></circle>
+      <circle cx="16" cy="22" r="3.6"/><circle cx="16" cy="34" r="3.6"/><circle cx="16" cy="46" r="3.6"/>
+      <circle cx="16" cy="58" r="3.6"/><circle cx="16" cy="70" r="3.6"/>
     </g>
   </g>
-  <path d="M70 4l2.2 4.8 5.2.6-3.9 3.5 1.1 5.1L70 15.4l-4.6 2.6 1.1-5.1-3.9-3.5 5.2-.6z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round"></path>
+  <path d="M70 4l2.2 4.8 5.2.6-3.9 3.5 1.1 5.1L70 15.4l-4.6 2.6 1.1-5.1-3.9-3.5 5.2-.6z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round"/>
 </svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="big" viewbox="0 0 80 90" aria-hidden="true">
+  <div class="orn tr" aria-hidden="true"><svg class="big" viewBox="0 0 80 90" aria-hidden="true">
   <g style="stroke:var(--ink);stroke-width:2;stroke-linejoin:round">
-    <g transform="rotate(-16 28 52)"><rect x="23" y="8" width="9" height="44" style="fill:var(--c3)"></rect><path d="M23 8L27.5-2 32 8z" style="fill:#f6dcc0"></path></g>
-    <g transform="rotate(4 42 52)"><rect x="38" y="4" width="9" height="48" style="fill:var(--accent)"></rect><path d="M38 4L42.5-6 47 4z" style="fill:#f6dcc0"></path></g>
-    <g transform="rotate(20 54 52)"><rect x="50" y="10" width="9" height="42" style="fill:var(--c4)"></rect><path d="M50 10L54.5 0 59 10z" style="fill:#f6dcc0"></path></g>
-    <path d="M14 46h52l-5 36a5 5 0 0 1-5 4H24a5 5 0 0 1-5-4z" style="fill:var(--c5)"></path>
+    <g transform="rotate(-16 28 52)"><rect x="23" y="8" width="9" height="44" style="fill:var(--c3)"/><path d="M23 8L27.5-2 32 8z" style="fill:#f6dcc0"/></g>
+    <g transform="rotate(4 42 52)"><rect x="38" y="4" width="9" height="48" style="fill:var(--accent)"/><path d="M38 4L42.5-6 47 4z" style="fill:#f6dcc0"/></g>
+    <g transform="rotate(20 54 52)"><rect x="50" y="10" width="9" height="42" style="fill:var(--c4)"/><path d="M50 10L54.5 0 59 10z" style="fill:#f6dcc0"/></g>
+    <path d="M14 46h52l-5 36a5 5 0 0 1-5 4H24a5 5 0 0 1-5-4z" style="fill:var(--c5)"/>
   </g>
-  <path d="M40 70c-3-2.4-4.6-4-4.6-5.6a2.3 2.3 0 0 1 4.6-.6 2.3 2.3 0 0 1 4.6.6c0 1.6-1.6 3.2-4.6 5.6z" style="fill:#fff"></path>
+  <path d="M40 70c-3-2.4-4.6-4-4.6-5.6a2.3 2.3 0 0 1 4.6-.6 2.3 2.3 0 0 1 4.6.6c0 1.6-1.6 3.2-4.6 5.6z" style="fill:#fff"/>
 </svg></div>
 
   <h1>HTML</h1>
   <p style="text-align:center"><span class="tag">Webentwicklung · Grundlagen</span></p>
 
-  <h2>Was ist HTML?</h2>
+  <h3>Was ist HTML?</h3>
   <section class="grid">
     <article class="card" style="--c:var(--c1)">
-      <h3><span class="num">1</span>Die Abkürzung</h3>
+      <h2><span class="num">1</span>Die Abkürzung</h2>
       <p class="sub">HyperText Markup Language</p>
       <ul>
         <li>Auf Deutsch: <span class="hl">Hypertext-Auszeichnungssprache</span></li>
       </ul>
     </article>
     <article class="card" style="--c:var(--c2)">
-      <h3><span class="num">2</span>Keine Programmiersprache!</h3>
+      <h2><span class="num">2</span>Keine Programmiersprache!</h2>
       <p class="sub">Sondern eine Auszeichnungssprache</p>
       <ul>
         <li>HTML <span class="hl">beschreibt Inhalte</span>, es rechnet nicht.</li>
       </ul>
     </article>
     <article class="card" style="--c:var(--c3)">
-      <h3><span class="num">3</span>Das Fundament</h3>
+      <h2><span class="num">3</span>Das Fundament</h2>
       <p class="sub">Das Grundgerüst jeder Website</p>
       <ul>
         <li>Jede Website <span class="hl">baut auf HTML auf</span>.</li>
       </ul>
     </article>
     <article class="card" style="--c:var(--c4)">
-      <h3><span class="num">4</span>Seine Aufgabe</h3>
+      <h2><span class="num">4</span>Seine Aufgabe</h2>
       <p class="sub">Dem Browser etwas mitteilen</p>
       <ul>
         <li>Welche <span class="hl">Inhalte</span> sind auf der Seite?</li>
         <li>Welche <span class="hl">Bedeutung</span> haben sie? (Überschrift, Text, Bild, Link)</li>
       </ul>
     </article>
-  </main>
+  </section>
 
   <hr>
-  <h2>1. HTML-Vokabular</h2>
+  <h3>1. HTML-Vokabular</h3>
   <section class="grid">
     <article class="card" style="--c:var(--c5)">
-      <h3><span class="num">1</span>Tag</h3>
+      <h2><span class="num">1</span>Tag</h2>
       <p class="sub">Ein Befehl in spitzen Klammern</p>
       <ul>
         <li>Sagt dem Browser, <span class="hl">was dargestellt</span> werden soll.</li>
@@ -193,7 +191,7 @@ a:focus:not(:focus-visible){outline:none}
       </ul>
     </article>
     <article class="card" style="--c:var(--c6)">
-      <h3><span class="num">2</span>Element</h3>
+      <h2><span class="num">2</span>Element</h2>
       <p class="sub">Ein kompletter Baustein</p>
       <ul>
         <li>Start-Tag + <span class="hl">Inhalt</span> + End-Tag</li>
@@ -201,14 +199,14 @@ a:focus:not(:focus-visible){outline:none}
       </ul>
     </article>
     <article class="card" style="--c:var(--c1)">
-      <h3><span class="num">3</span>Attribut</h3>
+      <h2><span class="num">3</span>Attribut</h2>
       <p class="sub">Eine Zusatzangabe im Start-Tag</p>
       <ul>
         <li>Liefert <span class="hl">Details</span>, z. B. die Webadresse eines Links oder den Namen eines Bildes.</li>
       </ul>
     </article>
     <article class="card" style="--c:var(--c2)">
-      <h3><span class="num">4</span>Semantik</h3>
+      <h2><span class="num">4</span>Semantik</h2>
       <p class="sub">Die Bedeutung eines Tags</p>
       <ul>
         <li><span class="code">&lt;button&gt;</span> = „Hier ist ein <span class="hl">klickbarer Knopf</span>“</li>
@@ -220,15 +218,15 @@ a:focus:not(:focus-visible){outline:none}
 </main>
 
 <!-- ============ SEITE 2 ============ -->
-<section aria-label="Seite 2" class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewbox="0 0 40 48" aria-hidden="true">
-  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"></path>
-  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-</svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="heart" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
 
-  <h2>Die Standard-Tags</h2>
+  <h1>Die Standard-Tags</h1>
   <p style="text-align:center"><span class="tag">Inhalte darstellen</span></p>
 
   <p style="text-align:center;margin:14px 0 0">So sieht ein Element aus:</p>
@@ -240,7 +238,7 @@ a:focus:not(:focus-visible){outline:none}
 
   <section class="grid">
     <article class="card" style="--c:var(--c1)">
-      <h3><span class="num">1</span>Überschriften</h3>
+      <h2><span class="num">1</span>Überschriften</h2>
       <p class="sub"><span class="code">&lt;h1&gt;</span> bis <span class="code">&lt;h6&gt;</span></p>
       <ul>
         <li>Gliedern den Text <span class="hl">hierarchisch</span>.</li>
@@ -251,7 +249,7 @@ a:focus:not(:focus-visible){outline:none}
     </article>
 
     <article class="card" style="--c:var(--c2)">
-      <h3><span class="num">2</span>Absätze</h3>
+      <h2><span class="num">2</span>Absätze</h2>
       <p class="sub"><span class="code">&lt;p&gt;</span></p>
       <ul>
         <li>Definieren <span class="hl">normale Textblöcke</span>.</li>
@@ -261,7 +259,7 @@ a:focus:not(:focus-visible){outline:none}
     </article>
 
     <article class="card" style="--c:var(--c3)">
-      <h3><span class="num">3</span>Links</h3>
+      <h2><span class="num">3</span>Links</h2>
       <p class="sub"><span class="code">&lt;a&gt;</span></p>
       <ul>
         <li>Verknüpfen mit anderen Webseiten.</li>
@@ -271,7 +269,7 @@ a:focus:not(:focus-visible){outline:none}
     </article>
 
     <article class="card" style="--c:var(--c4)">
-      <h3><span class="num">4</span>Bilder</h3>
+      <h2><span class="num">4</span>Bilder</h2>
       <p class="sub"><span class="code">&lt;img&gt;</span></p>
       <ul>
         <li>Bindet Bilder ein – <span class="hl">ohne End-Tag</span>!</li>
@@ -282,7 +280,7 @@ a:focus:not(:focus-visible){outline:none}
     </article>
 
     <article class="card" style="--c:var(--c5)">
-      <h3><span class="num">5</span>Listen</h3>
+      <h2><span class="num">5</span>Listen</h2>
       <p class="sub"><span class="code">&lt;ul&gt;</span> <span class="code">&lt;ol&gt;</span> <span class="code">&lt;li&gt;</span></p>
       <ul>
         <li><span class="code">&lt;ul&gt;</span> = ungeordnete Liste (mit Punkten)</li>
@@ -292,7 +290,7 @@ a:focus:not(:focus-visible){outline:none}
     </article>
 
     <article class="card" style="--c:var(--c6)">
-      <h3><span class="num">6</span>Hervorhebung</h3>
+      <h2><span class="num">6</span>Hervorhebung</h2>
       <p class="sub"><span class="code">&lt;strong&gt;</span> <span class="code">&lt;em&gt;</span></p>
       <ul>
         <li><span class="code">&lt;strong&gt;</span> = <b style="all:unset;font-weight:700">fett</b> + als <span class="hl">wichtig</span> markiert (wichtig für Screenreader)</li>
@@ -310,15 +308,15 @@ a:focus:not(:focus-visible){outline:none}
 </main>
 
 <!-- ============ SEITE 3 ============ -->
-<section aria-label="Seite 3" class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewbox="0 0 40 48" aria-hidden="true">
-  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"></path>
-  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-</svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="heart" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
 
-  <h2>Die Grundstruktur</h2>
+  <h1>Die Grundstruktur</h1>
   <p style="text-align:center"><span class="tag">2. HTML-Grundstruktur</span></p>
 
   <p style="margin:16px 0 0">Jede HTML-Seite braucht ein <span class="hl">festes Grundgerüst</span>, damit der Browser die Inhalte korrekt einliest:</p>
@@ -342,19 +340,19 @@ a:focus:not(:focus-visible){outline:none}
   <h3>Wichtige Bausteine</h3>
   <section class="grid">
     <article class="card" style="--c:var(--c1)">
-      <h4><span class="num">1</span>&lt;!DOCTYPE html&gt;</h4>
+      <h2><span class="num">1</span>&lt;!DOCTYPE html&gt;</h2>
       <ul><li>Kündigt ein <span class="hl">modernes HTML-Dokument</span> an.</li></ul>
     </article>
     <article class="card" style="--c:var(--c2)">
-      <h4><span class="num">2</span>&lt;head&gt;</h4>
+      <h2><span class="num">2</span>&lt;head&gt;</h2>
       <ul><li>Enthält <span class="hl">unsichtbare Metadaten</span> und den Browsertitel.</li></ul>
     </article>
     <article class="card" style="--c:var(--c3)">
-      <h4><span class="num">3</span>&lt;body&gt;</h4>
+      <h2><span class="num">3</span>&lt;body&gt;</h2>
       <ul><li>Umschließt <span class="hl">alle sichtbaren Inhalte</span>.</li></ul>
     </article>
     <article class="card" style="--c:var(--c4)">
-      <h4><span class="num">4</span>Bereiche</h4>
+      <h2><span class="num">4</span>Bereiche</h2>
       <p class="sub"><span class="code">&lt;header&gt;</span> <span class="code">&lt;main&gt;</span> <span class="code">&lt;footer&gt;</span></p>
       <ul><li>Teilen die Seite <span class="hl">logisch auf</span>.</li></ul>
     </article>
@@ -368,15 +366,15 @@ a:focus:not(:focus-visible){outline:none}
 </main>
 
 <!-- ============ SEITE 4 ============ -->
-<section aria-label="Seite 4" class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewbox="0 0 40 48" aria-hidden="true">
-  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"></path>
-  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-</svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="heart" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
 
-  <h2>Barrierefreiheit</h2>
+  <h1>Barrierefreiheit</h1>
   <p style="text-align:center"><span class="tag">3. Schlechte Struktur &amp; Screenreader</span></p>
 
   <p style="margin:16px 0 0">Blinde oder sehbehinderte Menschen nutzen <span class="hl">Screenreader</span>, die Webseiteninhalte vorlesen.
@@ -384,7 +382,7 @@ a:focus:not(:focus-visible){outline:none}
 
   <section class="grid one">
     <article class="card" style="--c:var(--c1)">
-      <h3><span class="num">1</span>Überschriften-Chaos</h3>
+      <h2><span class="num">1</span>Überschriften-Chaos</h2>
       <p class="sub">Ebenen werden durcheinandergebracht oder übersprungen</p>
       <ul>
         <li>Beispiel: Sprung von <span class="code">&lt;h1&gt;</span> direkt zu <span class="code">&lt;h4&gt;</span></li>
@@ -394,7 +392,7 @@ a:focus:not(:focus-visible){outline:none}
     </article>
 
     <article class="card" style="--c:var(--c2)">
-      <h3><span class="num">2</span>Fehlende Bereiche</h3>
+      <h2><span class="num">2</span>Fehlende Bereiche</h2>
       <p class="sub">Die „&lt;div&gt;-Wüste“</p>
       <ul>
         <li>Seite besteht nur aus neutralen <span class="code">&lt;div&gt;</span> statt aus <span class="code">&lt;header&gt;</span>, <span class="code">&lt;main&gt;</span> …</li>
@@ -403,7 +401,7 @@ a:focus:not(:focus-visible){outline:none}
     </article>
 
     <article class="card" style="--c:var(--c3)">
-      <h3><span class="num">3</span>Fehlende Bildbeschreibungen</h3>
+      <h2><span class="num">3</span>Fehlende Bildbeschreibungen</h2>
       <p class="sub">Das <span class="code">alt</span>-Attribut fehlt</p>
       <ul>
         <li>Der Screenreader liest oft nur den <span class="hl">kryptischen Dateinamen</span> vor.</li>
@@ -412,7 +410,7 @@ a:focus:not(:focus-visible){outline:none}
     </article>
 
     <article class="card" style="--c:var(--c4)">
-      <h3><span class="num">4</span>Falsche Reihenfolge</h3>
+      <h2><span class="num">4</span>Falsche Reihenfolge</h2>
       <p class="sub">CSS verschiebt Inhalte</p>
       <ul>
         <li>Inhalte stehen im Code an einer anderen Stelle als auf dem Bildschirm.</li>
@@ -434,22 +432,22 @@ a:focus:not(:focus-visible){outline:none}
 </main>
 
 <!-- ============ SEITE 5 ============ -->
-<section aria-label="Seite 5" class="sheet">
-  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewbox="0 0 40 48" aria-hidden="true">
-  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"></path>
-  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"></path>
-</svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
-  <div class="orn tr" aria-hidden="true"><svg class="heart" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg><svg class="star" viewbox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"></path></svg></div>
+<main class="sheet">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
 
-  <h2>Manuelles Testen</h2>
+  <h1>Manuelles Testen</h1>
   <p style="text-align:center"><span class="tag">4. Barrierefreiheit prüfen</span></p>
 
   <p style="margin:16px 0 0">Automatische Prüfprogramme finden <span class="hl">längst nicht jeden Fehler</span>. Deshalb wird manuell getestet:</p>
 
   <section class="grid one">
     <article class="card" style="--c:var(--c1)">
-      <h3><span class="num">1</span>Tastatur-Test</h3>
+      <h2><span class="num">1</span>Tastatur-Test</h2>
       <p class="sub">Maus weglegen!</p>
       <ul>
         <li>Nur mit <span class="code">Tab</span> (vorwärts) und <span class="code">Shift + Tab</span> (rückwärts) bedienen.</li>
@@ -459,7 +457,7 @@ a:focus:not(:focus-visible){outline:none}
     </article>
 
     <article class="card" style="--c:var(--c2)">
-      <h3><span class="num">2</span>Screenreader einschalten</h3>
+      <h2><span class="num">2</span>Screenreader einschalten</h2>
       <p class="sub">Kostenlose Programme</p>
       <ul>
         <li><span class="hl">NVDA</span> (Windows) oder <span class="hl">VoiceOver</span> (Mac) starten.</li>
@@ -468,7 +466,7 @@ a:focus:not(:focus-visible){outline:none}
     </article>
 
     <article class="card" style="--c:var(--c3)">
-      <h3><span class="num">3</span>Erweiterungen nutzen</h3>
+      <h2><span class="num">3</span>Erweiterungen nutzen</h2>
       <p class="sub">Browser-Tools</p>
       <ul>
         <li>Zum Beispiel <span class="hl">WAVE</span>, <span class="hl">Axe</span> oder eine <span class="hl">IBM-Erweiterung</span>.</li>
