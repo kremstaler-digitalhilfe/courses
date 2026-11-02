@@ -1,0 +1,24 @@
+# OS / éditeur
+.DS_Store
+**/.DS_Store
+.cursor/
+
+# Outils locaux (génération PPT / polices)
+.fonts/
+.python-pkgs/
+logo.png
+
+# Scripts Python (génération indexes / PPTX)
+*.py
+**/__pycache__/
+*.pyc
+
+# PowerPoint & assets de build
+*.pptx
+**/powerpoint/grid-bg.png
+
+# Fiche de référence locale (pas publiée)
+**/technisches-objekt.html
+
+# Tout sauf le site HTML (docs/)
+# → les .html restent trackables ; le reste est exclu ci-dessus
