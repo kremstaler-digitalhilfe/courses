@@ -25,9 +25,11 @@ scripts/
 **/__pycache__/
 *.pyc
 
-# PowerPoint (non déployé)
+# PowerPoint / assets (sources non déployées ; index placeholder OK)
 *.pptx
-**/powerpoint/
+**/powerpoint/**
+!**/powerpoint/index.html
+**/assets/
 
 # Fiche de référence locale (pas publiée)
 **/technisches-objekt.html
