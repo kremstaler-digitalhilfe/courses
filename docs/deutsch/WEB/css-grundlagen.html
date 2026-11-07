@@ -238,7 +238,7 @@ a:focus:not(:focus-visible){outline:none}
     </article>
     <article class="card" style="--c:var(--c3)">
       <h2><span class="num">3</span>Wert</h2>
-      <p class="sub">Value – Wie soll es sich ändern?</p>
+      <p class="sub">Value – Auf was soll es sich ändern?</p>
       <ul>
         <li><span class="code">blue</span> = Blau</li>
         <li><span class="code">16px</span> = Größe</li>
@@ -365,6 +365,26 @@ a:focus:not(:focus-visible){outline:none}
       <ul>
         <li><span class="code">font-family</span> bestimmt die <span class="hl">Schriftart</span> (z. B. Arial, sans-serif).</li>
         <li><span class="code">font-size</span> bestimmt die <span class="hl">Schriftgröße</span>.</li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c3)">
+      <h2><span class="num">3</span>Einheit rem</h2>
+      <p class="sub">root em · relativ zur Wurzel</p>
+      <ul>
+        <li><span class="code">rem</span> (root em) ist eine <span class="hl">relative Einheit</span>.</li>
+        <li>Ihr Wert hängt nur von der Schriftgröße auf dem Wurzelelement ab – dem Tag <span class="code">&lt;html&gt;</span>.</li>
+      </ul>
+      <p class="sub" style="margin-top:10px">Warum rem statt px oder em?</p>
+      <ul>
+        <li><b>Barrierefreiheit</b> Erhöht jemand die Standard-Schrift im Browser, passen sich alle <span class="code">rem</span>-Größen <span class="hl">automatisch an</span>. Pixel (<span class="code">px</span>) bleiben fest.</li>
+        <li><b>Vorhersehbar</b> (gegenüber <span class="code">em</span>): <span class="code">em</span> bezieht sich auf das direkte Elternelement – bei Verschachtelung entsteht ein <span class="hl">Multiplikator-Effekt</span>. <span class="code">rem</span> zeigt immer auf <span class="code">&lt;html&gt;</span>, egal wie tief das Element liegt.</li>
+      </ul>
+      <p class="sub" style="margin-top:10px">Nicht nur für Schrift!</p>
+      <ul>
+        <li><span class="code">rem</span> gilt nicht nur für <span class="code">font-size</span> – für <span class="hl">jede Längen-Eigenschaft</span>:</li>
+        <li><span class="code">padding</span> und <span class="code">margin</span> (Abstände)</li>
+        <li><span class="code">width</span> und <span class="code">height</span> (Breiten und Höhen)</li>
+        <li><span class="code">line-height</span>, <span class="code">border-radius</span> und mehr</li>
       </ul>
     </article>
   </section>
