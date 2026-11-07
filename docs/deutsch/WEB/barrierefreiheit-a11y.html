@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Barrierefreiheit A11y</title>
+<link rel="icon" href="../../favicon.png" type="image/png" sizes="32x32">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Patrick+Hand&family=Caveat:wght@600&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -53,7 +54,7 @@ h3{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px;display:inl
 .hl{background:linear-gradient(transparent 55%,var(--highlight) 55%)}
 .code{display:inline-block;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem;
   background:#fff;border:1.5px dashed var(--c,var(--accent));border-radius:8px;padding:1px 8px;
-  margin:1px 0;word-break:break-word}
+  margin:1px 0;word-break:break-word;max-width:100%;overflow-wrap:anywhere}
 pre.codeblock{--c:var(--c2);display:block;width:100%;max-width:100%;box-sizing:border-box;position:relative;
   margin:36px 0 8px;padding:32px 28px 24px;background:#fff;min-height:6.5rem;
   border:2px dashed var(--c);border-radius:var(--radius);overflow:visible;
@@ -71,14 +72,14 @@ pre.codeblock.bad{--c:var(--c6)}
 .cloud{display:inline-block;padding:8px 16px;border:2px dashed var(--accent);
   border-radius:40px;background:#fff;font-family:var(--font-hand);font-size:1.2rem;margin:4px 4px 0 0}
 .note{border:2px solid var(--accent);border-radius:var(--radius);
-  background:#fff;padding:12px 16px;margin-top:18px}
+  background:#fff;padding:12px 16px;margin-top:18px;max-width:100%;box-sizing:border-box}
 .note ul{list-style:none;padding:0;margin:6px 0 0}
 .note li::before{content:"♥ ";color:color-mix(in srgb,var(--accent) 45%,#14141f)}
 .tip{--c:var(--c3);border:2px dashed var(--c);border-radius:var(--radius);
-  background:color-mix(in srgb,var(--c) 6%,white);padding:10px 16px;margin-top:18px}
+  background:color-mix(in srgb,var(--c) 6%,white);padding:10px 16px;margin-top:18px;max-width:100%;box-sizing:border-box}
 .tip strong{font-family:var(--font-title);color:color-mix(in srgb,var(--c) 38%,#14141f)}
 .rule{--c:var(--c4);border:2px solid var(--c);border-radius:var(--radius);
-  background:color-mix(in srgb,var(--c) 6%,white);padding:10px 16px;margin-top:18px}
+  background:color-mix(in srgb,var(--c) 6%,white);padding:10px 16px;margin-top:18px;max-width:100%;box-sizing:border-box}
 .rule strong{font-family:var(--font-title);color:color-mix(in srgb,var(--c) 38%,#14141f)}
 hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
 .banner{margin-top:20px;padding:10px;text-align:center;background:var(--accent-soft);

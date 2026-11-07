@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Übungen Modul 1 · Agiles Setup</title>
+<link rel="icon" href="../../../../favicon.png" type="image/png" sizes="32x32">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Patrick+Hand&family=Caveat:wght@600&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -36,7 +37,7 @@ h3{font-family:var(--font-title);font-size:1.2rem;margin:20px 0 4px;display:inli
 .grid.one{grid-template-columns:1fr}
 .grid.three{grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr))}
 .card{--c:var(--c1);position:relative;border:2px solid var(--c);border-radius:var(--radius);
-  padding:14px 16px;background:color-mix(in srgb,var(--c) 5%,white)}
+  padding:14px 16px;background:color-mix(in srgb,var(--c) 5%,white);overflow-wrap:anywhere;max-width:100%;min-width:0}
 .card::before{content:"";position:absolute;top:-9px;right:18px;width:54px;height:16px;
   background:color-mix(in srgb,var(--c) 45%,white);opacity:.8;transform:rotate(4deg);border-radius:2px}
 .card h2{margin:0 0 4px;font-family:var(--font-title);font-size:1.05rem}
@@ -47,15 +48,15 @@ h3{font-family:var(--font-title);font-size:1.2rem;margin:20px 0 4px;display:inli
 .card li::before{content:"✓ ";color:color-mix(in srgb,var(--c) 38%,#14141f);font-weight:700}
 .card ul.plain li::before{content:""}
 .hl{background:linear-gradient(transparent 55%,var(--highlight) 55%)}
-.note{border:2px solid var(--accent);border-radius:var(--radius);background:#fff;padding:12px 16px;margin-top:16px}
+.note{border:2px solid var(--accent);border-radius:var(--radius);background:#fff;padding:12px 16px;margin-top:16px;max-width:100%;box-sizing:border-box}
 .note ul{list-style:none;padding:0;margin:6px 0 0}
 .note li{margin:4px 0}
 .note li::before{content:"♥ ";color:color-mix(in srgb,var(--accent) 45%,#14141f)}
 .tip{--c:var(--c3);border:2px dashed var(--c);border-radius:var(--radius);
-  background:color-mix(in srgb,var(--c) 6%,white);padding:10px 16px;margin-top:16px}
+  background:color-mix(in srgb,var(--c) 6%,white);padding:10px 16px;margin-top:16px;max-width:100%;box-sizing:border-box}
 .tip strong{font-family:var(--font-title);color:color-mix(in srgb,var(--c) 38%,#14141f)}
 .rule{--c:var(--c4);border:2px solid var(--c);border-radius:var(--radius);
-  background:color-mix(in srgb,var(--c) 6%,white);padding:10px 16px;margin-top:16px}
+  background:color-mix(in srgb,var(--c) 6%,white);padding:10px 16px;margin-top:16px;max-width:100%;box-sizing:border-box}
 .rule strong{font-family:var(--font-title);color:color-mix(in srgb,var(--c) 38%,#14141f)}
 hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:18px 0 4px}
 .banner{margin-top:18px;padding:10px;text-align:center;background:var(--accent-soft);
@@ -75,7 +76,7 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:18px 0 4px}
 .duel .who{padding:8px 18px;border:2px solid var(--c);border-radius:12px;background:color-mix(in srgb,var(--c) 15%,white);
   font-family:var(--font-title)}
 .arrow{font-size:1.3rem;color:color-mix(in srgb,var(--accent) 45%,#14141f);font-weight:700}
-.gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px 18px;margin-top:12px}
+.gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:10px 18px;margin-top:12px}
 .gloss div{padding:8px 12px;border-left:5px solid var(--c);border-radius:6px;
   background:color-mix(in srgb,var(--c) 5%,white);font-size:1rem}
 .gloss b{font-family:var(--font-title);font-size:.95rem}
@@ -86,7 +87,7 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:18px 0 4px}
 .orn .bulb{width:38px;height:46px;margin-top:6px}
 .orn .star{width:26px;height:26px}
 .orn .heart{width:28px;height:28px;margin-top:10px}
-@media (max-width:640px){.orn{display:none}h1{padding:0}}
+@media (max-width:640px){body{padding:10px}.orn{display:none}.sheet{padding:22px 14px 40px;overflow-x:clip}h1{padding:0}}
 @media print{
   @page{size:A4;margin:10mm}
   body{background:#fff;padding:0}

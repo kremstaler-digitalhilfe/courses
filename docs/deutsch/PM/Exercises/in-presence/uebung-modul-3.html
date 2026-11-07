@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Übungen Modul 3 · Tools</title>
+<link rel="icon" href="../../../../favicon.png" type="image/png" sizes="32x32">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Patrick+Hand&family=Caveat:wght@600&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -35,7 +36,7 @@ h3{font-family:var(--font-title);font-size:1.1rem;margin:16px 0 4px;display:inli
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px;margin-top:12px}
 .grid.one{grid-template-columns:1fr}
 .card{--c:var(--c1);position:relative;border:2px solid var(--c);border-radius:var(--radius);
-  padding:12px 14px;background:color-mix(in srgb,var(--c) 5%,white)}
+  padding:12px 14px;background:color-mix(in srgb,var(--c) 5%,white);overflow-wrap:anywhere;max-width:100%;min-width:0}
 .card::before{content:"";position:absolute;top:-9px;right:18px;width:54px;height:16px;
   background:color-mix(in srgb,var(--c) 45%,white);opacity:.8;transform:rotate(4deg);border-radius:2px}
 .card h2{margin:0 0 4px;font-family:var(--font-title);font-size:1rem}
@@ -46,7 +47,7 @@ h3{font-family:var(--font-title);font-size:1.1rem;margin:16px 0 4px;display:inli
 .mc{list-style:none;padding:0;margin:6px 0 0}
 .mc li{margin:5px 0;padding-left:28px;position:relative;font-size:1rem}
 .mc li::before{content:"☐";position:absolute;left:0;top:0;color:var(--c);font-size:1.15rem;line-height:1.2}
-.note{border:2px solid var(--accent);border-radius:var(--radius);background:#fff;padding:12px 16px;margin-top:14px}
+.note{border:2px solid var(--accent);border-radius:var(--radius);background:#fff;padding:12px 16px;margin-top:14px;max-width:100%;box-sizing:border-box}
 .note ul{list-style:none;padding:0;margin:6px 0 0}
 .note li{margin:4px 0}
 .note li::before{content:"♥ ";color:color-mix(in srgb,var(--accent) 45%,#14141f)}
@@ -55,7 +56,7 @@ h3{font-family:var(--font-title);font-size:1.1rem;margin:16px 0 4px;display:inli
 .pageno{position:absolute;bottom:16px;left:0;right:0;text-align:center;
   font-family:var(--font-hand);font-size:1.1rem;color:color-mix(in srgb,var(--ink) 72%,white)}
 .cap{font-family:var(--font-hand);font-size:1.1rem;margin:2px 0 0}
-.gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:8px 16px;margin-top:10px}
+.gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:8px 16px;margin-top:10px}
 .gloss div{padding:6px 10px;border-left:5px solid var(--c);border-radius:6px;
   background:color-mix(in srgb,var(--c) 5%,white);font-size:.95rem}
 .gloss b{font-family:var(--font-title);font-size:.9rem}
@@ -66,7 +67,7 @@ h3{font-family:var(--font-title);font-size:1.1rem;margin:16px 0 4px;display:inli
 .orn .bulb{width:38px;height:46px;margin-top:6px}
 .orn .star{width:26px;height:26px}
 .orn .heart{width:28px;height:28px;margin-top:10px}
-@media (max-width:640px){.orn{display:none}h1{padding:0}}
+@media (max-width:640px){body{padding:10px}.orn{display:none}.sheet{padding:22px 14px 40px;overflow-x:clip}h1{padding:0}}
 @media print{
   @page{size:A4;margin:10mm}
   body{background:#fff;padding:0}
