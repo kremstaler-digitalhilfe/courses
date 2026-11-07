@@ -143,6 +143,13 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
   font-family:var(--font-title);font-size:1.2rem;background:color-mix(in srgb,var(--c) 30%,white);box-sizing:border-box}
 .fibsum{text-align:center;font-family:var(--font-hand);font-size:1.15rem;margin-top:6px}
 
+/* ---- Story-Point-Venn ---- */
+.sp-venn{container-type:inline-size;width:100%;margin:12px auto 0}
+.sp-venn .diagram{width:100%;height:auto;display:block;overflow:visible}
+.sp-venn .diagram text{fill:var(--ink);font-family:var(--font-hand);font-size:clamp(11px,3.2cqi,15px)}
+.sp-venn .diagram .t{font-family:var(--font-title);font-size:clamp(12px,3.8cqi,17px)}
+.sp-venn .diagram .s{font-size:clamp(11px,3.2cqi,15px)}
+
 /* ---- Planning-Poker-Karten ---- */
 .cards{display:flex;justify-content:center;gap:10px;margin-top:16px;flex-wrap:wrap}
 .pc{width:62px;height:88px;border:3px solid var(--ink);border-radius:12px;background:#fff;display:grid;place-items:center;
@@ -849,22 +856,24 @@ a:focus:not(:focus-visible){outline:none}
   <h3>Was ist ein Story Point?</h3>
   <p style="margin:6px 0 0">Ein relatives Maß für den <span class="hl">Gesamtaufwand</span> einer Aufgabe. Er kombiniert <span class="hl">drei Faktoren</span>:</p>
 
-  <svg class="diagram" viewBox="0 0 700 300" role="img" aria-label="Drei sich überlappende Kreise: Aufwand, Komplexität, Risiko und Unsicherheit. In der Mitte der Story Point.">
-    <g fill-opacity=".45" stroke="#2b2b3a" stroke-width="2">
-      <circle cx="285" cy="115" r="88" fill="#7bc47f"/>
-      <circle cx="415" cy="115" r="88" fill="#6fa8e8"/>
-      <circle cx="350" cy="205" r="88" fill="#f2a65a"/>
-    </g>
-    <g text-anchor="middle">
-      <text class="t" x="240" y="95">Aufwand</text>
-      <text class="s" x="240" y="116">Wie viel</text><text class="s" x="240" y="134">Arbeit ist es?</text>
-      <text class="t" x="460" y="95">Komplexität</text>
-      <text class="s" x="460" y="116">Wie schwierig ist</text><text class="s" x="460" y="134">die Umsetzung?</text>
-      <text class="t" x="350" y="232">Risiko &amp; Unsicherheit</text>
-      <text class="s" x="350" y="254">Was könnte</text><text class="s" x="350" y="272">dazwischenkommen?</text>
-      <text class="t" x="350" y="158">Story</text><text class="t" x="350" y="176">Point</text>
-    </g>
-  </svg>
+  <div class="sp-venn">
+    <svg class="diagram" viewBox="0 0 480 410" role="img" aria-label="Drei sich überlappende Kreise: Aufwand, Komplexität, Risiko und Unsicherheit. In der Mitte der Story Point.">
+      <g fill-opacity=".45" stroke="#2b2b3a" stroke-width="2.4">
+        <circle cx="158" cy="142" r="118" fill="#7bc47f"/>
+        <circle cx="322" cy="142" r="118" fill="#6fa8e8"/>
+        <circle cx="240" cy="272" r="118" fill="#f2a65a"/>
+      </g>
+      <g text-anchor="middle">
+        <text class="t" x="118" y="102">Aufwand</text>
+        <text class="s" x="118" y="122">Wie viel Arbeit<tspan x="118" dy="1.25em">ist es?</tspan></text>
+        <text class="t" x="362" y="102">Komplexität</text>
+        <text class="s" x="362" y="122">Wie schwierig ist<tspan x="362" dy="1.25em">die Umsetzung?</tspan></text>
+        <text class="t" x="240" y="294">Risiko &amp;<tspan x="240" dy="1.15em">Unsicherheit</tspan></text>
+        <text class="s" x="240" y="338">Was könnte<tspan x="240" dy="1.25em">dazwischenkommen?</tspan></text>
+        <text class="t" x="240" y="176" lang="en">Story<tspan x="240" dy="1.15em">Point</tspan></text>
+      </g>
+    </svg>
+  </div>
 
   <div class="tip">
     <strong>Wichtig:</strong> Ein Story Point ist <span class="hl">einheitslos</span> – keine Stunden, sondern ein relatives Maß im Vergleich zu anderen Aufgaben.
@@ -893,7 +902,7 @@ a:focus:not(:focus-visible){outline:none}
     <div style="height:114px;--c:var(--c5)">8</div>
     <div style="height:172px;--c:var(--c6)">13</div>
   </div>
-  <p class="fibsum">1 + 2 = 3 · 2 + 3 = 5 · 3 + 5 = 8 · 5 + 8 = 13</p>
+  <p class="fibsum">1 + 2 = 3 &nbsp;&nbsp;&nbsp; 2 + 3 = 5 &nbsp;&nbsp;&nbsp; 3 + 5 = 8 &nbsp;&nbsp;&nbsp; 5 + 8 = 13</p>
 
   <section class="grid one">
     <article class="card" style="--c:var(--c4)">
