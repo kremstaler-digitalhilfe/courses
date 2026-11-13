@@ -49,6 +49,10 @@ h3{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px;display:inl
 .card li::before{content:"✓ ";color:color-mix(in srgb,var(--c) 38%,#14141f);font-weight:700}
 .card li b{font-family:var(--font-title);font-size:.78rem;text-transform:uppercase;
   background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:1px solid var(--c);padding:1px 8px;border-radius:6px;margin-right:6px}
+.gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:10px 18px;margin-top:12px}
+.gloss div{padding:8px 12px;border-left:5px solid var(--c);border-radius:6px;
+  background:color-mix(in srgb,var(--c) 5%,white);font-size:1rem}
+.gloss b{font-family:var(--font-title);font-size:.95rem}
 .hl{background:linear-gradient(transparent 55%,var(--highlight) 55%)}
 .code{display:inline-block;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem;
   background:#fff;border:1.5px dashed var(--c,var(--accent));border-radius:8px;padding:1px 8px;
@@ -130,7 +134,7 @@ a.link{color:var(--link);font-weight:700;text-decoration:underline wavy var(--li
   body{background:#fff;padding:0}
   .sheet{box-shadow:none;margin:0;min-height:auto;break-after:page;border-radius:0}
   .sheet:last-of-type{break-after:auto}
-  .card,.note,.tip,.rule,pre,.demo,.bm{break-inside:avoid}
+  .card,.note,.tip,.rule,pre,.demo,.bm,.gloss div{break-inside:avoid}
 }
 
 /* === a11y === */
@@ -257,11 +261,75 @@ a:focus:not(:focus-visible){outline:none}
     <span style="background:color-mix(in srgb,var(--c2) 35%,white)">Eigenschaft</span>
     <span style="background:color-mix(in srgb,var(--c3) 40%,white)">Wert</span>
   </div>
-  <div class="pageno">Seite 1 / 6</div>
+  <div class="pageno">Seite 1 / 7</div>
 </main>
 
 <!-- ============ SEITE 2 ============ -->
 <section class="sheet" aria-label="Seite 2">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+
+  <h2>CSS-Selektoren</h2>
+  <p style="text-align:center"><span class="tag">1b. Welches Element wird gestylt?</span></p>
+
+  <p style="margin:16px 0 0">Denk an Menschen – so merkst du die drei Selektoren:</p>
+  <p style="margin:8px 0 0">
+    <span class="cloud"># · eine Person</span>
+    <span class="cloud">. · eine Gruppe</span>
+    <span class="cloud">Tag · alle Menschen</span>
+  </p>
+
+  <section class="grid one">
+    <article class="card" style="--c:var(--c2)">
+      <h2><span class="num">1</span>ID-Selektor</h2>
+      <p class="sub">Eine Person · mit #</p>
+      <ul>
+        <li>Wie <span class="hl">eine bestimmte Person</span> – einzigartig.</li>
+        <li>In HTML: <span class="code">id="logo"</span> – nur <span class="hl">einmal</span> pro Seite.</li>
+        <li>In CSS: <span class="code">#logo</span> (Raute + Name).</li>
+      </ul>
+    </article>
+
+    <article class="card" style="--c:var(--c4)">
+      <h2><span class="num">2</span>Klassen-Selektor</h2>
+      <p class="sub">Eine Gruppe · mit .</p>
+      <ul>
+        <li>Wie <span class="hl">eine Gruppe</span> (z. B. die Fußballmannschaft).</li>
+        <li>In HTML: <span class="code">class="btn"</span> – beliebig oft.</li>
+        <li>In CSS: <span class="code">.btn</span> (Punkt + Name).</li>
+      </ul>
+    </article>
+
+    <article class="card" style="--c:var(--c1)">
+      <h2><span class="num">3</span>Element-Selektor</h2>
+      <p class="sub">Alle Menschen · der Tag-Name</p>
+      <ul>
+        <li>Wie <span class="hl">alle Menschen der Welt</span> dieses Typs.</li>
+        <li>Schreib den Tag: <span class="code">p</span>, <span class="code">h1</span>, <span class="code">a</span></li>
+        <li>Trifft <span class="hl">jedes</span> passende Element auf der Seite.</li>
+      </ul>
+    </article>
+  </section>
+
+  <div class="rule">
+    <strong>Goldene Regel:</strong> Für Styles meist die <span class="hl">Gruppe</span> (Klasse) nutzen.
+    Die <span class="hl">eine Person</span> (<span class="code">id</span>) eher für Anker und JavaScript.
+  </div>
+  <div class="tip">
+    <strong>Tipp:</strong> Merkhilfe —
+    <span class="code">#</span> = eine Person ·
+    <span class="code">.</span> = eine Gruppe ·
+    <span class="code">p</span> = alle Menschen
+  </div>
+  <div class="pageno">Seite 2 / 7</div>
+</section>
+
+<!-- ============ SEITE 3 ============ -->
+<section class="sheet" aria-label="Seite 3">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
@@ -335,11 +403,11 @@ a:focus:not(:focus-visible){outline:none}
       </ul>
     </article>
   </section>
-  <div class="pageno">Seite 2 / 6</div>
+  <div class="pageno">Seite 3 / 7</div>
 </section>
 
-<!-- ============ SEITE 3 ============ -->
-<section class="sheet" aria-label="Seite 3">
+<!-- ============ SEITE 4 ============ -->
+<section class="sheet" aria-label="Seite 4">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
@@ -420,11 +488,11 @@ a:focus:not(:focus-visible){outline:none}
       <ul><li>Ein <span class="hl">sichtbarer Rahmen</span> um das Element.</li></ul>
     </article>
   </section>
-  <div class="pageno">Seite 3 / 6</div>
+  <div class="pageno">Seite 4 / 7</div>
 </section>
 
-<!-- ============ SEITE 4 ============ -->
-<section class="sheet" aria-label="Seite 4">
+<!-- ============ SEITE 5 ============ -->
+<section class="sheet" aria-label="Seite 5">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
@@ -490,11 +558,11 @@ a:focus:not(:focus-visible){outline:none}
     <strong>Nachschlagen:</strong> CSS-Tricks-Guide:
     <a class="link" href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank" rel="noopener noreferrer">css-tricks.com/…/a-guide-to-flexbox<span class="sr-only"> (öffnet in neuem Tab)</span></a>
   </div>
-  <div class="pageno">Seite 4 / 6</div>
+  <div class="pageno">Seite 5 / 7</div>
 </section>
 
-<!-- ============ SEITE 5 ============ -->
-<section class="sheet" aria-label="Seite 5">
+<!-- ============ SEITE 6 ============ -->
+<section class="sheet" aria-label="Seite 6">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
@@ -556,11 +624,11 @@ a:focus:not(:focus-visible){outline:none}
     <span class="hl">Grid für das große Layout</span> der gesamten Website und
     <span class="hl">Flexbox für die kleinen Details</span> im Inneren (z. B. Logo und Menüpunkte nebeneinander in der Kopfzeile).
   </div>
-  <div class="pageno">Seite 5 / 6</div>
+  <div class="pageno">Seite 6 / 7</div>
 </section>
 
-<!-- ============ SEITE 6 ============ -->
-<section class="sheet" aria-label="Seite 6">
+<!-- ============ SEITE 7 ============ -->
+<section class="sheet" aria-label="Seite 7">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
@@ -605,7 +673,7 @@ a:focus:not(:focus-visible){outline:none}
   <hr>
   <p style="margin:12px 0 4px"><span class="tag">Zusammenfassung</span></p>
   <span class="cloud">CSS = Design, keine Programmierung</span>
-  <span class="cloud">Selektor { Eigenschaft: Wert; }</span>
+  <span class="cloud"># Person · . Gruppe · Tag alle</span>
   <span class="cloud">Externe Datei = Standard</span>
   <span class="cloud">Flexbox 1D · Grid 2D</span>
 
@@ -613,14 +681,25 @@ a:focus:not(:focus-visible){outline:none}
     <strong>Merke dir:</strong> Gutes CSS …
     <ul>
       <li>liegt in einer externen Datei</li>
+      <li>wählt Selektoren wie Menschen: eine Person (#), Gruppe (.), alle (Tag)</li>
       <li>nutzt Flexbox für eine Richtung und Grid für Flächen</li>
       <li>erhält den Fokus-Rahmen und sorgt für gute Kontraste</li>
       <li>nutzt rem statt px für Schriftgrößen</li>
     </ul>
   </div>
 
+  <h3>Glossar</h3>
+  <div class="gloss">
+    <div style="--c:var(--c2)"><b>ID-Selektor (#):</b> Wie <span class="hl">eine Person</span> – genau ein Element.</div>
+    <div style="--c:var(--c4)"><b>Klassen-Selektor (.):</b> Wie <span class="hl">eine Gruppe</span> – mehrere Elemente mit derselben Klasse.</div>
+    <div style="--c:var(--c1)"><b>Element-Selektor:</b> Wie <span class="hl">alle Menschen</span> dieses Typs – z. B. alle <span class="code">p</span>.</div>
+    <div style="--c:var(--c3)"><b>Selektor:</b> Sagt, welches HTML-Element gestylt wird.</div>
+    <div style="--c:var(--c5)"><b>Flexbox:</b> Layout in einer Richtung (Zeile oder Spalte).</div>
+    <div style="--c:var(--c6)"><b>Grid:</b> Layout in Zeilen und Spalten gleichzeitig.</div>
+  </div>
+
   <div class="banner">Gestalten · Anordnen · Zugänglich bleiben</div>
-  <div class="pageno">Seite 6 / 6</div>
+  <div class="pageno">Seite 7 / 7</div>
 </section>
 
 </body>
