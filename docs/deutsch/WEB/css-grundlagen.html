@@ -127,8 +127,9 @@ a.link{color:var(--link);font-weight:700;text-decoration:underline wavy var(--li
 .orn .bulb{width:38px;height:46px;margin-top:6px}
 .orn .star{width:26px;height:26px}
 .orn .heart{width:28px;height:28px;margin-top:10px}
-.sheet h1{padding:0 84px}
-@media (max-width:640px){body{padding:10px}.orn{display:none}.sheet{padding:22px 14px 40px;overflow-x:clip}.sheet h1{padding:0}}
+.sheet > h1,
+.sheet:not(:has(> h1)) > h2:first-of-type{padding:0 92px;text-align:center;box-sizing:border-box}
+@media (max-width:640px){body{padding:10px}.orn{display:none}.sheet{padding:22px 14px 40px;overflow-x:clip}.sheet > h1,.sheet:not(:has(> h1)) > h2:first-of-type{padding:0}}
 @media print{
   @page{size:A4;margin:10mm}
   body{background:#fff;padding:0}
