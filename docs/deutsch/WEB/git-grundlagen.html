@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Git Grundlagen</title>
+<link rel="icon" href="../../favicon.png" type="image/png" sizes="32x32">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Patrick+Hand&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* === THEME : seul bloc à modifier === */
+  --paper:#fffdfa; --grid:#ebe6ee; --ink:#2b2b3a; --page:#f3eef2;
+  --accent:#d44d86; --link:#0B3D91; --accent-soft:#fce4ef; --highlight:#ffe566;
+  --c1:#5faf64; --c2:#5a96d4; --c3:#e0923f;
+  --c4:#9b6fd0; --c5:#3aa89e; --c6:#e06f90;
+  --font-title:'Fredoka',sans-serif;
+  --font-body:'Patrick Hand',sans-serif;
+  --font-hand:'Caveat',cursive;
+  --radius:14px;
+}
+*{box-sizing:border-box}
+body{margin:0;padding:16px;background:var(--page);color:var(--ink);
+  font-family:var(--font-body);font-size:18px;line-height:1.4;max-width:100%;overflow-x:clip}
+.sheet{position:relative;width:100%;max-width:min(794px,100%);min-height:1050px;margin:0 auto 24px;padding:32px 28px 52px;border-radius:6px;box-sizing:border-box;
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),
+                   linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px;box-shadow:0 6px 24px #0002}
+h1{font-family:var(--font-title);font-size:2.2rem;text-align:center;margin:0 0 6px;padding:0 84px}
+h1::after{content:"";display:block;height:6px;width:60%;margin:8px auto 0;
+  background:var(--accent);border-radius:6px;opacity:.7}
+h2{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px}
+h3{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px;display:inline-block;
+  background:var(--accent-soft);padding:3px 14px;border-radius:8px}
+.tag{display:inline-block;background:var(--accent-soft);padding:4px 14px;
+  border-radius:8px;font-family:var(--font-title);font-size:.95rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px;margin-top:16px}
+.grid.one{grid-template-columns:1fr}
+.grid.three{grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr))}
+.card{--c:var(--c1);position:relative;border:2px solid var(--c);border-radius:var(--radius);
+  padding:14px 16px;background:color-mix(in srgb,var(--c) 5%,white);overflow-wrap:anywhere;max-width:100%;min-width:0}
+.card::before{content:"";position:absolute;top:-9px;right:18px;width:54px;height:16px;
+  background:color-mix(in srgb,var(--c) 45%,white);opacity:.8;transform:rotate(4deg);border-radius:2px}
+.card h2{margin:0 0 4px;font-family:var(--font-title);font-size:1.05rem}
+.card .sub{font-family:var(--font-hand);font-size:1.15rem;color:color-mix(in srgb,var(--c) 38%,#14141f);margin:0 0 8px;overflow-wrap:anywhere;hyphens:auto;-webkit-hyphens:auto}
+.num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;padding:0;border-radius:50%;box-sizing:border-box;font-family:var(--font-title);font-size:.82rem;font-weight:700;line-height:1;letter-spacing:0;text-align:center;background:color-mix(in srgb,var(--c) 18%,white);color:var(--ink);border:2px solid var(--c);margin-right:6px}
+.card ul{list-style:none;padding:0;margin:0}
+.card li{margin:6px 0}
+.card li::before{content:"✓ ";color:color-mix(in srgb,var(--c) 38%,#14141f);font-weight:700}
+.hl{background:linear-gradient(transparent 55%,var(--highlight) 55%)}
+.code{display:inline-block;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem;
+  background:#fff;border:1.5px dashed var(--c,var(--accent));border-radius:8px;padding:1px 8px;max-width:100%;overflow-wrap:anywhere}
+pre.codeblock{--c:var(--c2);display:block;width:100%;max-width:100%;box-sizing:border-box;position:relative;
+  margin:36px 0 8px;padding:32px 28px 24px;background:#fff;min-height:9rem;
+  border:2px dashed var(--c);border-radius:var(--radius);overflow:visible;
+  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem;line-height:1.6;
+  white-space:pre-wrap;word-break:normal;overflow-wrap:anywhere}
+pre.codeblock[data-lang]::after{content:attr(data-lang);position:absolute;top:-14px;left:18px;
+  background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:1.5px solid var(--c);
+  font-family:var(--font-title);font-size:.78rem;letter-spacing:.05em;
+  padding:3px 14px;border-radius:6px;line-height:1.2;white-space:nowrap}
+.k{color:color-mix(in srgb,var(--c4) 42%,#14141f);font-weight:700}
+.fn{color:color-mix(in srgb,var(--c2) 38%,#14141f)}
+.st{color:color-mix(in srgb,var(--c) 42%,#14141f)}
+.cm{color:var(--ink);font-style:italic}
+.cloud{display:inline-block;padding:8px 16px;border:2px dashed var(--accent);border-radius:40px;
+  background:#fff;font-family:var(--font-hand);font-size:1.15rem;margin:4px 4px 0 0}
+.note{border:2px solid var(--accent);border-radius:var(--radius);background:#fff;padding:12px 16px;margin-top:16px;max-width:100%;box-sizing:border-box}
+.note ul{list-style:none;padding:0;margin:6px 0 0}
+.note li{margin:4px 0}
+.note li::before{content:"♥ ";color:color-mix(in srgb,var(--accent) 45%,#14141f)}
+.tip{--c:var(--c3);border:2px dashed var(--c);border-radius:var(--radius);
+  background:color-mix(in srgb,var(--c) 6%,white);padding:10px 16px;margin-top:16px;max-width:100%;box-sizing:border-box}
+.tip strong{font-family:var(--font-title);color:color-mix(in srgb,var(--c) 38%,#14141f)}
+.rule{--c:var(--c4);border:2px solid var(--c);border-radius:var(--radius);
+  background:color-mix(in srgb,var(--c) 6%,white);padding:10px 16px;margin-top:16px;max-width:100%;box-sizing:border-box}
+.rule strong{font-family:var(--font-title);color:color-mix(in srgb,var(--c) 38%,#14141f)}
+hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:18px 0 4px}
+.banner{margin-top:18px;padding:10px;text-align:center;background:var(--accent-soft);
+  border:2px solid var(--accent);font-family:var(--font-title);text-transform:uppercase;letter-spacing:.04em}
+.pageno{position:absolute;bottom:16px;left:0;right:0;text-align:center;
+  font-family:var(--font-hand);font-size:1.1rem;color:color-mix(in srgb,var(--ink) 72%,white)}
+.lead{margin:14px 0 0}
+.cap{font-family:var(--font-hand);font-size:1.15rem;margin:4px 0 0}
+.arrow{font-size:1.3rem;color:color-mix(in srgb,var(--accent) 45%,#14141f);font-weight:700}
+.flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;margin-top:12px}
+.flow .st{padding:5px 14px;border-radius:20px;border:2px solid var(--c);
+  background:color-mix(in srgb,var(--c) 16%,white);font-family:var(--font-title);font-size:.9rem;color:color-mix(in srgb,var(--c) 38%,#14141f)}
+a.link{color:var(--link);font-weight:700;text-decoration:underline wavy var(--link);text-underline-offset:3px;
+  word-break:break-all}
+.gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:10px 18px;margin-top:12px}
+.gloss div{padding:8px 12px;border-left:5px solid var(--c);border-radius:6px;
+  background:color-mix(in srgb,var(--c) 5%,white);font-size:1rem}
+.gloss b{font-family:var(--font-title);font-size:.95rem}
+nav.crumb{font-family:var(--font-hand);font-size:1.15rem;margin:10px 0 0}
+nav.crumb a{color:var(--link);text-decoration:underline;text-decoration-color:var(--link);text-underline-offset:3px}
+nav.crumb a:hover{text-decoration-thickness:2px}
+.orn{position:absolute;top:16px;display:flex;gap:2px;align-items:flex-start;pointer-events:none}
+.orn.tl{left:18px}.orn.tr{right:18px}
+.orn svg{display:block;overflow:visible}
+.orn .big{width:78px;height:88px}
+.orn .bulb{width:38px;height:46px;margin-top:6px}
+.orn .star{width:26px;height:26px}
+.orn .heart{width:28px;height:28px;margin-top:10px}
+@media (max-width:640px){body{padding:10px}.orn{display:none}.sheet{padding:22px 14px 40px;overflow-x:clip}h1{padding:0}}
+@media print{
+  @page{size:A4;margin:10mm}
+  body{background:#fff;padding:0}
+  .sheet{box-shadow:none;margin:0;min-height:auto;break-after:page;border-radius:0}
+  .sheet:last-child,.sheet:last-of-type{break-after:auto}
+  .card,.note,.tip,.rule,pre,.gloss div,.flow{break-inside:avoid}
+}
+
+/* === a11y === */
+a{color:var(--link)}
+a:hover{color:var(--link);text-decoration-thickness:2px}
+:focus-visible{outline:3px solid var(--link);outline-offset:3px}
+a:focus:not(:focus-visible){outline:none}
+.skip-link{position:absolute;top:0;left:0;transform:translateY(-120%);
+  background:var(--paper);color:var(--link);padding:10px 16px;border:2px solid var(--link);
+  border-radius:8px;font-family:var(--font-title);font-weight:700;text-decoration:underline;text-decoration-color:var(--link);z-index:100}
+.skip-link:focus,.skip-link:focus-visible{transform:translateY(0);outline:3px solid var(--link);outline-offset:2px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0,0,0,0);white-space:nowrap;border:0}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Zum Hauptinhalt springen</a>
+
+<!-- ============ SEITE 1 ============ -->
+<main id="main" class="sheet" tabindex="-1">
+  <div class="orn tl" aria-hidden="true"><svg class="big" viewBox="0 0 80 90" aria-hidden="true">
+  <g transform="rotate(-8 40 48)">
+    <rect x="16" y="10" width="52" height="68" rx="7" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.5"/>
+    <rect x="28" y="24" width="30" height="16" rx="3" style="fill:#fff;stroke:var(--ink);stroke-width:2"/>
+    <path d="M43 36c-4-3-6-5-6-7a3 3 0 0 1 6-.8 3 3 0 0 1 6 .8c0 2-2 4-6 7z" style="fill:var(--accent)"/>
+    <g style="fill:#fff;stroke:var(--ink);stroke-width:2.2">
+      <circle cx="16" cy="22" r="3.6"/><circle cx="16" cy="34" r="3.6"/><circle cx="16" cy="46" r="3.6"/>
+      <circle cx="16" cy="58" r="3.6"/><circle cx="16" cy="70" r="3.6"/>
+    </g>
+  </g>
+  <path d="M70 4l2.2 4.8 5.2.6-3.9 3.5 1.1 5.1L70 15.4l-4.6 2.6 1.1-5.1-3.9-3.5 5.2-.6z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round"/>
+</svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="big" viewBox="0 0 80 90" aria-hidden="true">
+  <g style="stroke:var(--ink);stroke-width:2;stroke-linejoin:round">
+    <g transform="rotate(-16 28 52)"><rect x="23" y="8" width="9" height="44" style="fill:var(--c3)"/><path d="M23 8L27.5-2 32 8z" style="fill:#f6dcc0"/></g>
+    <g transform="rotate(4 42 52)"><rect x="38" y="4" width="9" height="48" style="fill:var(--accent)"/><path d="M38 4L42.5-6 47 4z" style="fill:#f6dcc0"/></g>
+    <g transform="rotate(20 54 52)"><rect x="50" y="10" width="9" height="42" style="fill:var(--c4)"/><path d="M50 10L54.5 0 59 10z" style="fill:#f6dcc0"/></g>
+    <path d="M14 46h52l-5 36a5 5 0 0 1-5 4H24a5 5 0 0 1-5-4z" style="fill:var(--c5)"/>
+  </g>
+  <path d="M40 70c-3-2.4-4.6-4-4.6-5.6a2.3 2.3 0 0 1 4.6-.6 2.3 2.3 0 0 1 4.6.6c0 1.6-1.6 3.2-4.6 5.6z" style="fill:#fff"/>
+</svg></div>
+
+  <h1><span lang="en">Git</span> Grundlagen</h1>
+  <p style="text-align:center"><span class="tag">Webentwicklung · Grundlagen</span></p>
+  <nav class="crumb" aria-label="Brotkrumen"><a href="../../">Home</a> <span aria-hidden="true">›</span> <a href="../">Deutsch</a> <span aria-hidden="true">›</span> <a href="index.html">WEB</a> <span aria-hidden="true">›</span> <span aria-current="page"><span lang="en">Git</span> Grundlagen</span></nav>
+
+  <h2><span lang="en">Learn Git visually</span></h2>
+  <section class="grid one">
+    <article class="card" style="--c:var(--c2)">
+      <h2><span class="num">1</span>Zuerst die Bilder</h2>
+      <p class="sub">Danach sind die Befehle leichter</p>
+      <ul>
+        <li><span lang="en">Git</span> in kleinen Animationen ansehen</li>
+        <li>Gut als Einstieg, bevor du tippst</li>
+      </ul>
+      <p class="cap"><a class="link" href="https://gitualize.com/" target="_blank" rel="noopener noreferrer">gitualize.com<span class="sr-only"> (öffnet in neuem Tab)</span></a></p>
+    </article>
+  </section>
+
+  <hr>
+  <h2>Was ist <span lang="en">Git</span>?</h2>
+  <section class="grid">
+    <article class="card" style="--c:var(--c1)">
+      <h2><span class="num">1</span><span lang="en">Git</span> am Computer</h2>
+      <p class="sub">Dein Speicherstand-System</p>
+      <ul>
+        <li>Wie Speicherstände in einem Videospiel</li>
+        <li>Läuft <span class="hl">lokal</span> auf deinem Computer</li>
+        <li>Merkt sich jede Änderung, damit du <span class="hl">zurückspulen</span> kannst</li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c4)">
+      <h2><span class="num">2</span><span lang="en">GitHub</span> und <span lang="en">GitLab</span></h2>
+      <p class="sub">Die Cloud dafür</p>
+      <ul>
+        <li>Wie <span lang="en">Google Drive</span> oder <span lang="en">Dropbox</span></li>
+        <li>Hier lädst du Speicherstände <span class="hl">hoch</span></li>
+        <li>Zum Sichern und zum Teilen im Team</li>
+      </ul>
+    </article>
+  </section>
+
+  <div class="note">
+    <strong>Merke dir:</strong> <span lang="en">Git</span> ist das Werkzeug an deinem Computer. <span lang="en">GitHub</span> und <span lang="en">GitLab</span> sind die Websites, auf denen das Projekt liegt.
+  </div>
+
+  <h2>Installation</h2>
+  <section class="grid">
+    <article class="card" style="--c:var(--c3)">
+      <h2><span class="num">1</span><span lang="en">Windows</span></h2>
+      <p class="sub">Installer von der Website</p>
+      <ul>
+        <li>Öffne <a class="link" href="https://git-scm.com" target="_blank" rel="noopener noreferrer">git-scm.com<span class="sr-only"> (öffnet in neuem Tab)</span></a></li>
+        <li>Lade den <span lang="en">Windows</span>-Installer herunter</li>
+        <li>Klicke immer auf <span class="hl">Next</span>. Die Standardeinstellungen passen</li>
+        <li>Prüfen in <span lang="en">PowerShell</span>: <span class="code">git --version</span></li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c5)">
+      <h2><span class="num">2</span><span lang="en">macOS</span></h2>
+      <p class="sub">Zwei Wege</p>
+      <ul>
+        <li>Mit <span lang="en">Homebrew</span>: <span class="code">brew install git</span></li>
+        <li>Ohne Extra-Software: <span class="code">git --version</span> im <span lang="en">Terminal</span></li>
+        <li><span lang="en">macOS</span> fragt nach den <span lang="en">Xcode Command Line Tools</span>. Klicke auf <span class="hl">Installieren</span></li>
+        <li>Prüfe danach noch einmal mit <span class="code">git --version</span></li>
+      </ul>
+    </article>
+  </section>
+
+  <div class="tip">
+    <strong>Tipp:</strong> Steht eine Versionsnummer da, ist <span lang="en">Git</span> installiert.
+  </div>
+  <div class="pageno">Seite 1 / 7</div>
+</main>
+
+<!-- ============ SEITE 2 ============ -->
+<section class="sheet" aria-label="Seite 2">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+
+  <h2>Die 3 Zustände</h2>
+  <p class="lead">Jede Datei liegt in <span class="hl">einem</span> von drei Orten.</p>
+  <div class="flow">
+    <span class="st" style="--c:var(--c1)"><span lang="en">Working Directory</span></span><span class="arrow">→</span>
+    <span class="st" style="--c:var(--c3)"><span lang="en">Staging</span></span><span class="arrow">→</span>
+    <span class="st" style="--c:var(--c2)"><span lang="en">Repository</span></span>
+  </div>
+
+  <section class="grid three">
+    <article class="card" style="--c:var(--c1)">
+      <h2><span class="num">1</span>Arbeitsverzeichnis</h2>
+      <p class="sub"><span lang="en">Working Directory</span></p>
+      <ul>
+        <li>Deine aktuellen Dateien</li>
+        <li>Noch <span class="hl">nicht</span> gespeichert</li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c3)">
+      <h2><span class="num">2</span><span lang="en">Staging</span></h2>
+      <p class="sub">Auch <span lang="en">Index</span> genannt</p>
+      <ul>
+        <li><span class="code">git add</span> legt Änderungen bereit</li>
+        <li>Für den <span class="hl">nächsten</span> <span lang="en">Commit</span></li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c2)">
+      <h2><span class="num">3</span><span lang="en">Repository</span></h2>
+      <p class="sub">Der Ordner <span class="code">.git</span></p>
+      <ul>
+        <li>Die dauerhafte Historie</li>
+        <li>Entsteht mit <span class="code">git commit</span></li>
+      </ul>
+    </article>
+  </section>
+
+  <hr>
+  <h2>Wichtige Wörter</h2>
+  <section class="grid">
+    <article class="card" style="--c:var(--c4)">
+      <h2><span lang="en">Branch</span></h2>
+      <p class="sub">Ein Zweig</p>
+      <ul>
+        <li>Ein paralleler Entwicklungsstrang</li>
+        <li>Der Hauptzweig heißt meist <span class="code">main</span></li>
+        <li>Früher hieß er <span class="code">master</span></li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c6)">
+      <h2><span lang="en">Commit</span></h2>
+      <p class="sub">Ein Schnappschuss</p>
+      <ul>
+        <li>Der Stand des Codes zu einem Zeitpunkt</li>
+        <li>Jede Aufnahme hat eine Kennung, den <span lang="en">Hash</span></li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c5)">
+      <h2><span lang="en">HEAD</span></h2>
+      <p class="sub">Der Zeiger</p>
+      <ul>
+        <li>Zeigt immer auf den <span class="hl">aktiven</span> <span lang="en">Commit</span></li>
+        <li>Oder auf den aktiven <span lang="en">Branch</span></li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c1)">
+      <h2><span class="code">.gitignore</span></h2>
+      <p class="sub">Die Ignorier-Liste</p>
+      <ul>
+        <li>Eine Textdatei im Hauptordner</li>
+        <li><span lang="en">Git</span> übersieht die genannten Dateien</li>
+        <li>Typisch: <span class="code">node_modules/</span> und <span class="code">.env</span></li>
+        <li>Auch Passwörter gehören hierher</li>
+      </ul>
+    </article>
+  </section>
+  <div class="pageno">Seite 2 / 7</div>
+</section>
+
+<!-- ============ SEITE 3 ============ -->
+<section class="sheet" aria-label="Seite 3">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+
+  <h2>Projekt starten</h2>
+  <section class="grid">
+    <article class="card" style="--c:var(--c1)">
+      <h2><span class="num">1</span>Neu anlegen</h2>
+      <p class="sub"><span class="code">git init</span></p>
+      <ul>
+        <li>Macht aus dem Ordner ein lokales <span lang="en">Repository</span></li>
+        <li>Legt den versteckten Ordner <span class="code">.git</span> an</li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c2)">
+      <h2><span class="num">2</span>Herunterladen</h2>
+      <p class="sub"><span class="code">git clone</span></p>
+      <ul>
+        <li>Holt ein bestehendes <span lang="en">Remote</span>-Projekt</li>
+        <li>Die Adresse steht in spitzen Klammern als Platzhalter</li>
+      </ul>
+    </article>
+  </section>
+  <pre class="codeblock" data-lang="Git"><span class="k">git</span> <span class="fn">init</span>
+<span class="k">git</span> <span class="fn">clone</span> &lt;repository-url&gt;</pre>
+
+  <hr>
+  <h2>Im Alltag</h2>
+  <p class="lead">Schauen, vormerken, speichern, nachsehen.</p>
+  <section class="grid">
+    <article class="card" style="--c:var(--c5)">
+      <h2><span class="code">git status</span></h2>
+      <p class="sub">Wo stehe ich?</p>
+      <ul><li>Zeigt geänderte und vorgemerkte Dateien</li></ul>
+    </article>
+    <article class="card" style="--c:var(--c3)">
+      <h2><span class="code">git diff</span></h2>
+      <p class="sub">Was ist anders?</p>
+      <ul><li>Zeigt die Änderung <span class="hl">Zeile für Zeile</span></li></ul>
+    </article>
+    <article class="card" style="--c:var(--c4)">
+      <h2><span class="code">git log</span></h2>
+      <p class="sub">Der Verlauf</p>
+      <ul><li>Die <span lang="en">Commits</span> von neu nach alt</li></ul>
+    </article>
+    <article class="card" style="--c:var(--c6)">
+      <h2><span lang="en">Commit</span> anpassen</h2>
+      <p class="sub"><span class="code">git commit --amend</span></p>
+      <ul><li>Ändert den <span class="hl">letzten</span> <span lang="en">Commit</span> nachträglich</li></ul>
+    </article>
+  </section>
+  <pre class="codeblock" data-lang="Git"><span class="k">git</span> <span class="fn">status</span>
+<span class="k">git</span> <span class="fn">diff</span>
+<span class="k">git</span> <span class="fn">add</span> .
+<span class="k">git</span> <span class="fn">commit</span> -m <span class="st">"Aussagekräftige Nachricht"</span>
+<span class="k">git</span> <span class="fn">log</span>
+
+<span class="cm"># letzten Commit nachträglich anpassen</span>
+<span class="k">git</span> <span class="fn">add</span> .
+<span class="k">git</span> <span class="fn">commit</span> --amend</pre>
+
+  <div class="tip">
+    <strong>Tipp:</strong> <span class="code">--amend</span> nur nutzen, wenn der <span lang="en">Commit</span> noch <span class="hl">nicht geteilt</span> wurde.
+  </div>
+  <div class="pageno">Seite 3 / 7</div>
+</section>
+
+<!-- ============ SEITE 4 ============ -->
+<section class="sheet" aria-label="Seite 4">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+
+  <h2><span lang="en">Branches</span> verwalten</h2>
+  <p class="lead">Der aktive <span lang="en">Branch</span> ist in der Liste markiert.</p>
+  <pre class="codeblock" data-lang="Git"><span class="k">git</span> <span class="fn">branch</span>
+<span class="k">git</span> <span class="fn">branch</span> neues-feature
+<span class="k">git</span> <span class="fn">switch</span> neues-feature
+<span class="cm"># oder klassisch:</span>
+<span class="k">git</span> <span class="fn">checkout</span> neues-feature
+<span class="cm"># anlegen und direkt wechseln:</span>
+<span class="k">git</span> <span class="fn">checkout</span> -b neues-feature</pre>
+
+  <div class="tip">
+    <strong>Tipp:</strong> <span class="code">git switch</span> wechselt den <span lang="en">Branch</span>. <span class="code">checkout -b</span> legt ihn an und wechselt sofort.
+  </div>
+
+  <hr>
+  <h2>Rückgängig machen</h2>
+  <section class="grid">
+    <article class="card" style="--c:var(--c1)">
+      <h2><span class="num">1</span>Datei verwerfen</h2>
+      <p class="sub">Noch nicht gespeichert</p>
+      <ul>
+        <li><span class="code">git restore index.html</span></li>
+        <li>Klassisch: <span class="code">git checkout -- index.html</span></li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c3)">
+      <h2><span class="num">2</span>Aus dem <span lang="en">Staging</span></h2>
+      <p class="sub"><span lang="en">Unstage</span></p>
+      <ul>
+        <li><span class="code">git restore --staged index.html</span></li>
+        <li>Die Datei bleibt geändert, ist nur nicht mehr vorgemerkt</li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c2)">
+      <h2><span class="num">3</span><span lang="en">Revert</span></h2>
+      <p class="sub">Sicher rückgängig</p>
+      <ul>
+        <li><span class="code">git revert &lt;commit-hash&gt;</span></li>
+        <li>Legt einen <span class="hl">neuen Gegen-Commit</span> an</li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c6)">
+      <h2><span class="num">4</span><span lang="en">Reset</span></h2>
+      <p class="sub">Vorsicht</p>
+      <ul>
+        <li><span class="code">git reset --hard &lt;commit-hash&gt;</span></li>
+        <li>Springt zurück und <span class="hl">löscht spätere Commits</span></li>
+      </ul>
+    </article>
+  </section>
+
+  <div class="rule">
+    <strong>Goldene Regel:</strong> <span class="code">git revert</span> ist der sichere Weg. <span class="code">git reset --hard</span> löscht Nachfolgendes. Nur nutzen, wenn du dir sicher bist.
+  </div>
+  <div class="pageno">Seite 4 / 7</div>
+</section>
+
+<!-- ============ SEITE 5 ============ -->
+<section class="sheet" aria-label="Seite 5">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+
+  <h2>Beiseitelegen und aufräumen</h2>
+  <section class="grid three">
+    <article class="card" style="--c:var(--c3)">
+      <h2><span lang="en">Stash</span></h2>
+      <p class="sub">Kurz weglegen</p>
+      <ul>
+        <li><span class="code">git stash</span> versteckt halbfertige Änderungen</li>
+        <li><span class="code">git stash pop</span> holt sie zurück</li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c4)">
+      <h2><span lang="en">Cherry-Pick</span></h2>
+      <p class="sub">Einen Commit holen</p>
+      <ul>
+        <li>Nimmt <span class="hl">einen</span> <span lang="en">Commit</span> von einem anderen <span lang="en">Branch</span></li>
+        <li><span class="code">git cherry-pick &lt;commit-hash&gt;</span></li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c5)">
+      <h2><span lang="en">Squash</span></h2>
+      <p class="sub">Commits bündeln</p>
+      <ul>
+        <li><span class="code">git rebase -i HEAD~3</span></li>
+        <li>Öffnet den Editor für die letzten 3 <span lang="en">Commits</span></li>
+      </ul>
+    </article>
+  </section>
+  <pre class="codeblock" data-lang="Git"><span class="k">git</span> <span class="fn">stash</span>
+<span class="k">git</span> <span class="fn">stash</span> pop
+<span class="k">git</span> <span class="fn">cherry-pick</span> &lt;commit-hash&gt;
+<span class="k">git</span> <span class="fn">rebase</span> -i HEAD~3</pre>
+
+  <hr>
+  <h2><span lang="en">Remote</span>-Repositories</h2>
+  <section class="grid three">
+    <article class="card" style="--c:var(--c1)">
+      <h2><span class="code">git push</span></h2>
+      <p class="sub">Hochladen</p>
+      <ul><li>Sendet lokale <span lang="en">Commits</span> an den Server, zum Beispiel <span lang="en">GitHub</span> oder <span lang="en">GitLab</span></li></ul>
+    </article>
+    <article class="card" style="--c:var(--c2)">
+      <h2><span class="code">git fetch</span></h2>
+      <p class="sub">Nur nachsehen</p>
+      <ul><li>Lädt Infos über neue Änderungen. Dein lokaler Code <span class="hl">bleibt gleich</span></li></ul>
+    </article>
+    <article class="card" style="--c:var(--c6)">
+      <h2><span class="code">git pull</span></h2>
+      <p class="sub">Holen und einbauen</p>
+      <ul><li>Das ist <span class="code">git fetch</span> plus <span class="code">git merge</span></li></ul>
+    </article>
+  </section>
+
+  <section class="grid">
+    <article class="card" style="--c:var(--c4)">
+      <h2><span lang="en">Origin</span></h2>
+      <p class="sub">Dein Standard-<span lang="en">Remote</span></p>
+      <ul><li>Oft dein eigener <span lang="en">Fork</span>, also deine Kopie</li></ul>
+    </article>
+    <article class="card" style="--c:var(--c5)">
+      <h2><span lang="en">Upstream</span></h2>
+      <p class="sub">Das Original</p>
+      <ul><li>Das Hauptprojekt, von dem du geforkt hast</li></ul>
+    </article>
+  </section>
+  <div class="pageno">Seite 5 / 7</div>
+</section>
+
+<!-- ============ SEITE 6 ============ -->
+<section class="sheet" aria-label="Seite 6">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+
+  <h2>Zusammenführen</h2>
+  <section class="grid">
+    <article class="card" style="--c:var(--c1)">
+      <h2><span lang="en">Merge</span></h2>
+      <p class="sub"><span class="code">git merge &lt;branch-name&gt;</span></p>
+      <ul>
+        <li>Führt zwei <span lang="en">Branches</span> zusammen</li>
+        <li>Erzeugt einen neuen <span lang="en">Merge-Commit</span></li>
+        <li>Beide Historien <span class="hl">bleiben erhalten</span></li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c2)">
+      <h2><span lang="en">Rebase</span></h2>
+      <p class="sub"><span class="code">git rebase &lt;branch-name&gt;</span></p>
+      <ul>
+        <li>Setzt deine <span lang="en">Commits</span> auf den neuesten Stand des Ziel-<span lang="en">Branch</span></li>
+        <li>Die Historie wird <span class="hl">linear</span></li>
+        <li>Dafür wird die Historie umgeschrieben</li>
+      </ul>
+    </article>
+  </section>
+
+  <div class="rule">
+    <strong>Goldene Regel:</strong> <span class="code">git push --force</span> niemals auf <span class="code">main</span> verwenden.
+  </div>
+
+  <h2>Konflikte lösen</h2>
+  <p class="lead">Kann <span lang="en">Git</span> zwei Änderungen nicht allein zusammenführen, setzt es Marker in die Datei.</p>
+  <pre class="codeblock" data-lang="Text">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+Dein lokaler Code
+=======
+Der fremde Code
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; branch-name</pre>
+
+  <div class="note">
+    <strong>Merke dir:</strong> So schließt du einen Konflikt
+    <ul>
+      <li>Den richtigen Code behalten</li>
+      <li>Die Marker <span class="code">&lt;&lt;&lt;</span> <span class="code">===</span> <span class="code">&gt;&gt;&gt;</span> löschen</li>
+      <li>Datei speichern, dann <span class="code">git add</span> und <span class="code">git commit</span></li>
+    </ul>
+  </div>
+  <div class="pageno">Seite 6 / 7</div>
+</section>
+
+<!-- ============ SEITE 7 ============ -->
+<section class="sheet" aria-label="Seite 7">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+
+  <h2>Im Team</h2>
+  <p class="lead">Der übliche Weg ist der <span lang="en">Feature-Branch</span>-Workflow. Jedes neue Feature oder jeder Bugfix bekommt einen eigenen <span lang="en">Branch</span>. Fertig? Dann nach <span class="code">main</span> zusammenführen.</p>
+  <section class="grid">
+    <article class="card" style="--c:var(--c1)">
+      <h2>Vorteil</h2>
+      <p class="sub">Klare Trennung</p>
+      <ul>
+        <li>Änderungen bleiben isoliert</li>
+        <li>Weniger Konflikte</li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c6)">
+      <h2>Nachteil</h2>
+      <p class="sub">Braucht Ordnung</p>
+      <ul>
+        <li><span lang="en">Branches</span> müssen diszipliniert gepflegt werden</li>
+      </ul>
+    </article>
+  </section>
+  <div class="tip">
+    <strong>Tipp:</strong> Je nach Team gibt es auch <span lang="en">Gitflow</span>, den <span lang="en">Forking</span>-Workflow, <span lang="en">Pull Requests</span>, <span lang="en">Merge Requests</span> oder <span lang="en">Trunk-Based Development</span>.
+  </div>
+
+  <hr>
+  <h2>Zusammenfassung</h2>
+  <span class="cloud"><span lang="en">Git</span> lokal · <span lang="en">GitHub</span> in der Cloud</span>
+  <span class="cloud">add → commit → push</span>
+  <span class="cloud">Ein <span lang="en">Branch</span> pro Feature</span>
+  <span class="cloud">revert sicher · reset --hard vorsichtig</span>
+
+  <div class="note">
+    <strong>Merke dir:</strong>
+    <ul>
+      <li>Zuerst visuell lernen, dann die Befehle</li>
+      <li>Kleine <span lang="en">Commits</span> mit klarer Nachricht</li>
+      <li>Passwörter und <span class="code">.env</span> gehören in die <span class="code">.gitignore</span></li>
+      <li>Kein <span class="code">push --force</span> auf <span class="code">main</span></li>
+    </ul>
+  </div>
+
+  <h2>Glossar</h2>
+  <div class="gloss">
+    <div style="--c:var(--c1)"><b><span lang="en">Git</span>:</b> Werkzeug am Computer. Speichert jeden Stand.</div>
+    <div style="--c:var(--c4)"><b><span lang="en">GitHub</span> / <span lang="en">GitLab</span>:</b> Websites, auf denen das Projekt liegt.</div>
+    <div style="--c:var(--c2)"><b><span lang="en">Commit</span>:</b> Schnappschuss mit einer eindeutigen Kennung.</div>
+    <div style="--c:var(--c3)"><b><span lang="en">Staging</span>:</b> Änderungen, die für den nächsten <span lang="en">Commit</span> bereitliegen.</div>
+    <div style="--c:var(--c5)"><b><span lang="en">Branch</span>:</b> Ein paralleler Strang. Der Hauptstrang heißt meist <span class="code">main</span>.</div>
+    <div style="--c:var(--c6)"><b><span lang="en">HEAD</span>:</b> Zeiger auf den aktiven <span lang="en">Commit</span> oder <span lang="en">Branch</span>.</div>
+    <div style="--c:var(--c1)"><b><span lang="en">Remote</span>:</b> Die Kopie auf dem Server. <span lang="en">Origin</span> ist deine, <span lang="en">Upstream</span> das Original.</div>
+    <div style="--c:var(--c2)"><b><span lang="en">Merge</span>:</b> Zwei Stränge zusammenführen. Beide Historien bleiben.</div>
+  </div>
+
+  <h2>Zum Nachschlagen</h2>
+  <section class="grid">
+    <article class="card" style="--c:var(--c2)">
+      <h2><span lang="en">Cheat Sheet</span></h2>
+      <p class="sub">Offizielle Kurzreferenz</p>
+      <ul>
+        <li>Alle wichtigen Befehle auf einer Seite</li>
+      </ul>
+      <p class="cap"><a class="link" href="https://git-scm.com/cheat-sheet" target="_blank" rel="noopener noreferrer">git-scm.com/cheat-sheet<span class="sr-only"> (öffnet in neuem Tab)</span></a></p>
+    </article>
+    <article class="card" style="--c:var(--c6)">
+      <h2><span lang="en">Git</span> als Comic</h2>
+      <p class="sub">Bilder statt langer Texte</p>
+      <ul>
+        <li><span lang="en">Git</span> und <span lang="en">GitHub</span> als gezeichnete Geschichte</li>
+      </ul>
+      <p class="cap"><a class="link" href="https://allisonhorst.com/git-github" target="_blank" rel="noopener noreferrer">allisonhorst.com/git-github<span class="sr-only"> (öffnet in neuem Tab)</span></a></p>
+    </article>
+  </section>
+
+  <div class="banner">Lokal · Branch · Remote</div>
+  <div class="pageno">Seite 7 / 7</div>
+</section>
+
+</body>
+</html>
