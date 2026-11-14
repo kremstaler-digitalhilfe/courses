@@ -86,6 +86,9 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
 .diagram .t{font-family:var(--font-title);font-size:16px}
 .diagram .b{font-family:var(--font-title);font-size:15px}
 .diagram .s{font-size:16px}
+.fig{display:block;width:100%;max-width:100%;height:auto;margin:14px auto 0;
+  border-radius:var(--radius);border:2px solid color-mix(in srgb,var(--c4) 55%,white);
+  background:#fff;box-sizing:border-box}
 
 /* ---- Lernziele ---- */
 .check{list-style:none;padding:0;margin:0}
@@ -200,7 +203,7 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
   body{background:#fff;padding:0}
   .sheet{box-shadow:none;margin:0;min-height:auto;break-after:page;border-radius:0}
   .sheet:last-of-type{break-after:auto}
-  .card,.note,.tip,.rule,.diagram,.gloss div,.invest div,.cards,.fib,.table{break-inside:avoid}
+  .card,.note,.tip,.rule,.diagram,.fig,.gloss div,.invest div,.cards,.fib,.table{break-inside:avoid}
 }
 
 /* === a11y === */
@@ -311,7 +314,7 @@ a:focus:not(:focus-visible){outline:none}
     <text class="t" x="520" y="278" text-anchor="middle">Kanban Board</text>
     <text x="520" y="302" text-anchor="middle">kontinuierlicher Fluss</text>
   </svg>
-  <div class="pageno">Seite 1 / 14</div>
+  <div class="pageno">Seite 1 / 15</div>
 </main>
 
 <!-- ============ SEITE 2 ============ -->
@@ -427,7 +430,7 @@ a:focus:not(:focus-visible){outline:none}
   <div class="rule">
     <strong><span lang="en">Kanban</span> steckt auch in Scrum:</strong> Fast jedes Scrum-Team nutzt für die tägliche Arbeit ein <span class="hl"><span lang="en">Sprint</span> Board</span>, das genau nach dem <span class="hl"><span lang="en">Kanban</span>-Prinzip</span> funktioniert (Spalten von To-Do bis Done). Wer <span lang="en">Kanban</span> versteht, kann also <span class="hl">sofort auch ein Scrum Board lesen und bedienen</span>.
   </div>
-  <div class="pageno">Seite 2 / 14</div>
+  <div class="pageno">Seite 2 / 15</div>
 </section>
 
 <!-- ============ SEITE 3 ============ -->
@@ -499,7 +502,7 @@ a:focus:not(:focus-visible){outline:none}
       </ul>
     </article>
   </section>
-  <div class="pageno">Seite 3 / 14</div>
+  <div class="pageno">Seite 3 / 15</div>
 </section>
 
 <!-- ============ SEITE 4 ============ -->
@@ -590,7 +593,7 @@ a:focus:not(:focus-visible){outline:none}
       <ul class="plain"><li>WIP-Limits sind <span class="hl">freiwillig</span>: Der <span lang="en">Sprint</span> begrenzt die Arbeit schon auf die Sprint-Dauer.</li></ul>
     </article>
   </section>
-  <div class="pageno">Seite 4 / 14</div>
+  <div class="pageno">Seite 4 / 15</div>
 </section>
 
 <!-- ============ SEITE 5 ============ -->
@@ -658,7 +661,7 @@ a:focus:not(:focus-visible){outline:none}
     <p class="quote" style="margin:8px 0 0">„Epics und Features sind eine ergänzende, <span class="hl">optionale</span> Praktik, die <span lang="en">Product Owner</span> nutzen können, um das <span lang="en">Product Backlog</span> des Teams zu strukturieren. Ich betrachte Epics und Features als eine Art Ordnerstruktur.“</p>
     <p style="margin:8px 0 0">Bringt die Feature-Ebene keinen Mehrwert (kleine Backlogs, nur ein Team), kannst du sie <span class="hl">weglassen</span> und <span lang="en">User Stories</span> direkt mit den Epics verknüpfen.</p>
   </div>
-  <div class="pageno">Seite 5 / 14</div>
+  <div class="pageno">Seite 5 / 15</div>
 </section>
 
 <!-- ============ SEITE 6 ============ -->
@@ -706,7 +709,7 @@ a:focus:not(:focus-visible){outline:none}
   <div class="tip">
     <strong>Merke:</strong> Ohne Akzeptanzkriterien lässt sich nicht prüfen, ob eine Story wirklich fertig ist – sie machen die Story <span class="hl">prüfbar</span>.
   </div>
-  <div class="pageno">Seite 6 / 14</div>
+  <div class="pageno">Seite 6 / 15</div>
 </section>
 
 <!-- ============ SEITE 7 ============ -->
@@ -741,7 +744,7 @@ a:focus:not(:focus-visible){outline:none}
       <li>Jedes Kriterium: erst erkennen, was <span class="hl">schlecht</span> ist – dann die <span class="hl">gute</span> Variante</li>
     </ul>
   </div>
-  <div class="pageno">Seite 7 / 14</div>
+  <div class="pageno">Seite 7 / 15</div>
 </section>
 
 <!-- ============ SEITE 8 ============ -->
@@ -781,7 +784,7 @@ a:focus:not(:focus-visible){outline:none}
       </ul>
     </article>
   </section>
-  <div class="pageno">Seite 8 / 14</div>
+  <div class="pageno">Seite 8 / 15</div>
 </section>
 
 <!-- ============ SEITE 9 ============ -->
@@ -824,7 +827,7 @@ a:focus:not(:focus-visible){outline:none}
   <div class="tip">
     <strong>Tipp:</strong> Erfüllt die Story alle sechs Buchstaben, ist sie bereit für Planung und Entwicklung.
   </div>
-  <div class="pageno">Seite 9 / 14</div>
+  <div class="pageno">Seite 9 / 15</div>
 </section>
 
 <!-- ============ SEITE 10 ============ -->
@@ -908,7 +911,7 @@ a:focus:not(:focus-visible){outline:none}
       </div>
     </article>
   </section>
-  <div class="pageno">Seite 10 / 14</div>
+  <div class="pageno">Seite 10 / 15</div>
 </section>
 
 <!-- ============ SEITE 11 ============ -->
@@ -959,7 +962,7 @@ a:focus:not(:focus-visible){outline:none}
   <div class="tip">
     <strong>Wichtig:</strong> Ein Story Point ist <span class="hl">einheitslos</span> – keine Stunden, sondern ein relatives Maß im Vergleich zu anderen Aufgaben.
   </div>
-  <div class="pageno">Seite 11 / 14</div>
+  <div class="pageno">Seite 11 / 15</div>
 </section>
 
 <!-- ============ SEITE 12 ============ -->
@@ -1010,7 +1013,7 @@ a:focus:not(:focus-visible){outline:none}
   <div class="demo">
     <span class="cloud">Rechtschreibfehler = 1</span><span class="arrow">≪</span><span class="cloud">Kreditkarten-Schnittstelle = 8</span>
   </div>
-  <div class="pageno">Seite 12 / 14</div>
+  <div class="pageno">Seite 12 / 15</div>
 </section>
 
 <!-- ============ SEITE 13 ============ -->
@@ -1053,11 +1056,29 @@ a:focus:not(:focus-visible){outline:none}
   <div class="rule">
     <strong>Wichtig:</strong> Der größte Nutzen von <span lang="en">Planning Poker</span> liegt im <span class="hl">Gespräch</span>! Unterschiedliche Schätzungen decken <span class="hl">Missverständnisse, fehlendes Wissen oder versteckte Risiken</span> auf.
   </div>
-  <div class="pageno">Seite 13 / 14</div>
+  <div class="pageno">Seite 13 / 15</div>
 </section>
 
 <!-- ============ SEITE 14 ============ -->
 <section class="sheet" aria-label="Seite 14">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <h2><span lang="en">Planning Poker</span> · Überblick</h2>
+  <p style="text-align:center"><span class="tag">2.3 Infografik</span></p>
+
+  <p class="lead">Die Schritte auf einen Blick: <span class="hl">erst verdeckt wählen, dann gemeinsam aufdecken</span>.</p>
+
+  <img class="fig" src="planning-poker-infografik.png" width="1645" height="956" alt="Planning Poker Infografik: Karten 1, 2, 3, 5, 8, 13 und fünf Schritte vom gemeinsamen Klären bis zur erneuten Wahl">
+
+  <div class="pageno">Seite 14 / 15</div>
+</section>
+
+<!-- ============ SEITE 15 ============ -->
+<section class="sheet" aria-label="Seite 15">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
@@ -1098,7 +1119,7 @@ a:focus:not(:focus-visible){outline:none}
   </div>
 
   <div class="banner">Sichtbar machen · Zerkleinern · Gemeinsam schätzen</div>
-  <div class="pageno">Seite 14 / 14</div>
+  <div class="pageno">Seite 15 / 15</div>
 </section>
 
 </body>
