@@ -311,7 +311,7 @@ a:focus:not(:focus-visible){outline:none}
     <text class="t" x="520" y="278" text-anchor="middle">Kanban Board</text>
     <text x="520" y="302" text-anchor="middle">kontinuierlicher Fluss</text>
   </svg>
-  <div class="pageno">Seite 1 / 12</div>
+  <div class="pageno">Seite 1 / 14</div>
 </main>
 
 <!-- ============ SEITE 2 ============ -->
@@ -427,7 +427,7 @@ a:focus:not(:focus-visible){outline:none}
   <div class="rule">
     <strong><span lang="en">Kanban</span> steckt auch in Scrum:</strong> Fast jedes Scrum-Team nutzt für die tägliche Arbeit ein <span class="hl"><span lang="en">Sprint</span> Board</span>, das genau nach dem <span class="hl"><span lang="en">Kanban</span>-Prinzip</span> funktioniert (Spalten von To-Do bis Done). Wer <span lang="en">Kanban</span> versteht, kann also <span class="hl">sofort auch ein Scrum Board lesen und bedienen</span>.
   </div>
-  <div class="pageno">Seite 2 / 12</div>
+  <div class="pageno">Seite 2 / 14</div>
 </section>
 
 <!-- ============ SEITE 3 ============ -->
@@ -499,7 +499,7 @@ a:focus:not(:focus-visible){outline:none}
       </ul>
     </article>
   </section>
-  <div class="pageno">Seite 3 / 12</div>
+  <div class="pageno">Seite 3 / 14</div>
 </section>
 
 <!-- ============ SEITE 4 ============ -->
@@ -579,7 +579,18 @@ a:focus:not(:focus-visible){outline:none}
   <div class="rule">
     <strong>Beispiel:</strong> Das Limit für „In Bearbeitung“ ist <span class="hl">3</span>. Sind dort 3 Aufgaben, darf niemand eine <span class="hl">4. Aufgabe beginnen</span>. Erst muss eine fertige Aufgabe in die nächste Spalte wandern.
   </div>
-  <div class="pageno">Seite 4 / 12</div>
+
+  <section class="grid">
+    <article class="card" style="--c:var(--c3)">
+      <h2><span lang="en">Kanban</span> · Pflicht</h2>
+      <ul class="plain"><li>WIP-Limits sind <span class="hl">obligatorisch</span> – ohne sie fehlt der Schutz vor Überlastung.</li></ul>
+    </article>
+    <article class="card" style="--c:var(--c2)">
+      <h2><span lang="en">Scrum</span> · optional</h2>
+      <ul class="plain"><li>WIP-Limits sind <span class="hl">freiwillig</span>: Der <span lang="en">Sprint</span> begrenzt die Arbeit schon auf die Sprint-Dauer.</li></ul>
+    </article>
+  </section>
+  <div class="pageno">Seite 4 / 14</div>
 </section>
 
 <!-- ============ SEITE 5 ============ -->
@@ -641,7 +652,7 @@ a:focus:not(:focus-visible){outline:none}
       <ul class="plain"><li>Kleine, konkrete Anforderung aus Nutzersicht, in <span class="hl">einem <span lang="en">Sprint</span></span> umsetzbar.</li></ul>
     </article>
   </section>
-  <div class="pageno">Seite 5 / 12</div>
+  <div class="pageno">Seite 5 / 14</div>
 </section>
 
 <!-- ============ SEITE 6 ============ -->
@@ -689,7 +700,7 @@ a:focus:not(:focus-visible){outline:none}
   <div class="tip">
     <strong>Merke:</strong> Ohne Akzeptanzkriterien lässt sich nicht prüfen, ob eine Story wirklich fertig ist – sie machen die Story <span class="hl">prüfbar</span>.
   </div>
-  <div class="pageno">Seite 6 / 12</div>
+  <div class="pageno">Seite 6 / 14</div>
 </section>
 
 <!-- ============ SEITE 7 ============ -->
@@ -714,40 +725,104 @@ a:focus:not(:focus-visible){outline:none}
     <div style="--c:var(--c6)"><strong>T</strong><span><b>Testable</b><em>testbar – Akzeptanzkriterien machen sie prüfbar</em></span></div>
   </div>
 
-  <h3>Probe aufs Beispiel</h3>
-  <section class="grid">
-    <article class="card" style="--c:var(--c6)">
-      <h2>✗ „Online-Banking für Privatkunden“</h2>
-      <ul class="plain">
-        <li>Das ist ein <span class="hl">Epic</span> – dauert mehrere Monate.</li>
-        <li><b>S</b> nicht klein genug für einen <span lang="en">Sprint</span></li>
-        <li><b>E</b> kaum schätzbar</li>
-      </ul>
-    </article>
-    <article class="card" style="--c:var(--c1)">
-      <h2>✓ „Reset-Link per E-Mail erhalten“</h2>
-      <ul class="plain">
-        <li>Klein und konkret, aus Nutzersicht formuliert.</li>
-        <li><b>T</b> durch Akzeptanzkriterien prüfbar (60 s, 30 min, neutrale Meldung)</li>
-        <li><b>S</b> in einem <span lang="en">Sprint</span> umsetzbar</li>
-      </ul>
-    </article>
-  </section>
+  <h3>Beispiel: PayPal im Online-Shop</h3>
+  <p class="lead">Story: <span class="hl">„Kunden sollen mit <span lang="en">PayPal</span> bezahlen können.“</span> – So prüft das Team jedes <span lang="en">INVEST</span>-Kriterium (schlecht vs. gut):</p>
 
   <div class="note">
     <strong>Merke dir:</strong>
     <ul>
-      <li>Hierarchie: Epic → Feature → <span lang="en">User Story</span></li>
-      <li>Satzmuster: Als [Rolle] möchte ich [Funktion], damit [Nutzen]</li>
-      <li>Akzeptanzkriterien = wann ist die Story fertig?</li>
       <li><span lang="en">INVEST</span> = Qualitäts-Check vor der Entwicklung</li>
+      <li>Jedes Kriterium: erst erkennen, was <span class="hl">schlecht</span> ist – dann die <span class="hl">gute</span> Variante</li>
     </ul>
   </div>
-  <div class="pageno">Seite 7 / 12</div>
+  <div class="pageno">Seite 7 / 14</div>
 </section>
 
 <!-- ============ SEITE 8 ============ -->
 <section class="sheet" aria-label="Seite 8">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+
+  <h2><span lang="en">INVEST</span></h2>
+  <p style="text-align:center"><span class="tag">2.2 PayPal-Beispiel · schlecht vs. gut</span></p>
+
+  <section class="grid one">
+    <article class="card" style="--c:var(--c1)">
+      <h2><span class="num">I</span><span lang="en">Independent</span> · unabhängig</h2>
+      <ul>
+        <li><b>Schlecht</b>Hängt davon ab, dass zuerst ein komplett neues Benutzerkonto-System umgebaut wird.</li>
+        <li><b>Gut</b>Das <span lang="en">PayPal</span>-Modul wird als eigenständige Funktion entwickelt – losgelöst von späteren Zahlungsarten (z. B. Kreditkarte).</li>
+      </ul>
+    </article>
+
+    <article class="card" style="--c:var(--c2)">
+      <h2><span class="num">N</span><span lang="en">Negotiable</span> · verhandelbar</h2>
+      <ul>
+        <li><b>Schlecht</b>Seitenlanger, starrer Vertrag darüber, wie der Button exakt aussehen muss.</li>
+        <li><b>Gut</b>Die Anforderung bleibt flexibel: <span lang="en">Product Owner</span> und Entwickler:innen entscheiden im Gespräch, ob der Button rund oder eckig ist und wo er im Warenkorb landet.</li>
+      </ul>
+    </article>
+
+    <article class="card" style="--c:var(--c3)">
+      <h2><span class="num">V</span><span lang="en">Valuable</span> · wertvoll</h2>
+      <ul>
+        <li><b>Schlecht</b>„Wir refaktorisieren die Bezahl-API im Hintergrund.“ – kein direkter Nutzen für Kundinnen.</li>
+        <li><b>Gut</b>Kunden können per Klick mit <span lang="en">PayPal</span> bezahlen – echter Nutzen (weniger Kaufabbrüche).</li>
+      </ul>
+    </article>
+  </section>
+  <div class="pageno">Seite 8 / 14</div>
+</section>
+
+<!-- ============ SEITE 9 ============ -->
+<section class="sheet" aria-label="Seite 9">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+
+  <p style="text-align:center"><span class="tag">2.2 PayPal-Beispiel · Fortsetzung</span></p>
+
+  <section class="grid one">
+    <article class="card" style="--c:var(--c4)">
+      <h2><span class="num">E</span><span lang="en">Estimable</span> · schätzbar</h2>
+      <ul>
+        <li><b>Schlecht</b>„Wir bauen ein komplett neues Zahlungssystem für alle Länder weltweit.“ – viel zu vage, kaum schätzbar.</li>
+        <li><b>Gut</b>Das Team kennt die technische Schnittstelle zu <span lang="en">PayPal</span> und schätzt z. B. <span class="hl">3 Tage</span> Arbeit.</li>
+      </ul>
+    </article>
+
+    <article class="card" style="--c:var(--c5)">
+      <h2><span class="num">S</span><span lang="en">Small</span> · klein</h2>
+      <ul>
+        <li><b>Schlecht</b>„Das gesamte Checkout-System neu erfinden“ – dauert Monate und sprengt jeden <span lang="en">Sprint</span>.</li>
+        <li><b>Gut</b>Nur die Integration von <span lang="en">PayPal</span> für den Standard-Kaufprozess – passt in den aktuellen zweiwöchigen <span lang="en">Sprint</span>.</li>
+      </ul>
+    </article>
+
+    <article class="card" style="--c:var(--c6)">
+      <h2><span class="num">T</span><span lang="en">Testable</span> · testbar</h2>
+      <ul>
+        <li><b>Schlecht</b>„Der Checkout soll sich gut anfühlen.“ – nicht prüfbar.</li>
+        <li><b>Gut</b>Klare Akzeptanzkriterien: „Wenn der Nutzer auf den <span lang="en">PayPal</span>-Button klickt, öffnet sich das Login-Fenster; nach erfolgreicher Zahlung erscheint die Bestellbestätigung.“</li>
+      </ul>
+    </article>
+  </section>
+
+  <div class="tip">
+    <strong>Tipp:</strong> Erfüllt die Story alle sechs Buchstaben, ist sie bereit für Planung und Entwicklung.
+  </div>
+  <div class="pageno">Seite 9 / 14</div>
+</section>
+
+<!-- ============ SEITE 10 ============ -->
+<section class="sheet" aria-label="Seite 10">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
@@ -827,11 +902,11 @@ a:focus:not(:focus-visible){outline:none}
       </div>
     </article>
   </section>
-  <div class="pageno">Seite 8 / 12</div>
+  <div class="pageno">Seite 10 / 14</div>
 </section>
 
-<!-- ============ SEITE 9 ============ -->
-<section class="sheet" aria-label="Seite 9">
+<!-- ============ SEITE 11 ============ -->
+<section class="sheet" aria-label="Seite 11">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
@@ -878,11 +953,11 @@ a:focus:not(:focus-visible){outline:none}
   <div class="tip">
     <strong>Wichtig:</strong> Ein Story Point ist <span class="hl">einheitslos</span> – keine Stunden, sondern ein relatives Maß im Vergleich zu anderen Aufgaben.
   </div>
-  <div class="pageno">Seite 9 / 12</div>
+  <div class="pageno">Seite 11 / 14</div>
 </section>
 
-<!-- ============ SEITE 10 ============ -->
-<section class="sheet" aria-label="Seite 10">
+<!-- ============ SEITE 12 ============ -->
+<section class="sheet" aria-label="Seite 12">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
@@ -929,11 +1004,11 @@ a:focus:not(:focus-visible){outline:none}
   <div class="demo">
     <span class="cloud">Rechtschreibfehler = 1</span><span class="arrow">≪</span><span class="cloud">Kreditkarten-Schnittstelle = 8</span>
   </div>
-  <div class="pageno">Seite 10 / 12</div>
+  <div class="pageno">Seite 12 / 14</div>
 </section>
 
-<!-- ============ SEITE 11 ============ -->
-<section class="sheet" aria-label="Seite 11">
+<!-- ============ SEITE 13 ============ -->
+<section class="sheet" aria-label="Seite 13">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
@@ -972,11 +1047,11 @@ a:focus:not(:focus-visible){outline:none}
   <div class="rule">
     <strong>Wichtig:</strong> Der größte Nutzen von <span lang="en">Planning Poker</span> liegt im <span class="hl">Gespräch</span>! Unterschiedliche Schätzungen decken <span class="hl">Missverständnisse, fehlendes Wissen oder versteckte Risiken</span> auf.
   </div>
-  <div class="pageno">Seite 11 / 12</div>
+  <div class="pageno">Seite 13 / 14</div>
 </section>
 
-<!-- ============ SEITE 12 ============ -->
-<section class="sheet" aria-label="Seite 12">
+<!-- ============ SEITE 14 ============ -->
+<section class="sheet" aria-label="Seite 14">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
@@ -1013,11 +1088,11 @@ a:focus:not(:focus-visible){outline:none}
     <div style="--c:var(--c3)"><b>Story Point:</b> Einheitsloses Maß für den relativen Aufwand, die Komplexität und das Risiko einer Aufgabe.</div>
     <div style="--c:var(--c4)"><b>Token:</b> Einmaliger, geschützter Code (z. B. in einem Link zum Passwort-Zurücksetzen).</div>
     <div style="--c:var(--c5)"><b><span lang="en">User Story</span>:</b> Anforderung aus Sicht der Nutzerinnen und Nutzer: Als [Rolle] möchte ich [Funktion], damit [Nutzen].</div>
-    <div style="--c:var(--c6)"><b>WIP-Limit:</b> Maximale Anzahl von Aufgaben, die gleichzeitig in einer Spalte des Boards bearbeitet werden dürfen.</div>
+    <div style="--c:var(--c6)"><b>WIP-Limit:</b> Max. parallele Aufgaben in einer Spalte. Bei <span lang="en">Kanban</span> Pflicht; bei <span lang="en">Scrum</span> optional (der Sprint begrenzt schon die Arbeit).</div>
   </div>
 
   <div class="banner">Sichtbar machen · Zerkleinern · Gemeinsam schätzen</div>
-  <div class="pageno">Seite 12 / 12</div>
+  <div class="pageno">Seite 14 / 14</div>
 </section>
 
 </body>

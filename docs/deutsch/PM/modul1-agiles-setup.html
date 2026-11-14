@@ -84,6 +84,9 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
 .diagram text{font-family:var(--font-hand);font-size:19px;fill:var(--ink)}
 .diagram .t{font-family:var(--font-title);font-size:16px}
 .diagram .b{font-family:var(--font-title);font-size:15px}
+.fig{display:block;width:100%;max-width:100%;height:auto;margin:14px auto 0;
+  border-radius:var(--radius);border:2px solid color-mix(in srgb,var(--c4) 55%,white);
+  background:#fff;box-sizing:border-box}
 
 /* ---- Lernziele ---- */
 .check{list-style:none;padding:0;margin:0}
@@ -149,7 +152,7 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
   body{background:#fff;padding:0}
   .sheet{box-shadow:none;margin:0;min-height:auto;break-after:page;border-radius:0}
   .sheet:last-of-type{break-after:auto}
-  .card,.note,.tip,.rule,.table,.smart,.diagram,.gloss div{break-inside:avoid}
+  .card,.note,.tip,.rule,.table,.smart,.diagram,.fig,.gloss div{break-inside:avoid}
 }
 
 /* === a11y === */
@@ -208,6 +211,7 @@ a:focus:not(:focus-visible){outline:none}
       <h2>Nach diesem Modul kannst du …</h2>
       <ul class="check">
         <li>den Unterschied zwischen <span class="hl">klassischem und agilem Vorgehen</span> erklären</li>
+        <li><span class="hl">Scrum</span> und <span class="hl">Kanban</span> grob unterscheiden</li>
         <li>die <span class="hl">drei Scrum-Rollen</span> und ihre Aufgaben nennen</li>
         <li>den <span class="hl">Ablauf eines Sprints</span> mit seinen Terminen beschreiben</li>
         <li><span class="hl">Projektleiter (PM)</span> und <span class="hl"><span lang="en">Product Owner</span> (PO)</span> unterscheiden</li>
@@ -242,7 +246,7 @@ a:focus:not(:focus-visible){outline:none}
     <span class="arrow">vs.</span>
     <span class="cloud">Kochen: probieren ↻ nachwürzen</span>
   </div>
-  <div class="pageno">Seite 1 / 7</div>
+  <div class="pageno">Seite 1 / 10</div>
 </main>
 
 <!-- ============ SEITE 2 ============ -->
@@ -333,7 +337,7 @@ a:focus:not(:focus-visible){outline:none}
   <div class="rule">
     <strong>Wichtig:</strong> Agil ist <span class="hl">nicht automatisch besser</span>. Bei festen Vorgaben (z. B. gesetzlichen Pflichten) passt klassisches Vorgehen oft gut. Viele Firmen nutzen Mischformen (<span class="hl">hybrid</span>).
   </div>
-  <div class="pageno">Seite 2 / 7</div>
+  <div class="pageno">Seite 2 / 10</div>
 </section>
 
 <!-- ============ SEITE 3 ============ -->
@@ -371,10 +375,109 @@ a:focus:not(:focus-visible){outline:none}
   <div class="demo">
     <span class="cloud">Agil: 2 Wochen</span><span class="arrow">→</span><span class="cloud">Überweisung</span><span class="arrow">→</span><span class="cloud">Feedback</span><span class="arrow">→</span><span class="cloud">nächste Funktion</span>
   </div>
+  <div class="pageno">Seite 3 / 10</div>
+</section>
 
-  <hr>
-  <h3>1.2 Scrum und seine Rollen</h3>
-  <p class="lead"><span class="hl">Scrum</span> (englisch für „Gedränge“ beim Rugby) ist das bekannteste <span class="hl">agile Regelwerk</span>. Es verteilt die Aufgaben auf <span class="hl">drei Rollen</span> – ohne klassischen Chef.</p>
+<!-- ============ SEITE 4 ============ -->
+<section class="sheet" aria-label="Seite 4">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+
+  <h2>1.2 Agile Methoden</h2>
+  <p style="text-align:center"><span class="tag">Scrum · Kanban</span></p>
+
+  <p class="lead"><span class="hl">Scrum</span> und <span class="hl">Kanban</span> sind beide beliebte agile Methoden, um Projekte zu steuern und die Zusammenarbeit im Team zu verbessern. Sie teilen Prinzipien wie <span class="hl">Transparenz</span> und <span class="hl">kontinuierliche Verbesserung</span> – unterscheiden sich aber stark in Struktur und Ablauf.</p>
+
+  <section class="grid one">
+    <article class="card" style="--c:var(--c2)">
+      <h2><span class="num">1</span>Scrum</h2>
+      <p class="sub">Feste Zyklen · feste Rollen · klare Meetings</p>
+      <ul>
+        <li>Komplexe Projekte in kurze <span class="hl"><span lang="en">Sprints</span></span> (1–4 Wochen).</li>
+        <li>Rollen: <span lang="en">Product Owner</span>, <span lang="en">Scrum Master</span>, Team.</li>
+        <li>Meetings: Planning, Daily, Review, Retrospektive.</li>
+        <li>Während eines <span lang="en">Sprints</span> bleiben die Ziele <span class="hl">stabil</span>.</li>
+      </ul>
+    </article>
+  </section>
+
+  <img class="fig" src="scrum-kanban-boards.png" width="700" height="400" alt="Vergleich: Scrum Board mit Spalten Story, To Do, In Progress, Done und Kanban Board mit Backlog, Work-in-Progress, Validate, Complete">
+
+  <section class="grid one">
+    <article class="card" style="--c:var(--c3)">
+      <h2><span class="num">2</span>Kanban</h2>
+      <p class="sub">Kontinuierlicher Fluss · ohne feste Zyklen</p>
+      <ul>
+        <li>Kein fester Sprint-Rhythmus, keine Pflichtrollen.</li>
+        <li>Fokus: weniger Aufgaben gleichzeitig (<span class="hl"><span lang="en">WIP</span>-Limits</span>).</li>
+        <li>So entstehen weniger Engpässe im Arbeitsfluss.</li>
+      </ul>
+    </article>
+  </section>
+
+  <div class="rule">
+    <strong>Kurz gesagt:</strong> Scrum = Struktur und fester Rhythmus (komplexe Produktentwicklung).
+    Kanban = maximale Flexibilität (Support, Wartung, laufende Aufgaben).
+  </div>
+  <div class="tip">
+    <strong>Tipp:</strong> In der klassischen IT- und Softwareentwicklung ist <span class="hl">Scrum</span> deutlich weiter verbreitet als Kanban – oft der etablierte Standard.
+  </div>
+  <div class="pageno">Seite 4 / 10</div>
+</section>
+
+<!-- ============ SEITE 5 ============ -->
+<section class="sheet" aria-label="Seite 5">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+
+  <h2>Woher kommen die Namen?</h2>
+  <p style="text-align:center"><span class="tag">1.2 Keine Abkürzungen</span></p>
+
+  <p class="lead">Weder <span class="hl">Scrum</span> noch <span class="hl">Kanban</span> sind Abkürzungen (Akronyme), bei denen jeder Buchstabe für ein Wort steht. Beide sind eigenständige Begriffe aus anderen Bereichen:</p>
+
+  <section class="grid one">
+    <article class="card" style="--c:var(--c2)">
+      <h2>Scrum · aus dem Rugby</h2>
+      <p class="sub">Deutsch: „Gedränge“</p>
+      <ul>
+        <li>Beim Rugby verhaken sich Spieler eng, um den Ball gemeinsam nach vorne zu bringen.</li>
+        <li>Metapher: Das Team arbeitet <span class="hl">eng zusammen</span> an einem gemeinsamen Ziel.</li>
+      </ul>
+    </article>
+
+    <article class="card" style="--c:var(--c3)">
+      <h2>Kanban · aus dem Japanischen</h2>
+      <p class="sub">wörtlich „Signalkarte“ / „Sichtkarte“</p>
+      <ul>
+        <li><span lang="ja">kan</span> = sichtbar / Schild · <span lang="ja">ban</span> = Karte / Tafel</li>
+        <li>Aus der Produktionssteuerung (bekannt durch Toyota).</li>
+        <li>Früher: physische Karten zeigten, wann neues Material nachproduziert werden muss.</li>
+      </ul>
+    </article>
+  </section>
+
+  <div class="pageno">Seite 5 / 10</div>
+</section>
+
+<!-- ============ SEITE 6 ============ -->
+<section class="sheet" aria-label="Seite 6">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <h2>Scrum-Rollen im Überblick</h2>
+  <p style="text-align:center"><span class="tag">1.2 Das Team ohne klassischen Chef</span></p>
+  <p class="lead">Die Aufgaben liegen bei <span class="hl">drei Rollen</span> – ohne klassischen Chef.</p>
 
   <svg class="diagram" viewBox="0 0 700 300" role="img" aria-label="Drei Scrum-Rollen um das Scrum-Team: Product Owner, Scrum Master, Developers">
     <g stroke="#e8639a" stroke-width="2.5" fill="none" marker-end="url(#arrw)" opacity=".85">
@@ -398,11 +501,20 @@ a:focus:not(:focus-visible){outline:none}
     <text x="350" y="260" text-anchor="middle">Programmierung, Design, Tests</text>
     <text x="350" y="280" text-anchor="middle">→ bauen das Produkt</text>
   </svg>
-  <div class="pageno">Seite 3 / 7</div>
+
+  <div class="note">
+    <strong>Eselsbrücke:</strong>
+    <ul>
+      <li>PO = <span class="hl">Was</span> kommt zuerst?</li>
+      <li>SM = <span class="hl">Wie</span> läuft der Prozess, was blockiert?</li>
+      <li>Developers = <span class="hl">Umsetzung</span> – bauen und testen</li>
+    </ul>
+  </div>
+  <div class="pageno">Seite 6 / 10</div>
 </section>
 
-<!-- ============ SEITE 4 ============ -->
-<section class="sheet" aria-label="Seite 4">
+<!-- ============ SEITE 7 ============ -->
+<section class="sheet" aria-label="Seite 7">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
@@ -443,20 +555,11 @@ a:focus:not(:focus-visible){outline:none}
       </ul>
     </article>
   </section>
-
-  <div class="note">
-    <strong>Eselsbrücke:</strong>
-    <ul>
-      <li>PO = <span class="hl">Was</span> kommt zuerst?</li>
-      <li>SM = <span class="hl">Wie</span> läuft der Prozess, was blockiert?</li>
-      <li>Developers = <span class="hl">Umsetzung</span> – bauen und testen</li>
-    </ul>
-  </div>
-  <div class="pageno">Seite 4 / 7</div>
+  <div class="pageno">Seite 7 / 10</div>
 </section>
 
-<!-- ============ SEITE 5 ============ -->
-<section class="sheet" aria-label="Seite 5">
+<!-- ============ SEITE 8 ============ -->
+<section class="sheet" aria-label="Seite 8">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
@@ -513,11 +616,11 @@ a:focus:not(:focus-visible){outline:none}
   <div class="tip">
     <strong>Merkhilfe:</strong> Review = <span class="hl">Was</span> haben wir gebaut? · Retrospective = <span class="hl">Wie</span> haben wir zusammengearbeitet?
   </div>
-  <div class="pageno">Seite 5 / 7</div>
+  <div class="pageno">Seite 8 / 10</div>
 </section>
 
-<!-- ============ SEITE 6 ============ -->
-<section class="sheet" aria-label="Seite 6">
+<!-- ============ SEITE 9 ============ -->
+<section class="sheet" aria-label="Seite 9">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
@@ -568,11 +671,11 @@ a:focus:not(:focus-visible){outline:none}
     <div class="s4" role="listitem"><strong>R</strong>Realistisch<br>erreichbar</div>
     <div class="s5" role="listitem"><strong>T</strong>Terminiert<br>mit Datum</div>
   </div>
-  <div class="pageno">Seite 6 / 7</div>
+  <div class="pageno">Seite 9 / 10</div>
 </section>
 
-<!-- ============ SEITE 7 ============ -->
-<section class="sheet" aria-label="Seite 7">
+<!-- ============ SEITE 10 ============ -->
+<section class="sheet" aria-label="Seite 10">
   <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
   <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
   <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
@@ -606,6 +709,7 @@ a:focus:not(:focus-visible){outline:none}
     <article class="card" style="--c:var(--c5)">
       <ul>
         <li><span class="hl">Klassisch</span> plant alles vorab. <span class="hl">Agil</span> arbeitet in kurzen Sprints mit frühem Feedback.</li>
+        <li><span class="hl">Scrum</span> = fester Rhythmus; <span class="hl">Kanban</span> = fließende Arbeit mit <span lang="en">WIP</span>-Limits. Beide sind <span class="hl">keine Abkürzungen</span>.</li>
         <li>Scrum kennt <span class="hl">drei Rollen</span>: <span lang="en">Product Owner</span> (Produktwert), <span lang="en">Scrum Master</span> (Prozess &amp; Hilfe) und Developers (Umsetzung).</li>
         <li>Ein <span lang="en">Sprint</span> besteht aus <span class="hl">vier Terminen</span>: Planning, Daily, Review und Retrospective.</li>
         <li>Der PM achtet auf <span class="hl">Zeit und Geld</span>, der PO auf den <span class="hl">Nutzen für den Kunden</span>.</li>
@@ -625,11 +729,14 @@ a:focus:not(:focus-visible){outline:none}
     <div style="--c:var(--c1)"><b>Product <span lang="en">Backlog</span>:</b> Geordnete Liste aller Wünsche und Aufgaben für ein Produkt.</div>
     <div style="--c:var(--c2)"><b>Release:</b> Veröffentlichung einer Softwareversion für die Nutzer.</div>
     <div style="--c:var(--c3)"><b><span lang="en">Sprint</span>:</b> Feste Arbeitsphase (meist 1 bis 4 Wochen), in der ein Teilergebnis entsteht.</div>
-    <div style="--c:var(--c4)"><b>Testumgebung:</b> Getrennter Server oder Bereich zum gefahrlosen Ausprobieren.</div>
+    <div style="--c:var(--c4)"><b>Kanban:</b> Agiler Fluss ohne feste Sprints – begrenzt parallele Arbeit (<span lang="en">WIP</span>-Limits). Japanisch: „Signalkarte“.</div>
+    <div style="--c:var(--c5)"><b>Scrum:</b> Agile Methode mit Sprints und festen Rollen. Name aus dem Rugby („Gedränge“) – keine Abkürzung.</div>
+    <div style="--c:var(--c1)"><b><span lang="en">WIP</span>-Limit:</b> Maximale Anzahl Aufgaben „in Arbeit“ gleichzeitig.</div>
+    <div style="--c:var(--c2)"><b>Testumgebung:</b> Getrennter Server oder Bereich zum gefahrlosen Ausprobieren.</div>
   </div>
 
   <div class="banner">Planen · Liefern · Lernen · Verbessern</div>
-  <div class="pageno">Seite 7 / 7</div>
+  <div class="pageno">Seite 10 / 10</div>
 </section>
 
 </body>
