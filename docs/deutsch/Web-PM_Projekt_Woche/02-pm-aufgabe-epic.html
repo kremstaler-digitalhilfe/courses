@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vom Epic zu den User Stories</title>
+<link rel="icon" href="../../favicon.png" type="image/png" sizes="32x32">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Patrick+Hand&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* === THEME : seul bloc à modifier === */
+  --paper:#fffdfa; --grid:#ebe6ee; --ink:#2b2b3a; --page:#f3eef2;
+  --accent:#d44d86; --link:#0B3D91; --accent-soft:#fce4ef; --highlight:#ffe566;
+  --c1:#5faf64; --c2:#5a96d4; --c3:#e0923f;
+  --c4:#9b6fd0; --c5:#3aa89e; --c6:#e06f90;
+  --font-title:'Fredoka',sans-serif;
+  --font-body:'Patrick Hand',sans-serif;
+  --font-hand:'Caveat',cursive;
+  --radius:14px;
+}
+*{box-sizing:border-box}
+body{margin:0;padding:16px;background:var(--page);color:var(--ink);
+  font-family:var(--font-body);font-size:18px;line-height:1.4;max-width:100%;overflow-x:clip}
+.sheet{position:relative;width:100%;max-width:min(794px,100%);min-height:1050px;margin:0 auto 24px;padding:32px 28px 52px;border-radius:6px;box-sizing:border-box;
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),
+                   linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px;box-shadow:0 6px 24px #0002}
+h1{font-family:var(--font-title);font-size:2.1rem;text-align:center;margin:0 0 6px}
+h1::after{content:"";display:block;height:6px;width:60%;margin:8px auto 0;
+  background:var(--accent);border-radius:6px;opacity:.7}
+h2{font-family:var(--font-title);font-size:1.35rem;margin:18px 0 6px}
+h3{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px;display:inline-block;
+  background:var(--accent-soft);padding:3px 14px;border-radius:8px}
+.tag{display:inline-block;background:var(--accent-soft);padding:4px 14px;
+  border-radius:8px;font-family:var(--font-title);font-size:.95rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));
+  gap:18px;margin-top:20px}
+.grid.one{grid-template-columns:1fr}
+.grid.three{grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr))}
+.card{--c:var(--c1);position:relative;border:2px solid var(--c);
+  border-radius:var(--radius);padding:14px 16px;
+  background:color-mix(in srgb,var(--c) 5%,white);overflow-wrap:anywhere;max-width:100%;min-width:0}
+.card::before{content:"";position:absolute;top:-9px;right:18px;width:54px;height:16px;
+  background:color-mix(in srgb,var(--c) 45%,white);opacity:.8;transform:rotate(4deg);border-radius:2px}
+.card h2,.card h3{margin:0 0 4px;font-family:var(--font-title);font-size:1.05rem;background:none;padding:0;display:block}
+.card .sub{font-family:var(--font-hand);font-size:1.15rem;color:color-mix(in srgb,var(--c) 38%,#14141f);margin:0 0 8px;overflow-wrap:anywhere;hyphens:auto;-webkit-hyphens:auto}
+.num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;padding:0;border-radius:50%;box-sizing:border-box;font-family:var(--font-title);font-size:.82rem;font-weight:700;line-height:1;letter-spacing:0;text-align:center;background:color-mix(in srgb,var(--c) 18%,white);color:var(--ink);border:2px solid var(--c);margin-right:6px}
+.card ul{list-style:none;padding:0;margin:0}
+.card li{margin:6px 0;padding-left:2px}
+.card li::before{content:"✓ ";color:color-mix(in srgb,var(--c) 38%,#14141f);font-weight:700}
+.card ul.plain li::before{content:""}
+.hl{background:linear-gradient(transparent 55%,var(--highlight) 55%)}
+.code{display:inline-block;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem;
+  background:#fff;border:1.5px dashed var(--c,var(--accent));border-radius:8px;padding:1px 8px;margin:1px 0;max-width:100%;overflow-wrap:anywhere}
+.cloud{display:inline-block;padding:8px 16px;border:2px dashed var(--accent);
+  border-radius:40px;background:#fff;font-family:var(--font-hand);font-size:1.15rem;margin:4px 4px 0 0}
+.note{border:2px solid var(--accent);border-radius:var(--radius);
+  background:#fff;padding:12px 16px;margin-top:18px;max-width:100%;box-sizing:border-box}
+.note ul{list-style:none;padding:0;margin:6px 0 0}
+.note li{margin:4px 0}
+.note li::before{content:"♥ ";color:color-mix(in srgb,var(--accent) 45%,#14141f)}
+.tip{--c:var(--c3);border:2px dashed var(--c);border-radius:var(--radius);
+  background:color-mix(in srgb,var(--c) 6%,white);padding:10px 16px;margin-top:18px;max-width:100%;box-sizing:border-box}
+.tip strong{font-family:var(--font-title);color:color-mix(in srgb,var(--c) 38%,#14141f)}
+.rule{--c:var(--c4);border:2px solid var(--c);border-radius:var(--radius);
+  background:color-mix(in srgb,var(--c) 6%,white);padding:10px 16px;margin-top:18px;max-width:100%;box-sizing:border-box}
+.rule strong{font-family:var(--font-title);color:color-mix(in srgb,var(--c) 38%,#14141f)}
+hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
+.banner{margin-top:20px;padding:10px;text-align:center;background:var(--accent-soft);
+  border:2px solid var(--accent);font-family:var(--font-title);
+  text-transform:uppercase;letter-spacing:.04em}
+.pageno{position:absolute;bottom:16px;left:0;right:0;text-align:center;
+  font-family:var(--font-hand);font-size:1.1rem;color:color-mix(in srgb,var(--ink) 72%,white)}
+.lead{margin:16px 0 0}
+.cap{font-family:var(--font-hand);font-size:1.15rem;margin:4px 0 0}
+.arrow{font-size:1.3rem;color:color-mix(in srgb,var(--accent) 45%,#14141f);font-weight:700}
+.demo{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;margin-top:12px;
+  font-family:var(--font-hand);font-size:1.15rem}
+.crumb{font-family:var(--font-hand);font-size:1.05rem;margin:10px 0 0;text-align:center}
+.crumb a{color:var(--link);text-decoration:underline;text-underline-offset:2px}
+.quote{font-size:1.05rem;line-height:1.55;margin:8px 0 0}
+
+/* ---- Ticket / Badge ---- */
+.ticket{--c:var(--c4);width:100%;max-width:100%;margin:14px auto 0;background:#fff;border:2px solid var(--ink);border-radius:12px;
+  box-shadow:3px 4px 0 #0002;overflow:hidden;box-sizing:border-box}
+.ticket .th{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:10px 14px;background:color-mix(in srgb,var(--c) 22%,white);
+  border-bottom:2px solid var(--ink);font-family:var(--font-title);font-size:1rem}
+.ticket .tb{display:grid;grid-template-columns:minmax(0,140px) minmax(0,1fr);gap:6px 10px;padding:12px 14px;font-size:1rem;align-items:start}
+.ticket .tb dt{font-family:var(--font-hand);font-size:1.15rem;color:color-mix(in srgb,var(--ink) 72%,white);min-width:0;overflow-wrap:anywhere}
+.ticket .tb dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.badge{display:inline-block;padding:1px 12px;border-radius:8px;color:var(--ink);font-family:var(--font-title);font-size:.8rem;letter-spacing:.03em;border:1.5px solid transparent}
+.badge.epic{background:color-mix(in srgb,var(--c4) 28%,white);border-color:var(--c4)}
+.badge.story{background:color-mix(in srgb,var(--c1) 28%,white);border-color:var(--c1)}
+.badge.task{background:color-mix(in srgb,var(--c2) 28%,white);border-color:var(--c2)}
+
+/* ---- Mapping phrase → ticket ---- */
+.flow{display:grid;gap:10px;margin-top:14px}
+.flow .st{display:grid;grid-template-columns:minmax(0,1.2fr) auto minmax(0,1fr);gap:8px;align-items:center;
+  padding:10px 12px;border:2px solid var(--c);border-radius:12px;background:color-mix(in srgb,var(--c) 6%,white)}
+.flow .st .from{font-family:var(--font-hand);font-size:1.1rem}
+.flow .st .to{font-family:var(--font-title);font-size:.95rem}
+
+/* ---- INVEST ---- */
+.invest{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px;margin-top:12px}
+.invest div{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:2px solid var(--c);
+  border-radius:12px;background:color-mix(in srgb,var(--c) 6%,white);font-size:1rem}
+.invest strong{flex:none;display:grid;place-items:center;width:44px;height:52px;border-radius:10px;
+  background:color-mix(in srgb,var(--c) 28%,white);color:var(--ink);border:2px solid var(--c);font-family:var(--font-title);font-size:1.7rem}
+.invest b{display:block;font-family:var(--font-title);font-size:.95rem}
+.invest em{font-style:normal;font-family:var(--font-hand);font-size:1.05rem;color:color-mix(in srgb,var(--ink) 72%,white)}
+
+.tshirts{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:center;gap:10px;margin-top:12px;max-width:100%}
+.tshirts div{display:grid;place-items:center;border:2px solid var(--ink);border-radius:10px 10px 6px 6px;
+  font-family:var(--font-title);background:color-mix(in srgb,var(--c) 28%,white);box-sizing:border-box;color:var(--ink);padding:6px 4px}
+
+/* === Ornements SVG === */
+.sheet{position:relative}
+.orn{position:absolute;top:16px;display:flex;gap:2px;align-items:flex-start;pointer-events:none}
+.orn.tl{left:18px}
+.orn.tr{right:18px}
+.orn svg{display:block;overflow:visible}
+.orn .big{width:78px;height:88px}
+.orn .bulb{width:38px;height:46px;margin-top:6px}
+.orn .star{width:26px;height:26px}
+.orn .heart{width:28px;height:28px;margin-top:10px}
+.sheet > h1,
+.sheet:not(:has(> h1)) > h2:first-of-type{padding:0 92px;text-align:center;box-sizing:border-box}
+@media (max-width:640px){
+  body{padding:10px}.orn{display:none}.sheet{padding:22px 14px 40px;overflow-x:clip}.sheet > h1,.sheet:not(:has(> h1)) > h2:first-of-type{padding:0}
+  .flow .st{grid-template-columns:1fr;text-align:left}
+  .ticket .tb{grid-template-columns:1fr}
+}
+@media print{
+  @page{size:A4;margin:10mm}
+  body{background:#fff;padding:0}
+  .sheet{box-shadow:none;margin:0;min-height:auto;break-after:page;border-radius:0}
+  .sheet:last-child{break-after:auto}
+  .card,.note,.tip,.rule,.ticket,.flow .st,.invest div,.tshirts{break-inside:avoid}
+}
+
+/* === a11y === */
+a{color:var(--link)}
+a:hover{color:var(--link);text-decoration-thickness:2px}
+:focus-visible{outline:3px solid var(--link);outline-offset:3px}
+a:focus:not(:focus-visible){outline:none}
+.skip-link{position:absolute;top:0;left:0;transform:translateY(-120%);
+  background:var(--paper);color:var(--link);padding:10px 16px;border:2px solid var(--link);
+  border-radius:8px;font-family:var(--font-title);font-weight:700;text-decoration:underline;z-index:100}
+.skip-link:focus,.skip-link:focus-visible{transform:translateY(0);outline:3px solid var(--link);outline-offset:2px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0,0,0,0);white-space:nowrap;border:0}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Zum Hauptinhalt springen</a>
+
+<!-- ============ SEITE 1 ============ -->
+<main id="main" class="sheet" tabindex="-1">
+  <div class="orn tl" aria-hidden="true"><svg class="big" viewBox="0 0 80 90" aria-hidden="true">
+  <g transform="rotate(-8 40 48)">
+    <rect x="16" y="10" width="52" height="68" rx="7" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.5"/>
+    <rect x="28" y="24" width="30" height="16" rx="3" style="fill:#fff;stroke:var(--ink);stroke-width:2"/>
+    <path d="M43 36c-4-3-6-5-6-7a3 3 0 0 1 6-.8 3 3 0 0 1 6 .8c0 2-2 4-6 7z" style="fill:var(--accent)"/>
+    <g style="fill:#fff;stroke:var(--ink);stroke-width:2.2">
+      <circle cx="16" cy="22" r="3.6"/><circle cx="16" cy="34" r="3.6"/><circle cx="16" cy="46" r="3.6"/>
+      <circle cx="16" cy="58" r="3.6"/><circle cx="16" cy="70" r="3.6"/>
+    </g>
+  </g>
+  <path d="M70 4l2.2 4.8 5.2.6-3.9 3.5 1.1 5.1L70 15.4l-4.6 2.6 1.1-5.1-3.9-3.5 5.2-.6z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round"/>
+</svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="big" viewBox="0 0 80 90" aria-hidden="true">
+  <g style="stroke:var(--ink);stroke-width:2;stroke-linejoin:round">
+    <g transform="rotate(-16 28 52)"><rect x="23" y="8" width="9" height="44" style="fill:var(--c3)"/><path d="M23 8L27.5-2 32 8z" style="fill:#f6dcc0"/></g>
+    <g transform="rotate(4 42 52)"><rect x="38" y="4" width="9" height="48" style="fill:var(--accent)"/><path d="M38 4L42.5-6 47 4z" style="fill:#f6dcc0"/></g>
+    <g transform="rotate(20 54 52)"><rect x="50" y="10" width="9" height="42" style="fill:var(--c4)"/><path d="M50 10L54.5 0 59 10z" style="fill:#f6dcc0"/></g>
+    <path d="M14 46h52l-5 36a5 5 0 0 1-5 4H24a5 5 0 0 1-5-4z" style="fill:var(--c5)"/>
+  </g>
+  <path d="M40 70c-3-2.4-4.6-4-4.6-5.6a2.3 2.3 0 0 1 4.6-.6 2.3 2.3 0 0 1 4.6.6c0 1.6-1.6 3.2-4.6 5.6z" style="fill:#fff"/>
+</svg></div>
+
+  <h1>Vom <span lang="en">Epic</span> zu den <span lang="en">User Stories</span></h1>
+  <p style="text-align:center"><span class="tag">Web-PM · Projektwoche · Fiche 2 · Aufgabenstellung</span></p>
+  <nav class="crumb" aria-label="Brotkrumen">
+    <a href="../../">Home</a> <span aria-hidden="true">›</span>
+    <a href="../">Deutsch</a> <span aria-hidden="true">›</span>
+    <span>Web-PM Projekt-Woche</span> <span aria-hidden="true">›</span>
+    <span aria-current="page">Vom <span lang="en">Epic</span> zu den Stories</span>
+  </nav>
+
+  <h2>Die <span lang="en">Epic</span></h2>
+  <p class="cap">Großes Ziel der Projektwoche</p>
+
+  <div class="ticket" style="--c:var(--c4)">
+    <div class="th"><span class="badge epic">Epic</span> Online stellen eines personalisierten, barrierefreien und herunterladbaren CV-Portfolios</div>
+    <dl class="tb">
+      <dt>Als …</dt>
+      <dd>Bewerber:in</dd>
+      <dt>möchte ich …</dt>
+      <dd>eine Online-CV-Website mit aktuellen persönlichen Infos, einem optimierten und barrierefreien Foto, einem sorgfältigen Design, einer flüssigen Navigation und der Möglichkeit, meinen Lebenslauf als <span lang="en">PDF</span> herunterzuladen</dd>
+      <dt>damit …</dt>
+      <dd>ich Recruitern einen <span class="hl">professionellen Link</span> schicken kann</dd>
+    </dl>
+  </div>
+
+  <hr>
+  <h2>Aufgabenstellung</h2>
+  <p class="cap">Vom <span lang="en">Epic</span> zu den <span lang="en">User Stories</span></p>
+
+  <section class="grid one">
+    <article class="card" style="--c:var(--c5)">
+      <h2>Euer Ziel</h2>
+      <ul>
+        <li>Zerlegt das vorgegebene <span lang="en">Epic</span> in euren Arbeitsgruppen in <span class="hl">6 konkrete <span lang="en">User Stories</span></span>.</li>
+        <li>Legt diese als Tickets in eurem <span lang="en">GitHub Board</span> an.</li>
+      </ul>
+    </article>
+  </section>
+  <div class="pageno">Seite 1 / 3</div>
+</main>
+
+<!-- ============ SEITE 2 ============ -->
+<section class="sheet" aria-label="Seite 2">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+
+  <h2>Schritte 1 &amp; 2</h2>
+  <p style="text-align:center"><span class="tag">Format · <span lang="en">INVEST</span></span></p>
+
+  <section class="grid one">
+    <article class="card" style="--c:var(--c1)">
+      <h2><span class="num">1</span>Story-Format formulieren</h2>
+      <p class="sub">Jede Story im Standard-Format</p>
+      <ul>
+        <li><span class="hl">Als</span> [Rolle – z.&nbsp;B. Bewerber:in oder Recruiter:in]</li>
+        <li><span class="hl">möchte ich</span> [Funktion / Ziel – was soll passieren?]</li>
+        <li><span class="hl">damit</span> [Nutzen / Mehrwert – warum ist das wichtig?]</li>
+      </ul>
+    </article>
+
+    <article class="card" style="--c:var(--c2)">
+      <h2><span class="num">2</span><span lang="en">INVEST</span>-Check</h2>
+      <p class="sub">Stellt sicher, dass eure Stories gut geschnitten sind</p>
+    </article>
+  </section>
+
+  <div class="invest">
+    <div style="--c:var(--c1)"><strong>I</strong><span><b lang="en">Independent</b><em>unabhängig voneinander umsetzbar</em></span></div>
+    <div style="--c:var(--c2)"><strong>N</strong><span><b lang="en">Negotiable</b><em>verhandelbar im Detail</em></span></div>
+    <div style="--c:var(--c3)"><strong>V</strong><span><b lang="en">Valuable</b><em>klarer Mehrwert</em></span></div>
+    <div style="--c:var(--c4)"><strong>E</strong><span><b lang="en">Estimable</b><em>Aufwand einschätzbar</em></span></div>
+    <div style="--c:var(--c5)"><strong>S</strong><span><b lang="en">Small</b><em>klein genug für 1 Arbeitstag Sprint</em></span></div>
+    <div style="--c:var(--c6)"><strong>T</strong><span><b lang="en">Testable</b><em>klar überprüfbar</em></span></div>
+  </div>
+  <div class="pageno">Seite 2 / 3</div>
+</section>
+
+<!-- ============ SEITE 3 ============ -->
+<section class="sheet" aria-label="Seite 3">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+
+  <h2>Schritte 3 &amp; 4</h2>
+  <p style="text-align:center"><span class="tag"><span lang="en">DoD</span> · Schätzung · Board</span></p>
+
+  <section class="grid one">
+    <article class="card" style="--c:var(--c3)">
+      <h2><span class="num">3</span>Akzeptanzkriterien / <span lang="en">DoD</span></h2>
+      <p class="sub">Definition of Done unter jede Story</p>
+      <ul>
+        <li>2–3 Stichpunkte: wann gilt das Ticket offiziell als <span class="hl" lang="en">Done</span>?</li>
+        <li>Beispiel: Bild über <span lang="en">TinyPNG</span> komprimiert, unter 150&nbsp;KB, sinnvolles <span class="code">alt</span>-Attribut</li>
+      </ul>
+    </article>
+
+    <article class="card" style="--c:var(--c4)">
+      <h2><span class="num">4</span>Schätzen &amp; ins Board eintragen</h2>
+      <p class="sub">T-Shirt-Größen + <span lang="en">GitHub Project</span></p>
+      <ul>
+        <li>Aufwand je Story: <span class="hl">XS · S · M · L</span></li>
+        <li>Referenz: alle 6 Stories zusammen = <span class="hl">1 voller Arbeitstag / 6&nbsp;Std. Dev-Zeit</span></li>
+        <li>Alle 6 als Issues anlegen (Beschreibung, <span lang="en">DoD</span>, T-Shirt-Größe)</li>
+        <li>In die Spalte <span class="hl" lang="en">Todo</span> schieben</li>
+      </ul>
+    </article>
+  </section>
+
+  <div class="tshirts" aria-label="T-Shirt Größen">
+    <div style="--c:var(--c1);width:48px;height:42px;font-size:.85rem">XS</div>
+    <div style="--c:var(--c2);width:58px;height:50px;font-size:.95rem">S</div>
+    <div style="--c:var(--c3);width:72px;height:60px;font-size:1.05rem">M</div>
+    <div style="--c:var(--c4);width:88px;height:72px;font-size:1.15rem">L</div>
+  </div>
+  <div class="pageno">Seite 3 / 3</div>
+</section>
+
+</body>
+</html>
