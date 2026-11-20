@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Quiz 3 · Tools</title>
+<title>Quiz 1 · Agiles Setup</title>
 <link rel="icon" href="../../../../favicon.png" type="image/png" sizes="32x32">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Patrick+Hand&family=Caveat:wght@600&display=swap" rel="stylesheet">
 <style>
@@ -78,6 +78,9 @@ h3{font-family:var(--font-title);font-size:1.25rem;margin:16px 0 4px;display:inl
   .card,.note,.gloss div{break-inside:avoid}
 }
 
+.crumb{font-family:var(--font-hand);font-size:1.05rem;margin:10px 0 0;text-align:center}
+.crumb a{color:var(--link);text-decoration:underline;text-underline-offset:2px}
+
 /* === a11y === */
 a{color:var(--link)}
 a:hover{color:var(--link);text-decoration-thickness:2px}
@@ -89,19 +92,10 @@ a:focus:not(:focus-visible){outline:none}
 .skip-link:focus,.skip-link:focus-visible{transform:translateY(0);outline:3px solid var(--link);outline-offset:2px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0,0,0,0);white-space:nowrap;border:0}
-
-
-
-
-
-
-
-
 </style>
 </head>
 <body>
 <a class="skip-link" href="#main">Zum Hauptinhalt springen</a>
-
 
 <main id="main" class="sheet" tabindex="-1">
   <div class="orn tl" aria-hidden="true"><svg class="big" viewBox="0 0 80 90" aria-hidden="true">
@@ -126,56 +120,68 @@ a:focus:not(:focus-visible){outline:none}
   <path d="M40 70c-3-2.4-4.6-4-4.6-5.6a2.3 2.3 0 0 1 4.6-.6 2.3 2.3 0 0 1 4.6.6c0 1.6-1.6 3.2-4.6 5.6z" style="fill:#fff"/>
 </svg></div>
 
-  <h1>Quiz 3</h1>
+  <h1>Quiz 1</h1>
   <p style="text-align:center">
-    <span class="tag">PM · Präsenz · Tools · Multiple Choice</span>
+    <span class="tag">PM · SOL · Agiles Setup · Multiple Choice</span>
   </p>
+  <nav class="crumb" aria-label="Brotkrumen">
+    <a href="../../../../">Home</a> <span aria-hidden="true">›</span>
+    <a href="../../../">Deutsch</a> <span aria-hidden="true">›</span>
+    <a href="../../">PM</a> <span aria-hidden="true">›</span>
+    <a href="../">Exercises</a> <span aria-hidden="true">›</span>
+    <a href="./">SOL</a> <span aria-hidden="true">›</span>
+    <span aria-current="page">Quiz 1</span>
+  </nav>
   <p class="cap" style="text-align:center">Kreuze jeweils die richtige Antwort an.</p>
 
-  <h2>1 · E-Mails &amp; Zettel im Büro</h2>
-  <section class="grid one">
-    <article class="card" style="--c:var(--c2)">
-      <h2>Warum reichen E-Mails und Zettel im Büro für wachsende Teams meist nicht mehr aus?</h2>
-      <ul class="mc">
-        <li>A) E-Mails werden nach 30 Tagen automatisch gelöscht.</li>
-        <li>B) Informationen gehen verloren und sind fürs Team unauffindbar.</li>
-        <li>C) Zettel auf Whiteboards sind gesetzlich nicht erlaubt.</li>
-      </ul>
-    </article>
-  </section>
-
-  <h2>2 · Einführung von agilen Tools</h2>
-  <section class="grid one">
-    <article class="card" style="--c:var(--c3)">
-      <h2>Was passiert, wenn ein Team ein agiles Tool wie <span lang="en">Jira</span> einführt?</h2>
-      <ul class="mc">
-        <li>A) Die Arbeit wird automatisch ohne agile Regeln gut organisiert.</li>
-        <li>B) Das Tool macht Prozesse nur sichtbar, ersetzt aber keine Methodik.</li>
-        <li>C) <span lang="en">Scrum Master</span> und <span lang="en">Product Owner</span> werden überflüssig.</li>
-      </ul>
-    </article>
-  </section>
-
-  <h2>3 · Tool-Paare für Aufgaben &amp; Wissen</h2>
+  <h2>1 · Kundenfeedback</h2>
   <section class="grid one">
     <article class="card" style="--c:var(--c1)">
-      <h2>Welches Tool-Paar wird für Aufgabenverwaltung (1) &amp; Wissensmanagement (2) genutzt?</h2>
+      <h2>Welcher Ansatz setzt auf regelmäßiges Kundenfeedback?</h2>
       <ul class="mc">
-        <li>A) (1) <span lang="en">Confluence</span> und (2) <span lang="en">Jira</span></li>
-        <li>B) (1) <span lang="en">Jira</span> und (2) <span lang="en">Confluence</span></li>
-        <li>C) (1) Slack und (2) Miro</li>
+        <li>A) Wasserfall</li>
+        <li>B) Agil</li>
+        <li>C) Beide ausschließlich am Ende</li>
+        <li>D) Keiner von beiden</li>
       </ul>
     </article>
   </section>
 
-  <h2>4 · Ticket-Typen in <span lang="en">Jira</span></h2>
+  <h2>2 · Anforderungsplanung im Wasserfallmodell</h2>
+  <section class="grid one">
+    <article class="card" style="--c:var(--c2)">
+      <h2>Wann werden beim Wasserfallmodell die Anforderungen typischerweise geplant?</h2>
+      <ul class="mc">
+        <li>A) Erst nach der Auslieferung</li>
+        <li>B) Vor Beginn der Umsetzung</li>
+        <li>C) Nach jedem Sprint</li>
+        <li>D) Nur bei Problemen</li>
+      </ul>
+    </article>
+  </section>
+
+  <h2>3 · Produktauslieferung im Vergleich</h2>
+  <section class="grid one">
+    <article class="card" style="--c:var(--c3)">
+      <h2>Bei welchem Modell wird das fertige Produkt typischerweise erst am Ende ausgeliefert?</h2>
+      <ul class="mc">
+        <li>A) Agil</li>
+        <li>B) Scrum</li>
+        <li>C) Wasserfall</li>
+        <li>D) Kanban</li>
+      </ul>
+    </article>
+  </section>
+
+  <h2>4 · Berichterstattung bei Budgetüberschreitungen</h2>
   <section class="grid one">
     <article class="card" style="--c:var(--c4)">
-      <h2>Welcher Ticket-Typ beschreibt eine technische Aufgabe ohne direkten Kundennutzen?</h2>
+      <h2>Wer berichtet typischerweise über Budgetüberschreitungen?</h2>
       <ul class="mc">
-        <li>A) Bug</li>
-        <li>B) Epic</li>
-        <li>C) Task</li>
+        <li>A) <span lang="en">Product Owner</span></li>
+        <li>B) <span lang="en">Project Manager</span></li>
+        <li>C) Developer</li>
+        <li>D) <span lang="en">Scrum Master</span></li>
       </ul>
     </article>
   </section>
@@ -191,52 +197,56 @@ a:focus:not(:focus-visible){outline:none}
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
 
   <h2>Übungen 5–8</h2>
-  <p style="text-align:center"><span class="tag">Modul 3 · Doku · Spike · Tools</span></p>
+  <p style="text-align:center"><span class="tag">Modul 1 · Rollen · Events</span></p>
 
-  <h3>5 · <span lang="en">Single Source of Truth</span></h3>
+  <h3>5 · Priorisierung von Features</h3>
   <section class="grid one">
     <article class="card" style="--c:var(--c5)">
-      <h2>Was bedeutet das Prinzip der „<span lang="en">Single Source of Truth</span>“ in der Dokumentation?</h2>
+      <h2>Wer priorisiert die Suchfunktion gegenüber dem Design?</h2>
       <ul class="mc">
-        <li>A) Jedes Teammitglied muss eine eigene Kopie aller Dokumente speichern.</li>
-        <li>B) Eine Information steht an genau einem zentralen Ort (keine Widersprüche).</li>
-        <li>C) Dokumente dürfen nur von der Geschäftsleitung bearbeitet werden.</li>
+        <li>A) <span lang="en">Product Owner</span></li>
+        <li>B) <span lang="en">Project Manager</span></li>
+        <li>C) <span lang="en">Scrum Master</span></li>
+        <li>D) Kunde allein</li>
       </ul>
     </article>
   </section>
 
-  <h3>6 · Agiler Spike</h3>
-  <section class="grid one">
-    <article class="card" style="--c:var(--c3)">
-      <h2>Wozu dient ein sogenannter „Spike“ im agilen Projekt?</h2>
-      <ul class="mc">
-        <li>A) Zum schnellen Beheben von kritischen Software-Fehlern im Live-System.</li>
-        <li>B) Für eine zeitlich begrenzte Recherche, um eine offene Frage zu klären.</li>
-        <li>C) Zum automatischen Erstellen von Testberichten in <span lang="en">Confluence</span>.</li>
-      </ul>
-    </article>
-  </section>
-
-  <h3>7 · Vertikaler Schnitt von <span lang="en">User Stories</span></h3>
-  <section class="grid one">
-    <article class="card" style="--c:var(--c1)">
-      <h2>Warum sollen <span lang="en">User Stories</span> „vertikal“ geschnitten werden?</h2>
-      <ul class="mc">
-        <li>A) Damit jede Story ein funktionierendes, testbares Stück Arbeit liefert.</li>
-        <li>B) Weil Datenbanken immer vor der Benutzeroberfläche gebaut werden müssen.</li>
-        <li>C) Damit Entwickler und Designer völlig getrennt voneinander arbeiten.</li>
-      </ul>
-    </article>
-  </section>
-
-  <h3>8 · Auswahl neuer Tools</h3>
+  <h3>6 · Meilenstein-Überwachung</h3>
   <section class="grid one">
     <article class="card" style="--c:var(--c6)">
-      <h2>Was ist die wichtigste Faustregel bei der Auswahl neuer Tools?</h2>
+      <h2>Wer weist auf einen gefährdeten Meilenstein hin?</h2>
       <ul class="mc">
-        <li>A) Immer das teuerste Tool mit den meisten Funktionen wählen.</li>
-        <li>B) Für jede Aufgabe ein eigenes, spezialisiertes Tool anschaffen.</li>
-        <li>C) Lieber klein &amp; einfach anfangen, damit das Board gepflegt wird.</li>
+        <li>A) <span lang="en">Product Owner</span></li>
+        <li>B) Developer</li>
+        <li>C) <span lang="en">Project Manager</span></li>
+        <li>D) <span lang="en">Scrum Master</span></li>
+      </ul>
+    </article>
+  </section>
+
+  <h3>7 · Scrum-Events &amp; Prozessverbesserung</h3>
+  <section class="grid one">
+    <article class="card" style="--c:var(--c1)">
+      <h2>Welches Scrum-Event beschäftigt sich mit der Verbesserung der Zusammenarbeit?</h2>
+      <ul class="mc">
+        <li>A) <span lang="en">Sprint Planning</span></li>
+        <li>B) <span lang="en">Daily Scrum</span></li>
+        <li>C) <span lang="en">Sprint Review</span></li>
+        <li>D) <span lang="en">Sprint Retrospective</span></li>
+      </ul>
+    </article>
+  </section>
+
+  <h3>8 · Coaching &amp; Hindernisbeseitigung</h3>
+  <section class="grid one">
+    <article class="card" style="--c:var(--c3)">
+      <h2>Welche Scrum-Rolle coacht das Team und hilft, Hindernisse zu beseitigen?</h2>
+      <ul class="mc">
+        <li>A) <span lang="en">Product Owner</span></li>
+        <li>B) <span lang="en">Scrum Master</span></li>
+        <li>C) <span lang="en">Project Manager</span></li>
+        <li>D) Stakeholder</li>
       </ul>
     </article>
   </section>
@@ -244,24 +254,24 @@ a:focus:not(:focus-visible){outline:none}
   <div class="note">
     <strong>Merke dir:</strong>
     <ul>
-      <li>Tools machen sichtbar – ersetzen keine Methode</li>
-      <li><span lang="en">Jira</span> = Aufgaben · <span lang="en">Confluence</span> = Wissen</li>
-      <li>Eine Info = ein Ort · Spike = kurze Recherche</li>
-      <li>Vertikal schneiden · lieber einfach starten</li>
+      <li>Agil = regelmäßiges Feedback · Wasserfall = Anforderungen vorab, Lieferung am Ende</li>
+      <li>PM = Budget &amp; Meilensteine · PO = Priorisierung</li>
+      <li>Retro = Zusammenarbeit verbessern</li>
+      <li><span lang="en">Scrum Master</span> = Coach &amp; Hindernisse</li>
     </ul>
   </div>
 
   <h3>Glossar</h3>
   <div class="gloss">
-    <div style="--c:var(--c1)"><b><span lang="en">Jira</span>:</b> Tool für Tickets, <span lang="en">Backlog</span> und Boards.</div>
-    <div style="--c:var(--c2)"><b><span lang="en">Confluence</span>:</b> Wiki für gemeinsames Wissen und Doku.</div>
-    <div style="--c:var(--c3)"><b>Task:</b> Technische Aufgabe ohne direkten Kundennutzen.</div>
-    <div style="--c:var(--c4)"><b><span lang="en">Single Source of Truth</span>:</b> Eine Information an genau einem Ort.</div>
-    <div style="--c:var(--c5)"><b>Spike:</b> Zeitlich begrenzte Recherche zu einer offenen Frage.</div>
-    <div style="--c:var(--c6)"><b>Vertikal schneiden:</b> Stories liefern nutzbaren Nutzen, nicht nur Technik-Schichten.</div>
+    <div style="--c:var(--c1)"><b>Agil:</b> Kurze Zyklen mit regelmäßigem Kundenfeedback.</div>
+    <div style="--c:var(--c2)"><b>Wasserfall:</b> Anforderungen vor der Umsetzung; Produkt oft erst am Ende.</div>
+    <div style="--c:var(--c3)"><b><span lang="en">Product Owner</span>:</b> Priorisiert Features und Produktnutzen.</div>
+    <div style="--c:var(--c4)"><b><span lang="en">Project Manager</span>:</b> Achtet auf Budget, Zeit und Meilensteine.</div>
+    <div style="--c:var(--c5)"><b><span lang="en">Sprint</span> Retro:</b> Event zur Verbesserung der Zusammenarbeit.</div>
+    <div style="--c:var(--c6)"><b><span lang="en">Scrum Master</span>:</b> Coach des Teams; beseitigt Hindernisse.</div>
   </div>
 
-  <div class="banner">Sichtbar · Verlinkt · Einfach · Eine Quelle</div>
+  <div class="banner">Feedback · Rollen · Events · Coach</div>
   <div class="pageno">Seite 2 / 2</div>
 </section>
 

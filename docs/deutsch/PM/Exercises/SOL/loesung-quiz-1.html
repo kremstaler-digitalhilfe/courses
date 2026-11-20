@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lösungen – Quiz 3</title>
-<link rel="icon" href="../../../../../favicon.png" type="image/png" sizes="32x32">
+<title>Lösungen – Quiz 1</title>
+<link rel="icon" href="../../../../favicon.png" type="image/png" sizes="32x32">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Patrick+Hand&family=Caveat:wght@600&display=swap" rel="stylesheet">
 <style>
 :root{
+  /* === THEME : seul bloc à modifier === */
   --paper:#fffdfa; --grid:#ebe6ee; --ink:#2b2b3a; --page:#f3eef2;
   --accent:#d44d86; --link:#0B3D91; --accent-soft:#fce4ef; --highlight:#ffe566;
   --c1:#5faf64; --c2:#5a96d4; --c3:#e0923f;
@@ -43,9 +44,21 @@ h3{font-family:var(--font-title);font-size:1.25rem;margin:16px 0 4px;display:inl
 .card p{margin:6px 0}
 .num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;padding:0;border-radius:50%;box-sizing:border-box;font-family:var(--font-title);font-size:.82rem;font-weight:700;line-height:1;letter-spacing:0;text-align:center;background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:2px solid var(--c);margin-right:6px}
 .hl{background:linear-gradient(transparent 55%,var(--highlight) 55%)}
+.note{border:2px solid var(--accent);border-radius:var(--radius);background:#fff;padding:12px 16px;margin-top:14px;max-width:100%;box-sizing:border-box}
+.note ul{list-style:none;padding:0;margin:6px 0 0}
+.note li{margin:4px 0}
+.note li::before{content:"♥ ";color:color-mix(in srgb,var(--accent) 45%,#14141f)}
+.banner{margin-top:16px;padding:10px;text-align:center;background:var(--accent-soft);
+  border:2px solid var(--accent);font-family:var(--font-title);text-transform:uppercase;letter-spacing:.04em}
 .pageno{position:absolute;bottom:16px;left:0;right:0;text-align:center;
   font-family:var(--font-hand);font-size:1.1rem;color:color-mix(in srgb,var(--ink) 72%,white)}
 .cap{font-family:var(--font-hand);font-size:1.15rem;margin:2px 0 0}
+.cloud{display:inline-block;padding:8px 16px;border:2px dashed var(--accent);border-radius:40px;
+  background:#fff;font-family:var(--font-hand);font-size:1.15rem;margin:4px 4px 0 0}
+.gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:8px 16px;margin-top:10px}
+.gloss div{padding:6px 10px;border-left:5px solid var(--c);border-radius:6px;
+  background:color-mix(in srgb,var(--c) 5%,white);font-size:1rem}
+.gloss b{font-family:var(--font-title);font-size:.9rem}
 .orn{position:absolute;top:16px;display:flex;gap:2px;align-items:flex-start;pointer-events:none}
 .orn.tl{left:18px}.orn.tr{right:18px}
 .orn svg{display:block;overflow:visible}
@@ -61,8 +74,13 @@ h3{font-family:var(--font-title);font-size:1.25rem;margin:16px 0 4px;display:inl
   body{background:#fff;padding:0}
   .sheet{box-shadow:none;margin:0;min-height:auto;break-after:page;border-radius:0}
   .sheet:last-child{break-after:auto}
-  .card{break-inside:avoid}
+  .card,.note,.gloss div{break-inside:avoid}
 }
+
+.crumb{font-family:var(--font-hand);font-size:1.05rem;margin:10px 0 0;text-align:center}
+.crumb a{color:var(--link);text-decoration:underline;text-underline-offset:2px}
+
+/* === a11y === */
 a{color:var(--link)}
 a:hover{color:var(--link);text-decoration-thickness:2px}
 :focus-visible{outline:3px solid var(--link);outline-offset:3px}
@@ -101,41 +119,49 @@ a:focus:not(:focus-visible){outline:none}
   <path d="M40 70c-3-2.4-4.6-4-4.6-5.6a2.3 2.3 0 0 1 4.6-.6 2.3 2.3 0 0 1 4.6.6c0 1.6-1.6 3.2-4.6 5.6z" style="fill:#fff"/>
 </svg></div>
 
-  <h1>Lösungen – Quiz 3</h1>
+  <h1>Lösungen – Quiz 1</h1>
   <p style="text-align:center">
-    <span class="tag">PM · Quiz · Modul 3</span>
+    <span class="tag">PM · SOL · Quiz · Modul 1</span>
   </p>
+  <nav class="crumb" aria-label="Brotkrumen">
+    <a href="../../../../">Home</a> <span aria-hidden="true">›</span>
+    <a href="../../../">Deutsch</a> <span aria-hidden="true">›</span>
+    <a href="../../">PM</a> <span aria-hidden="true">›</span>
+    <a href="../">Exercises</a> <span aria-hidden="true">›</span>
+    <a href="./">SOL</a> <span aria-hidden="true">›</span>
+    <span aria-current="page">Lösung Quiz 1</span>
+  </nav>
   <p class="cap" style="text-align:center">Richtige Antworten mit kurzer Erklärung.</p>
 
-  <h2>1 · E-Mails &amp; Zettel im Büro</h2>
-  <section class="grid one">
-    <article class="card" style="--c:var(--c2)">
-      <h3><span class="num">1</span> Richtige Antwort: <span class="hl">B</span></h3>
-      <p>E-Mails verbleiben oft in persönlichen Postfächern und Informationen gehen für das Gesamtteam schnell verloren oder sind unauffindbar.</p>
-    </article>
-  </section>
-
-  <h2>2 · Einführung von agilen Tools</h2>
-  <section class="grid one">
-    <article class="card" style="--c:var(--c3)">
-      <h3><span class="num">2</span> Richtige Antwort: <span class="hl">B</span></h3>
-      <p>Software macht Arbeitsabläufe lediglich transparent. Ohne ein funktionierendes agiles Mindset, klare Rollen und Methodik löst ein Tool allein keine Organisationsprobleme.</p>
-    </article>
-  </section>
-
-  <h2>3 · Tool-Paare für Aufgaben &amp; Wissen</h2>
+  <h2>1 · Kundenfeedback</h2>
   <section class="grid one">
     <article class="card" style="--c:var(--c1)">
-      <h3><span class="num">3</span> Richtige Antwort: <span class="hl">B</span></h3>
-      <p><span lang="en">Jira</span> ist standardmäßig für die Vorgangs- und Aufgabenverwaltung (1) zuständig, während <span lang="en">Confluence</span> als zentrales Wiki für Wissensmanagement und Dokumentation (2) dient.</p>
+      <h3><span class="num">1</span> Richtige Antwort: <span class="hl">B (Agil)</span></h3>
+      <p>Agile Vorgehensweisen setzen auf kurze Iterationen und regelmäßiges Feedback der Kunden/Nutzer, um flexibel auf Änderungen reagieren zu können.</p>
     </article>
   </section>
 
-  <h2>4 · Ticket-Typen in <span lang="en">Jira</span></h2>
+  <h2>2 · Anforderungsplanung im Wasserfallmodell</h2>
+  <section class="grid one">
+    <article class="card" style="--c:var(--c2)">
+      <h3><span class="num">2</span> Richtige Antwort: <span class="hl">B (Vor Beginn der Umsetzung)</span></h3>
+      <p>Im klassischen Wasserfallmodell werden die Anforderungen in der Initialisierungs- und Analysephase vollständig vor dem Start der Entwicklungsphase spezifiziert.</p>
+    </article>
+  </section>
+
+  <h2>3 · Produktauslieferung im Vergleich</h2>
+  <section class="grid one">
+    <article class="card" style="--c:var(--c3)">
+      <h3><span class="num">3</span> Richtige Antwort: <span class="hl">C (Wasserfall)</span></h3>
+      <p>Beim Wasserfallmodell durchläuft das Gesamtprojekt alle Phasen nacheinander; das finale Produkt wird erst am Ende des Projekts ausgeliefert.</p>
+    </article>
+  </section>
+
+  <h2>4 · Berichterstattung bei Budgetüberschreitungen</h2>
   <section class="grid one">
     <article class="card" style="--c:var(--c4)">
-      <h3><span class="num">4</span> Richtige Antwort: <span class="hl">C</span></h3>
-      <p>Ein <span lang="en">Task</span> (oder Technical Task) beschreibt eine konkrete technische Arbeit (z. B. Server aufsetzen, Refactoring), die notwendig ist, aber für den Endnutzer keinen direkten funktionellen Mehrwert darstellt.</p>
+      <h3><span class="num">4</span> Richtige Antwort: <span class="hl">B (<span lang="en">Project Manager</span>)</span></h3>
+      <p>In klassischen Projektstrukturen ist der Projektmanager für die Überwachung von Kosten, Terminen und Ressourcenverbrauch sowie für das Finanz-Reporting verantwortlich.</p>
     </article>
   </section>
   <div class="pageno">Seite 1 / 2</div>
@@ -150,37 +176,37 @@ a:focus:not(:focus-visible){outline:none}
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
 
   <h2>Lösungen 5–8</h2>
-  <p style="text-align:center"><span class="tag">Modul 3 · Doku · Spike · Tools</span></p>
+  <p style="text-align:center"><span class="tag">Modul 1 · Rollen · Events</span></p>
 
-  <h3>5 · <span lang="en">Single Source of Truth</span></h3>
+  <h3>5 · Priorisierung von Features</h3>
   <section class="grid one">
     <article class="card" style="--c:var(--c5)">
-      <h3><span class="num">5</span> Richtige Antwort: <span class="hl">B</span></h3>
-      <p>Informationen sollen zentral an einer Stelle gepflegt werden, damit alle Teammitglieder immer den aktuellsten Stand sehen und widersprüchliche Versionen oder veraltete Kopien vermieden werden.</p>
+      <h3><span class="num">5</span> Richtige Antwort: <span class="hl">A (<span lang="en">Product Owner</span>)</span></h3>
+      <p>Der <span lang="en">Product Owner</span> verantwortet im <span lang="en">Scrum</span>-Framework den Wert des Produkts und hat die finale Entscheidungsgewalt über die Priorisierung der Einträge im <span lang="en">Product Backlog</span>.</p>
     </article>
   </section>
 
-  <h3>6 · Agiler Spike</h3>
-  <section class="grid one">
-    <article class="card" style="--c:var(--c3)">
-      <h3><span class="num">6</span> Richtige Antwort: <span class="hl">B</span></h3>
-      <p>Ein Spike ist eine zeitlich fest begrenzte Aufgabe (<span lang="en">Timebox</span>), in der das Team recherchiert oder Prototypen baut, um technische Unsicherheiten vor einer tatsächlichen Umsetzungs-Story zu klären.</p>
-    </article>
-  </section>
-
-  <h3>7 · Vertikaler Schnitt von <span lang="en">User Stories</span></h3>
-  <section class="grid one">
-    <article class="card" style="--c:var(--c1)">
-      <h3><span class="num">7</span> Richtige Antwort: <span class="hl">A</span></h3>
-      <p>Ein vertikaler Schnitt durchdringt alle Schichten einer Anwendung (Datenbank, Logik, UI), sodass am Ende einer Story ein echtes, lauffähiges und testbares Inkrement für den Nutzer entsteht.</p>
-    </article>
-  </section>
-
-  <h3>8 · Auswahl neuer Tools</h3>
+  <h3>6 · Meilenstein-Überwachung</h3>
   <section class="grid one">
     <article class="card" style="--c:var(--c6)">
-      <h3><span class="num">8</span> Richtige Antwort: <span class="hl">C</span></h3>
-      <p>Neue Tools sollten schlank und einfach gehalten werden, um die Einstiegshürde niedrig zu halten und sicherzustellen, dass das gesamte Team das Board aktiv pflegt.</p>
+      <h3><span class="num">6</span> Richtige Antwort: <span class="hl">C (<span lang="en">Project Manager</span>)</span></h3>
+      <p>Das Verfolgen klassischer Projektmeilensteine und das Melden von Abweichungen bezüglich des Zeitplans gehören zu den Kernaufgaben des Projektmanagers.</p>
+    </article>
+  </section>
+
+  <h3>7 · Scrum-Events &amp; Prozessverbesserung</h3>
+  <section class="grid one">
+    <article class="card" style="--c:var(--c1)">
+      <h3><span class="num">7</span> Richtige Antwort: <span class="hl">D (<span lang="en">Sprint Retrospective</span>)</span></h3>
+      <p>Die Retrospektive dient am Ende des <span lang="en">Sprints</span> dazu, die Arbeitsweise, Prozesse und die menschliche Zusammenarbeit zu reflektieren und konkrete Verbesserungen für den nächsten <span lang="en">Sprint</span> zu vereinbaren.</p>
+    </article>
+  </section>
+
+  <h3>8 · Coaching &amp; Hindernisbeseitigung</h3>
+  <section class="grid one">
+    <article class="card" style="--c:var(--c3)">
+      <h3><span class="num">8</span> Richtige Antwort: <span class="hl">B (<span lang="en">Scrum Master</span>)</span></h3>
+      <p>Der <span lang="en">Scrum Master</span> fungiert als <span lang="en">Servant Leader</span> (dienende Führungskraft), coacht das Team in agilen Methoden und sorgt dafür, dass störende Hindernisse (<span lang="en">Impediments</span>) beseitigt werden.</p>
     </article>
   </section>
   <div class="pageno">Seite 2 / 2</div>

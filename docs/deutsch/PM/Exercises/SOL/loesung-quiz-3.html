@@ -3,12 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Quiz 2 · Boards &amp; Stories</title>
+<title>Lösungen – Quiz 3</title>
 <link rel="icon" href="../../../../favicon.png" type="image/png" sizes="32x32">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Patrick+Hand&family=Caveat:wght@600&display=swap" rel="stylesheet">
 <style>
 :root{
-  /* === THEME : seul bloc à modifier === */
   --paper:#fffdfa; --grid:#ebe6ee; --ink:#2b2b3a; --page:#f3eef2;
   --accent:#d44d86; --link:#0B3D91; --accent-soft:#fce4ef; --highlight:#ffe566;
   --c1:#5faf64; --c2:#5a96d4; --c3:#e0923f;
@@ -29,6 +28,7 @@ body{margin:0;padding:16px;background:var(--page);color:var(--ink);
 h1{font-family:var(--font-title);font-size:2.2rem;text-align:center;margin:0 0 6px}
 h1::after{content:"";display:block;height:6px;width:60%;margin:8px auto 0;
   background:var(--accent);border-radius:6px;opacity:.7}
+.sheet > h2{font-family:var(--font-title);font-size:1.35rem;margin:16px 0 4px}
 h3{font-family:var(--font-title);font-size:1.25rem;margin:16px 0 4px;display:inline-block;
   background:var(--accent-soft);padding:3px 12px;border-radius:8px}
 .tag{display:inline-block;background:var(--accent-soft);padding:4px 14px;
@@ -39,27 +39,13 @@ h3{font-family:var(--font-title);font-size:1.25rem;margin:16px 0 4px;display:inl
   padding:12px 14px;background:color-mix(in srgb,var(--c) 5%,white);overflow-wrap:anywhere;max-width:100%;min-width:0}
 .card::before{content:"";position:absolute;top:-9px;right:18px;width:54px;height:16px;
   background:color-mix(in srgb,var(--c) 45%,white);opacity:.8;transform:rotate(4deg);border-radius:2px}
-.card h2{margin:0 0 4px;font-family:var(--font-title);font-size:1.05rem}
-.card ul{list-style:none;padding:0;margin:0}
-.card li{margin:5px 0;padding-left:2px}
-.card ul.plain li::before{content:""}
+.card h2,.card h3{margin:0 0 6px;font-family:var(--font-title);font-size:1.05rem;display:block;background:none;padding:0;border-radius:0}
+.card p{margin:6px 0}
+.num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;padding:0;border-radius:50%;box-sizing:border-box;font-family:var(--font-title);font-size:.82rem;font-weight:700;line-height:1;letter-spacing:0;text-align:center;background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:2px solid var(--c);margin-right:6px}
 .hl{background:linear-gradient(transparent 55%,var(--highlight) 55%)}
-.mc{list-style:none;padding:0;margin:6px 0 0}
-.mc li{margin:5px 0;padding-left:28px;position:relative;font-size:1rem}
-.mc li::before{content:"☐";position:absolute;left:0;top:0;color:var(--c);font-size:1.15rem;line-height:1.2}
-.note{border:2px solid var(--accent);border-radius:var(--radius);background:#fff;padding:12px 16px;margin-top:14px;max-width:100%;box-sizing:border-box}
-.note ul{list-style:none;padding:0;margin:6px 0 0}
-.note li{margin:4px 0}
-.note li::before{content:"♥ ";color:color-mix(in srgb,var(--accent) 45%,#14141f)}
-.banner{margin-top:16px;padding:10px;text-align:center;background:var(--accent-soft);
-  border:2px solid var(--accent);font-family:var(--font-title);text-transform:uppercase;letter-spacing:.04em}
 .pageno{position:absolute;bottom:16px;left:0;right:0;text-align:center;
   font-family:var(--font-hand);font-size:1.1rem;color:color-mix(in srgb,var(--ink) 72%,white)}
 .cap{font-family:var(--font-hand);font-size:1.15rem;margin:2px 0 0}
-.gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:8px 16px;margin-top:10px}
-.gloss div{padding:6px 10px;border-left:5px solid var(--c);border-radius:6px;
-  background:color-mix(in srgb,var(--c) 5%,white);font-size:1rem}
-.gloss b{font-family:var(--font-title);font-size:.9rem}
 .orn{position:absolute;top:16px;display:flex;gap:2px;align-items:flex-start;pointer-events:none}
 .orn.tl{left:18px}.orn.tr{right:18px}
 .orn svg{display:block;overflow:visible}
@@ -74,11 +60,11 @@ h3{font-family:var(--font-title);font-size:1.25rem;margin:16px 0 4px;display:inl
   @page{size:A4;margin:10mm}
   body{background:#fff;padding:0}
   .sheet{box-shadow:none;margin:0;min-height:auto;break-after:page;border-radius:0}
-  .sheet:last-of-type{break-after:auto}
-  .card,.note,.gloss div{break-inside:avoid}
+  .sheet:last-child{break-after:auto}
+  .card{break-inside:avoid}
 }
-
-/* === a11y === */
+.crumb{font-family:var(--font-hand);font-size:1.05rem;margin:10px 0 0;text-align:center}
+.crumb a{color:var(--link);text-decoration:underline;text-underline-offset:2px}
 a{color:var(--link)}
 a:hover{color:var(--link);text-decoration-thickness:2px}
 :focus-visible{outline:3px solid var(--link);outline-offset:3px}
@@ -117,45 +103,49 @@ a:focus:not(:focus-visible){outline:none}
   <path d="M40 70c-3-2.4-4.6-4-4.6-5.6a2.3 2.3 0 0 1 4.6-.6 2.3 2.3 0 0 1 4.6.6c0 1.6-1.6 3.2-4.6 5.6z" style="fill:#fff"/>
 </svg></div>
 
-  <h1>Quiz 2</h1>
+  <h1>Lösungen – Quiz 3</h1>
   <p style="text-align:center">
-    <span class="tag">PM · Präsenz · Boards · Stories · Multiple Choice</span>
+    <span class="tag">PM · SOL · Quiz · Modul 3</span>
   </p>
-  <p class="cap" style="text-align:center">Kreuze jeweils die richtige Antwort an.</p>
+  <nav class="crumb" aria-label="Brotkrumen">
+    <a href="../../../../">Home</a> <span aria-hidden="true">›</span>
+    <a href="../../../">Deutsch</a> <span aria-hidden="true">›</span>
+    <a href="../../">PM</a> <span aria-hidden="true">›</span>
+    <a href="../">Exercises</a> <span aria-hidden="true">›</span>
+    <a href="./">SOL</a> <span aria-hidden="true">›</span>
+    <span aria-current="page">Lösung Quiz 3</span>
+  </nav>
+  <p class="cap" style="text-align:center">Richtige Antworten mit kurzer Erklärung.</p>
 
-  <h2>1 · WIP-Limit verstehen</h2>
-  <section class="grid one">
-    <article class="card" style="--c:var(--c6)">
-      <h2>Spalte „In Progress“ ist voll (WIP-Limit 3/3). Eine Entwicklerin will neue Arbeit starten. Was sollte sie tun?</h2>
-      <ul class="mc">
-        <li>A) Nein. Sie muss zuerst eine bestehende Aufgabe fertigstellen/helfen.</li>
-        <li>B) Ja, Limits sind nur Richtwerte und dürfen überschritten werden.</li>
-        <li>C) Sie sollte das WIP-Limit von 3 auf 4 erhöhen.</li>
-      </ul>
-    </article>
-  </section>
-
-  <h2>2 · <span lang="en">User Story</span> Muster</h2>
-  <section class="grid one">
-    <article class="card" style="--c:var(--c1)">
-      <h2>Wie lautet das klassische Muster für eine gut formulierte <span lang="en">User Story</span>?</h2>
-      <ul class="mc">
-        <li>A) Als [Rolle] möchte ich [Funktion], damit [Nutzen].</li>
-        <li>B) Wenn [Ereignis], dann soll [System] Folgendes machen: [Aktion].</li>
-        <li>C) Ich als [Rolle] verlange [Funktion] bis zum [Datum].</li>
-      </ul>
-    </article>
-  </section>
-
-  <h2>3 · Akzeptanzkriterien</h2>
+  <h2>1 · E-Mails &amp; Zettel im Büro</h2>
   <section class="grid one">
     <article class="card" style="--c:var(--c2)">
-      <h2>Ein Kunde möchte den Kontostand in der App sehen. Welches ist ein valides Akzeptanzkriterium?</h2>
-      <ul class="mc">
-        <li>A) Die App muss schnell geladen werden.</li>
-        <li>B) Der Kontostand wird nach Login direkt auf der Startseite angezeigt.</li>
-        <li>C) Das Design muss allen Nutzern gut gefallen.</li>
-      </ul>
+      <h3><span class="num">1</span> Richtige Antwort: <span class="hl">B</span></h3>
+      <p>E-Mails verbleiben oft in persönlichen Postfächern und Informationen gehen für das Gesamtteam schnell verloren oder sind unauffindbar.</p>
+    </article>
+  </section>
+
+  <h2>2 · Einführung von agilen Tools</h2>
+  <section class="grid one">
+    <article class="card" style="--c:var(--c3)">
+      <h3><span class="num">2</span> Richtige Antwort: <span class="hl">B</span></h3>
+      <p>Software macht Arbeitsabläufe lediglich transparent. Ohne ein funktionierendes agiles Mindset, klare Rollen und Methodik löst ein Tool allein keine Organisationsprobleme.</p>
+    </article>
+  </section>
+
+  <h2>3 · Tool-Paare für Aufgaben &amp; Wissen</h2>
+  <section class="grid one">
+    <article class="card" style="--c:var(--c1)">
+      <h3><span class="num">3</span> Richtige Antwort: <span class="hl">B</span></h3>
+      <p><span lang="en">Jira</span> ist standardmäßig für die Vorgangs- und Aufgabenverwaltung (1) zuständig, während <span lang="en">Confluence</span> als zentrales Wiki für Wissensmanagement und Dokumentation (2) dient.</p>
+    </article>
+  </section>
+
+  <h2>4 · Ticket-Typen in <span lang="en">Jira</span></h2>
+  <section class="grid one">
+    <article class="card" style="--c:var(--c4)">
+      <h3><span class="num">4</span> Richtige Antwort: <span class="hl">C</span></h3>
+      <p>Ein <span lang="en">Task</span> (oder Technical Task) beschreibt eine konkrete technische Arbeit (z. B. Server aufsetzen, Refactoring), die notwendig ist, aber für den Endnutzer keinen direkten funktionellen Mehrwert darstellt.</p>
     </article>
   </section>
   <div class="pageno">Seite 1 / 2</div>
@@ -169,54 +159,40 @@ a:focus:not(:focus-visible){outline:none}
 </svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
 
-  <h2>Übungen 4 &amp; 5</h2>
-  <p style="text-align:center"><span class="tag">Modul 2 · <span lang="en">INVEST</span> · <span lang="en">Planning Poker</span></span></p>
+  <h2>Lösungen 5–8</h2>
+  <p style="text-align:center"><span class="tag">Modul 3 · Doku · Spike · Tools</span></p>
 
-  <h3>4 · <span lang="en">INVEST</span>-Checkliste</h3>
+  <h3>5 · <span lang="en">Single Source of Truth</span></h3>
   <section class="grid one">
-    <article class="card" style="--c:var(--c4)">
-      <h2>Story: „Gesamte App komplett fertig programmieren“. Welche <span lang="en">INVEST</span>-Kriterien sind stark verletzt?</h2>
-      <ul class="mc">
-        <li>A) Fast alle: Small, Estimable, Testable, Valuable, Independent</li>
-        <li>B) Nur I (Independent) und N (Negotiable).</li>
-        <li>C) Keine, die Story ist ideal geschnitten.</li>
-      </ul>
+    <article class="card" style="--c:var(--c5)">
+      <h3><span class="num">5</span> Richtige Antwort: <span class="hl">B</span></h3>
+      <p>Informationen sollen zentral an einer Stelle gepflegt werden, damit alle Teammitglieder immer den aktuellsten Stand sehen und widersprüchliche Versionen oder veraltete Kopien vermieden werden.</p>
     </article>
   </section>
 
-  <h3>5 · <span lang="en">Planning Poker</span> Diskrepanz</h3>
+  <h3>6 · Agiler Spike</h3>
   <section class="grid one">
-    <article class="card" style="--c:var(--c2)">
-      <h2>Beim <span lang="en">Planning Poker</span> deckt das Team 3, 5 und 13 Story Points auf. Was passiert als Erstes?</h2>
-      <ul class="mc">
-        <li>A) Der Durchschnitt (7) wird sofort als Wert eingetragen.</li>
-        <li>B) Die Abweichler (3 und 13) erklären ihre Annahmen &amp; Gründe.</li>
-        <li>C) Der <span lang="en">Product Owner</span> entscheidet alleine den Wert.</li>
-      </ul>
+    <article class="card" style="--c:var(--c3)">
+      <h3><span class="num">6</span> Richtige Antwort: <span class="hl">B</span></h3>
+      <p>Ein Spike ist eine zeitlich fest begrenzte Aufgabe (<span lang="en">Timebox</span>), in der das Team recherchiert oder Prototypen baut, um technische Unsicherheiten vor einer tatsächlichen Umsetzungs-Story zu klären.</p>
     </article>
   </section>
 
-  <div class="note">
-    <strong>Merke dir:</strong>
-    <ul>
-      <li>WIP voll → zuerst fertigstellen, nicht neu starten</li>
-      <li>Story = Als … möchte ich …, damit …</li>
-      <li>Akzeptanzkriterien = konkret &amp; prüfbar</li>
-      <li><span lang="en">INVEST</span> erkennt zu große Stories · Poker: Abweichler erklären zuerst</li>
-    </ul>
-  </div>
+  <h3>7 · Vertikaler Schnitt von <span lang="en">User Stories</span></h3>
+  <section class="grid one">
+    <article class="card" style="--c:var(--c1)">
+      <h3><span class="num">7</span> Richtige Antwort: <span class="hl">A</span></h3>
+      <p>Ein vertikaler Schnitt durchdringt alle Schichten einer Anwendung (Datenbank, Logik, UI), sodass am Ende einer Story ein echtes, lauffähiges und testbares Inkrement für den Nutzer entsteht.</p>
+    </article>
+  </section>
 
-  <h3>Glossar</h3>
-  <div class="gloss">
-    <div style="--c:var(--c1)"><b>WIP-Limit:</b> Max. Anzahl paralleler Aufgaben in einer Spalte.</div>
-    <div style="--c:var(--c2)"><b><span lang="en">User Story</span>:</b> Als [Rolle] möchte ich [Funktion], damit [Nutzen].</div>
-    <div style="--c:var(--c3)"><b>Akzeptanzkriterium:</b> Konkrete, prüfbare Bedingung für „fertig“.</div>
-    <div style="--c:var(--c4)"><b><span lang="en">INVEST</span>:</b> Checkliste für gute <span lang="en">User Stories</span>.</div>
-    <div style="--c:var(--c5)"><b>Story Point:</b> Relatives Maß für Aufwand und Komplexität.</div>
-    <div style="--c:var(--c6)"><b><span lang="en">Planning Poker</span>:</b> Verdeckt schätzen; bei Abweichung zuerst diskutieren.</div>
-  </div>
-
-  <div class="banner">Limit · Story · <span lang="en">INVEST</span> · Poker</div>
+  <h3>8 · Auswahl neuer Tools</h3>
+  <section class="grid one">
+    <article class="card" style="--c:var(--c6)">
+      <h3><span class="num">8</span> Richtige Antwort: <span class="hl">C</span></h3>
+      <p>Neue Tools sollten schlank und einfach gehalten werden, um die Einstiegshürde niedrig zu halten und sicherzustellen, dass das gesamte Team das Board aktiv pflegt.</p>
+    </article>
+  </section>
   <div class="pageno">Seite 2 / 2</div>
 </section>
 
