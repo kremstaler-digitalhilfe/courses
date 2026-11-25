@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Setup-Guide · Web-PM Projektwoche</title>
+<link rel="icon" href="../../favicon.png" type="image/png" sizes="32x32">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Patrick+Hand&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* === THEME : seul bloc à modifier === */
+  --paper:#fffdfa; --grid:#ebe6ee; --ink:#2b2b3a; --page:#f3eef2;
+  --accent:#d44d86; --link:#0B3D91; --accent-soft:#fce4ef; --highlight:#ffe566;
+  --c1:#5faf64; --c2:#5a96d4; --c3:#e0923f;
+  --c4:#9b6fd0; --c5:#3aa89e; --c6:#e06f90;
+  --font-title:'Fredoka',sans-serif;
+  --font-body:'Patrick Hand',sans-serif;
+  --font-hand:'Caveat',cursive;
+  --radius:14px;
+}
+*{box-sizing:border-box}
+body{margin:0;padding:16px;background:var(--page);color:var(--ink);
+  font-family:var(--font-body);font-size:18px;line-height:1.4;max-width:100%;overflow-x:clip}
+.sheet{position:relative;width:100%;max-width:min(794px,100%);min-height:1050px;margin:0 auto 24px;padding:32px 28px 52px;border-radius:6px;box-sizing:border-box;
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),
+                   linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px;box-shadow:0 6px 24px #0002}
+h1{font-family:var(--font-title);font-size:2.1rem;text-align:center;margin:0 0 6px;padding:0 92px}
+h1::after{content:"";display:block;height:6px;width:60%;margin:8px auto 0;
+  background:var(--accent);border-radius:6px;opacity:.7}
+h2{font-family:var(--font-title);font-size:1.25rem;margin:20px 0 4px}
+h3{font-family:var(--font-title);font-size:1.15rem;margin:18px 0 4px;display:inline-block;
+  background:var(--accent-soft);padding:3px 14px;border-radius:8px}
+.tag{display:inline-block;background:var(--accent-soft);padding:4px 14px;
+  border-radius:8px;font-family:var(--font-title);font-size:.95rem}
+nav.crumb{font-family:var(--font-hand);font-size:1.15rem;margin:10px 0 0;text-align:center}
+nav.crumb a{color:var(--link);text-decoration:underline;text-underline-offset:3px}
+nav.crumb a:hover{text-decoration-thickness:2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px;margin-top:14px}
+.grid.one{grid-template-columns:1fr}
+.card{--c:var(--c1);position:relative;border:2px solid var(--c);border-radius:var(--radius);
+  padding:14px 16px;background:color-mix(in srgb,var(--c) 5%,white);overflow-wrap:anywhere;max-width:100%;min-width:0}
+.card::before{content:"";position:absolute;top:-9px;right:18px;width:54px;height:16px;
+  background:color-mix(in srgb,var(--c) 45%,white);opacity:.8;transform:rotate(4deg);border-radius:2px}
+.card h2,.card h3{margin:0 0 4px;font-family:var(--font-title);font-size:1.05rem;background:none;padding:0;display:block}
+.card .sub{font-family:var(--font-hand);font-size:1.15rem;color:color-mix(in srgb,var(--c) 38%,#14141f);margin:0 0 8px;overflow-wrap:anywhere;hyphens:auto;-webkit-hyphens:auto}
+.num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;padding:0;border-radius:50%;box-sizing:border-box;font-family:var(--font-title);font-size:.82rem;font-weight:700;line-height:1;letter-spacing:0;text-align:center;background:color-mix(in srgb,var(--c) 18%,white);color:var(--ink);border:2px solid var(--c);margin-right:6px}
+.card ul{list-style:none;padding:0;margin:0}
+.card li{margin:6px 0}
+.card li::before{content:"✓ ";color:color-mix(in srgb,var(--c) 38%,#14141f);font-weight:700}
+.card ol{padding-left:22px;margin:0}
+.card ol li{margin:6px 0}
+.card ol li::before{content:none}
+.hl{background:linear-gradient(transparent 55%,var(--highlight) 55%)}
+.code{display:inline-block;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem;
+  background:#fff;border:1.5px dashed var(--c,var(--accent));border-radius:8px;padding:1px 8px;max-width:100%;overflow-wrap:anywhere}
+pre.codeblock{--c:var(--c2);display:block;width:100%;max-width:100%;box-sizing:border-box;position:relative;
+  margin:24px 0 8px;padding:24px 20px 16px;background:#fff;
+  border:2px dashed var(--c);border-radius:var(--radius);overflow:visible;
+  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.84rem;line-height:1.55;
+  white-space:pre-wrap;word-break:normal;overflow-wrap:anywhere}
+pre.codeblock[data-lang]::after{content:attr(data-lang);position:absolute;top:-13px;left:18px;
+  background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:1.5px solid var(--c);
+  font-family:var(--font-title);font-size:.76rem;letter-spacing:.05em;
+  padding:2px 12px;border-radius:6px;line-height:1.2;white-space:nowrap}
+pre.codeblock .k{color:color-mix(in srgb,var(--c4) 42%,#14141f);font-weight:700}
+pre.codeblock .fn{color:color-mix(in srgb,var(--c2) 38%,#14141f)}
+pre.codeblock .st{color:color-mix(in srgb,var(--c) 42%,#14141f)}
+pre.codeblock .cm{color:var(--ink);font-style:italic}
+.cloud{display:inline-block;padding:8px 16px;border:2px dashed var(--accent);border-radius:40px;
+  background:#fff;font-family:var(--font-hand);font-size:1.15rem;margin:4px 4px 0 0}
+.note{border:2px solid var(--accent);border-radius:var(--radius);background:#fff;padding:12px 16px;margin-top:16px;max-width:100%;box-sizing:border-box}
+.note ul{list-style:none;padding:0;margin:6px 0 0}
+.note li{margin:4px 0}
+.note li::before{content:"♥ ";color:color-mix(in srgb,var(--accent) 45%,#14141f)}
+.tip{--c:var(--c3);border:2px dashed var(--c);border-radius:var(--radius);
+  background:color-mix(in srgb,var(--c) 6%,white);padding:10px 16px;margin-top:14px;max-width:100%;box-sizing:border-box}
+.tip strong{font-family:var(--font-title);color:color-mix(in srgb,var(--c) 38%,#14141f)}
+hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:18px 0 4px}
+.banner{margin-top:18px;padding:10px;text-align:center;background:var(--accent-soft);
+  border:2px solid var(--accent);font-family:var(--font-title);text-transform:uppercase;letter-spacing:.04em}
+.pageno{position:absolute;bottom:16px;left:0;right:0;text-align:center;
+  font-family:var(--font-hand);font-size:1.1rem;color:color-mix(in srgb,var(--ink) 72%,white)}
+.lead{margin:14px 0 0}
+.cap{font-family:var(--font-hand);font-size:1.15rem;margin:4px 0 0}
+.demo{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;margin-top:12px;
+  font-family:var(--font-hand);font-size:1.15rem}
+.arrow{font-size:1.3rem;color:color-mix(in srgb,var(--accent) 45%,#14141f);font-weight:700}
+.flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;margin-top:14px}
+.flow .st{padding:5px 14px;border-radius:20px;border:2px solid var(--c);
+  background:color-mix(in srgb,var(--c) 16%,white);font-family:var(--font-title);font-size:.9rem;color:color-mix(in srgb,var(--c) 38%,#14141f)}
+a.link{color:var(--link);font-weight:700;text-decoration:underline wavy var(--link);text-underline-offset:3px;
+  word-break:break-all}
+.check{list-style:none;padding:0;margin:8px 0 0}
+.check li{margin:8px 0;padding-left:34px;position:relative}
+.check li::before{content:"";position:absolute;left:0;top:2px;width:22px;height:22px;
+  border:2.5px solid var(--accent);border-radius:6px;background:#fff}
+.orn{position:absolute;top:16px;display:flex;gap:2px;align-items:flex-start;pointer-events:none}
+.orn.tl{left:18px}.orn.tr{right:18px}
+.orn svg{display:block;overflow:visible}
+.orn .big{width:78px;height:88px}
+.orn .bulb{width:38px;height:46px;margin-top:6px}
+.orn .star{width:26px;height:26px}
+.orn .heart{width:28px;height:28px;margin-top:10px}
+@media (max-width:640px){body{padding:10px}.orn{display:none}.sheet{padding:22px 14px 40px;overflow-x:clip}h1{padding:0}}
+@media print{
+  @page{size:A4;margin:10mm}
+  body{background:#fff;padding:0}
+  .sheet{box-shadow:none;margin:0;min-height:auto;break-after:page;border-radius:0}
+  .sheet:last-of-type{break-after:auto}
+  .card,.note,.tip,.flow,pre{break-inside:avoid}
+}
+
+/* === a11y === */
+a{color:var(--link)}
+a:hover{color:var(--link);text-decoration-thickness:2px}
+:focus-visible{outline:3px solid var(--link);outline-offset:3px}
+a:focus:not(:focus-visible){outline:none}
+.skip-link{position:absolute;top:0;left:0;transform:translateY(-120%);
+  background:var(--paper);color:var(--link);padding:10px 16px;border:2px solid var(--link);
+  border-radius:8px;font-family:var(--font-title);font-weight:700;text-decoration:underline;z-index:100}
+.skip-link:focus,.skip-link:focus-visible{transform:translateY(0);outline:3px solid var(--link);outline-offset:2px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0,0,0,0);white-space:nowrap;border:0}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Zum Hauptinhalt springen</a>
+
+<!-- ============ SEITE 1 ============ -->
+<main id="main" class="sheet" tabindex="-1">
+  <div class="orn tl" aria-hidden="true"><svg class="big" viewBox="0 0 80 90" aria-hidden="true">
+  <g transform="rotate(-8 40 48)">
+    <rect x="16" y="10" width="52" height="68" rx="7" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.5"/>
+    <rect x="28" y="24" width="30" height="16" rx="3" style="fill:#fff;stroke:var(--ink);stroke-width:2"/>
+    <path d="M43 36c-4-3-6-5-6-7a3 3 0 0 1 6-.8 3 3 0 0 1 6 .8c0 2-2 4-6 7z" style="fill:var(--accent)"/>
+    <g style="fill:#fff;stroke:var(--ink);stroke-width:2.2">
+      <circle cx="16" cy="22" r="3.6"/><circle cx="16" cy="34" r="3.6"/><circle cx="16" cy="46" r="3.6"/>
+      <circle cx="16" cy="58" r="3.6"/><circle cx="16" cy="70" r="3.6"/>
+    </g>
+  </g>
+  <path d="M70 4l2.2 4.8 5.2.6-3.9 3.5 1.1 5.1L70 15.4l-4.6 2.6 1.1-5.1-3.9-3.5 5.2-.6z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round"/>
+</svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="big" viewBox="0 0 80 90" aria-hidden="true">
+  <g style="stroke:var(--ink);stroke-width:2;stroke-linejoin:round">
+    <g transform="rotate(-16 28 52)"><rect x="23" y="8" width="9" height="44" style="fill:var(--c3)"/><path d="M23 8L27.5-2 32 8z" style="fill:#f6dcc0"/></g>
+    <g transform="rotate(4 42 52)"><rect x="38" y="4" width="9" height="48" style="fill:var(--accent)"/><path d="M38 4L42.5-6 47 4z" style="fill:#f6dcc0"/></g>
+    <g transform="rotate(20 54 52)"><rect x="50" y="10" width="9" height="42" style="fill:var(--c4)"/><path d="M50 10L54.5 0 59 10z" style="fill:#f6dcc0"/></g>
+    <path d="M14 46h52l-5 36a5 5 0 0 1-5 4H24a5 5 0 0 1-5-4z" style="fill:var(--c5)"/>
+  </g>
+  <path d="M40 70c-3-2.4-4.6-4-4.6-5.6a2.3 2.3 0 0 1 4.6-.6 2.3 2.3 0 0 1 4.6.6c0 1.6-1.6 3.2-4.6 5.6z" style="fill:#fff"/>
+</svg></div>
+
+  <h1>Setup-Guide</h1>
+  <p style="text-align:center">
+    <span class="tag">Web-PM Projektwoche · Schritt 1 · Vorbereitung</span>
+  </p>
+  <nav class="crumb" aria-label="Brotkrumen">
+    <a href="../../">Home</a> <span aria-hidden="true">›</span>
+    <a href="../">Deutsch</a> <span aria-hidden="true">›</span>
+    <a href="index.html">Web-PM Projekt-Woche</a> <span aria-hidden="true">›</span>
+    <span aria-current="page">Setup-Guide</span>
+  </nav>
+
+  <p class="lead">Bevor wir in der Projektwoche starten, gehe bitte diese <span class="hl">neun Schritte der Reihe nach</span> durch:</p>
+
+  <div class="flow" aria-label="Übersicht der 9 Schritte">
+    <span class="st" style="--c:var(--c1)">1 · <span lang="en">VS Code</span></span><span class="arrow">→</span>
+    <span class="st" style="--c:var(--c4)">2 · <span lang="en">Node.js</span></span><span class="arrow">→</span>
+    <span class="st" style="--c:var(--c3)">3 · <span lang="en">Git</span> installieren</span><span class="arrow">→</span>
+    <span class="st" style="--c:var(--c2)">4 · <span lang="en">GitHub</span>-Account</span><span class="arrow">→</span>
+    <span class="st" style="--c:var(--c6)">5 · <span lang="en">Template-Repo</span></span><span class="arrow">→</span>
+    <span class="st" style="--c:var(--c5)">6 · <span lang="en">git clone</span></span><span class="arrow">→</span>
+    <span class="st" style="--c:var(--c1)">7 · Lokal starten</span><span class="arrow">→</span>
+    <span class="st" style="--c:var(--c4)">8 · Ändern &amp; <span lang="en">Commit</span></span><span class="arrow">→</span>
+    <span class="st" style="--c:var(--c3)">9 · <span lang="en">git push</span></span>
+  </div>
+
+  <hr>
+  <h2>Schritt 1 · <span lang="en">Visual Studio Code</span> installieren</h2>
+  <section class="grid one">
+    <article class="card" style="--c:var(--c1)">
+      <h3><span class="num">1</span><span lang="en">Visual Studio Code</span> (<span lang="en">VS Code</span>)</h3>
+      <p class="sub">Kostenloser Code-Editor</p>
+      <ol>
+        <li>Öffne die Download-Seite:
+          <a class="link" href="https://code.visualstudio.com/download" target="_blank" rel="noopener noreferrer">code.visualstudio.com/download<span class="sr-only"> (öffnet in neuem Tab)</span></a>
+        </li>
+        <li>Lade den passenden Installer für dein Betriebssystem (<span lang="en">Windows</span> oder <span lang="en">macOS</span>) herunter.</li>
+        <li>Führe die Installation mit den Standardeinstellungen durch und öffne <span lang="en">VS Code</span> einmal zum Testen.</li>
+        <li>Optional für den <span lang="en">WEB</span>-Bereich: Extension <span class="hl" lang="en">Live Server</span> installieren.</li>
+      </ol>
+    </article>
+  </section>
+
+  <hr>
+  <h2>Schritt 2 · <span lang="en">Node.js</span> installieren</h2>
+  <section class="grid one">
+    <article class="card" style="--c:var(--c4)">
+      <h3><span class="num">2</span><span lang="en">Node.js</span></h3>
+      <p class="sub">Laufzeitumgebung für moderne Webprojekte</p>
+      <ol>
+        <li>Gehe zu
+          <a class="link" href="https://www.w3schools.com/nodejs/nodejs_get_started.asp" target="_blank" rel="noopener noreferrer">w3schools.com/nodejs/…<span class="sr-only"> (öffnet in neuem Tab)</span></a>
+          und mache den Schritt <span class="hl" lang="en">„Verify Installation“</span>.
+        </li>
+        <li>Wenn du noch kein <span lang="en">Node.js</span> hast: gehe zu
+          <a class="link" href="https://nodejs.org/en/download" target="_blank" rel="noopener noreferrer">nodejs.org/en/download<span class="sr-only"> (öffnet in neuem Tab)</span></a>
+          und scrolle bis <span class="hl" lang="en">„Or get a prebuilt Node.js® for“</span> – wähle dein Betriebssystem und deinen Prozessor aus und lade den Installer herunter.
+        </li>
+        <li>Installiere <span lang="en">Node.js</span> und prüfe danach im <span lang="en">Terminal</span> / in <span lang="en">PowerShell</span> mit <span class="code">node -v</span>.</li>
+      </ol>
+      <div class="demo">
+        <span class="cloud"><span lang="en">Verify Installation</span></span><span class="arrow">→</span>
+        <span class="cloud">ggf. installieren</span><span class="arrow">→</span>
+        <span class="cloud"><span lang="en">Node.js</span> bereit</span>
+      </div>
+    </article>
+  </section>
+
+  <div class="pageno">Seite 1 / 5</div>
+</main>
+
+<!-- ============ SEITE 2 ============ -->
+<section class="sheet" aria-label="Seite 2">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+
+  <h2>Schritt 3 · <span lang="en">Git</span> installieren</h2>
+  <p class="cap">Hier geht es nur um die Installation – die Einführung in <span lang="en">Git</span> folgt später.</p>
+
+  <section class="grid">
+    <article class="card" style="--c:var(--c3)">
+      <h3><span class="num">3a</span><span lang="en">Windows</span></h3>
+      <p class="sub">Installer von der Website</p>
+      <ol>
+        <li>Öffne <a class="link" href="https://git-scm.com" target="_blank" rel="noopener noreferrer">git-scm.com<span class="sr-only"> (öffnet in neuem Tab)</span></a>.</li>
+        <li>Lade den <span lang="en">Windows</span>-Installer herunter.</li>
+        <li>Klicke immer auf <span class="hl">Next</span>. Die Standardeinstellungen passen.</li>
+        <li>Prüfen in <span lang="en">PowerShell</span>: <span class="code">git --version</span></li>
+      </ol>
+    </article>
+    <article class="card" style="--c:var(--c5)">
+      <h3><span class="num">3b</span><span lang="en">macOS</span></h3>
+      <p class="sub">Zwei Wege</p>
+      <ol>
+        <li>Mit <span lang="en">Homebrew</span>: <span class="code">brew install git</span></li>
+        <li>Ohne Extra-Software: <span class="code">git --version</span> im <span lang="en">Terminal</span> eingeben.</li>
+        <li><span lang="en">macOS</span> fragt nach den <span lang="en">Xcode Command Line Tools</span>. Klicke auf <span class="hl">Installieren</span>.</li>
+        <li>Prüfe danach noch einmal mit <span class="code">git --version</span>.</li>
+      </ol>
+    </article>
+  </section>
+
+  <div class="tip">
+    <strong>Tipp:</strong> Steht eine Versionsnummer da, ist <span lang="en">Git</span> installiert.
+  </div>
+
+  <hr>
+  <h2>Schritt 4 · <span lang="en">GitHub</span>-Account erstellen</h2>
+  <section class="grid one">
+    <article class="card" style="--c:var(--c2)">
+      <h3><span class="num">4</span>Kostenloses <span lang="en">GitHub</span>-Konto anlegen</h3>
+      <p class="sub">Für dein Projekt-Repository &amp; das <span lang="en">Kanban</span>-Board</p>
+      <ol>
+        <li>Öffne <a class="link" href="https://github.com" target="_blank" rel="noopener noreferrer">github.com<span class="sr-only"> (öffnet in neuem Tab)</span></a> und klicke auf <span class="hl" lang="en">Sign up</span> (Registrieren).</li>
+        <li>Du kannst dich klassisch mit <span class="hl">E-Mail-Adresse</span>, Passwort und <span class="hl">Benutzernamen</span> anmelden – oder direkt per <span class="hl" lang="en">Social Sign-up</span> (z.&nbsp;B. <span lang="en">Continue with Google</span> oder <span lang="en">Apple</span>).</li>
+        <li>Wähle einen klaren, seriösen Benutzernamen (z.&nbsp;B. Vor- und Nachname) und bestätige falls gefragt deine E-Mail-Adresse / Sicherheitsprüfung.</li>
+        <li>Wähle den kostenlosen <span class="hl" lang="en">Free</span>-Plan (keine Zahlungsdaten nötig) und melde dich an.</li>
+      </ol>
+    </article>
+  </section>
+
+  <div class="tip">
+    <strong>Tipp:</strong> Merke dir deine <span lang="en">GitHub</span>-Anmeldedaten und deinen Benutzernamen – beides brauchen wir zu Beginn der Projektwoche.
+  </div>
+
+  <div class="pageno">Seite 2 / 5</div>
+</section>
+
+<!-- ============ SEITE 3 ============ -->
+<section class="sheet" aria-label="Seite 3">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+
+  <h2>Schritt 5 · Eigenes <span lang="en">Repository</span> aus Vorlage erstellen</h2>
+  <p class="cap">Deine persönliche Kopie des <span lang="en">Astro</span>-CV-Templates auf <span lang="en">GitHub</span></p>
+
+  <section class="grid one">
+    <article class="card" style="--c:var(--c6)">
+      <h3><span class="num">5</span>Neues <span lang="en">Repository</span> über das <span lang="en">Template</span> anlegen</h3>
+      <p class="sub">Öffentliche Vorlage: <span class="code">https://github.com/kremstaler-digitalhilfe/astro-beginner-cv.git</span></p>
+      <ol>
+        <li>Melde dich auf <span lang="en">GitHub</span> an und öffne das öffentliche Template-Repository:
+          <a class="link" href="https://github.com/kremstaler-digitalhilfe/astro-beginner-cv" target="_blank" rel="noopener noreferrer">github.com/kremstaler-digitalhilfe/astro-beginner-cv<span class="sr-only"> (öffnet in neuem Tab)</span></a>
+        </li>
+        <li>Klicke oben rechts auf <span class="hl" lang="en">Use this template</span> → <span class="hl" lang="en">Create a new repository</span>.</li>
+        <li>Gib deinem eigenen Repository einen Namen (z.&nbsp;B. <span class="code">mein-cv-portfolio</span>) und wähle als Sichtbarkeit <span class="hl" lang="en">Public</span>.</li>
+        <li>Klicke auf <span class="hl" lang="en">Create repository</span> – schon liegt dein eigenes Projekt-Repository in deinem <span lang="en">GitHub</span>-Account!</li>
+      </ol>
+    </article>
+  </section>
+
+  <div class="tip">
+    <strong>Tipp:</strong> Mit <span lang="en">Use this template</span> bekommst du eine saubere eigene Kopie der Vorlage unter deinem eigenen Benutzernamen. Wähle <span lang="en">Public</span>, damit das Klonen im nächsten Schritt ohne Anmeldung klappt und spätere Website-Veröffentlichungen problemlos funktionieren.
+  </div>
+
+  <hr>
+  <h2>Schritt 6 · Dein <span lang="en">Repository</span> klonen (<span class="code">git clone</span>)</h2>
+  <section class="grid one">
+    <article class="card" style="--c:var(--c5)">
+      <h3><span class="num">6</span>Projekt auf deinen Computer herunterladen</h3>
+      <p class="sub">Aus <span lang="en">GitHub</span> in einen lokalen Ordner</p>
+      <ol>
+        <li>Öffne <strong>dein neu erstelltes Repository</strong> auf <span lang="en">GitHub</span> (unter deinem Benutzernamen).</li>
+        <li>Klicke auf den grünen Button <span class="hl" lang="en">Code</span> und kopiere die <span class="hl">HTTPS-URL</span> (endet auf <span class="code">.git</span>).</li>
+        <li>Öffne in <span lang="en">VS Code</span> ein Terminal (<span class="code">Terminal → New Terminal</span>) und wechsle in deinen gewünschten Ordner (z.&nbsp;B. <span class="code">cd Desktop</span> oder <span class="code">cd Documents</span>).</li>
+        <li>Führe <span class="code">git clone</span> mit deiner kopierten URL aus und wechsle in den von <span lang="en">Git</span> erstellten Ordner:</li>
+      </ol>
+    </article>
+  </section>
+
+  <pre class="codeblock" data-lang="Terminal"><span class="k">git</span> <span class="fn">clone</span> https://github.com/&lt;dein-benutzername&gt;/mein-cv-portfolio.git
+<span class="k">cd</span> mein-cv-portfolio</pre>
+
+  <div class="tip">
+    <strong>Tipp:</strong> Öffne den heruntergeladenen Ordner anschließend in <span lang="en">VS Code</span> (<span class="code">File → Open Folder…</span> oder <span class="code">code .</span> im Terminal).
+  </div>
+
+  <div class="pageno">Seite 3 / 5</div>
+</section>
+
+<!-- ============ SEITE 4 ============ -->
+<section class="sheet" aria-label="Seite 4">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+
+  <h2>Schritt 7 · Projekt lokal starten</h2>
+  <section class="grid one">
+    <article class="card" style="--c:var(--c1)">
+      <h3><span class="num">7</span>Abhängigkeiten installieren &amp; <span lang="en">Dev-Server</span> starten</h3>
+      <p class="sub"><span lang="en">Astro</span>-Projekt im Browser ansehen</p>
+      <ol>
+        <li>Stelle im <span lang="en">VS Code Terminal</span> sicher, dass du im Projektordner bist. Der aktuelle Pfad wird im Terminal angezeigt.</li>
+        <li>Installiere einmalig alle benötigten Pakete mit <span class="code">npm install</span>.</li>
+        <li>Starte danach den lokalen Entwicklungsserver mit <span class="code">npm run dev</span>.</li>
+        <li>Öffne die angezeigte Adresse im Browser (meist <span class="code">http://localhost:4321</span>).</li>
+      </ol>
+    </article>
+  </section>
+
+  <pre class="codeblock" data-lang="Terminal"><span class="k">npm</span> <span class="fn">install</span>
+<span class="k">npm</span> <span class="fn">run</span> dev</pre>
+
+  <hr>
+  <h2>Schritt 8 · Erste Änderung machen &amp; committen</h2>
+  <section class="grid one">
+    <article class="card" style="--c:var(--c4)">
+      <h3><span class="num">8</span>Kleine Test-Änderung speichern &amp; <span class="code">git commit</span></h3>
+      <p class="sub">Deinen ersten eigenen Speicherstand erstellen</p>
+      <ol>
+        <li>Öffne in <span lang="en">VS Code</span> eine Datei (z.&nbsp;B. <span class="code">src/data/cv.json</span> oder <span class="code">src/pages/index.astro</span>), ändere eine Kleinigkeit (z.&nbsp;B. deinen Namen) und speichere (<span class="code">Ctrl + S</span> / <span class="code">Cmd + S</span> – bei aktiviertem <span lang="en">Auto Save</span> nicht nötig).</li>
+        <li>Prüfe im Browser auf <span class="code">localhost:4321</span>, ob die Änderung sofort sichtbar ist.</li>
+        <li>Öffne ein zweites Terminal in <span lang="en">VS Code</span> (oder stoppe den Server mit <span class="code">Ctrl + C</span>), prüfe den Status, merke die Änderung vor und committe sie:</li>
+      </ol>
+    </article>
+  </section>
+
+  <pre class="codeblock" data-lang="Git"><span class="k">git</span> <span class="fn">status</span>
+<span class="k">git</span> <span class="fn">add</span> .
+<span class="k">git</span> <span class="fn">commit</span> -m <span class="st">"Erste Änderung: Name angepasst"</span></pre>
+
+  <div class="tip">
+    <strong>Tipp:</strong> Falls <span lang="en">Git</span> beim ersten <span lang="en">Commit</span> nach Name und E-Mail fragt, führe einmalig
+    <span class="code">git config --global user.name "Dein Name"</span> und
+    <span class="code">git config --global user.email "deine@email.at"</span> aus und wiederhole danach <span class="code">git commit</span>.
+  </div>
+
+  <div class="pageno">Seite 4 / 5</div>
+</section>
+
+<!-- ============ SEITE 5 ============ -->
+<section class="sheet" aria-label="Seite 5">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+
+  <h2>Schritt 9 · Änderungen auf <span lang="en">GitHub</span> hochladen (<span class="code">git push</span>)</h2>
+  <section class="grid one">
+    <article class="card" style="--c:var(--c3)">
+      <h3><span class="num">9</span>Aus <span lang="en">VS Code</span> pushen &amp; einmalig im Browser anmelden</h3>
+      <p class="sub">Kein extra Passwort-Token oder SSH-Schlüssel nötig</p>
+      <ol>
+        <li>Führe im <span lang="en">VS Code Terminal</span> <span class="code">git push</span> aus (oder klicke in <span lang="en">VS Code</span> links bei <span lang="en">Source Control</span> auf <span class="hl" lang="en">Sync Changes</span> / <span lang="en">Push</span>).</li>
+        <li>Beim allerersten <span class="code">push</span> fragt <span lang="en">VS Code</span> nach der <span lang="en">GitHub</span>-Anmeldung: Klicke auf <span class="hl" lang="en">Allow</span> / <span class="hl" lang="en">Sign in with your browser</span>.</li>
+        <li>Melde dich im geöffneten Browser-Fenster bei <span lang="en">GitHub</span> an und bestätige mit <span class="hl" lang="en">Authorize Visual-Studio-Code</span>.</li>
+        <li>Lade dein <span lang="en">GitHub</span>-Repository im Browser neu – dein erster <span lang="en">Commit</span> ist jetzt auf <span lang="en">GitHub</span> sichtbar!</li>
+      </ol>
+    </article>
+  </section>
+
+  <pre class="codeblock" data-lang="Git"><span class="k">git</span> <span class="fn">push</span></pre>
+
+  <div class="tip">
+    <strong>Tipp:</strong> <span lang="en">VS Code</span> merkt sich deine Anmeldung – bei den nächsten <span class="code">git push</span>-Befehlen musst du dich nicht erneut im Browser einloggen.
+  </div>
+
+  <div class="note">
+    <strong>Checkliste vor dem Start:</strong>
+    <ul class="check">
+      <li><span lang="en">VS Code</span>, <span lang="en">Node.js</span> (<span class="code">node -v</span>) und <span lang="en">Git</span> (<span class="code">git --version</span>) funktionieren</li>
+      <li><span lang="en">GitHub</span>-Account erstellt &amp; eigenes <span lang="en">Repository</span> aus <span class="code">astro-beginner-cv</span> angelegt</li>
+      <li>Repository lokal geklont (<span class="code">git clone</span>) und auf <span class="code">localhost:4321</span> gestartet</li>
+      <li>Erste kleine Änderung gemacht, mit <span class="code">git commit</span> gespeichert und per <span class="code">git push</span> hochgeladen</li>
+    </ul>
+  </div>
+
+  <div class="banner">Installieren · Klonen · Starten · Committen · Pushen</div>
+  <div class="pageno">Seite 5 / 5</div>
+</section>
+
+</body>
+</html>
