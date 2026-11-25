@@ -213,10 +213,11 @@ a:focus:not(:focus-visible){outline:none}
       <h2><span class="num">2</span><span lang="en">macOS</span></h2>
       <p class="sub">Zwei Wege</p>
       <ul>
-        <li>Mit <span lang="en">Homebrew</span>: <span class="code">brew install git</span></li>
-        <li>Ohne Extra-Software: <span class="code">git --version</span> im <span lang="en">Terminal</span></li>
-        <li><span lang="en">macOS</span> fragt nach den <span lang="en">Xcode Command Line Tools</span>. Klicke auf <span class="hl">Installieren</span></li>
-        <li>Prüfe danach noch einmal mit <span class="code">git --version</span></li>
+        <li><span class="hl">Weg A:</span> Mit <span lang="en">Homebrew</span> → <span class="code">brew install git</span></li>
+        <li><span class="hl">Weg B:</span> Ohne <span lang="en">Homebrew</span>. Tippe im <span lang="en">Terminal</span>: <span class="code">git --version</span></li>
+        <li>Fehlt <span lang="en">Git</span>, öffnet <span lang="en">macOS</span> ein Fenster: <span lang="en">Xcode Command Line Tools</span></li>
+        <li>Dort auf <span class="hl">Installieren</span> klicken. Danach steckt <span lang="en">Git</span> mit drin</li>
+        <li>Danach noch einmal <span class="code">git --version</span> prüfen</li>
       </ul>
     </article>
   </section>
@@ -237,11 +238,11 @@ a:focus:not(:focus-visible){outline:none}
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
 
   <h2>Die 3 Zustände</h2>
-  <p class="lead">Jede Datei liegt in <span class="hl">einem</span> von drei Orten.</p>
+  <p class="lead">So wandert eine Änderung: bearbeiten → vormerken → festschreiben.</p>
   <div class="flow">
-    <span class="st" style="--c:var(--c1)"><span lang="en">Working Directory</span></span><span class="arrow">→</span>
-    <span class="st" style="--c:var(--c3)"><span lang="en">Staging</span></span><span class="arrow">→</span>
-    <span class="st" style="--c:var(--c2)"><span lang="en">Repository</span></span>
+    <span class="st" style="--c:var(--c1)">geändert</span><span class="arrow">→</span>
+    <span class="st" style="--c:var(--c3)">vorgemerkt</span><span class="arrow">→</span>
+    <span class="st" style="--c:var(--c2)">committed</span>
   </div>
 
   <section class="grid three">
@@ -249,27 +250,31 @@ a:focus:not(:focus-visible){outline:none}
       <h2><span class="num">1</span>Arbeitsverzeichnis</h2>
       <p class="sub"><span lang="en">Working Directory</span></p>
       <ul>
-        <li>Deine aktuellen Dateien</li>
-        <li>Noch <span class="hl">nicht</span> gespeichert</li>
+        <li>Die Dateien, die du im Editor siehst</li>
+        <li>Änderungen sind auf der Festplatte, aber <span class="hl">noch nicht</span> in <span lang="en">Git</span> festgeschrieben</li>
       </ul>
     </article>
     <article class="card" style="--c:var(--c3)">
       <h2><span class="num">2</span><span lang="en">Staging</span></h2>
       <p class="sub">Auch <span lang="en">Index</span> genannt</p>
       <ul>
-        <li><span class="code">git add</span> legt Änderungen bereit</li>
-        <li>Für den <span class="hl">nächsten</span> <span lang="en">Commit</span></li>
+        <li><span class="code">git add</span> wählt aus, was mitkommt</li>
+        <li>Warteschlange für den <span class="hl">nächsten</span> <span lang="en">Commit</span></li>
       </ul>
     </article>
     <article class="card" style="--c:var(--c2)">
-      <h2><span class="num">3</span><span lang="en">Repository</span></h2>
-      <p class="sub">Der Ordner <span class="code">.git</span></p>
+      <h2><span class="num">3</span>Lokal gespeichert</h2>
+      <p class="sub"><span lang="en">Repository</span> · Ordner <span class="code">.git</span></p>
       <ul>
-        <li>Die dauerhafte Historie</li>
-        <li>Entsteht mit <span class="code">git commit</span></li>
+        <li><span class="code">git commit</span> schreibt den Stand dauerhaft fest</li>
+        <li>Danach gehört die Änderung zur Historie</li>
       </ul>
     </article>
   </section>
+
+  <div class="note">
+    <strong>Merke dir:</strong> Datei speichern im Editor ≠ <span lang="en">Commit</span>. Erst <span class="code">add</span> und <span class="code">commit</span> machen den Stand für <span lang="en">Git</span> dauerhaft.
+  </div>
 
   <hr>
   <h2>Wichtige Wörter</h2>
@@ -288,7 +293,7 @@ a:focus:not(:focus-visible){outline:none}
       <p class="sub">Ein Schnappschuss</p>
       <ul>
         <li>Der Stand des Codes zu einem Zeitpunkt</li>
-        <li>Jede Aufnahme hat eine Kennung, den <span lang="en">Hash</span></li>
+        <li>Jeder <span lang="en">Commit</span> hat eine Kennung, den <span lang="en">Hash</span></li>
       </ul>
     </article>
     <article class="card" style="--c:var(--c5)">
@@ -304,7 +309,7 @@ a:focus:not(:focus-visible){outline:none}
       <p class="sub">Die Ignorier-Liste</p>
       <ul>
         <li>Eine Textdatei im Hauptordner</li>
-        <li><span lang="en">Git</span> übersieht die genannten Dateien</li>
+        <li><span lang="en">Git</span> ignoriert die genannten Dateien</li>
         <li>Typisch: <span class="code">node_modules/</span> und <span class="code">.env</span></li>
         <li>Auch Passwörter gehören hierher</li>
       </ul>
@@ -404,6 +409,10 @@ a:focus:not(:focus-visible){outline:none}
 <span class="cm"># anlegen und direkt wechseln:</span>
 <span class="k">git</span> <span class="fn">checkout</span> -b neues-feature</pre>
 
+  <div class="note">
+    <strong>Merke dir:</strong> Änderungen, <span lang="en">Commits</span>, <span class="code">reset</span> und Co. wirken immer nur auf den <span class="hl">aktuellen</span> <span lang="en">Branch</span>. Andere Zweige bleiben unberührt.
+  </div>
+
   <div class="tip">
     <strong>Tipp:</strong> <span class="code">git switch</span> wechselt den <span lang="en">Branch</span>. <span class="code">checkout -b</span> legt ihn an und wechselt sofort.
   </div>
@@ -413,17 +422,17 @@ a:focus:not(:focus-visible){outline:none}
   <section class="grid">
     <article class="card" style="--c:var(--c1)">
       <h2><span class="num">1</span>Datei verwerfen</h2>
-      <p class="sub">Noch nicht gespeichert</p>
+      <p class="sub">Änderung im Arbeitsverzeichnis weg</p>
       <ul>
-        <li><span class="code">git restore index.html</span></li>
-        <li>Klassisch: <span class="code">git checkout -- index.html</span></li>
+        <li><span class="code">git checkout -- index.html</span></li>
+        <li>Die Datei geht zurück auf den letzten <span lang="en">Commit</span></li>
       </ul>
     </article>
     <article class="card" style="--c:var(--c3)">
       <h2><span class="num">2</span>Aus dem <span lang="en">Staging</span></h2>
       <p class="sub"><span lang="en">Unstage</span></p>
       <ul>
-        <li><span class="code">git restore --staged index.html</span></li>
+        <li><span class="code">git reset HEAD index.html</span></li>
         <li>Die Datei bleibt geändert, ist nur nicht mehr vorgemerkt</li>
       </ul>
     </article>
@@ -437,7 +446,7 @@ a:focus:not(:focus-visible){outline:none}
     </article>
     <article class="card" style="--c:var(--c6)">
       <h2><span class="num">4</span><span lang="en">Reset</span></h2>
-      <p class="sub">Vorsicht</p>
+      <p class="sub">Vorsicht · nur am aktuellen <span lang="en">Branch</span></p>
       <ul>
         <li><span class="code">git reset --hard &lt;commit-hash&gt;</span></li>
         <li>Springt zurück und <span class="hl">löscht spätere Commits</span></li>
@@ -464,9 +473,9 @@ a:focus:not(:focus-visible){outline:none}
   <section class="grid three">
     <article class="card" style="--c:var(--c3)">
       <h2><span lang="en">Stash</span></h2>
-      <p class="sub">Kurz weglegen</p>
+      <p class="sub">Zwischenspeichern</p>
       <ul>
-        <li><span class="code">git stash</span> versteckt halbfertige Änderungen</li>
+        <li><span class="code">git stash</span> speichert halbfertige Änderungen vorübergehend</li>
         <li><span class="code">git stash pop</span> holt sie zurück</li>
       </ul>
     </article>
@@ -508,20 +517,21 @@ a:focus:not(:focus-visible){outline:none}
     <article class="card" style="--c:var(--c6)">
       <h2><span class="code">git pull</span></h2>
       <p class="sub">Holen und einbauen</p>
-      <ul><li>Das ist <span class="code">git fetch</span> plus <span class="code">git merge</span></li></ul>
+      <ul>
+        <li>Kurz: neue <span lang="en">Commits</span> vom Server holen und in deinen <span lang="en">Branch</span> einbauen</li>
+        <li>Technisch: zuerst <span class="code">git fetch</span> (Infos laden), dann <span class="code">git merge</span> (einbauen)</li>
+      </ul>
     </article>
   </section>
 
-  <section class="grid">
+  <section class="grid one">
     <article class="card" style="--c:var(--c4)">
       <h2><span lang="en">Origin</span></h2>
       <p class="sub">Dein Standard-<span lang="en">Remote</span></p>
-      <ul><li>Oft dein eigener <span lang="en">Fork</span>, also deine Kopie</li></ul>
-    </article>
-    <article class="card" style="--c:var(--c5)">
-      <h2><span lang="en">Upstream</span></h2>
-      <p class="sub">Das Original</p>
-      <ul><li>Das Hauptprojekt, von dem du geforkt hast</li></ul>
+      <ul>
+        <li>Der Server-Name für dein Projekt, meist <span class="code">origin</span></li>
+        <li>Beispiel: <span class="code">git push origin main</span> lädt zu diesem <span lang="en">Remote</span> hoch</li>
+      </ul>
     </article>
   </section>
   <div class="pageno">Seite 5 / 7</div>
@@ -543,7 +553,8 @@ a:focus:not(:focus-visible){outline:none}
       <p class="sub"><span class="code">git merge &lt;branch-name&gt;</span></p>
       <ul>
         <li>Führt zwei <span lang="en">Branches</span> zusammen</li>
-        <li>Erzeugt einen neuen <span lang="en">Merge-Commit</span></li>
+        <li>Oft reicht ein <span class="hl">Fast-Forward</span>: der Zeiger wandert einfach weiter, ohne extra <span lang="en">Commit</span></li>
+        <li>Nur wenn beide Seiten neue <span lang="en">Commits</span> haben, entsteht ein <span lang="en">Merge-Commit</span></li>
         <li>Beide Historien <span class="hl">bleiben erhalten</span></li>
       </ul>
     </article>
@@ -551,9 +562,9 @@ a:focus:not(:focus-visible){outline:none}
       <h2><span lang="en">Rebase</span></h2>
       <p class="sub"><span class="code">git rebase &lt;branch-name&gt;</span></p>
       <ul>
-        <li>Setzt deine <span lang="en">Commits</span> auf den neuesten Stand des Ziel-<span lang="en">Branch</span></li>
-        <li>Die Historie wird <span class="hl">linear</span></li>
-        <li>Dafür wird die Historie umgeschrieben</li>
+        <li>Stell dir vor: du nimmst deine <span lang="en">Commits</span> und legst sie <span class="hl">noch einmal</span> oben auf den anderen <span lang="en">Branch</span></li>
+        <li>Ergebnis: eine gerade Linie ohne <span lang="en">Merge-Commit</span></li>
+        <li>Dafür schreibt <span lang="en">Git</span> die Historie um — nicht auf geteilten <span lang="en">Branches</span> nutzen</li>
       </ul>
     </article>
   </section>
@@ -638,8 +649,10 @@ Der fremde Code
     <div style="--c:var(--c3)"><b><span lang="en">Staging</span>:</b> Änderungen, die für den nächsten <span lang="en">Commit</span> bereitliegen.</div>
     <div style="--c:var(--c5)"><b><span lang="en">Branch</span>:</b> Ein paralleler Strang. Der Hauptstrang heißt meist <span class="code">main</span>.</div>
     <div style="--c:var(--c6)"><b><span lang="en">HEAD</span>:</b> Zeiger auf den aktiven <span lang="en">Commit</span> oder <span lang="en">Branch</span>.</div>
-    <div style="--c:var(--c1)"><b><span lang="en">Remote</span>:</b> Die Kopie auf dem Server. <span lang="en">Origin</span> ist deine, <span lang="en">Upstream</span> das Original.</div>
-    <div style="--c:var(--c2)"><b><span lang="en">Merge</span>:</b> Zwei Stränge zusammenführen. Beide Historien bleiben.</div>
+    <div style="--c:var(--c1)"><b><span lang="en">Remote</span> / <span lang="en">Origin</span>:</b> Die Kopie auf dem Server. <span class="code">origin</span> ist der übliche Name.</div>
+    <div style="--c:var(--c2)"><b><span lang="en">Merge</span>:</b> Zwei Stränge zusammenführen. Manchmal mit, manchmal ohne <span lang="en">Merge-Commit</span>.</div>
+    <div style="--c:var(--c3)"><b><span lang="en">Rebase</span>:</b> Eigene <span lang="en">Commits</span> neu auf einen anderen <span lang="en">Branch</span> setzen. Historie wird linear.</div>
+    <div style="--c:var(--c4)"><b><span lang="en">Stash</span>:</b> Halbfertige Änderungen zwischenspeichern und später zurückholen.</div>
   </div>
 
   <h2>Zum Nachschlagen</h2>
