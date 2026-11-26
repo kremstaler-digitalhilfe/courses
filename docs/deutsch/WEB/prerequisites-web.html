@@ -50,6 +50,28 @@ h3{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px;display:inl
 .hl{background:linear-gradient(transparent 55%,var(--highlight) 55%)}
 .code{display:inline-block;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem;
   background:#fff;border:1.5px dashed var(--c,var(--accent));border-radius:8px;padding:1px 8px;max-width:100%;overflow-wrap:anywhere}
+pre.codeblock{--c:var(--c2);display:block;width:100%;max-width:100%;box-sizing:border-box;position:relative;
+  margin:36px 0 8px;padding:32px 28px 24px;background:#fff;min-height:6.5rem;
+  border:2px dashed var(--c);border-radius:var(--radius);overflow:visible;
+  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem;line-height:1.6;
+  white-space:pre-wrap;word-break:normal;overflow-wrap:anywhere}
+pre.codeblock[data-lang]::after{content:attr(data-lang);position:absolute;top:-14px;left:18px;
+  background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:1.5px solid var(--c);
+  font-family:var(--font-title);font-size:.78rem;letter-spacing:.05em;
+  padding:3px 14px;border-radius:6px;line-height:1.2;white-space:nowrap}
+pre.codeblock .copy-btn{position:absolute;top:8px;right:10px;z-index:1;
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-title);font-size:.75rem;line-height:1.2;padding:5px 11px;
+  border:2px dashed color-mix(in srgb,var(--highlight) 55%,#14141f);border-radius:6px;cursor:pointer;
+  background:var(--highlight);color:var(--ink);
+  transition:background .2s ease,border-color .2s ease}
+pre.codeblock .copy-btn:hover{background:color-mix(in srgb,var(--highlight) 78%,#fff59a)}
+pre.codeblock .copy-btn:focus-visible{outline:3px solid var(--link);outline-offset:2px}
+pre.codeblock .copy-btn.copied{background:color-mix(in srgb,var(--c1) 42%,white);
+  border:2px dashed color-mix(in srgb,var(--c1) 55%,#14141f);color:var(--ink)}
+pre.codeblock .copy-btn svg{width:14px;height:14px;flex-shrink:0;display:block}
+pre.codeblock .copy-btn svg path,pre.codeblock .copy-btn svg polyline,pre.codeblock .copy-btn svg rect{
+  fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .cloud{display:inline-block;padding:8px 16px;border:2px dashed var(--accent);border-radius:40px;
   background:#fff;font-family:var(--font-hand);font-size:1.15rem;margin:4px 4px 0 0}
 .note{border:2px solid var(--accent);border-radius:var(--radius);background:#fff;padding:12px 16px;margin-top:16px;max-width:100%;box-sizing:border-box}
@@ -92,13 +114,17 @@ a.link{color:var(--link);font-weight:700;text-decoration:underline wavy var(--li
 .orn .bulb{width:38px;height:46px;margin-top:6px}
 .orn .star{width:26px;height:26px}
 .orn .heart{width:28px;height:28px;margin-top:10px}
-@media (max-width:640px){body{padding:10px}.orn{display:none}.sheet{padding:22px 14px 40px;overflow-x:clip}h1{padding:0}}
+.sheet > h1,
+.sheet:not(:has(> h1)) > h2:first-of-type{padding:0 92px;text-align:center;box-sizing:border-box}
+@media (max-width:640px){body{padding:10px}.orn{display:none}.sheet{padding:22px 14px 40px;overflow-x:clip}
+  .sheet > h1,.sheet:not(:has(> h1)) > h2:first-of-type{padding:0}}
 @media print{
   @page{size:A4;margin:10mm}
   body{background:#fff;padding:0}
   .sheet{box-shadow:none;margin:0;min-height:auto;break-after:page;border-radius:0}
   .sheet:last-of-type{break-after:auto}
-  .card,.note,.tip,.rule,.gloss div,.flow{break-inside:avoid}
+  .card,.note,.tip,.rule,.gloss div,.flow,pre{break-inside:avoid}
+  pre.codeblock .copy-btn{display:none}
 }
 
 /* === a11y === */
@@ -197,31 +223,89 @@ a:focus:not(:focus-visible){outline:none}
     <span class="st" style="--c:var(--c1)"><span lang="en">VS Code</span> + <span lang="en">Live Server</span></span>
   </div>
 
-  <hr>
-  <h2><span lang="en">Node.js</span> Installation</h2>
-  <section class="grid one">
-    <article class="card" style="--c:var(--c4)">
-      <h2>So gehst du vor</h2>
-      <ul>
-        <li>Gehe zu
-          <a class="link" href="https://www.w3schools.com/nodejs/nodejs_get_started.asp" target="_blank" rel="noopener noreferrer">w3schools.com/nodejs/…<span class="sr-only"> (öffnet in neuem Tab)</span></a>
-          und mache den Schritt <span class="hl" lang="en">„Verify Installation“</span></li>
-        <li>Wenn du kein <span lang="en">Node.js</span> hast: gehe zu
-          <a class="link" href="https://nodejs.org/en/download" target="_blank" rel="noopener noreferrer">nodejs.org/en/download<span class="sr-only"> (öffnet in neuem Tab)</span></a>
-          und scrolle bis <span class="hl" lang="en">„Or get a prebuilt Node.js® for“</span>
-          – wähle dein Betriebssystem und Prozessor aus und downloade dein Installer</li>
-      </ul>
-      <div class="demo">
-        <span class="cloud"><span lang="en">Verify Installation</span></span><span class="arrow">→</span>
-        <span class="cloud">ggf. installieren</span><span class="arrow">→</span>
-        <span class="cloud"><span lang="en">Node.js</span> bereit</span>
-      </div>
-    </article>
-  </section>
-
   <div class="tip">
     <strong>Tipp:</strong> <span lang="en">CodePen</span> reicht für die ersten Übungen.
     <span lang="en">VS Code</span> + <span lang="en">Live Server</span> brauchst du später für den <span class="hl">lokalen Ordner</span>.
+  </div>
+
+  <div class="pageno">Seite 1 / 2</div>
+</main>
+
+<section class="sheet" aria-label="Seite 2">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+
+  <h2><span lang="en">Node.js</span> prüfen</h2>
+  <p style="text-align:center"><span class="tag">Terminal · Version checken</span></p>
+
+  <p class="lead">Zuerst das <span class="hl">Terminal</span> öffnen – dann eine kurze Prüfung.</p>
+
+  <h3>1. Terminal öffnen</h3>
+  <section class="grid">
+    <article class="card" style="--c:var(--c2)">
+      <h2><span class="num">Win</span>Windows</h2>
+      <ul class="plain">
+        <li>Taste <span class="hl">Windows</span> drücken</li>
+        <li><span class="code">cmd</span> oder <span class="code">Terminal</span> tippen</li>
+        <li><span lang="en">Eingabeaufforderung</span> / Terminal öffnen</li>
+      </ul>
+      <p class="cap">Schnell: <span class="code">Win</span> + <span class="code">R</span> → <span class="code">cmd</span> → Enter</p>
+    </article>
+    <article class="card" style="--c:var(--c5)">
+      <h2><span class="num">Mac</span>macOS</h2>
+      <ul class="plain">
+        <li><span class="hl">Cmd</span> + <span class="hl">Leertaste</span> (Spotlight)</li>
+        <li><span class="code">Terminal</span> tippen</li>
+        <li>Enter – das Fenster öffnet sich</li>
+      </ul>
+      <p class="cap">Oder: Programme → Dienstprogramme → Terminal</p>
+    </article>
+  </section>
+
+  <h3>2. Befehl ausführen</h3>
+  <p class="cap">Kopieren → ins Terminal einfügen → Enter.</p>
+  <pre class="codeblock" data-lang="Terminal" style="--c:var(--c4)">node -v</pre>
+
+  <section class="grid">
+    <article class="card" style="--c:var(--c1)">
+      <h2>Ergebnis OK</h2>
+      <ul class="plain">
+        <li>Du siehst eine Version, z.&nbsp;B. <span class="code">v22.11.0</span></li>
+        <li><span lang="en">Node.js</span> ist <span class="hl">installiert</span> – fertig</li>
+      </ul>
+    </article>
+    <article class="card" style="--c:var(--c6)">
+      <h2>Noch nicht da?</h2>
+      <ul class="plain">
+        <li>Meldung wie <span class="hl">command not found</span> / nicht erkannt</li>
+        <li>Dann unten installieren und danach <span class="code">node -v</span> nochmal</li>
+      </ul>
+    </article>
+  </section>
+
+  <h3>3. Falls nötig: installieren</h3>
+  <section class="grid one">
+    <article class="card" style="--c:var(--c4)">
+      <h2>Download</h2>
+      <ul>
+        <li>Gehe zu
+          <a class="link" href="https://nodejs.org/en/download" target="_blank" rel="noopener noreferrer">nodejs.org/en/download<span class="sr-only"> (öffnet in neuem Tab)</span></a></li>
+        <li>Scrolle bis <span class="hl" lang="en">„Or get a prebuilt Node.js® for“</span></li>
+        <li>Wähle Betriebssystem + Prozessor → Installer laden → durchklicken</li>
+        <li><span class="hl">Terminal neu öffnen</span>, dann wieder <span class="code">node -v</span></li>
+      </ul>
+    </article>
+  </section>
+
+  <div class="demo">
+    <span class="cloud">Terminal öffnen</span><span class="arrow">→</span>
+    <span class="cloud"><span class="code">node -v</span></span><span class="arrow">→</span>
+    <span class="cloud">ggf. installieren</span><span class="arrow">→</span>
+    <span class="cloud"><span lang="en">Node.js</span> bereit</span>
   </div>
 
   <div class="note">
@@ -230,7 +314,7 @@ a:focus:not(:focus-visible){outline:none}
       <li>Browser + Internet = Basis</li>
       <li><span lang="en">CodePen</span> = schnell im Browser üben</li>
       <li><span lang="en">VS Code</span> + <span lang="en">Live Server</span> = echtes lokales Projekt</li>
-      <li>Keine Vorkenntnisse nötig</li>
+      <li><span class="code">node -v</span> im Terminal = <span lang="en">Node.js</span> prüfen</li>
     </ul>
   </div>
 
@@ -239,14 +323,67 @@ a:focus:not(:focus-visible){outline:none}
     <div style="--c:var(--c1)"><b>Browser:</b> Programm zum Anzeigen von Webseiten (Chrome, Firefox).</div>
     <div style="--c:var(--c2)"><b><span lang="en">CodePen</span>:</b> Online-Editor für HTML, CSS und <span lang="en">JavaScript</span>.</div>
     <div style="--c:var(--c3)"><b><span lang="en">VS Code</span>:</b> Kostenloser Code-Editor auf dem eigenen Rechner.</div>
-    <div style="--c:var(--c4)"><b><span lang="en">Live Server</span>:</b> VS-Code-Extension, die die Seite lokal im Browser zeigt.</div>
+    <div style="--c:var(--c4)"><b>Terminal:</b> Textfenster, in dem du Befehle tippst (Windows / Mac).</div>
     <div style="--c:var(--c5)"><b><span lang="en">Node.js</span>:</b> Laufzeitumgebung für <span lang="en">JavaScript</span> außerhalb des Browsers.</div>
-    <div style="--c:var(--c6)"><b>/pen:</b> URL-Ende bei <span lang="en">CodePen</span> für die einfache Editor-Ansicht.</div>
+    <div style="--c:var(--c6)"><b><span class="code">node -v</span>:</b> Befehl, der die installierte <span lang="en">Node.js</span>-Version zeigt.</div>
   </div>
 
-  <div class="banner">Checken · Installieren · Loslegen</div>
-  <div class="pageno">Seite 1 / 1</div>
-</main>
+  <div class="banner">Terminal · node -v · Loslegen</div>
+  <div class="pageno">Seite 2 / 2</div>
+</section>
 
+<script>
+(function () {
+  var ICON_COPY = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M4 16V6a2 2 0 0 1 2-2h10"/></svg>';
+  var ICON_OK = '<svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="4 12 10 18 20 6"/></svg>';
+  function setBtn(btn, ok) {
+    btn.classList.toggle("copied", !!ok);
+    btn.innerHTML = (ok ? ICON_OK : ICON_COPY) + "<span>" + (ok ? "Kopiert!" : "Kopieren") + "</span>";
+    btn.setAttribute("aria-label", ok ? "Code kopiert" : "Code kopieren");
+  }
+  function codeText(pre) {
+    var clone = pre.cloneNode(true);
+    clone.querySelectorAll(".copy-btn").forEach(function (b) { b.remove(); });
+    return clone.textContent.replace(/^\n+|\n+$/g, "");
+  }
+  function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(text);
+    }
+    return new Promise(function (resolve, reject) {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        if (document.execCommand("copy")) resolve();
+        else reject();
+      } catch (e) { reject(e); }
+      document.body.removeChild(ta);
+    });
+  }
+  document.querySelectorAll("pre.codeblock").forEach(function (pre) {
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "copy-btn";
+    setBtn(btn, false);
+    btn.addEventListener("click", function () {
+      copyText(codeText(pre)).then(function () {
+        setBtn(btn, true);
+        setTimeout(function () { setBtn(btn, false); }, 1500);
+      }).catch(function () {
+        btn.classList.remove("copied");
+        btn.innerHTML = ICON_COPY + "<span>Fehler</span>";
+        btn.setAttribute("aria-label", "Kopieren fehlgeschlagen");
+        setTimeout(function () { setBtn(btn, false); }, 1500);
+      });
+    });
+    pre.appendChild(btn);
+  });
+})();
+</script>
 </body>
 </html>
