@@ -63,7 +63,10 @@ h3{font-family:var(--font-title);font-size:1.25rem;margin:22px 0 4px;display:inl
 .note li::before{content:"♥ ";color:color-mix(in srgb,var(--accent) 45%,#14141f)}
 .tip{--c:var(--c3);border:2px dashed var(--c);border-radius:var(--radius);
   background:color-mix(in srgb,var(--c) 6%,white);padding:10px 16px;margin-top:18px;max-width:100%;box-sizing:border-box}
+.tip.blue{--c:var(--c2);background:color-mix(in srgb,var(--c2) 28%,white)}
 .tip strong{font-family:var(--font-title);color:color-mix(in srgb,var(--c) 38%,#14141f)}
+.tip ul{list-style:none;padding:0;margin:6px 0 0}
+.tip li{margin:4px 0}
 .rule{--c:var(--c4);border:2px solid var(--c);border-radius:var(--radius);
   background:color-mix(in srgb,var(--c) 6%,white);padding:10px 16px;margin-top:18px;max-width:100%;box-sizing:border-box}
 .rule strong{font-family:var(--font-title);color:color-mix(in srgb,var(--c) 38%,#14141f)}
@@ -84,6 +87,11 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
 .badge{display:inline-block;padding:1px 12px;border-radius:8px;color:var(--ink);font-family:var(--font-title);font-size:.8rem;letter-spacing:.03em;border:1.5px solid transparent}
 .badge.story{background:color-mix(in srgb,var(--c1) 28%,white);border-color:var(--c1)}
 .badge.task{background:color-mix(in srgb,var(--c2) 28%,white);border-color:var(--c2)}
+
+.navex{margin:10px 0 4px;background:#fff;border:2px solid color-mix(in srgb,var(--c4) 35%,white);border-radius:var(--radius);padding:10px 12px}
+.navex .pills{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0}
+.navex .pills span{font-family:var(--font-title);font-size:.82rem;line-height:1.2;color:color-mix(in srgb,var(--c4) 55%,var(--ink));background:color-mix(in srgb,var(--c4) 16%,white);border:2px solid transparent;border-radius:999px;padding:5px 12px}
+.navex .pills .on{border-color:color-mix(in srgb,var(--c4) 62%,var(--ink))}
 
 /* ---- INVEST ---- */
 .invest{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px;margin-top:16px}
@@ -175,21 +183,31 @@ a:focus:not(:focus-visible){outline:none}
   <section class="grid one">
     <article class="card" style="--c:var(--c1)">
       <h2><span class="badge story">US 1</span> Personalisierter Inhalt (<span lang="en">JSON</span>)</h2>
-      <p class="sub">Als Bewerber:in möchte ich meine Daten in der <span lang="en">JSON</span>-Datei füllen und im <span lang="en">HTML</span> anzeigen, damit ich meinen echten Werdegang zeige.</p>
+      <p class="sub">Als Bewerber:in möchte ich meine Daten in <span class="code">cv-raw-data.json</span> füllen und im <span lang="en">HTML</span> anzeigen, damit ich meinen echten Werdegang zeige. Die Foto-Datei kommt in US&nbsp;4.</p>
       <ul>
-        <li><b>DoD</b>Die <span class="code">.json</span> enthält echte Infos; kein „Lorem ipsum“ / Beispieltext mehr auf dem Screen.</li>
+        <li><b>DoD</b>Die Datei <span class="code">cv-raw-data.json</span> ist gefunden. Die aktualisierten Infos erscheinen auf dem Screen.</li>
       </ul>
     </article>
 
     <article class="card" style="--c:var(--c2)">
-      <h2><span class="badge story">US 2</span> Navigation zum CV</h2>
-      <p class="sub">Als Recruiter:in möchte ich im Navigationsmenü auf einen Link klicken, um direkt zum Download-Bereich des CV zu kommen.</p>
+      <h2><span class="badge story">US 2</span> Navigation zur <span lang="en">Download</span>-Sektion</h2>
+      <p class="sub">Als Recruiter:in möchte ich in der Navigation einen Eintrag haben, der die <span lang="en">Download</span>-Sektion öffnet. Der Wortlaut ist frei, zum Beispiel <span lang="en">CV Download</span>.</p>
+      <div class="navex" role="img" aria-label="Pill-Navigation: About, Professional Experience, Education, Key facts, CV Download. CV Download ist hervorgehoben.">
+        <p class="pills">
+          <span lang="en">About</span>
+          <span lang="en">Professional Experience</span>
+          <span lang="en">Education</span>
+          <span lang="en">Key facts</span>
+          <span class="on" lang="en">CV Download</span>
+        </p>
+      </div>
       <ul>
-        <li><b>DoD</b>Link ist im Header/Nav; scrollt oder leitet zur richtigen Sektion — ohne 404.</li>
+        <li><b>DoD</b>Ein Eintrag steht bei den anderen <span lang="en">Pills</span>. Der Wortlaut ist frei (z.&nbsp;B. <span lang="en">CV Download</span>). Ein Klick öffnet die <span lang="en">Download</span>-Sektion.</li>
+        <li><b>Bonus</b>Finde heraus, wo du die Art der Konfetti ändern kannst. Wie bekommst du eine <span lang="en">Pill</span> mit Konfetti und eine ohne?</li>
       </ul>
     </article>
   </section>
-  <div class="pageno">Seite 1 / 5</div>
+  <div class="pageno">Seite 1 / 6</div>
 </main>
 
 <!-- ============ SEITE 2 ============ -->
@@ -202,42 +220,53 @@ a:focus:not(:focus-visible){outline:none}
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
 
   <h2>Übersicht · Fortsetzung</h2>
-  <p style="text-align:center"><span class="tag">US 3–5 · Tech 6</span></p>
+  <p style="text-align:center"><span class="tag">US 3–5 · Bonus</span></p>
 
   <section class="grid one">
     <article class="card" style="--c:var(--c3)">
       <h2><span class="badge story">US 3</span> <span lang="en">PDF</span>-Download</h2>
-      <p class="sub">Als Recruiter:in möchte ich auf einen Button klicken, um den CV als <span lang="en">PDF</span> zu öffnen/herunterzuladen — für offline.</p>
+      <p class="sub">Als Recruiter:in möchte ich den CV als <span lang="en">PDF</span> in einem neuen Tab öffnen.</p>
       <ul>
-        <li><b>DoD</b><span lang="en">PDF</span> liegt in <span class="code">public/</span>; Button öffnet neues Tab (<span class="code">target="_blank"</span>) oder lädt herunter.</li>
+        <li><b>DoD</b>Der CV liegt genau unter <span class="code">public/cv-pdf/cv.pdf</span>. Das Element ist wie ein Button gestylt, ist aber ein <span class="code">&lt;a&gt;</span>, weil es den CV in einem neuen Tab öffnet (<span class="code">target="_blank"</span>).</li>
       </ul>
+      <div class="tip blue">
+        <strong>Tipp:</strong>
+        <ul class="plain">
+          <li>Es führt irgendwohin (Sektion, Seite, <span lang="en">PDF</span>) → <span class="code">&lt;a href="..."&gt;</span></li>
+          <li>Es macht nur eine Aktion auf der Seite → <span class="code">&lt;button&gt;</span></li>
+        </ul>
+      </div>
     </article>
 
     <article class="card" style="--c:var(--c4)">
-      <h2><span class="badge story">US 4</span> <span lang="en">CSS</span>-Personalisierung (<span lang="en">Free Task</span>)</h2>
+      <h2><span class="badge story">US 4</span> Optimiertes Profilfoto</h2>
+      <p class="sub">Als Bewerber:in möchte ich mein komprimiertes Foto mit Textbeschreibung zeigen, damit die Seite schnell lädt und barrierefrei ist.</p>
+      <ul>
+        <li><b>DoD</b>Die Datei heißt genau <span class="code">images/me.png</span>, komprimiert über <span lang="en">TinyPNG</span> (&lt;&nbsp;150&nbsp;KB). Das passende <span class="code">alt</span> steht in <span class="code">cv-raw-data.json</span> — wichtig für <span lang="en">Screenreader</span>.</li>
+      </ul>
+      <div class="tip">
+        <strong>Tipp:</strong> Ist das Bild doch ein <span lang="en">JPG</span>, müssen mehrere Stellen angepasst werden, auch in <span class="code">cv-raw-data.json</span>, wo der passende Alternativtext (<span class="code">alt</span>) steht.
+      </div>
+    </article>
+
+    <article class="card" style="--c:var(--c5)">
+      <h2><span class="badge story">US 5</span> <span lang="en">CSS</span>-Personalisierung (<span lang="en">Free Task</span>)</h2>
       <p class="sub">Als Bewerber:in möchte ich ein Element nach Wahl stylen (Farben, Typo, Hover, Karte…), damit mein CV optisch auffällt.</p>
       <ul>
+        <li><b>Beispiel</b><span lang="en">Download</span>-Button, <span lang="en">Pills</span>, Karten oder Hintergrund stylen. Konfetti anpassen oder löschen, usw.</li>
         <li><b>DoD</b>Mindestens eine Komponente/Sektion ist sauber und responsive in <span lang="en">CSS</span> geändert.</li>
       </ul>
     </article>
 
-    <article class="card" style="--c:var(--c5)">
-      <h2><span class="badge story">US 5</span> Optimiertes Profilfoto</h2>
-      <p class="sub">Als Bewerber:in möchte ich mein komprimiertes Foto mit Textbeschreibung zeigen, damit die Seite schnell lädt und barrierefrei ist.</p>
-      <ul>
-        <li><b>DoD</b>Bild über <span lang="en">TinyPNG</span> (&lt;&nbsp;150&nbsp;KB) + beschreibendes, passendes <span class="code">alt</span>.</li>
-      </ul>
-    </article>
-
     <article class="card" style="--c:var(--c6)">
-      <h2><span class="badge task">Tech 6</span> Analyse: dynamische Navigation</h2>
-      <p class="sub">Gruppenaufgabe (Tag&nbsp;6 oder Ende Tag&nbsp;5): verstehen, wie <span lang="en">Astro</span> die Navigation dynamisch baut (Schleife <span class="code">.map()</span>, Props …).</p>
+      <h2><span class="badge task">Bonus</span> Analyse: dynamische Navigation</h2>
+      <p class="sub">Gruppenaufgabe (am Ende der letzten <span lang="en">Coding Session</span>): verstehen, wie <span lang="en">Astro</span> die Navigation dynamisch mit einer <span class="code">for</span>-Schleife baut.</p>
       <ul>
-        <li><b>DoD</b>Jedes Gruppenmitglied erklärt mündlich, wie der gelieferte Code-Ausschnitt funktioniert.</li>
+        <li><b>DoD</b>Die Gruppe bespricht gemeinsam, wie es funktioniert, und stellt die Erklärung dem Trainer vor.</li>
       </ul>
     </article>
   </section>
-  <div class="pageno">Seite 2 / 5</div>
+  <div class="pageno">Seite 2 / 6</div>
 </section>
 
 <!-- ============ SEITE 3 ============ -->
@@ -256,29 +285,29 @@ a:focus:not(:focus-visible){outline:none}
     <article class="card" style="--c:var(--c1)">
       <h2><span class="num">1</span>US 1 · Personalisierter Inhalt (<span lang="en">JSON</span>)</h2>
       <ul class="plain">
-        <li><b>I</b>Ja — ohne andere Stories entwickelbar.</li>
-        <li><b>N</b>Ja — exakte <span lang="en">JSON</span>-Felder je nach Profil verhandelbar.</li>
+        <li><b>I</b>Ja — Texte in <span class="code">cv-raw-data.json</span>, ohne die Foto-Datei (die ist US&nbsp;4).</li>
+        <li><b>N</b>Ja — welche Textfelder, je nach Profil. Der Dateiname ist fest.</li>
         <li><b>V</b>Ja — Grundlage, damit der CV dem/der Studierenden gehört.</li>
-        <li><b>E</b>Ja — für Anfänger:innen leicht schätzbar (Textfelder ändern).</li>
+        <li><b>E</b>Ja — Datei finden und Texte ändern.</li>
         <li><b>S</b>Ja — passt in einen Halbtag Dev.</li>
-        <li><b>T</b>Ja — Seite anschauen: hat sich der Text geändert?</li>
+        <li><b>T</b>Ja — <span class="code">cv-raw-data.json</span> ist gefunden, die neuen Infos sind auf dem Screen sichtbar.</li>
       </ul>
     </article>
 
     <article class="card" style="--c:var(--c2)">
-      <h2><span class="num">2</span>US 2 · Navigation zum CV</h2>
+      <h2><span class="num">2</span>US 2 · Navigation zur <span lang="en">Download</span>-Sektion</h2>
       <ul class="plain">
         <li><b>I</b>Ja — unabhängig vom Textinhalt (HTML-Struktur hilft).</li>
-        <li><b>N</b>Ja — Anker auf derselben Seite oder Link zu einer anderen Seite.</li>
+        <li><b>N</b>Ja — der Wortlaut ist frei (z.&nbsp;B. <span lang="en">CV Download</span>). Der Eintrag öffnet die <span lang="en">Download</span>-Sektion.</li>
         <li><b>V</b>Ja — Nutzer:innen finden den Download leicht.</li>
         <li><b>E</b>Ja — sehr kurz (wenige Zeilen HTML/<span lang="en">Astro</span>).</li>
         <li><b>S</b>Ja — sehr klein.</li>
-        <li><b>T</b>Ja — Klick führt an die erwartete Stelle.</li>
+        <li><b>T</b>Ja — ein Klick auf den gewählten Eintrag öffnet die <span lang="en">Download</span>-Sektion.</li>
       </ul>
     </article>
   </section>
 
-  <div class="pageno">Seite 3 / 5</div>
+  <div class="pageno">Seite 3 / 6</div>
 </section>
 
 <!-- ============ SEITE 4 ============ -->
@@ -298,28 +327,28 @@ a:focus:not(:focus-visible){outline:none}
       <h2><span class="num">3</span>US 3 · <span lang="en">PDF</span>-Download</h2>
       <ul class="plain">
         <li><b>I</b>Ja — braucht nur die eigene <span lang="en">PDF</span>-Datei.</li>
-        <li><b>N</b>Ja — Button-Style oder Vollbild-Öffnen frei wählbar.</li>
-        <li><b>V</b>Ja — Recruiter:in hat eine Offline-/Papier-Version.</li>
-        <li><b>E</b>Ja — schnell (<span class="code">&lt;a&gt;</span> mit <span class="code">download</span> oder <span class="code">target="_blank"</span>).</li>
+        <li><b>N</b>Ja — das Aussehen ist frei. Es bleibt ein <span class="code">&lt;a&gt;</span> mit <span class="code">target="_blank"</span>.</li>
+        <li><b>V</b>Ja — Recruiter:in öffnet die <span lang="en">PDF</span> in einem neuen Tab.</li>
+        <li><b>E</b>Ja — schnell (<span class="code">&lt;a href="..."&gt;</span> mit <span class="code">target="_blank"</span>).</li>
         <li><b>S</b>Ja — klein.</li>
-        <li><b>T</b>Ja — Klick öffnet oder lädt die <span lang="en">PDF</span>.</li>
+        <li><b>T</b>Ja — die Datei heißt genau <span class="code">public/cv-pdf/cv.pdf</span>. Ein Klick öffnet sie in einem neuen Tab. Das Element sieht aus wie ein Button und ist ein <span class="code">&lt;a&gt;</span>.</li>
       </ul>
     </article>
 
     <article class="card" style="--c:var(--c4)">
-      <h2><span class="num">4</span>US 4 · <span lang="en">CSS</span> (<span lang="en">Free Task</span>)</h2>
+      <h2><span class="num">4</span>US 4 · Optimiertes Profilfoto</h2>
       <ul class="plain">
-        <li><b>I</b>Ja — völlig unabhängig; jede:r wählt selbst.</li>
-        <li><b>N</b>Ja — Scope ist absichtlich verhandelbar (Grafik-Wünsche).</li>
-        <li><b>V</b>Ja — macht das Projekt einzigartig und persönlich.</li>
-        <li><b>E</b>Ja — z.&nbsp;B. „max. 45&nbsp;Min. für mein <span lang="en">CSS</span>“.</li>
-        <li><b>S</b>Ja — klein.</li>
-        <li><b>T</b>Ja — Design weicht sichtbar vom Template ab.</li>
+        <li><b>I</b>Ja — die Bilddatei ist getrennt. Der Alternativtext liegt in <span class="code">cv-raw-data.json</span> und blockiert US&nbsp;1 nicht.</li>
+        <li><b>N</b>Ja — das Motiv ist frei. Der Name <span class="code">images/me.png</span> ist fest.</li>
+        <li><b>V</b>Ja — kleines Bild und ein passendes <span class="code">alt</span> in <span class="code">cv-raw-data.json</span>.</li>
+        <li><b>E</b>Ja — ca. 10&nbsp;Min. (<span lang="en">TinyPNG</span> + <span class="code">alt</span> schreiben).</li>
+        <li><b>S</b>Ja — sehr klein.</li>
+        <li><b>T</b>Ja — Foto sichtbar als <span class="code">images/me.png</span>, unter 150&nbsp;KB, passendes <span class="code">alt</span> in <span class="code">cv-raw-data.json</span>.</li>
       </ul>
     </article>
   </section>
 
-  <div class="pageno">Seite 4 / 5</div>
+  <div class="pageno">Seite 4 / 6</div>
 </section>
 
 <!-- ============ SEITE 5 ============ -->
@@ -332,22 +361,44 @@ a:focus:not(:focus-visible){outline:none}
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
 
   <h2><span lang="en">INVEST</span> · US 5</h2>
-  <p style="text-align:center"><span class="tag">Profilfoto · Abschluss</span></p>
+  <p style="text-align:center"><span class="tag"><span lang="en">CSS</span> · <span lang="en">Free Task</span></span></p>
 
   <section class="grid one">
     <article class="card" style="--c:var(--c5)">
-      <h2><span class="num">5</span>US 5 · Optimiertes Profilfoto</h2>
+      <h2><span class="num">5</span>US 5 · <span lang="en">CSS</span> (<span lang="en">Free Task</span>)</h2>
       <ul class="plain">
-        <li><b>I</b>Ja — unabhängig von den anderen Stories.</li>
-        <li><b>N</b>Ja — Foto-Wahl ist frei.</li>
-        <li><b>V</b>Ja — Performance (Bildgewicht) + Barrierefreiheit (<span class="code">alt</span>).</li>
-        <li><b>E</b>Ja — ca. 10&nbsp;Min. (<span lang="en">TinyPNG</span> + <span class="code">alt</span> schreiben).</li>
-        <li><b>S</b>Ja — sehr klein.</li>
-        <li><b>T</b>Ja — Foto sichtbar, &lt;&nbsp;150&nbsp;KB, Alternativtext im HTML.</li>
+        <li><b>I</b>Ja — völlig unabhängig; jede:r wählt selbst.</li>
+        <li><b>N</b>Ja — Scope ist absichtlich verhandelbar (Grafik-Wünsche).</li>
+        <li><b>V</b>Ja — macht das Projekt einzigartig und persönlich.</li>
+        <li><b>E</b>Ja — z.&nbsp;B. „max. 45&nbsp;Min. für mein <span lang="en">CSS</span>“.</li>
+        <li><b>S</b>Ja — klein.</li>
+        <li><b>T</b>Ja — ein gewähltes Element (Button, <span lang="en">Pills</span>, Karten, Hintergrund oder Konfetti) weicht sichtbar vom Template ab und bleibt auf einem schmalen Screen lesbar.</li>
       </ul>
     </article>
   </section>
-  <div class="pageno">Seite 5 / 5</div>
+  <div class="pageno">Seite 5 / 6</div>
+</section>
+
+<!-- ============ SEITE 6 ============ -->
+<section class="sheet" aria-label="Seite 6">
+  <div class="orn tl" aria-hidden="true"><svg class="bulb" viewBox="0 0 40 48" aria-hidden="true">
+  <path d="M20 5a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round"/>
+  <path d="M14 38h12M16 42h8" style="stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+  <path d="M3 10l4 3M37 10l-4 3M1 22h5M34 22h5" style="stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;fill:none"/>
+</svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+  <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
+
+  <h2>3. <span lang="en">Board</span></h2>
+  <p style="text-align:center"><span class="tag"><span lang="en">GitHub Project</span></span></p>
+
+  <section class="grid one">
+    <article class="card" style="--c:var(--c2)">
+      <h2>Die 5 <span lang="en">User Stories</span> liegen hier</h2>
+      <p class="sub">Tickets, Größen und <span lang="en">DoD</span> stehen auf dem <span lang="en">Board</span>.</p>
+      <p><a class="link" href="https://github.com/orgs/kremstaler-digitalhilfe/projects/3" target="_blank" rel="noopener noreferrer">https://github.com/orgs/kremstaler-digitalhilfe/projects/3<span class="sr-only"> (öffnet in neuem Tab)</span></a></p>
+    </article>
+  </section>
+  <div class="pageno">Seite 6 / 6</div>
 </section>
 
 </body>

@@ -59,6 +59,19 @@ pre.codeblock[data-lang]::after{content:attr(data-lang);position:absolute;top:-1
   background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:1.5px solid var(--c);
   font-family:var(--font-title);font-size:.78rem;letter-spacing:.05em;
   padding:3px 14px;border-radius:6px;line-height:1.2;white-space:nowrap}
+pre.codeblock .copy-btn{position:absolute;top:8px;right:10px;z-index:1;
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-title);font-size:.75rem;line-height:1.2;padding:5px 11px;
+  border:2px dashed color-mix(in srgb,var(--highlight) 55%,#14141f);border-radius:6px;cursor:pointer;
+  background:var(--highlight);color:var(--ink);
+  transition:background .2s ease,border-color .2s ease}
+pre.codeblock .copy-btn:hover{background:color-mix(in srgb,var(--highlight) 78%,#fff59a)}
+pre.codeblock .copy-btn:focus-visible{outline:3px solid var(--link);outline-offset:2px}
+pre.codeblock .copy-btn.copied{background:color-mix(in srgb,var(--c1) 42%,white);
+  border:2px dashed color-mix(in srgb,var(--c1) 55%,#14141f);color:var(--ink)}
+pre.codeblock .copy-btn svg{width:14px;height:14px;flex-shrink:0;display:block}
+pre.codeblock .copy-btn svg path,pre.codeblock .copy-btn svg polyline,pre.codeblock .copy-btn svg rect{
+  fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .st{color:color-mix(in srgb,var(--c) 42%,#14141f)}
 .fn{color:color-mix(in srgb,var(--c2) 38%,#14141f)}
 .cloud{display:inline-block;padding:8px 16px;border:2px dashed var(--accent);border-radius:40px;
@@ -112,6 +125,7 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
   .sheet{box-shadow:none;margin:0;min-height:auto;break-after:page;border-radius:0}
   .sheet:last-of-type{break-after:auto}
   .card,.note,.tip,.rule,pre,.gloss div,.flow,.diagram{break-inside:avoid}
+  pre.codeblock .copy-btn{display:none}
 }
 
 /* === a11y === */
@@ -301,5 +315,58 @@ a:focus:not(:focus-visible){outline:none}
   <div class="pageno">Seite 2 / 2</div>
 </section>
 
+<script>
+(function () {
+  var ICON_COPY = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M4 16V6a2 2 0 0 1 2-2h10"/></svg>';
+  var ICON_OK = '<svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="4 12 10 18 20 6"/></svg>';
+  function setBtn(btn, ok) {
+    btn.classList.toggle("copied", !!ok);
+    btn.innerHTML = (ok ? ICON_OK : ICON_COPY) + "<span>" + (ok ? "Kopiert!" : "Kopieren") + "</span>";
+    btn.setAttribute("aria-label", ok ? "Code kopiert" : "Code kopieren");
+  }
+  function codeText(pre) {
+    var clone = pre.cloneNode(true);
+    clone.querySelectorAll(".copy-btn").forEach(function (b) { b.remove(); });
+    return clone.textContent.replace(/^\n+|\n+$/g, "");
+  }
+  function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(text);
+    }
+    return new Promise(function (resolve, reject) {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        if (document.execCommand("copy")) resolve();
+        else reject();
+      } catch (e) { reject(e); }
+      document.body.removeChild(ta);
+    });
+  }
+  document.querySelectorAll("pre.codeblock").forEach(function (pre) {
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "copy-btn";
+    setBtn(btn, false);
+    btn.addEventListener("click", function () {
+      copyText(codeText(pre)).then(function () {
+        setBtn(btn, true);
+        setTimeout(function () { setBtn(btn, false); }, 1500);
+      }).catch(function () {
+        btn.classList.remove("copied");
+        btn.innerHTML = ICON_COPY + "<span>Fehler</span>";
+        btn.setAttribute("aria-label", "Kopieren fehlgeschlagen");
+        setTimeout(function () { setBtn(btn, false); }, 1500);
+      });
+    });
+    pre.appendChild(btn);
+  });
+})();
+</script>
 </body>
 </html>

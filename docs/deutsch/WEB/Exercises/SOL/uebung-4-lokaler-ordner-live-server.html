@@ -59,6 +59,19 @@ pre.codeblock[data-lang]::after{content:attr(data-lang);position:absolute;top:-1
   background:color-mix(in srgb,var(--c) 22%,white);color:var(--ink);border:1.5px solid var(--c);
   font-family:var(--font-title);font-size:.78rem;letter-spacing:.05em;
   padding:3px 14px;border-radius:6px;line-height:1.2;white-space:nowrap}
+pre.codeblock .copy-btn{position:absolute;top:8px;right:10px;z-index:1;
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-title);font-size:.75rem;line-height:1.2;padding:5px 11px;
+  border:2px dashed color-mix(in srgb,var(--highlight) 55%,#14141f);border-radius:6px;cursor:pointer;
+  background:var(--highlight);color:var(--ink);
+  transition:background .2s ease,border-color .2s ease}
+pre.codeblock .copy-btn:hover{background:color-mix(in srgb,var(--highlight) 78%,#fff59a)}
+pre.codeblock .copy-btn:focus-visible{outline:3px solid var(--link);outline-offset:2px}
+pre.codeblock .copy-btn.copied{background:color-mix(in srgb,var(--c1) 42%,white);
+  border:2px dashed color-mix(in srgb,var(--c1) 55%,#14141f);color:var(--ink)}
+pre.codeblock .copy-btn svg{width:14px;height:14px;flex-shrink:0;display:block}
+pre.codeblock .copy-btn svg path,pre.codeblock .copy-btn svg polyline,pre.codeblock .copy-btn svg rect{
+  fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .s,.p,.v{display:inline;padding:1px 4px;border-radius:5px;white-space:nowrap}
 .s{background:color-mix(in srgb,var(--c1) 35%,white)}
 .p{background:color-mix(in srgb,var(--c2) 35%,white)}
@@ -121,6 +134,7 @@ hr{border:0;border-top:2px dashed var(--accent);opacity:.5;margin:20px 0 4px}
   .sheet{box-shadow:none;margin:0;min-height:auto;break-after:page;border-radius:0}
   .sheet:last-of-type{break-after:auto}
   .card,.note,.tip,.rule,.gloss div,.flow,.diagram{break-inside:avoid}
+  pre.codeblock .copy-btn{display:none}
 }
 
 /* === a11y === */
@@ -291,7 +305,7 @@ a:focus:not(:focus-visible){outline:none}
     (<span class="code">&lt;script src="script.js"&gt;</span>).
   </div>
 
-  <h3>index.html – kopieren</h3>
+  <h3>index.html</h3>
   <pre class="codeblock" data-lang="index.html" style="--c:var(--c2)"><span class="s">&lt;!DOCTYPE html&gt;</span>
 <span class="s">&lt;html</span> <span class="p">lang</span>=<span class="st">"de"</span><span class="s">&gt;</span>
 <span class="s">&lt;head&gt;</span>
@@ -322,7 +336,7 @@ a:focus:not(:focus-visible){outline:none}
 </svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
   <div class="orn tr" aria-hidden="true"><svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" style="fill:var(--accent);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.2 7 7.5.8-5.6 5.1 1.6 7.4L12 18l-6.7 3.8 1.6-7.4L1.3 9.3l7.5-.8z" style="fill:var(--highlight);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round"/></svg></div>
 
-  <h2>style.css – kopieren</h2>
+  <h2>style.css</h2>
   <p style="text-align:center"><span class="tag">Die Haut · Design</span></p>
 
   <pre class="codeblock" data-lang="style.css" style="--c:var(--c3)"><span class="cm">/* Alles zentrieren */</span>
@@ -362,7 +376,7 @@ a:focus:not(:focus-visible){outline:none}
 <span class="p">button:hover</span> { <span class="v">background-color</span>: #2980b9; }
 </pre>
 
-  <h3>script.js – kopieren</h3>
+  <h3>script.js</h3>
   <pre class="codeblock" data-lang="script.js" style="--c:var(--c4)"><span class="cm">// 1. Button holen</span>
 <span class="k">const</span> button = document.<span class="fn">getElementById</span>(<span class="st">"actionBtn"</span>);
 
@@ -445,5 +459,58 @@ button.<span class="fn">addEventListener</span>(<span class="st">"click"</span>,
   <div class="pageno">Seite 4 / 4</div>
 </section>
 
+<script>
+(function () {
+  var ICON_COPY = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M4 16V6a2 2 0 0 1 2-2h10"/></svg>';
+  var ICON_OK = '<svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="4 12 10 18 20 6"/></svg>';
+  function setBtn(btn, ok) {
+    btn.classList.toggle("copied", !!ok);
+    btn.innerHTML = (ok ? ICON_OK : ICON_COPY) + "<span>" + (ok ? "Kopiert!" : "Kopieren") + "</span>";
+    btn.setAttribute("aria-label", ok ? "Code kopiert" : "Code kopieren");
+  }
+  function codeText(pre) {
+    var clone = pre.cloneNode(true);
+    clone.querySelectorAll(".copy-btn").forEach(function (b) { b.remove(); });
+    return clone.textContent.replace(/^\n+|\n+$/g, "");
+  }
+  function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(text);
+    }
+    return new Promise(function (resolve, reject) {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        if (document.execCommand("copy")) resolve();
+        else reject();
+      } catch (e) { reject(e); }
+      document.body.removeChild(ta);
+    });
+  }
+  document.querySelectorAll("pre.codeblock").forEach(function (pre) {
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "copy-btn";
+    setBtn(btn, false);
+    btn.addEventListener("click", function () {
+      copyText(codeText(pre)).then(function () {
+        setBtn(btn, true);
+        setTimeout(function () { setBtn(btn, false); }, 1500);
+      }).catch(function () {
+        btn.classList.remove("copied");
+        btn.innerHTML = ICON_COPY + "<span>Fehler</span>";
+        btn.setAttribute("aria-label", "Kopieren fehlgeschlagen");
+        setTimeout(function () { setBtn(btn, false); }, 1500);
+      });
+    });
+    pre.appendChild(btn);
+  });
+})();
+</script>
 </body>
 </html>
